@@ -1,0 +1,522 @@
+sku,product,supplier,contact,unit_price,stock_qty,lead_time
+C0001,start capacitor 64 370v,Cascade Wholesale,C. Fernandez,15.52,5,4-6 wks
+C0002,contact switch 30a 3p 24v coil,Pacific Parts,C. Fernandez,47.07,20,in stock
+C0003,contactor 30a 2p 120v coil,Cascade Wholesale,M. Chen,34.27,35,1-2 wks
+C0004,fan blade 18 in 5 blade cw,Cascade Wholesale,C. Fernandez,76.92,35,3-5 days
+C0005,flame sensor 2 in ceramic,Pacific Parts,K. O'Brien,34.09,35,in stock
+C0006,cooling fan motor 5.00hp 120v 3ph 825 rpm 4p,Cascade Wholesale,L. Nguyen,127.72,35,4-6 wks
+C0007,compressor 1 ton 230v 3ph r-410a,Evergreen Supply,C. Fernandez,1518.91,5,1-2 wks
+C0008,compressor 3 ton 230v 1ph r-22,Cascade Wholesale,T. Schmidt,812.11,120,2 wks
+C0009,bearing 1-3/16 in ball,Cascade Wholesale,H. Yamamoto,36.76,35,2 wks
+C0010,damper 8 in barometric,Pacific Parts,A. Rossi,198.78,12,4-6 wks
+C0011,run capacitor 40/5 370v,Evergreen Supply,C. Fernandez,17.29,20,3-5 days
+C0012,belt 5l450 cogged,Cascade Wholesale,M. Chen,20.38,50,3-5 days
+C0013,thermostat smart 24v,Pacific Parts,S. Kowalski,121.59,0,1-2 wks
+C0014,power contactor 20a 3p 24v coil,Pacific Parts,L. Nguyen,63.15,200,4-6 wks
+C0015,blower wheel 10-1/2 in 10 in wide ccw,Pacific Parts,E. Johansson,124.81,75,in stock
+C0016,cooling fan motor .25hp 240v 1ph 825 rpm 2p,Cascade Wholesale,L. Nguyen,208.59,35,3-5 days
+C0017,pressure switch 2.0 in wc set 0.1 diff,Evergreen Supply,E. Johansson,45.68,20,2 wks
+C0018,control transformer 150 va 120v pri 240v sec,Pacific Parts,P. Dubois,52.33,120,4-6 wks
+C0019,contactor 30a 1p 120v coil,Pacific Parts,K. O'Brien,48.20,0,3-5 days
+C0020,start capacitor 124 370v,Pacific Parts,J. Alvarez,27.86,20,in stock
+C0021,xfmr 100 va 120v pri 120v sec,Evergreen Supply,K. O'Brien,73.09,200,1-2 wks
+C0022,motor run capacitor 15/5 370v,Evergreen Supply,K. O'Brien,15.56,200,3-5 days
+C0023,relay 10a 24v coil,Evergreen Supply,B. Nowak,21.05,75,1-2 wks
+C0024,control board 24v ignition,Cascade Wholesale,B. Nowak,137.40,350,in stock
+C0025,cond fan motor .50hp 24v 3ph 825 rpm 6p,Cascade Wholesale,E. Johansson,141.21,12,in stock
+C0026,contactor 20a 2p 240v coil,Evergreen Supply,T. Schmidt,35.56,5,1-2 wks
+C0027,motor run capacitor 50/7.5 370v,Pacific Parts,C. Fernandez,15.69,75,2 wks
+C0028,belt 5l450 fractional hp,Cascade Wholesale,D. Thompson,20.66,50,1-2 wks
+C0029,gas valve 1 in 24v 250k btu,Evergreen Supply,S. Kowalski,163.65,120,2 wks
+C0030,control transformer 50 va 120v pri 120v sec,Evergreen Supply,J. Alvarez,86.34,350,4-6 wks
+C0031,start capacitor 189 440v,Pacific Parts,E. Johansson,19.38,0,1-2 wks
+C0032,dual run capacitor 70/5 440v,Evergreen Supply,E. Johansson,33.64,5,1-2 wks
+C0033,dual rated capacitor 45/5 440v,Evergreen Supply,A. Rossi,21.52,120,1-2 wks
+C0034,run cap 20/5 440v,Cascade Wholesale,S. Kowalski,11.71,50,in stock
+C0035,air handler motor 3.00hp 230v 1ph 825 rpm 2p,Cascade Wholesale,L. Nguyen,216.63,5,1-2 wks
+C0036,flame sensor 6 in kanthal,Pacific Parts,S. Kowalski,26.30,0,in stock
+C0037,condenser coil 3 ton r-454b 2 row,Pacific Parts,L. Nguyen,817.36,5,2 wks
+C0038,filter 16x20x1 merv 13,Cascade Wholesale,T. Schmidt,25.06,0,4-6 wks
+C0039,contactor 40a 1p 240v coil,Pacific Parts,A. Rossi,59.09,0,3-5 days
+C0040,relay 10a 240v coil,Evergreen Supply,J. Alvarez,19.22,0,4-6 wks
+C0041,power contactor 40a 3p 24v coil,Pacific Parts,P. Dubois,40.64,0,1-2 wks
+C0042,contactor 60a 3p 120v coil,Evergreen Supply,C. Fernandez,40.37,500,2 wks
+C0043,pressure switch 1.0 in wc set 0.2 diff,Pacific Parts,E. Johansson,32.47,50,2 wks
+C0044,fan blade 18 in 3 blade cw,Pacific Parts,L. Nguyen,64.15,35,2 wks
+C0045,evaporator coil 1 ton r-22 3 row,Pacific Parts,C. Fernandez,548.01,0,4-6 wks
+C0046,transformer 75 va 240v pri 240v sec,Pacific Parts,S. Kowalski,90.51,50,4-6 wks
+C0047,cooling fan motor 2.00hp 460v 3ph 3450 rpm 2p,Evergreen Supply,T. Schmidt,150.97,120,in stock
+C0048,blower motor .75hp 460v 1ph 825 rpm 1p,Cascade Wholesale,A. Rossi,95.95,75,in stock
+C0049,draft inducer motor 1.00hp 24v 825 rpm 2p,Cascade Wholesale,K. O'Brien,238.00,120,2 wks
+C0050,cooling fan motor 3.00hp 240v 1ph 1075 rpm 1p,Evergreen Supply,D. Thompson,232.89,0,4-6 wks
+C0051,blower wheel 9 in 8 in wide ccw,Pacific Parts,D. Thompson,81.56,200,3-5 days
+C0052,dual run capacitor 55/5 440v,Pacific Parts,T. Schmidt,20.64,50,3-5 days
+C0053,dual run capacitor 60/5 440v,Pacific Parts,B. Nowak,24.18,35,4-6 wks
+C0054,motor run capacitor 15/5 440v,Cascade Wholesale,S. Kowalski,18.81,20,4-6 wks
+C0055,cond fan motor 1.00hp 208v 1ph 1725 rpm 1p,Cascade Wholesale,A. Rossi,142.55,12,in stock
+C0056,draft inducer .17hp 115v 1725 rpm 1p,Cascade Wholesale,E. Johansson,128.72,0,4-6 wks
+C0057,filter 24x24x1 merv 16,Cascade Wholesale,C. Fernandez,16.94,120,in stock
+C0058,blower mtr .33hp 208v 1ph 1625 rpm 1p,Cascade Wholesale,L. Nguyen,89.03,75,in stock
+C0059,run capacitor 60/5 440v,Cascade Wholesale,S. Kowalski,17.61,35,4-6 wks
+C0060,power contactor 30a 3p 120v coil,Cascade Wholesale,C. Fernandez,44.71,50,2 wks
+C0061,contactor 20a 1p 24v coil,Evergreen Supply,R. Patel,45.25,35,4-6 wks
+C0062,relay 20a 120v coil,Pacific Parts,S. Kowalski,30.77,35,4-6 wks
+C0063,draft inducer 3.00hp 240v 3450 rpm 2p,Pacific Parts,K. O'Brien,154.80,35,3-5 days
+C0064,fan blade 24 in 4 blade cw,Evergreen Supply,M. Chen,44.85,500,2 wks
+C0065,vent motor .17hp 115v 3450 rpm 1p,Pacific Parts,T. Schmidt,242.65,0,1-2 wks
+C0066,thermostat programmable 24v,Pacific Parts,R. Patel,94.12,120,1-2 wks
+C0067,blower mtr 5.00hp 460v 1ph 1075 rpm 1p,Evergreen Supply,J. Alvarez,187.83,35,2 wks
+C0068,run cap 70/5 440v,Evergreen Supply,R. Patel,11.79,120,4-6 wks
+C0069,condenser coil 2 ton r-410a 4 row,Pacific Parts,C. Fernandez,684.68,75,4-6 wks
+C0070,flame sensor 2 in kanthal,Pacific Parts,S. Kowalski,25.37,50,4-6 wks
+C0071,flame sensor 4 in kanthal,Pacific Parts,H. Yamamoto,38.10,200,4-6 wks
+C0072,filter 16x25x1 merv 16,Pacific Parts,K. O'Brien,13.82,35,3-5 days
+C0073,motor run capacitor 35/10 440v,Cascade Wholesale,R. Patel,20.08,50,1-2 wks
+C0074,control board 24v furnace,Pacific Parts,H. Yamamoto,165.96,350,1-2 wks
+C0075,igniter 120v spark,Pacific Parts,R. Patel,30.97,120,3-5 days
+C0076,condenser coil 3 ton r-32 4 row,Pacific Parts,P. Dubois,667.31,20,3-5 days
+C0077,cooling fan motor .75hp 115v 1ph 1075 rpm 1p,Evergreen Supply,T. Schmidt,159.88,75,1-2 wks
+C0078,cond fan motor .25hp 460v 3ph 1075 rpm 6p,Evergreen Supply,P. Dubois,175.11,75,4-6 wks
+C0079,fan blade 24 in 5 blade ccw,Cascade Wholesale,M. Chen,56.45,200,3-5 days
+C0080,air handler motor .75hp 115v 3ph 1075 rpm 1p,Cascade Wholesale,J. Alvarez,106.04,50,4-6 wks
+C0081,draft inducer .33hp 230v 825 rpm 1p,Pacific Parts,T. Schmidt,235.99,35,1-2 wks
+C0082,gas valve 3/4 in 24v 100k btu,Cascade Wholesale,E. Johansson,125.87,35,4-6 wks
+C0083,evaporator coil 1.5 ton r-454b 2 row,Pacific Parts,D. Thompson,654.94,75,3-5 days
+C0084,flame sensor 4 in ceramic,Evergreen Supply,L. Nguyen,38.23,12,2 wks
+C0085,evaporator coil 5 ton r-32 4 row,Evergreen Supply,R. Patel,322.50,200,3-5 days
+C0086,run cap 45/5 370v,Pacific Parts,T. Schmidt,11.88,0,3-5 days
+C0087,filter 14x20x1 merv 16,Cascade Wholesale,C. Fernandez,16.94,5,1-2 wks
+C0088,relay 30a 120v coil,Evergreen Supply,T. Schmidt,41.01,50,1-2 wks
+C0089,belt a40 cogged,Pacific Parts,K. O'Brien,26.12,120,4-6 wks
+C0090,compressor 2 ton 460v 3ph r-454b,Evergreen Supply,P. Dubois,673.49,12,2 wks
+C0091,run capacitor 70/5 370v,Evergreen Supply,A. Rossi,19.53,0,in stock
+C0092,condenser coil 3 ton r-22 2 row,Evergreen Supply,H. Yamamoto,482.27,75,in stock
+C0093,relay 15a 240v coil,Cascade Wholesale,J. Alvarez,23.15,35,1-2 wks
+C0094,gas valve 1/2 in 24v 250k btu,Pacific Parts,E. Johansson,138.57,0,3-5 days
+C0095,xfmr 200 va 480v pri 240v sec,Evergreen Supply,L. Nguyen,34.60,0,1-2 wks
+C0096,thermostat digital 24v,Cascade Wholesale,M. Chen,150.09,200,1-2 wks
+C0097,condenser coil 1.5 ton r-22 2 row,Pacific Parts,A. Rossi,546.04,0,in stock
+C0098,blower mtr 1.00hp 460v 3ph 1725 rpm 2p,Pacific Parts,D. Thompson,116.33,200,3-5 days
+C0099,transformer 40 va 208v pri 240v sec,Evergreen Supply,H. Yamamoto,46.18,350,4-6 wks
+C0100,belt 3l280 cogged,Cascade Wholesale,E. Johansson,14.23,0,1-2 wks
+C0101,blower wheel 10 in 6 in wide ccw,Cascade Wholesale,H. Yamamoto,80.50,0,2 wks
+C0102,evaporator coil 1 ton r-22 4 row,Cascade Wholesale,B. Nowak,449.13,75,1-2 wks
+C0103,compressor 2.5 ton 460v 1ph r-22,Cascade Wholesale,M. Chen,1371.64,0,in stock
+C0104,fuse 40a 600v blade,Pacific Parts,C. Fernandez,6.21,0,3-5 days
+C0105,draft inducer motor 3.00hp 24v 3450 rpm 6p,Evergreen Supply,B. Nowak,155.58,75,1-2 wks
+C0106,inducer motor .25hp 115v 3450 rpm 6p,Cascade Wholesale,P. Dubois,208.26,0,2 wks
+C0107,condenser coil 1 ton r-22 2 row,Cascade Wholesale,S. Kowalski,627.60,200,1-2 wks
+C0108,dual rated capacitor 50/7.5 370v,Cascade Wholesale,K. O'Brien,30.18,500,1-2 wks
+C0109,cooling fan motor 1.00hp 230v 1ph 1075 rpm 4p,Evergreen Supply,D. Thompson,193.89,350,in stock
+C0110,motor run capacitor 30/5 440v,Evergreen Supply,H. Yamamoto,9.22,120,in stock
+C0111,cond fan motor .33hp 120v 1ph 3450 rpm 2p,Cascade Wholesale,B. Nowak,116.20,0,1-2 wks
+C0112,blower motor 5.00hp 230v 3ph 825 rpm 4p,Evergreen Supply,E. Johansson,158.90,200,2 wks
+C0113,damper 8 in motorized,Evergreen Supply,B. Nowak,164.93,500,2 wks
+C0114,contactor 20a 3p 120v coil,Evergreen Supply,S. Kowalski,45.78,0,1-2 wks
+C0115,power contactor 30a 1p 240v coil,Evergreen Supply,R. Patel,36.96,0,4-6 wks
+C0116,dual run capacitor 20/5 440v,Pacific Parts,D. Thompson,15.87,50,2 wks
+C0117,contactor 50a 1p 24v coil,Evergreen Supply,T. Schmidt,55.24,500,1-2 wks
+C0118,start capacitor 189 370v,Cascade Wholesale,T. Schmidt,15.55,0,2 wks
+C0119,blower mtr .33hp 120v 3ph 825 rpm 4p,Evergreen Supply,R. Patel,201.19,200,4-6 wks
+C0120,blower mtr .75hp 120v 3ph 825 rpm 6p,Cascade Wholesale,P. Dubois,225.31,12,1-2 wks
+C0121,filter 16x25x4 merv 16,Pacific Parts,S. Kowalski,11.30,75,4-6 wks
+C0122,damper 10 in manual,Evergreen Supply,S. Kowalski,170.79,5,4-6 wks
+C0123,condenser coil 4 ton r-22 2 row,Pacific Parts,C. Fernandez,773.06,75,1-2 wks
+C0124,bearing 1/2 in flange,Cascade Wholesale,A. Rossi,31.38,200,in stock
+C0125,compressor 3 ton 208v 3ph r-22,Pacific Parts,T. Schmidt,1063.31,12,2 wks
+C0126,compressor 5 ton 208v 3ph r-32,Evergreen Supply,P. Dubois,1270.82,350,4-6 wks
+C0127,condenser fan motor 5.00hp 115v 1ph 1075 rpm 2p,Evergreen Supply,J. Alvarez,149.26,35,3-5 days
+C0128,cond fan motor .33hp 208v 3ph 825 rpm 4p,Evergreen Supply,S. Kowalski,151.92,500,3-5 days
+C0129,flame sensor 6 in ceramic,Cascade Wholesale,K. O'Brien,40.35,12,1-2 wks
+C0130,thermostat non-programmable 24v,Pacific Parts,A. Rossi,87.70,200,3-5 days
+C0131,start capacitor 88 370v,Cascade Wholesale,E. Johansson,11.21,20,in stock
+C0132,filter 16x25x1 merv 13,Cascade Wholesale,B. Nowak,10.66,35,in stock
+C0133,air handler motor .17hp 208v 3ph 1725 rpm 1p,Cascade Wholesale,B. Nowak,143.57,12,4-6 wks
+C0134,draft inducer motor .75hp 460v 1625 rpm 6p,Pacific Parts,D. Thompson,273.48,5,3-5 days
+C0135,pressure switch 1.0 in wc set 0.3 diff,Pacific Parts,T. Schmidt,45.29,350,4-6 wks
+C0136,control board 24v blower,Cascade Wholesale,C. Fernandez,241.26,500,1-2 wks
+C0137,fan blade 22 in 5 blade cw,Evergreen Supply,T. Schmidt,69.77,50,2 wks
+C0138,run cap 45/5 440v,Pacific Parts,C. Fernandez,14.07,0,3-5 days
+C0139,igniter 24v hot surface,Cascade Wholesale,J. Alvarez,76.74,20,1-2 wks
+C0140,power contactor 60a 2p 240v coil,Evergreen Supply,A. Rossi,70.23,200,1-2 wks
+C0141,dual rated capacitor 15/5 440v,Pacific Parts,T. Schmidt,25.19,500,3-5 days
+C0142,evaporator coil 5 ton r-32 3 row,Cascade Wholesale,J. Alvarez,713.03,0,in stock
+C0143,condenser fan motor 3.00hp 115v 1ph 825 rpm 6p,Cascade Wholesale,C. Fernandez,222.87,35,4-6 wks
+C0144,gas valve 1 in 24v 150k btu,Cascade Wholesale,J. Alvarez,144.40,0,2 wks
+C0145,draft inducer .75hp 120v 1625 rpm 1p,Pacific Parts,D. Thompson,163.63,5,in stock
+C0146,inducer motor 5.00hp 208v 1625 rpm 4p,Evergreen Supply,K. O'Brien,161.39,0,in stock
+C0147,inducer motor .17hp 120v 1725 rpm 4p,Cascade Wholesale,C. Fernandez,104.17,0,2 wks
+C0148,cond fan motor .25hp 24v 3ph 1725 rpm 6p,Cascade Wholesale,J. Alvarez,161.70,5,in stock
+C0149,control transformer 75 va 120v pri 120v sec,Pacific Parts,B. Nowak,47.09,5,1-2 wks
+C0150,blower wheel 12 in 6 in wide ccw,Evergreen Supply,C. Fernandez,82.79,50,3-5 days
+C0151,contactor 50a 3p 240v coil,Cascade Wholesale,C. Fernandez,25.41,75,in stock
+C0152,run cap 20/5 370v,Cascade Wholesale,E. Johansson,20.36,120,1-2 wks
+C0153,cond fan motor 1.00hp 120v 1ph 3450 rpm 1p,Cascade Wholesale,P. Dubois,148.40,12,3-5 days
+C0154,condenser coil 1.5 ton r-410a 3 row,Cascade Wholesale,H. Yamamoto,537.82,0,1-2 wks
+C0155,bearing 5/8 in sleeve,Pacific Parts,M. Chen,22.19,12,2 wks
+C0156,start capacitor 108 370v,Evergreen Supply,A. Rossi,25.79,75,1-2 wks
+C0157,filter 20x20x2 merv 16,Cascade Wholesale,S. Kowalski,12.34,120,3-5 days
+C0158,draft inducer .25hp 240v 3450 rpm 6p,Cascade Wholesale,P. Dubois,223.08,20,4-6 wks
+C0159,start capacitor 233 370v,Cascade Wholesale,K. O'Brien,26.21,0,2 wks
+C0160,inducer motor .33hp 115v 825 rpm 2p,Evergreen Supply,A. Rossi,185.79,0,2 wks
+C0161,contactor 40a 3p 120v coil,Evergreen Supply,A. Rossi,62.82,120,in stock
+C0162,filter 16x25x4 merv 11,Evergreen Supply,S. Kowalski,13.52,200,4-6 wks
+C0163,transformer 150 va 480v pri 24v sec,Pacific Parts,J. Alvarez,41.37,120,in stock
+C0164,blower mtr .17hp 115v 1ph 825 rpm 4p,Cascade Wholesale,J. Alvarez,188.00,12,1-2 wks
+C0165,gas valve 3/4 in 24v 200k btu,Pacific Parts,H. Yamamoto,94.08,5,3-5 days
+C0166,blower motor 1.00hp 24v 3ph 825 rpm 6p,Pacific Parts,T. Schmidt,109.54,5,3-5 days
+C0167,cond fan motor .33hp 115v 1ph 825 rpm 4p,Cascade Wholesale,L. Nguyen,176.60,75,2 wks
+C0168,power contactor 40a 2p 240v coil,Pacific Parts,C. Fernandez,43.09,500,2 wks
+C0169,draft inducer motor .33hp 115v 1625 rpm 1p,Evergreen Supply,S. Kowalski,234.56,200,4-6 wks
+C0170,fan blade 26 in 5 blade cw,Pacific Parts,K. O'Brien,82.85,5,2 wks
+C0171,igniter 120v hot surface,Cascade Wholesale,B. Nowak,47.48,500,4-6 wks
+C0172,contact switch 25a 2p 24v coil,Evergreen Supply,R. Patel,44.80,200,2 wks
+C0173,motor run capacitor 25/5 440v,Evergreen Supply,H. Yamamoto,17.23,350,2 wks
+C0174,compressor 1 ton 460v 3ph r-454b,Cascade Wholesale,D. Thompson,1074.11,200,4-6 wks
+C0175,air handler motor 1.50hp 230v 1ph 825 rpm 4p,Evergreen Supply,L. Nguyen,202.39,200,in stock
+C0176,dual run cap 60/5 370v,Cascade Wholesale,T. Schmidt,24.81,200,3-5 days
+C0177,air handler motor .25hp 24v 3ph 3450 rpm 1p,Pacific Parts,D. Thompson,248.56,50,1-2 wks
+C0178,air handler motor 1.50hp 208v 1ph 1075 rpm 4p,Evergreen Supply,T. Schmidt,150.27,500,in stock
+C0179,air handler motor .75hp 24v 3ph 1725 rpm 6p,Evergreen Supply,H. Yamamoto,230.73,20,2 wks
+C0180,fuse 15a 600v blade,Pacific Parts,B. Nowak,5.26,350,2 wks
+C0181,gas valve 3/4 in 24v 150k btu,Cascade Wholesale,L. Nguyen,132.63,35,1-2 wks
+C0182,fuse 10a 250v ceramic,Pacific Parts,L. Nguyen,6.50,20,2 wks
+C0183,belt 3l280 fractional hp,Pacific Parts,T. Schmidt,14.73,35,in stock
+C0184,condenser coil 2.5 ton r-454b 2 row,Cascade Wholesale,M. Chen,763.15,35,4-6 wks
+C0185,run cap 30/5 370v,Pacific Parts,E. Johansson,13.92,12,4-6 wks
+C0186,blower wheel 10 in 6 in wide cw,Evergreen Supply,M. Chen,68.80,5,4-6 wks
+C0187,air handler motor .33hp 460v 1ph 1075 rpm 2p,Pacific Parts,A. Rossi,166.13,120,in stock
+C0188,motor run capacitor 60/5 370v,Pacific Parts,E. Johansson,9.42,0,3-5 days
+C0189,cooling fan motor 3.00hp 230v 1ph 3450 rpm 2p,Pacific Parts,T. Schmidt,146.41,50,2 wks
+C0190,blower mtr .50hp 24v 1ph 3450 rpm 1p,Pacific Parts,C. Fernandez,92.69,120,1-2 wks
+C0191,cooling fan motor .75hp 120v 1ph 825 rpm 2p,Evergreen Supply,A. Rossi,139.90,0,1-2 wks
+C0192,evaporator coil 3 ton r-32 3 row,Evergreen Supply,R. Patel,754.21,200,1-2 wks
+C0193,blower mtr .25hp 460v 1ph 3450 rpm 6p,Pacific Parts,R. Patel,189.38,50,in stock
+C0194,compressor 5 ton 230v 1ph r-32,Pacific Parts,L. Nguyen,984.98,50,1-2 wks
+C0195,filter 20x20x2 merv 8,Pacific Parts,K. O'Brien,14.20,500,2 wks
+C0196,vent motor .25hp 115v 1725 rpm 1p,Cascade Wholesale,R. Patel,154.76,0,3-5 days
+C0197,air handler motor 1.00hp 240v 3ph 1625 rpm 4p,Evergreen Supply,M. Chen,195.52,20,2 wks
+C0198,contact switch 50a 2p 240v coil,Pacific Parts,H. Yamamoto,45.87,120,2 wks
+C0199,damper 10 in motorized,Evergreen Supply,T. Schmidt,95.69,120,4-6 wks
+C0200,blower motor .50hp 115v 1ph 3450 rpm 1p,Pacific Parts,H. Yamamoto,156.96,35,4-6 wks
+C0201,fan blade 22 in 4 blade cw,Cascade Wholesale,B. Nowak,50.69,50,3-5 days
+C0202,relay 10a 120v coil,Evergreen Supply,C. Fernandez,31.58,350,2 wks
+C0203,air handler motor .17hp 120v 1ph 1075 rpm 6p,Pacific Parts,R. Patel,222.90,5,3-5 days
+C0204,air handler motor 2.00hp 240v 1ph 3450 rpm 2p,Evergreen Supply,T. Schmidt,102.86,75,in stock
+C0205,filter 20x20x1 merv 13,Evergreen Supply,T. Schmidt,25.19,50,1-2 wks
+C0206,condenser fan motor .33hp 115v 1ph 3450 rpm 6p,Pacific Parts,R. Patel,122.64,5,1-2 wks
+C0207,damper 14 in motorized,Cascade Wholesale,H. Yamamoto,244.60,0,1-2 wks
+C0208,compressor 1.5 ton 230v 1ph r-454b,Cascade Wholesale,D. Thompson,894.16,120,in stock
+C0209,air handler motor 1.50hp 115v 1ph 3450 rpm 2p,Pacific Parts,T. Schmidt,174.57,200,3-5 days
+C0210,air handler motor .75hp 24v 1ph 1075 rpm 2p,Evergreen Supply,K. O'Brien,150.18,350,2 wks
+C0211,blower mtr 1.50hp 460v 3ph 1725 rpm 4p,Pacific Parts,M. Chen,106.22,35,in stock
+C0212,vent motor .17hp 230v 1625 rpm 2p,Pacific Parts,A. Rossi,154.24,12,4-6 wks
+C0213,cond fan motor .50hp 115v 1ph 1625 rpm 6p,Cascade Wholesale,T. Schmidt,178.10,500,4-6 wks
+C0214,compressor 2 ton 460v 3ph r-32,Cascade Wholesale,M. Chen,861.50,350,1-2 wks
+C0215,draft inducer .50hp 240v 1075 rpm 6p,Cascade Wholesale,J. Alvarez,250.60,0,4-6 wks
+C0216,compressor 2.5 ton 208v 3ph r-32,Pacific Parts,B. Nowak,1910.65,0,2 wks
+C0217,power contactor 50a 1p 120v coil,Evergreen Supply,M. Chen,42.25,0,3-5 days
+C0218,condenser coil 4 ton r-32 2 row,Pacific Parts,H. Yamamoto,649.08,12,2 wks
+C0219,draft inducer motor 1.50hp 240v 825 rpm 4p,Evergreen Supply,J. Alvarez,262.61,120,2 wks
+C0220,start capacitor 53 440v,Pacific Parts,T. Schmidt,14.66,35,3-5 days
+C0221,air handler motor .17hp 460v 3ph 825 rpm 2p,Pacific Parts,T. Schmidt,223.75,200,4-6 wks
+C0222,power contactor 60a 1p 240v coil,Cascade Wholesale,T. Schmidt,42.57,50,2 wks
+C0223,transformer 75 va 240v pri 120v sec,Pacific Parts,D. Thompson,37.17,500,4-6 wks
+C0224,dual rated capacitor 20/5 370v,Evergreen Supply,J. Alvarez,39.16,500,in stock
+C0225,cond fan motor 1.50hp 208v 3ph 1625 rpm 2p,Evergreen Supply,P. Dubois,229.04,35,3-5 days
+C0226,belt b42 fractional hp,Cascade Wholesale,T. Schmidt,25.63,120,1-2 wks
+C0227,relay 20a 240v coil,Pacific Parts,A. Rossi,29.77,20,2 wks
+C0228,dual run capacitor 70/5 370v,Cascade Wholesale,L. Nguyen,18.99,0,4-6 wks
+C0229,vent motor 5.00hp 24v 1625 rpm 6p,Evergreen Supply,L. Nguyen,258.98,120,3-5 days
+C0230,start capacitor 43 370v,Pacific Parts,R. Patel,29.60,120,in stock
+C0231,dual run cap 35/10 370v,Pacific Parts,E. Johansson,23.37,0,4-6 wks
+C0232,contactor 30a 2p 24v coil,Cascade Wholesale,A. Rossi,67.69,120,1-2 wks
+C0233,cond fan motor 1.50hp 24v 1ph 825 rpm 2p,Pacific Parts,S. Kowalski,148.08,500,2 wks
+C0234,cond fan motor 1.50hp 208v 3ph 3450 rpm 1p,Evergreen Supply,M. Chen,175.79,350,2 wks
+C0235,draft inducer motor 3.00hp 24v 1625 rpm 4p,Cascade Wholesale,C. Fernandez,268.71,5,3-5 days
+C0236,damper 14 in fire,Evergreen Supply,K. O'Brien,207.80,12,2 wks
+C0237,contactor 25a 1p 240v coil,Pacific Parts,B. Nowak,49.51,120,4-6 wks
+C0238,damper 8 in fire,Pacific Parts,H. Yamamoto,88.69,20,4-6 wks
+C0239,condenser coil 2 ton r-32 2 row,Evergreen Supply,A. Rossi,932.72,75,in stock
+C0240,cond fan motor 1.00hp 120v 3ph 1075 rpm 4p,Pacific Parts,B. Nowak,101.93,0,3-5 days
+C0241,compressor 4 ton 208v 3ph r-22,Cascade Wholesale,K. O'Brien,1785.74,75,1-2 wks
+C0242,blower mtr .33hp 240v 3ph 3450 rpm 4p,Pacific Parts,J. Alvarez,155.19,5,2 wks
+C0243,cooling fan motor .25hp 120v 1ph 1625 rpm 1p,Evergreen Supply,R. Patel,126.08,35,3-5 days
+C0244,condenser fan motor .50hp 24v 1ph 3450 rpm 6p,Cascade Wholesale,S. Kowalski,176.87,5,1-2 wks
+C0245,compressor 2 ton 230v 1ph r-22,Pacific Parts,L. Nguyen,1276.24,500,in stock
+C0246,evaporator coil 5 ton r-22 3 row,Pacific Parts,M. Chen,728.11,50,3-5 days
+C0247,control transformer 150 va 240v pri 24v sec,Cascade Wholesale,K. O'Brien,74.28,12,3-5 days
+C0248,fuse 5a 250v blade,Evergreen Supply,A. Rossi,4.98,0,in stock
+C0249,compressor 2 ton 208v 1ph r-410a,Evergreen Supply,L. Nguyen,829.03,0,4-6 wks
+C0250,blower motor .25hp 460v 1ph 1075 rpm 1p,Cascade Wholesale,S. Kowalski,201.67,0,4-6 wks
+C0251,draft inducer .33hp 230v 3450 rpm 6p,Cascade Wholesale,H. Yamamoto,165.92,200,in stock
+C0252,xfmr 150 va 240v pri 120v sec,Pacific Parts,E. Johansson,70.71,0,1-2 wks
+C0253,evaporator coil 5 ton r-410a 3 row,Cascade Wholesale,H. Yamamoto,601.89,75,4-6 wks
+C0254,inducer motor .50hp 240v 3450 rpm 4p,Pacific Parts,A. Rossi,222.42,50,in stock
+C0255,start capacitor 124 440v,Evergreen Supply,C. Fernandez,24.65,75,3-5 days
+C0256,vent motor 5.00hp 240v 1075 rpm 4p,Cascade Wholesale,T. Schmidt,225.27,20,4-6 wks
+C0257,condenser fan motor 3.00hp 460v 1ph 1625 rpm 2p,Pacific Parts,A. Rossi,145.76,200,3-5 days
+C0258,condenser fan motor 1.00hp 115v 3ph 1075 rpm 4p,Pacific Parts,H. Yamamoto,118.65,75,in stock
+C0259,blower motor 2.00hp 115v 1ph 825 rpm 2p,Pacific Parts,B. Nowak,95.22,20,4-6 wks
+C0260,blower mtr 1.00hp 208v 1ph 825 rpm 1p,Evergreen Supply,B. Nowak,89.31,75,in stock
+C0261,blower motor 3.00hp 240v 1ph 825 rpm 6p,Cascade Wholesale,L. Nguyen,220.79,120,in stock
+C0262,draft inducer motor .75hp 120v 1725 rpm 4p,Pacific Parts,A. Rossi,215.09,0,4-6 wks
+C0263,blower motor 3.00hp 240v 3ph 1075 rpm 4p,Evergreen Supply,D. Thompson,172.88,50,4-6 wks
+C0264,inducer motor .17hp 460v 825 rpm 4p,Evergreen Supply,T. Schmidt,159.32,0,in stock
+C0265,inducer motor .33hp 208v 1725 rpm 2p,Pacific Parts,L. Nguyen,201.02,35,3-5 days
+C0266,control transformer 75 va 240v pri 24v sec,Pacific Parts,J. Alvarez,79.56,0,3-5 days
+C0267,condenser fan motor 2.00hp 240v 3ph 1725 rpm 2p,Pacific Parts,B. Nowak,158.66,50,2 wks
+C0268,cooling fan motor 1.50hp 24v 3ph 825 rpm 6p,Pacific Parts,R. Patel,94.38,12,2 wks
+C0269,inducer motor .25hp 120v 3450 rpm 1p,Evergreen Supply,H. Yamamoto,228.06,35,4-6 wks
+C0270,condenser fan motor 1.00hp 115v 1ph 1725 rpm 1p,Pacific Parts,J. Alvarez,172.89,0,4-6 wks
+C0271,fuse 10a 600v blade,Cascade Wholesale,M. Chen,7.50,500,3-5 days
+C0272,belt a36 v-belt,Cascade Wholesale,J. Alvarez,31.76,35,2 wks
+C0273,blower wheel 11 in 8 in wide ccw,Cascade Wholesale,K. O'Brien,92.81,75,2 wks
+C0274,evaporator coil 2 ton r-454b 4 row,Cascade Wholesale,D. Thompson,707.46,12,1-2 wks
+C0275,filter 14x20x1 merv 13,Pacific Parts,T. Schmidt,20.67,20,1-2 wks
+C0276,evaporator coil 1 ton r-410a 2 row,Cascade Wholesale,K. O'Brien,556.46,0,1-2 wks
+C0277,cooling fan motor .75hp 230v 1ph 3450 rpm 6p,Evergreen Supply,E. Johansson,173.80,500,2 wks
+C0278,filter 20x25x1 merv 13,Evergreen Supply,A. Rossi,13.93,50,4-6 wks
+C0279,inducer motor 1.50hp 230v 1075 rpm 4p,Cascade Wholesale,S. Kowalski,197.49,200,1-2 wks
+C0280,condenser coil 5 ton r-22 3 row,Pacific Parts,S. Kowalski,532.46,0,in stock
+C0281,condenser fan motor 5.00hp 460v 3ph 1075 rpm 1p,Pacific Parts,M. Chen,168.37,75,in stock
+C0282,air handler motor 3.00hp 460v 3ph 825 rpm 2p,Evergreen Supply,D. Thompson,203.70,5,4-6 wks
+C0283,blower mtr 5.00hp 120v 1ph 3450 rpm 2p,Evergreen Supply,L. Nguyen,119.14,75,1-2 wks
+C0284,blower mtr .50hp 240v 1ph 1625 rpm 2p,Evergreen Supply,P. Dubois,129.19,0,3-5 days
+C0285,bearing 5/8 in flange,Evergreen Supply,E. Johansson,19.50,500,3-5 days
+C0286,cond fan motor 1.00hp 240v 1ph 1725 rpm 6p,Pacific Parts,S. Kowalski,102.62,0,2 wks
+C0287,cooling fan motor .17hp 460v 1ph 1075 rpm 4p,Cascade Wholesale,M. Chen,186.41,20,2 wks
+C0288,cond fan motor 1.00hp 115v 3ph 1725 rpm 1p,Evergreen Supply,D. Thompson,159.39,50,1-2 wks
+C0289,air handler motor 3.00hp 24v 3ph 825 rpm 1p,Evergreen Supply,P. Dubois,96.67,50,2 wks
+C0290,blower mtr 3.00hp 240v 3ph 3450 rpm 4p,Pacific Parts,A. Rossi,101.20,50,in stock
+C0291,draft inducer motor 5.00hp 240v 3450 rpm 2p,Evergreen Supply,L. Nguyen,293.70,120,in stock
+C0292,condenser coil 1 ton r-22 4 row,Pacific Parts,L. Nguyen,497.52,120,3-5 days
+C0293,bearing 1-3/16 in pillow block,Cascade Wholesale,A. Rossi,35.92,0,2 wks
+C0294,draft inducer motor 3.00hp 208v 1625 rpm 1p,Evergreen Supply,J. Alvarez,162.17,0,3-5 days
+C0295,compressor 1 ton 460v 3ph r-410a,Pacific Parts,E. Johansson,867.27,5,4-6 wks
+C0296,fuse 20a 600v ceramic,Pacific Parts,R. Patel,6.96,50,in stock
+C0297,compressor 1 ton 208v 3ph r-410a,Pacific Parts,E. Johansson,1712.64,0,1-2 wks
+C0298,fuse 15a 600v cartridge,Cascade Wholesale,C. Fernandez,7.76,200,2 wks
+C0299,air handler motor 3.00hp 230v 3ph 825 rpm 1p,Cascade Wholesale,D. Thompson,230.67,120,in stock
+C0300,blower motor .50hp 240v 3ph 825 rpm 1p,Cascade Wholesale,R. Patel,174.48,0,3-5 days
+C0301,draft inducer 3.00hp 208v 1075 rpm 1p,Pacific Parts,C. Fernandez,118.94,12,2 wks
+C0302,air handler motor 2.00hp 120v 3ph 1075 rpm 6p,Evergreen Supply,H. Yamamoto,155.53,20,1-2 wks
+C0303,blower motor 1.50hp 230v 3ph 1625 rpm 1p,Evergreen Supply,E. Johansson,136.50,75,4-6 wks
+C0304,compressor 2.5 ton 208v 1ph r-22,Cascade Wholesale,E. Johansson,1651.34,200,in stock
+C0305,inducer motor 1.50hp 208v 1725 rpm 1p,Evergreen Supply,K. O'Brien,212.48,200,in stock
+C0306,blower mtr 2.00hp 230v 3ph 3450 rpm 2p,Pacific Parts,C. Fernandez,118.04,0,3-5 days
+C0307,compressor 1.5 ton 230v 3ph r-410a,Cascade Wholesale,T. Schmidt,1392.79,75,4-6 wks
+C0308,blower mtr 2.00hp 120v 1ph 3450 rpm 2p,Evergreen Supply,D. Thompson,99.20,200,2 wks
+C0309,filter 20x20x2 merv 13,Evergreen Supply,M. Chen,16.28,12,1-2 wks
+C0310,blower motor .25hp 208v 3ph 825 rpm 1p,Cascade Wholesale,B. Nowak,88.74,0,4-6 wks
+C0311,condenser coil 2 ton r-454b 2 row,Cascade Wholesale,S. Kowalski,675.44,35,4-6 wks
+C0312,blower mtr .33hp 24v 3ph 1625 rpm 2p,Cascade Wholesale,T. Schmidt,101.11,0,1-2 wks
+C0313,vent motor .33hp 460v 1625 rpm 1p,Pacific Parts,H. Yamamoto,211.13,500,1-2 wks
+C0314,fan blade 30 in 5 blade cw,Evergreen Supply,L. Nguyen,53.39,75,in stock
+C0315,draft inducer motor 2.00hp 24v 825 rpm 4p,Pacific Parts,T. Schmidt,171.75,0,4-6 wks
+C0316,blower mtr 5.00hp 240v 3ph 1075 rpm 4p,Evergreen Supply,B. Nowak,114.89,0,1-2 wks
+C0317,cond fan motor .25hp 230v 1ph 1725 rpm 4p,Evergreen Supply,P. Dubois,100.22,75,in stock
+C0318,compressor 1 ton 460v 1ph r-454b,Cascade Wholesale,L. Nguyen,1495.89,50,3-5 days
+C0319,air handler motor 1.00hp 120v 1ph 3450 rpm 6p,Evergreen Supply,R. Patel,173.24,0,1-2 wks
+C0320,cond fan motor 2.00hp 24v 1ph 1625 rpm 1p,Pacific Parts,J. Alvarez,170.99,120,4-6 wks
+C0321,condenser coil 1.5 ton r-454b 3 row,Pacific Parts,P. Dubois,820.34,50,1-2 wks
+C0322,draft inducer 2.00hp 460v 1625 rpm 1p,Pacific Parts,B. Nowak,187.01,200,in stock
+C0323,compressor 2 ton 208v 3ph r-22,Pacific Parts,S. Kowalski,1660.25,120,2 wks
+C0324,condenser fan motor 2.00hp 240v 3ph 3450 rpm 1p,Evergreen Supply,S. Kowalski,214.16,0,1-2 wks
+C0325,cooling fan motor 2.00hp 24v 1ph 1725 rpm 1p,Pacific Parts,S. Kowalski,166.32,35,in stock
+C0326,control transformer 75 va 120v pri 24v sec,Evergreen Supply,B. Nowak,53.06,0,in stock
+C0327,fan blade 26 in 4 blade cw,Cascade Wholesale,R. Patel,87.43,50,2 wks
+C0328,filter 20x20x1 merv 11,Cascade Wholesale,E. Johansson,19.26,0,in stock
+C0329,draft inducer motor .75hp 208v 1725 rpm 4p,Pacific Parts,M. Chen,236.06,35,2 wks
+C0330,blower mtr .25hp 115v 1ph 3450 rpm 1p,Pacific Parts,M. Chen,224.72,0,2 wks
+C0331,evaporator coil 4 ton r-32 4 row,Evergreen Supply,K. O'Brien,534.74,350,3-5 days
+C0332,xfmr 150 va 208v pri 120v sec,Evergreen Supply,J. Alvarez,59.75,50,4-6 wks
+C0333,cooling fan motor .50hp 208v 3ph 1075 rpm 1p,Evergreen Supply,J. Alvarez,165.66,0,3-5 days
+C0334,evaporator coil 1.5 ton r-22 2 row,Evergreen Supply,L. Nguyen,645.88,20,in stock
+C0335,compressor 3 ton 230v 3ph r-410a,Evergreen Supply,H. Yamamoto,856.56,0,3-5 days
+C0336,blower mtr .33hp 230v 1ph 1075 rpm 6p,Pacific Parts,M. Chen,160.03,350,4-6 wks
+C0337,condenser fan motor 1.00hp 460v 3ph 1075 rpm 4p,Pacific Parts,B. Nowak,187.08,20,3-5 days
+C0338,control transformer 50 va 208v pri 240v sec,Cascade Wholesale,L. Nguyen,37.80,200,4-6 wks
+C0339,cooling fan motor .75hp 240v 1ph 825 rpm 4p,Cascade Wholesale,E. Johansson,196.93,500,in stock
+C0340,cond fan motor 3.00hp 115v 3ph 1075 rpm 2p,Cascade Wholesale,L. Nguyen,188.35,20,1-2 wks
+C0341,condenser fan motor 1.00hp 460v 1ph 1625 rpm 2p,Evergreen Supply,E. Johansson,117.98,200,1-2 wks
+C0342,inducer motor .33hp 240v 825 rpm 6p,Evergreen Supply,T. Schmidt,248.42,350,2 wks
+C0343,compressor 3 ton 230v 1ph r-32,Evergreen Supply,C. Fernandez,1504.20,500,2 wks
+C0344,cooling fan motor .17hp 240v 1ph 825 rpm 4p,Pacific Parts,A. Rossi,156.06,120,4-6 wks
+C0345,draft inducer motor .17hp 460v 1725 rpm 1p,Pacific Parts,M. Chen,106.34,0,2 wks
+C0346,inducer motor .50hp 230v 1725 rpm 6p,Pacific Parts,L. Nguyen,272.20,12,3-5 days
+C0347,condenser fan motor 1.50hp 24v 1ph 825 rpm 1p,Evergreen Supply,D. Thompson,88.93,12,1-2 wks
+C0348,evaporator coil 2 ton r-22 3 row,Pacific Parts,J. Alvarez,424.25,350,4-6 wks
+C0349,cond fan motor .25hp 208v 1ph 1625 rpm 2p,Evergreen Supply,C. Fernandez,124.61,20,4-6 wks
+C0350,blower mtr .33hp 24v 1ph 1625 rpm 4p,Evergreen Supply,M. Chen,188.89,5,4-6 wks
+C0351,vent motor .50hp 240v 1725 rpm 4p,Cascade Wholesale,R. Patel,151.68,50,2 wks
+C0352,compressor 2 ton 230v 3ph r-32,Pacific Parts,H. Yamamoto,978.01,500,in stock
+C0353,draft inducer motor .25hp 208v 3450 rpm 6p,Cascade Wholesale,L. Nguyen,215.42,500,2 wks
+C0354,cooling fan motor 1.00hp 460v 1ph 1625 rpm 4p,Cascade Wholesale,L. Nguyen,123.97,200,3-5 days
+C0355,cooling fan motor .75hp 240v 3ph 1725 rpm 6p,Cascade Wholesale,D. Thompson,89.27,200,in stock
+C0356,blower motor .33hp 24v 1ph 3450 rpm 1p,Pacific Parts,B. Nowak,137.36,50,1-2 wks
+C0357,vent motor 1.00hp 115v 1075 rpm 6p,Evergreen Supply,B. Nowak,136.10,120,1-2 wks
+C0358,condenser fan motor .17hp 24v 1ph 1075 rpm 2p,Evergreen Supply,C. Fernandez,162.86,5,3-5 days
+C0359,condenser coil 1.5 ton r-22 3 row,Pacific Parts,R. Patel,737.05,0,3-5 days
+C0360,condenser fan motor .25hp 24v 3ph 1725 rpm 1p,Evergreen Supply,P. Dubois,132.23,0,4-6 wks
+C0361,cond fan motor .17hp 460v 3ph 3450 rpm 1p,Cascade Wholesale,K. O'Brien,102.31,350,in stock
+C0362,cooling fan motor .75hp 120v 3ph 825 rpm 1p,Cascade Wholesale,P. Dubois,138.69,0,in stock
+C0363,inducer motor .75hp 115v 3450 rpm 4p,Pacific Parts,E. Johansson,141.00,50,in stock
+C0364,blower motor .25hp 460v 3ph 1075 rpm 4p,Evergreen Supply,K. O'Brien,208.15,120,3-5 days
+C0365,vent motor 2.00hp 120v 1725 rpm 6p,Evergreen Supply,R. Patel,139.01,75,1-2 wks
+C0366,condenser fan motor .17hp 208v 3ph 1725 rpm 1p,Pacific Parts,H. Yamamoto,130.01,0,in stock
+C0367,draft inducer .33hp 115v 1725 rpm 1p,Evergreen Supply,R. Patel,129.00,0,4-6 wks
+C0368,evaporator coil 5 ton r-32 2 row,Evergreen Supply,M. Chen,651.45,0,1-2 wks
+C0369,blower motor 1.00hp 24v 1ph 1725 rpm 6p,Evergreen Supply,P. Dubois,167.63,75,1-2 wks
+C0370,blower mtr .75hp 240v 3ph 825 rpm 1p,Evergreen Supply,D. Thompson,198.78,200,2 wks
+C0371,control transformer 75 va 208v pri 120v sec,Pacific Parts,T. Schmidt,48.70,120,4-6 wks
+C0372,blower mtr 5.00hp 230v 1ph 825 rpm 4p,Cascade Wholesale,E. Johansson,160.84,35,4-6 wks
+C0373,condenser fan motor .50hp 24v 1ph 1625 rpm 4p,Pacific Parts,J. Alvarez,177.76,12,1-2 wks
+C0374,draft inducer .33hp 240v 1625 rpm 4p,Pacific Parts,P. Dubois,135.80,5,4-6 wks
+C0375,compressor 2.5 ton 230v 3ph r-454b,Cascade Wholesale,K. O'Brien,918.66,5,3-5 days
+C0376,air handler motor 5.00hp 24v 3ph 1075 rpm 1p,Evergreen Supply,J. Alvarez,223.55,350,2 wks
+C0377,blower motor 5.00hp 240v 3ph 1725 rpm 4p,Evergreen Supply,L. Nguyen,176.04,20,4-6 wks
+C0378,compressor 2.5 ton 460v 1ph r-32,Evergreen Supply,K. O'Brien,888.86,200,3-5 days
+C0379,evaporator coil 4 ton r-454b 2 row,Pacific Parts,B. Nowak,476.73,12,3-5 days
+C0380,inducer motor 1.50hp 24v 825 rpm 1p,Evergreen Supply,H. Yamamoto,160.40,200,2 wks
+C0381,control transformer 50 va 240v pri 240v sec,Pacific Parts,T. Schmidt,57.93,120,3-5 days
+C0382,control transformer 40 va 480v pri 120v sec,Evergreen Supply,K. O'Brien,62.71,20,4-6 wks
+C0383,cond fan motor .75hp 240v 1ph 1725 rpm 4p,Evergreen Supply,B. Nowak,196.62,50,4-6 wks
+C0384,control transformer 200 va 120v pri 24v sec,Cascade Wholesale,R. Patel,50.29,0,1-2 wks
+C0385,transformer 100 va 120v pri 240v sec,Pacific Parts,R. Patel,58.01,5,in stock
+C0386,condenser coil 4 ton r-22 4 row,Pacific Parts,L. Nguyen,517.86,500,3-5 days
+C0387,fuse 20a 250v cartridge,Cascade Wholesale,M. Chen,5.43,12,2 wks
+C0388,draft inducer motor .25hp 24v 825 rpm 2p,Evergreen Supply,J. Alvarez,188.56,5,in stock
+C0389,bearing 5/8 in ball,Cascade Wholesale,S. Kowalski,18.96,200,3-5 days
+C0390,draft inducer motor 5.00hp 208v 825 rpm 1p,Pacific Parts,L. Nguyen,111.22,20,in stock
+C0391,blower mtr .25hp 24v 3ph 1725 rpm 2p,Evergreen Supply,K. O'Brien,189.03,500,3-5 days
+C0392,inducer motor 1.50hp 460v 825 rpm 4p,Evergreen Supply,B. Nowak,232.83,50,2 wks
+C0393,blower mtr 1.50hp 24v 3ph 3450 rpm 2p,Cascade Wholesale,M. Chen,181.42,12,1-2 wks
+C0394,condenser fan motor .50hp 460v 1ph 825 rpm 4p,Pacific Parts,H. Yamamoto,153.18,500,1-2 wks
+C0395,start capacitor 161 440v,Cascade Wholesale,D. Thompson,23.06,120,3-5 days
+C0396,blower mtr .50hp 240v 1ph 1725 rpm 4p,Pacific Parts,H. Yamamoto,120.79,50,4-6 wks
+C0397,cooling fan motor .50hp 24v 3ph 3450 rpm 6p,Pacific Parts,J. Alvarez,116.88,500,1-2 wks
+C0398,condenser fan motor .25hp 120v 3ph 825 rpm 2p,Pacific Parts,M. Chen,169.49,0,4-6 wks
+C0399,condenser fan motor .50hp 115v 1ph 3450 rpm 4p,Evergreen Supply,R. Patel,174.40,200,4-6 wks
+C0400,condenser fan motor 5.00hp 240v 3ph 825 rpm 4p,Pacific Parts,J. Alvarez,140.45,200,in stock
+C0401,cond fan motor 1.00hp 208v 3ph 1075 rpm 1p,Pacific Parts,M. Chen,211.09,0,2 wks
+C0402,condenser coil 1.5 ton r-32 4 row,Evergreen Supply,E. Johansson,444.44,5,1-2 wks
+C0403,cooling fan motor .33hp 230v 1ph 3450 rpm 1p,Cascade Wholesale,B. Nowak,139.00,0,2 wks
+C0404,cooling fan motor 1.00hp 230v 3ph 1075 rpm 6p,Evergreen Supply,H. Yamamoto,162.91,20,1-2 wks
+C0405,blower mtr .75hp 240v 3ph 825 rpm 2p,Pacific Parts,L. Nguyen,210.47,350,4-6 wks
+C0406,condenser fan motor 1.00hp 120v 1ph 1625 rpm 4p,Evergreen Supply,K. O'Brien,224.19,12,in stock
+C0407,cond fan motor .75hp 460v 1ph 1725 rpm 1p,Pacific Parts,T. Schmidt,101.79,35,2 wks
+C0408,blower motor 2.00hp 120v 1ph 3450 rpm 6p,Evergreen Supply,H. Yamamoto,174.48,200,1-2 wks
+C0409,cond fan motor 1.50hp 240v 1ph 1075 rpm 4p,Pacific Parts,T. Schmidt,132.91,0,2 wks
+C0410,vent motor .33hp 120v 825 rpm 4p,Pacific Parts,M. Chen,285.79,350,3-5 days
+C0411,condenser fan motor .50hp 115v 3ph 1625 rpm 4p,Cascade Wholesale,B. Nowak,170.51,0,in stock
+C0412,evaporator coil 2.5 ton r-22 4 row,Evergreen Supply,T. Schmidt,594.25,75,in stock
+C0413,blower mtr .75hp 240v 3ph 1625 rpm 6p,Pacific Parts,P. Dubois,204.85,0,1-2 wks
+C0414,inducer motor 2.00hp 115v 1625 rpm 1p,Pacific Parts,P. Dubois,265.83,120,3-5 days
+C0415,draft inducer 3.00hp 230v 1625 rpm 1p,Evergreen Supply,S. Kowalski,247.11,35,1-2 wks
+C0416,cooling fan motor 5.00hp 208v 3ph 825 rpm 4p,Cascade Wholesale,K. O'Brien,79.09,75,4-6 wks
+C0417,draft inducer .25hp 208v 1625 rpm 1p,Evergreen Supply,T. Schmidt,261.82,5,1-2 wks
+C0418,air handler motor .50hp 24v 3ph 1725 rpm 4p,Pacific Parts,A. Rossi,97.34,350,1-2 wks
+C0419,cond fan motor 1.50hp 24v 3ph 1725 rpm 6p,Evergreen Supply,L. Nguyen,129.28,500,2 wks
+C0420,air handler motor .25hp 24v 3ph 1075 rpm 1p,Pacific Parts,D. Thompson,142.97,35,1-2 wks
+C0421,blower motor .33hp 120v 3ph 1075 rpm 2p,Cascade Wholesale,P. Dubois,184.86,0,3-5 days
+C0422,draft inducer motor 1.50hp 24v 3450 rpm 1p,Pacific Parts,J. Alvarez,226.29,20,3-5 days
+C0423,inducer motor 3.00hp 120v 1625 rpm 2p,Cascade Wholesale,M. Chen,216.20,0,3-5 days
+C0424,cooling fan motor .75hp 460v 1ph 3450 rpm 6p,Evergreen Supply,S. Kowalski,187.40,75,4-6 wks
+C0425,cooling fan motor 2.00hp 240v 1ph 3450 rpm 4p,Pacific Parts,B. Nowak,104.94,0,1-2 wks
+C0426,inducer motor 1.00hp 208v 1625 rpm 2p,Pacific Parts,J. Alvarez,269.02,5,1-2 wks
+C0427,air handler motor 1.50hp 460v 1ph 825 rpm 4p,Pacific Parts,C. Fernandez,190.52,35,in stock
+C0428,air handler motor .75hp 208v 3ph 825 rpm 4p,Cascade Wholesale,R. Patel,140.92,500,4-6 wks
+C0429,contactor 60a 3p 24v coil,Pacific Parts,S. Kowalski,33.28,20,4-6 wks
+C0430,condenser coil 3 ton r-410a 4 row,Evergreen Supply,R. Patel,431.98,120,2 wks
+C0431,inducer motor .17hp 240v 1625 rpm 6p,Cascade Wholesale,B. Nowak,188.62,20,2 wks
+C0432,compressor 4 ton 230v 3ph r-454b,Evergreen Supply,K. O'Brien,741.70,200,2 wks
+C0433,blower motor .17hp 115v 1ph 3450 rpm 2p,Cascade Wholesale,E. Johansson,170.60,20,2 wks
+C0434,draft inducer motor 1.50hp 230v 1725 rpm 1p,Evergreen Supply,P. Dubois,303.47,0,3-5 days
+C0435,compressor 5 ton 208v 1ph r-22,Pacific Parts,B. Nowak,896.31,50,in stock
+C0436,blower mtr .50hp 115v 3ph 3450 rpm 1p,Pacific Parts,L. Nguyen,180.32,200,4-6 wks
+C0437,draft inducer motor 5.00hp 240v 1625 rpm 4p,Pacific Parts,B. Nowak,183.79,35,1-2 wks
+C0438,condenser fan motor .33hp 240v 3ph 1725 rpm 4p,Evergreen Supply,A. Rossi,196.91,500,1-2 wks
+C0439,evaporator coil 4 ton r-32 3 row,Pacific Parts,C. Fernandez,392.35,12,4-6 wks
+C0440,blower mtr .17hp 120v 1ph 1625 rpm 1p,Evergreen Supply,T. Schmidt,184.37,20,2 wks
+C0441,air handler motor 1.00hp 230v 3ph 1075 rpm 4p,Pacific Parts,J. Alvarez,185.90,200,3-5 days
+C0442,compressor 2 ton 230v 3ph r-410a,Evergreen Supply,P. Dubois,870.01,12,2 wks
+C0443,condenser fan motor .50hp 230v 1ph 3450 rpm 2p,Cascade Wholesale,T. Schmidt,103.84,350,1-2 wks
+C0444,cond fan motor .33hp 115v 1ph 1625 rpm 1p,Pacific Parts,J. Alvarez,159.81,500,3-5 days
+C0445,blower motor 2.00hp 208v 1ph 1075 rpm 2p,Cascade Wholesale,B. Nowak,131.36,500,1-2 wks
+C0446,vent motor 3.00hp 460v 825 rpm 4p,Evergreen Supply,T. Schmidt,179.00,50,1-2 wks
+C0447,blower motor 2.00hp 240v 3ph 1725 rpm 2p,Cascade Wholesale,A. Rossi,244.43,120,2 wks
+C0448,cond fan motor 1.50hp 230v 1ph 1725 rpm 2p,Evergreen Supply,T. Schmidt,228.74,200,1-2 wks
+C0449,cond fan motor 2.00hp 24v 3ph 825 rpm 2p,Pacific Parts,P. Dubois,219.46,350,2 wks
+C0450,cooling fan motor 2.00hp 230v 3ph 1075 rpm 6p,Evergreen Supply,K. O'Brien,202.51,350,1-2 wks
+C0451,blower mtr .17hp 230v 3ph 1075 rpm 2p,Evergreen Supply,C. Fernandez,202.72,5,1-2 wks
+C0452,contactor 30a 3p 240v coil,Pacific Parts,C. Fernandez,53.40,5,3-5 days
+C0453,condenser coil 3 ton r-22 4 row,Cascade Wholesale,J. Alvarez,529.40,20,1-2 wks
+C0454,cond fan motor 5.00hp 230v 1ph 1725 rpm 1p,Cascade Wholesale,M. Chen,192.51,5,in stock
+C0455,blower mtr .17hp 120v 1ph 3450 rpm 6p,Pacific Parts,S. Kowalski,162.66,200,in stock
+C0456,fuse 20a 250v ceramic,Pacific Parts,R. Patel,6.13,120,1-2 wks
+C0457,air handler motor 3.00hp 240v 1ph 1625 rpm 4p,Pacific Parts,J. Alvarez,146.83,350,3-5 days
+C0458,blower motor 1.50hp 115v 1ph 1725 rpm 4p,Evergreen Supply,S. Kowalski,129.10,12,4-6 wks
+C0459,cond fan motor 3.00hp 115v 3ph 1725 rpm 4p,Cascade Wholesale,T. Schmidt,188.48,5,4-6 wks
+C0460,air handler motor 5.00hp 115v 3ph 1075 rpm 6p,Cascade Wholesale,R. Patel,169.55,5,1-2 wks
+C0461,cond fan motor .75hp 208v 3ph 1725 rpm 2p,Pacific Parts,J. Alvarez,152.77,50,3-5 days
+C0462,condenser fan motor 3.00hp 240v 1ph 825 rpm 1p,Pacific Parts,H. Yamamoto,151.75,35,1-2 wks
+C0463,inducer motor 3.00hp 230v 1725 rpm 6p,Pacific Parts,D. Thompson,100.96,120,3-5 days
+C0464,cooling fan motor .17hp 24v 3ph 1075 rpm 1p,Pacific Parts,P. Dubois,114.87,0,4-6 wks
+C0465,air handler motor .25hp 208v 3ph 1625 rpm 4p,Evergreen Supply,C. Fernandez,172.29,35,4-6 wks
+C0466,condenser coil 2 ton r-32 3 row,Pacific Parts,K. O'Brien,810.01,20,1-2 wks
+C0467,condenser fan motor 2.00hp 24v 1ph 825 rpm 4p,Pacific Parts,J. Alvarez,187.39,75,4-6 wks
+C0468,cooling fan motor .75hp 240v 3ph 1725 rpm 4p,Cascade Wholesale,L. Nguyen,131.64,5,2 wks
+C0469,vent motor 1.50hp 208v 3450 rpm 2p,Cascade Wholesale,R. Patel,248.47,5,3-5 days
+C0470,blower motor .25hp 115v 1ph 1625 rpm 4p,Pacific Parts,S. Kowalski,138.86,0,in stock
+C0471,condenser fan motor .25hp 208v 3ph 1625 rpm 1p,Cascade Wholesale,J. Alvarez,208.91,50,3-5 days
+C0472,draft inducer motor .17hp 115v 1625 rpm 2p,Pacific Parts,P. Dubois,254.00,0,2 wks
+C0473,evaporator coil 4 ton r-22 2 row,Cascade Wholesale,M. Chen,318.08,120,in stock
+C0474,cond fan motor .50hp 240v 3ph 1625 rpm 2p,Evergreen Supply,K. O'Brien,116.42,120,in stock
+C0475,fan blade 30 in 4 blade cw,Pacific Parts,B. Nowak,48.06,12,2 wks
+C0476,draft inducer 1.50hp 208v 3450 rpm 1p,Pacific Parts,R. Patel,179.75,75,4-6 wks
+C0477,blower motor .33hp 208v 3ph 1725 rpm 6p,Pacific Parts,S. Kowalski,121.31,0,in stock
+C0478,vent motor 3.00hp 208v 1075 rpm 4p,Evergreen Supply,T. Schmidt,103.48,35,1-2 wks
+C0479,cond fan motor .17hp 120v 1ph 1625 rpm 6p,Pacific Parts,A. Rossi,91.95,0,in stock
+C0480,draft inducer 1.00hp 460v 1075 rpm 6p,Cascade Wholesale,E. Johansson,202.66,20,1-2 wks
+C0481,air handler motor .33hp 24v 3ph 1075 rpm 4p,Cascade Wholesale,M. Chen,196.82,20,in stock
+C0482,evaporator coil 1.5 ton r-32 2 row,Pacific Parts,H. Yamamoto,369.17,12,4-6 wks
+C0483,cooling fan motor 5.00hp 115v 1ph 1625 rpm 6p,Cascade Wholesale,K. O'Brien,205.93,350,2 wks
+C0484,draft inducer 5.00hp 115v 1725 rpm 6p,Pacific Parts,E. Johansson,126.40,0,1-2 wks
+C0485,air handler motor 5.00hp 240v 3ph 1725 rpm 6p,Pacific Parts,L. Nguyen,250.20,200,1-2 wks
+C0486,control transformer 40 va 240v pri 240v sec,Cascade Wholesale,D. Thompson,71.70,75,3-5 days
+C0487,condenser fan motor .17hp 120v 1ph 1625 rpm 1p,Pacific Parts,L. Nguyen,176.16,120,in stock
+C0488,blower mtr 3.00hp 460v 1ph 1625 rpm 1p,Cascade Wholesale,E. Johansson,224.02,20,2 wks
+C0489,blower motor .50hp 24v 3ph 1725 rpm 6p,Cascade Wholesale,K. O'Brien,215.42,350,3-5 days
+C0490,blower motor .17hp 208v 3ph 825 rpm 1p,Cascade Wholesale,J. Alvarez,209.40,75,4-6 wks
+C0491,blower motor .75hp 24v 3ph 3450 rpm 1p,Evergreen Supply,L. Nguyen,104.77,500,1-2 wks
+C0492,blower motor 5.00hp 120v 1ph 1725 rpm 1p,Evergreen Supply,J. Alvarez,154.33,0,2 wks
+C0493,blower mtr 3.00hp 120v 3ph 1625 rpm 6p,Pacific Parts,K. O'Brien,187.60,12,4-6 wks
+C0494,cond fan motor 1.50hp 120v 1ph 825 rpm 2p,Evergreen Supply,R. Patel,155.40,75,4-6 wks
+C0495,blower mtr .75hp 460v 3ph 825 rpm 4p,Evergreen Supply,K. O'Brien,135.92,200,1-2 wks
+C0496,cond fan motor 1.50hp 115v 1ph 3450 rpm 2p,Pacific Parts,J. Alvarez,90.27,12,4-6 wks
+C0497,evaporator coil 1 ton r-22 3 row,Pacific Parts,C. Fernandez,521.03,0,4-6 wks
+C0498,draft inducer .17hp 115v 1725 rpm 1p,Cascade Wholesale,E. Johansson,129.80,5,4-6 wks
+C0499,igniter 120v spark,Pacific Parts,R. Patel,30.94,90,3-5 days
+C0500,draft inducer .33hp 230v 825 rpm 1p,Pacific Parts,T. Schmidt,244.43,15,1-2 wks
+C0501,flame sensor 4 in ceramic,Evergreen Supply,L. Nguyen,39.75,0,2 wks
+C0502,belt 3l280 cogged,Cascade Wholesale,E. Johansson,14.38,0,1-2 wks
+C0503,fuse 40a 600v blade,Pacific Parts,C. Fernandez,6.04,40,3-5 days
+C0504,filter 20x20x1 merv 13,Evergreen Supply,T. Schmidt,25.77,5,1-2 wks
+C0505,draft inducer .50hp 240v 1075 rpm 6p,Cascade Wholesale,J. Alvarez,241.62,90,4-6 wks
+C0506,dual rated capacitor 20/5 370v,Evergreen Supply,J. Alvarez,39.69,90,in stock
+C0507,draft inducer motor 3.00hp 208v 1625 rpm 1p,Evergreen Supply,J. Alvarez,165.17,90,3-5 days
+C0508,fuse 15a 600v cartridge,Cascade Wholesale,C. Fernandez,7.86,15,2 wks
+C0509,air handler motor 3.00hp 230v 3ph 825 rpm 1p,Cascade Wholesale,D. Thompson,239.69,15,in stock
+C0510,blower mtr 5.00hp 230v 1ph 825 rpm 4p,Cascade Wholesale,E. Johansson,162.67,40,4-6 wks
+C0511,control transformer 50 va 240v pri 240v sec,Pacific Parts,T. Schmidt,58.62,15,3-5 days
+C0512,control transformer 200 va 120v pri 24v sec,Cascade Wholesale,R. Patel,51.36,40,1-2 wks
+C0513,blower mtr 1.50hp 24v 3ph 3450 rpm 2p,Cascade Wholesale,M. Chen,179.63,0,1-2 wks
+C0514,cooling fan motor .50hp 24v 3ph 3450 rpm 6p,Pacific Parts,J. Alvarez,113.40,40,1-2 wks
+C0515,condenser fan motor .50hp 115v 1ph 3450 rpm 4p,Evergreen Supply,R. Patel,178.87,40,4-6 wks
+C0516,draft inducer motor 1.50hp 24v 3450 rpm 1p,Pacific Parts,J. Alvarez,236.59,5,3-5 days
+C0517,draft inducer motor 1.50hp 230v 1725 rpm 1p,Evergreen Supply,P. Dubois,309.62,90,3-5 days
+C0518,condenser fan motor .33hp 240v 3ph 1725 rpm 4p,Evergreen Supply,A. Rossi,192.01,5,1-2 wks
+C0519,blower motor 2.00hp 240v 3ph 1725 rpm 2p,Cascade Wholesale,A. Rossi,236.89,40,2 wks
+C0520,vent motor 1.50hp 208v 3450 rpm 2p,Cascade Wholesale,R. Patel,245.93,15,3-5 days
+C0521,blower mtr 3.00hp 460v 1ph 1625 rpm 1p,Cascade Wholesale,E. Johansson,218.57,15,2 wks
