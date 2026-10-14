@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-canvas: #faf9f6;
+  --color-surface: #ffffff;
+  --color-elevated: #f2efe9;
+  --color-ink: #1a1815;
+  --color-ink-soft: #45413a;
+  --color-muted: #6f6a61;
+
+  --color-line: rgba(26, 24, 21, 0.12);
+  --color-line-strong: rgba(26, 24, 21, 0.24);
+
+  --color-accent: #211e1a;
+  --color-accent-hover: #3a352e;
+  --color-accent-soft: rgba(26, 24, 21, 0.06);
+
+  --color-amber: #8a5a2b;
+  --color-amber-soft: rgba(138, 90, 43, 0.1);
+  --color-gold: #c9a227;
+  --color-forest: #14120f;
+  --color-online: #2f8f5b;
+
+  --color-danger: #a33b30;
+  --color-danger-soft: rgba(163, 59, 48, 0.1);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-accent) 14%, transparent);
+  color: var(--color-ink);
+}
+
+/* Slim, warm scrollbars that match the landing page palette */
+.scroll-soft {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+.scroll-soft::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-soft::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-soft::-webkit-scrollbar-thumb {
+  background-color: var(--color-line-strong);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tesseract loader: nested rotating wireframe cubes                   */
+/* ------------------------------------------------------------------ */
+.cube-loader {
+  --size: 36px;
+  --half: calc(var(--size) / 2);
+  --quarter: calc(var(--size) / 4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size);
+  height: var(--size);
+  perspective: calc(var(--size) * 6);
+}
+
+.cube-loader__pivot {
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  transform-style: preserve-3d;
+  animation: cube-spin 5.5s linear infinite;
+}
+
+.cube-loader__cube {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.cube-loader__cube--inner {
+  inset: 25%;
+  animation: cube-spin 3.5s linear infinite reverse;
+}
+
+.cube-loader__face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in oklab, var(--color-gold) 75%, transparent);
+  background-color: color-mix(in oklab, var(--color-gold) 7%, transparent);
+}
+
+.cube-loader__face:nth-child(1) {
+  transform: translateZ(var(--half));
+}
+.cube-loader__face:nth-child(2) {
+  transform: rotateY(180deg) translateZ(var(--half));
+}
+.cube-loader__face:nth-child(3) {
+  transform: rotateY(90deg) translateZ(var(--half));
+}
+.cube-loader__face:nth-child(4) {
+  transform: rotateY(-90deg) translateZ(var(--half));
+}
+.cube-loader__face:nth-child(5) {
+  transform: rotateX(90deg) translateZ(var(--half));
+}
+.cube-loader__face:nth-child(6) {
+  transform: rotateX(-90deg) translateZ(var(--half));
+}
+
+.cube-loader__cube--inner .cube-loader__face:nth-child(1) {
+  transform: translateZ(var(--quarter));
+}
+.cube-loader__cube--inner .cube-loader__face:nth-child(2) {
+  transform: rotateY(180deg) translateZ(var(--quarter));
+}
+.cube-loader__cube--inner .cube-loader__face:nth-child(3) {
+  transform: rotateY(90deg) translateZ(var(--quarter));
+}
+.cube-loader__cube--inner .cube-loader__face:nth-child(4) {
+  transform: rotateY(-90deg) translateZ(var(--quarter));
+}
+.cube-loader__cube--inner .cube-loader__face:nth-child(5) {
+  transform: rotateX(90deg) translateZ(var(--quarter));
+}
+.cube-loader__cube--inner .cube-loader__face:nth-child(6) {
+  transform: rotateX(-90deg) translateZ(var(--quarter));
+}
+
+@keyframes cube-spin {
+  from {
+    transform: rotateX(-18deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-18deg) rotateY(360deg);
+  }
+}
+
+.cube-caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 0.15em;
+  vertical-align: text-bottom;
+  background-color: currentColor;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Gentle ring pulse to guide the eye to the recommended manual */
+.hint-pulse {
+  animation: hint-pulse 1.6s ease-in-out infinite;
+}
+@keyframes hint-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .cube-loader__pivot,
+  .cube-loader__cube--inner {
+    transform: rotateX(-18deg) rotateY(32deg);
+  }
+  .cube-caret {
+    animation: none !important;
+  }
+  .hint-pulse {
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
+    animation: none !important;
+  }
+}

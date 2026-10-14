@@ -1,0 +1,709 @@
+STK_NO,NAME_LINE_1,NAME_LINE_2,TYPE,NOTES,COST,SELL,LIST,CURR,UNIT,VENDOR,BUYER,STOCK_QTY,ON_ORDER,ETA_WEEKS,BIN,MOQ,CONTRACT_NO
+NF00001,CAP START,64 MFD 370V,CAP START,"Replaces prior stock. 64 MFD, 370V.",10.83,15.02,20.09,USD,EA,Keystone HVAC Supply,C. Fernandez,120,25,5,BIN-330,1,CN-84845
+NF00002,CONT,30A 3P 24V coil,CONT,"Replaces prior stock. 30A, 3P, 24V coil.",31.40,43.56,58.25,USD,EA,Keystone HVAC Supply,A. Rossi,12,0,7,BIN-412,5,CN-44775
+NF00003,CONT,30A 2P 120V coil,CONT,"Replaces prior stock. 30A, 2P, 120V coil.",21.06,29.21,39.07,USD,EACH,Summit Distributing,T. Schmidt,120,25,2,BIN-330,5,CN-94473
+NF00004,FAN BLADE,18 in 5 blade CW,FAN BLADE,"Replaces prior stock. 18 in, 5 blade, CW.",53.31,73.95,98.89,USD,EACH,Summit Distributing,K. O'Brien,35,25,3,BIN-330,25,CN-66738
+NF00005,FLAME SENSOR,2 in ceramic,FLAME SENSOR,"Replaces prior stock. 2 in, ceramic.",18.72,25.96,34.72,USD,EA,Northfield Wholesale,J. Alvarez,20,10,7,BIN-412,1,CN-56410
+NF00006,MTR COND FAN,5HP 120V 3PH 825 RPM 4P,MTR COND FAN,"Replaces prior stock. 5HP, 120V, 3PH, 825 RPM, 4P.",92.99,128.99,172.49,USD,EACH,Beacon Mechanical,S. Kowalski,200,50,3,BIN-330,1,CN-39466
+NF00007,COMPRESSOR,1 ton 230V 3PH R-410A,COMPRESSOR,"Replaces prior stock. 1 ton, 230V, 3PH, R-410A.",913.48,1267.08,1694.35,USD,EACH,Northfield Wholesale,A. Rossi,35,50,1,BIN-412,1,CN-40459
+NF00008,COMPRESSOR,3 ton 230V 1PH R-22,COMPRESSOR,"Replaces prior stock. 3 ton, 230V, 1PH, R-22.",529.15,733.98,981.48,USD,EACH,Beacon Mechanical,R. Patel,500,10,3,BIN-330,1,CN-48000
+NF00009,DAMPER,8 in barometric,DAMPER,"Replaces prior stock. 8 in, barometric.",112.33,155.81,208.36,USD,EACH,Keystone HVAC Supply,J. Alvarez,20,0,2,BIN-412,10,CN-45928
+NF00010,CAP RUN,40/5 MFD 370V,CAP RUN,"Replaces prior stock. 40/5 MFD, 370V.",11.12,15.42,20.62,USD,EACH,Summit Distributing,M. Chen,120,0,6,BIN-100,1,CN-30591
+NF00011,BELT,5L450 cogged,BELT,"Replaces prior stock. 5L450, cogged.",10.68,14.81,19.80,USD,EA,Beacon Mechanical,R. Patel,50,0,1,BIN-205,1,CN-29845
+NF00012,THERMOSTAT,smart 24V,THERMOSTAT,"Replaces prior stock. smart, 24V.",82.02,113.77,152.13,USD,EA,Keystone HVAC Supply,J. Alvarez,5,0,3,BIN-330,25,CN-44777
+NF00013,CONT,20A 3P 24V coil,CONT,"Replaces prior stock. 20A, 3P, 24V coil.",40.24,55.82,74.65,USD,EACH,Beacon Mechanical,R. Patel,75,100,2,BIN-100,1,CN-87697
+NF00014,BLWR WHEEL,10-1/2 in 10 in wide CCW,BLWR WHEEL,"Replaces prior stock. 10-1/2 in, 10 in wide, CCW.",73.74,102.28,136.77,USD,EACH,Keystone HVAC Supply,K. O'Brien,120,25,1,BIN-100,1,CN-13391
+NF00015,MTR COND FAN,1/4HP 240V 1PH 825 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/4HP, 240V, 1PH, 825 RPM, 2P.",110.65,153.48,205.23,USD,EACH,Beacon Mechanical,E. Johansson,200,25,2,BIN-205,25,CN-21016
+NF00016,PRESS SWITCH,2.0 in wc set 0.1 diff,PRESS SWITCH,"Replaces prior stock. 2.0 in wc set, 0.1 diff.",24.02,33.32,44.55,USD,EA,Summit Distributing,L. Nguyen,12,100,5,BIN-100,25,CN-73825
+NF00017,XFMR,150 VA 120V pri 240V sec,XFMR,"Replaces prior stock. 150 VA, 120V pri, 240V sec.",28.42,39.42,52.72,USD,EACH,Northfield Wholesale,E. Johansson,350,100,4,BIN-330,1,CN-40526
+NF00018,CONT,30A 1P 120V coil,CONT,"Replaces prior stock. 30A, 1P, 120V coil.",32.58,45.19,60.43,USD,EA,Keystone HVAC Supply,J. Alvarez,5,25,3,BIN-205,5,CN-78727
+NF00019,CAP START,124 MFD 370V,CAP START,"Replaces prior stock. 124 MFD, 370V.",15.80,21.91,29.30,USD,EACH,Northfield Wholesale,J. Alvarez,200,50,6,BIN-205,10,CN-90671
+NF00020,XFMR,100 VA 120V pri 120V sec,XFMR,"Replaces prior stock. 100 VA, 120V pri, 120V sec.",46.99,65.18,87.16,USD,EACH,Keystone HVAC Supply,J. Alvarez,0,100,5,BIN-412,1,CN-76863
+NF00021,CAP RUN,15/5 MFD 370V,CAP RUN,"Replaces prior stock. 15/5 MFD, 370V.",10.61,14.72,19.69,USD,EACH,Summit Distributing,T. Schmidt,75,0,2,BIN-100,5,CN-31609
+NF00022,RELAY,10A 24V coil,RELAY,"Replaces prior stock. 10A, 24V coil.",13.73,19.05,25.47,USD,EACH,Northfield Wholesale,E. Johansson,75,100,6,BIN-205,1,CN-77633
+NF00023,MTR COND FAN,1/2HP 24V 3PH 825 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/2HP, 24V, 3PH, 825 RPM, 6P.",96.16,133.39,178.36,USD,EACH,Northfield Wholesale,D. Thompson,12,0,2,BIN-330,25,CN-20512
+NF00024,CONT,20A 2P 240V coil,CONT,"Replaces prior stock. 20A, 2P, 240V coil.",21.32,29.57,39.54,USD,EACH,Summit Distributing,B. Nowak,20,100,1,BIN-100,10,CN-76901
+NF00025,CAP RUN,50/7.5 MFD 370V,CAP RUN,"Replaces prior stock. 50/7.5 MFD, 370V.",8.86,12.29,16.43,USD,EA,Summit Distributing,M. Chen,50,10,1,BIN-100,10,CN-47132
+NF00026,BELT,5L450 fractional hp,BELT,"Replaces prior stock. 5L450, fractional hp.",10.89,15.10,20.19,USD,EACH,Keystone HVAC Supply,B. Nowak,0,50,4,BIN-330,1,CN-38658
+NF00027,GAS VALVE,1 in 24V 250k BTU,GAS VALVE,"Replaces prior stock. 1 in, 24V, 250k BTU.",85.10,118.04,157.85,USD,EACH,Keystone HVAC Supply,M. Chen,50,100,5,BIN-412,10,CN-42969
+NF00028,XFMR,50 VA 120V pri 120V sec,XFMR,"Replaces prior stock. 50 VA, 120V pri, 120V sec.",48.05,66.65,89.12,USD,EACH,Summit Distributing,L. Nguyen,75,100,5,BIN-205,1,CN-72828
+NF00029,CAP START,189 MFD 440V,CAP START,"Replaces prior stock. 189 MFD, 440V.",11.54,16.00,21.40,USD,EACH,Keystone HVAC Supply,B. Nowak,35,10,7,BIN-330,10,CN-38606
+NF00030,CAP RUN DUAL,70/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 70/5 MFD, 440V.",20.24,28.07,37.54,USD,EACH,Northfield Wholesale,E. Johansson,20,100,3,BIN-412,1,CN-16142
+NF00031,CAP RUN DUAL,45/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 45/5 MFD, 440V.",12.77,17.72,23.69,USD,EA,Beacon Mechanical,S. Kowalski,120,100,1,BIN-330,25,CN-57848
+NF00032,BLWR WHEEL,10 in 8 in wide CW,BLWR WHEEL,"Replaces prior stock. 10 in, 8 in wide, CW.",54.03,74.95,100.22,USD,EA,Beacon Mechanical,E. Johansson,75,0,4,BIN-330,1,CN-93461
+NF00033,CAP RUN,20/5 MFD 440V,CAP RUN,"Replaces prior stock. 20/5 MFD, 440V.",8.13,11.27,15.08,USD,EA,Summit Distributing,L. Nguyen,20,100,4,BIN-100,1,CN-76522
+NF00034,MTR BLWR,3HP 230V 1PH 825 RPM 2P,MTR BLWR,"Replaces prior stock. 3HP, 230V, 1PH, 825 RPM, 2P.",130.53,181.06,242.11,USD,EACH,Keystone HVAC Supply,C. Fernandez,20,0,4,BIN-330,1,CN-89691
+NF00035,FLAME SENSOR,6 in Kanthal,FLAME SENSOR,"Replaces prior stock. 6 in, Kanthal.",20.03,27.78,37.14,USD,EA,Northfield Wholesale,R. Patel,75,50,1,BIN-205,1,CN-22375
+NF00036,COND COIL,3 ton R-454B 2 row,COND COIL,"Replaces prior stock. 3 ton, R-454B, 2 row.",450.98,625.55,836.49,USD,EACH,Beacon Mechanical,H. Yamamoto,20,100,2,BIN-330,10,CN-94015
+NF00037,FILTER,16x20x1 MERV 13,FILTER,"Replaces prior stock. 16x20x1, MERV 13.",12.73,17.66,23.61,USD,EACH,Beacon Mechanical,M. Chen,50,25,7,BIN-100,10,CN-50790
+NF00038,CONT,40A 1P 240V coil,CONT,"Replaces prior stock. 40A, 1P, 240V coil.",31.64,43.89,58.68,USD,EACH,Northfield Wholesale,T. Schmidt,50,0,6,BIN-100,10,CN-18704
+NF00039,RELAY,10A 240V coil,RELAY,"Replaces prior stock. 10A, 240V coil.",10.96,15.20,20.33,USD,EA,Summit Distributing,B. Nowak,200,100,5,BIN-412,25,CN-45168
+NF00040,CONT,40A 3P 24V coil,CONT,"Replaces prior stock. 40A, 3P, 24V coil.",24.71,34.28,45.84,USD,EA,Beacon Mechanical,T. Schmidt,0,10,2,BIN-412,1,CN-76615
+NF00041,CONT,60A 3P 120V coil,CONT,"Replaces prior stock. 60A, 3P, 120V coil.",24.43,33.89,45.32,USD,EA,Keystone HVAC Supply,M. Chen,120,0,4,BIN-100,25,CN-68872
+NF00042,PRESS SWITCH,1.0 in wc set 0.2 diff,PRESS SWITCH,"Replaces prior stock. 1.0 in wc set, 0.2 diff.",22.16,30.75,41.11,USD,EACH,Northfield Wholesale,A. Rossi,0,0,7,BIN-100,25,CN-58271
+NF00043,FAN BLADE,18 in 3 blade CW,FAN BLADE,"Replaces prior stock. 18 in, 3 blade, CW.",38.15,52.92,70.76,USD,EA,Beacon Mechanical,J. Alvarez,200,50,7,BIN-100,1,CN-19784
+NF00044,EVAP COIL,1 ton R-22 3 row,EVAP COIL,"Replaces prior stock. 1 ton, R-22, 3 row.",367.70,510.04,682.03,USD,EA,Keystone HVAC Supply,H. Yamamoto,50,50,3,BIN-330,1,CN-96130
+NF00045,XFMR,75 VA 240V pri 240V sec,XFMR,"Replaces prior stock. 75 VA, 240V pri, 240V sec.",51.51,71.45,95.54,USD,EA,Keystone HVAC Supply,T. Schmidt,35,100,2,BIN-205,10,CN-97135
+NF00046,MTR COND FAN,2HP 460V 3PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 2HP, 460V, 3PH, 3450 RPM, 2P.",75.84,105.20,140.68,USD,EACH,Summit Distributing,R. Patel,20,0,2,BIN-100,25,CN-97885
+NF00047,MTR BLWR,3/4HP 460V 1PH 825 RPM 1P,MTR BLWR,"Replaces prior stock. 3/4HP, 460V, 1PH, 825 RPM, 1P.",65.39,90.70,121.28,USD,EACH,Keystone HVAC Supply,T. Schmidt,75,0,3,BIN-412,1,CN-51445
+NF00048,MTR INDUCER,1HP 24V 825 RPM 2P,MTR INDUCER,"Replaces prior stock. 1HP, 24V, 825 RPM, 2P.",150.57,208.86,279.29,USD,EA,Summit Distributing,A. Rossi,50,10,3,BIN-330,5,CN-26097
+NF00049,MTR COND FAN,3HP 240V 1PH 1075 RPM 1P,MTR COND FAN,"Replaces prior stock. 3HP, 240V, 1PH, 1075 RPM, 1P.",129.52,179.66,240.25,USD,EA,Summit Distributing,E. Johansson,75,10,3,BIN-100,25,CN-68016
+NF00050,BLWR WHEEL,9 in 8 in wide CCW,BLWR WHEEL,"Replaces prior stock. 9 in, 8 in wide, CCW.",55.11,76.45,102.22,USD,EA,Beacon Mechanical,J. Alvarez,200,10,5,BIN-412,1,CN-30015
+NF00051,CAP RUN DUAL,55/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 55/5 MFD, 440V.",11.95,16.58,22.17,USD,EACH,Northfield Wholesale,K. O'Brien,50,25,3,BIN-412,1,CN-27049
+NF00052,CAP RUN DUAL,60/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 60/5 MFD, 440V.",13.55,18.79,25.13,USD,EA,Keystone HVAC Supply,S. Kowalski,350,10,4,BIN-330,10,CN-83796
+NF00053,CAP RUN,15/5 MFD 440V,CAP RUN,"Replaces prior stock. 15/5 MFD, 440V.",11.14,15.45,20.67,USD,EA,Keystone HVAC Supply,C. Fernandez,200,25,3,BIN-330,5,CN-88249
+NF00054,MTR COND FAN,1HP 208V 1PH 1725 RPM 1P,MTR COND FAN,"Replaces prior stock. 1HP, 208V, 1PH, 1725 RPM, 1P.",78.24,108.53,145.13,USD,EACH,Northfield Wholesale,R. Patel,75,0,6,BIN-330,1,CN-21931
+NF00055,MTR INDUCER,1/6HP 115V 1725 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/6HP, 115V, 1725 RPM, 1P.",83.03,115.17,154.01,USD,EA,Keystone HVAC Supply,A. Rossi,20,0,3,BIN-330,1,CN-36395
+NF00056,FILTER,24x24x1 MERV 16,FILTER,"Replaces prior stock. 24x24x1, MERV 16.",11.30,15.68,20.96,USD,EA,Northfield Wholesale,S. Kowalski,0,25,2,BIN-330,10,CN-41530
+NF00057,MTR BLWR,1/3HP 208V 1PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 1/3HP, 208V, 1PH, 1625 RPM, 1P.",64.49,89.45,119.61,USD,EACH,Beacon Mechanical,R. Patel,0,25,2,BIN-412,5,CN-20357
+NF00058,CAP RUN,60/5 MFD 440V,CAP RUN,"Replaces prior stock. 60/5 MFD, 440V.",9.72,13.48,18.03,USD,EACH,Beacon Mechanical,R. Patel,35,50,3,BIN-100,25,CN-89105
+NF00059,CONT,30A 3P 120V coil,CONT,"Replaces prior stock. 30A, 3P, 120V coil.",27.63,38.32,51.24,USD,EACH,Northfield Wholesale,B. Nowak,35,0,7,BIN-100,10,CN-94688
+NF00060,CAP START,43 MFD 440V,CAP START,"Replaces prior stock. 43 MFD, 440V.",18.03,25.01,33.44,USD,EACH,Northfield Wholesale,J. Alvarez,5,100,2,BIN-100,5,CN-96260
+NF00061,CONT,20A 1P 24V coil,CONT,"Replaces prior stock. 20A, 1P, 24V coil.",27.43,38.05,50.88,USD,EACH,Keystone HVAC Supply,M. Chen,5,10,6,BIN-205,1,CN-89534
+NF00062,RELAY,20A 120V coil,RELAY,"Replaces prior stock. 20A, 120V coil.",19.55,27.12,36.26,USD,EACH,Keystone HVAC Supply,E. Johansson,200,100,2,BIN-412,1,CN-77663
+NF00063,MTR INDUCER,3HP 240V 3450 RPM 2P,MTR INDUCER,"Replaces prior stock. 3HP, 240V, 3450 RPM, 2P.",109.63,152.07,203.35,USD,EACH,Northfield Wholesale,B. Nowak,350,10,6,BIN-412,5,CN-24154
+NF00064,FAN BLADE,24 in 4 blade CW,FAN BLADE,"Replaces prior stock. 24 in, 4 blade, CW.",25.60,35.51,47.48,USD,EACH,Northfield Wholesale,C. Fernandez,0,0,1,BIN-205,1,CN-16410
+NF00065,MTR INDUCER,1/6HP 115V 3450 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/6HP, 115V, 3450 RPM, 1P.",133.49,185.16,247.59,USD,EA,Keystone HVAC Supply,T. Schmidt,12,100,1,BIN-205,1,CN-58878
+NF00066,THERMOSTAT,programmable 24V,THERMOSTAT,"Replaces prior stock. programmable, 24V.",47.37,65.71,87.87,USD,EACH,Northfield Wholesale,L. Nguyen,20,25,2,BIN-412,5,CN-27888
+NF00067,MTR BLWR,5HP 460V 1PH 1075 RPM 1P,MTR BLWR,"Replaces prior stock. 5HP, 460V, 1PH, 1075 RPM, 1P.",90.72,125.84,168.27,USD,EACH,Keystone HVAC Supply,L. Nguyen,75,50,4,BIN-412,1,CN-29110
+NF00068,CAP RUN,70/5 MFD 440V,CAP RUN,"Replaces prior stock. 70/5 MFD, 440V.",8.30,11.51,15.39,USD,EA,Beacon Mechanical,J. Alvarez,50,0,4,BIN-205,1,CN-54032
+NF00069,COND COIL,2 ton R-410A 4 row,COND COIL,"Replaces prior stock. 2 ton, R-410A, 4 row.",483.33,670.43,896.51,USD,EA,Beacon Mechanical,H. Yamamoto,0,0,1,BIN-205,5,CN-66319
+NF00070,FLAME SENSOR,2 in Kanthal,FLAME SENSOR,"Replaces prior stock. 2 in, Kanthal.",14.61,20.27,27.11,USD,EACH,Keystone HVAC Supply,P. Dubois,0,50,7,BIN-330,1,CN-76987
+NF00071,FLAME SENSOR,4 in Kanthal,FLAME SENSOR,"Replaces prior stock. 4 in, Kanthal.",28.56,39.61,52.97,USD,EA,Keystone HVAC Supply,C. Fernandez,120,50,6,BIN-330,1,CN-81103
+NF00072,FILTER,16x25x1 MERV 16,FILTER,"Replaces prior stock. 16x25x1, MERV 16.",8.06,11.18,14.95,USD,EACH,Beacon Mechanical,D. Thompson,500,0,5,BIN-330,1,CN-37945
+NF00073,CAP RUN,35/10 MFD 440V,CAP RUN,"Replaces prior stock. 35/10 MFD, 440V.",10.55,14.64,19.57,USD,EA,Summit Distributing,T. Schmidt,200,0,7,BIN-330,25,CN-83913
+NF00074,CONTROL BOARD,24V furnace,CONTROL BOARD,"Replaces prior stock. 24V, furnace.",88.26,122.42,163.70,USD,EACH,Beacon Mechanical,S. Kowalski,0,0,4,BIN-412,1,CN-42641
+NF00075,IGN,120V spark,IGN,"Replaces prior stock. 120V, spark.",20.52,28.47,38.06,USD,EA,Summit Distributing,A. Rossi,50,10,5,BIN-100,1,CN-70591
+NF00076,COND COIL,3 ton R-32 4 row,COND COIL,"Replaces prior stock. 3 ton, R-32, 4 row.",486.92,675.40,903.15,USD,EACH,Northfield Wholesale,B. Nowak,120,25,6,BIN-205,1,CN-78557
+NF00077,MTR COND FAN,3/4HP 115V 1PH 1075 RPM 1P,MTR COND FAN,"Replaces prior stock. 3/4HP, 115V, 1PH, 1075 RPM, 1P.",97.01,134.56,179.94,USD,EACH,Northfield Wholesale,J. Alvarez,35,0,6,BIN-412,10,CN-21713
+NF00078,MTR COND FAN,1/4HP 460V 3PH 1075 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/4HP, 460V, 3PH, 1075 RPM, 6P.",99.47,137.97,184.49,USD,EACH,Summit Distributing,B. Nowak,50,50,3,BIN-412,25,CN-98101
+NF00079,FAN BLADE,24 in 5 blade CCW,FAN BLADE,"Replaces prior stock. 24 in, 5 blade, CCW.",30.63,42.49,56.82,USD,EACH,Summit Distributing,R. Patel,20,25,3,BIN-330,1,CN-59961
+NF00080,MTR BLWR,3/4HP 115V 3PH 1075 RPM 1P,MTR BLWR,"Replaces prior stock. 3/4HP, 115V, 3PH, 1075 RPM, 1P.",61.89,85.85,114.80,USD,EA,Northfield Wholesale,P. Dubois,50,25,4,BIN-205,10,CN-50899
+NF00081,MTR INDUCER,1/3HP 230V 825 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/3HP, 230V, 825 RPM, 1P.",130.98,181.68,242.95,USD,EA,Northfield Wholesale,H. Yamamoto,120,25,2,BIN-330,1,CN-61679
+NF00082,GAS VALVE,3/4 in 24V 100k BTU,GAS VALVE,"Replaces prior stock. 3/4 in, 24V, 100k BTU.",77.55,107.57,143.84,USD,EA,Northfield Wholesale,L. Nguyen,20,25,3,BIN-100,1,CN-56067
+NF00083,EVAP COIL,1.5 ton R-454B 2 row,EVAP COIL,"Replaces prior stock. 1.5 ton, R-454B, 2 row.",446.68,619.59,828.52,USD,EACH,Summit Distributing,L. Nguyen,75,25,5,BIN-205,10,CN-80499
+NF00084,FLAME SENSOR,4 in ceramic,FLAME SENSOR,"Replaces prior stock. 4 in, ceramic.",26.99,37.44,50.07,USD,EA,Summit Distributing,H. Yamamoto,500,25,7,BIN-412,1,CN-30004
+NF00085,EVAP COIL,5 ton R-32 4 row,EVAP COIL,"Replaces prior stock. 5 ton, R-32, 4 row.",231.77,321.49,429.89,USD,EA,Beacon Mechanical,T. Schmidt,200,0,2,BIN-330,1,CN-22319
+NF00086,CAP RUN,45/5 MFD 370V,CAP RUN,"Replaces prior stock. 45/5 MFD, 370V.",7.95,11.03,14.74,USD,EA,Beacon Mechanical,E. Johansson,200,25,1,BIN-330,1,CN-57291
+NF00087,FILTER,14x20x1 MERV 16,FILTER,"Replaces prior stock. 14x20x1, MERV 16.",10.87,15.08,20.16,USD,EACH,Keystone HVAC Supply,R. Patel,350,0,6,BIN-100,1,CN-37797
+NF00088,RELAY,30A 120V coil,RELAY,"Replaces prior stock. 30A, 120V coil.",19.68,27.30,36.51,USD,EACH,Northfield Wholesale,A. Rossi,50,0,2,BIN-412,1,CN-82801
+NF00089,BELT,A40 v-belt,BELT,"Replaces prior stock. A40, v-belt.",14.76,20.47,27.37,USD,EACH,Keystone HVAC Supply,K. O'Brien,350,100,1,BIN-330,1,CN-96173
+NF00090,BELT,A40 cogged,BELT,"Replaces prior stock. A40, cogged.",14.32,19.86,26.55,USD,EA,Northfield Wholesale,A. Rossi,5,50,3,BIN-412,1,CN-67010
+NF00091,COMPRESSOR,2 ton 460V 3PH R-454B,COMPRESSOR,"Replaces prior stock. 2 ton, 460V, 3PH, R-454B.",492.39,682.99,913.30,USD,EA,Northfield Wholesale,S. Kowalski,5,25,5,BIN-330,10,CN-26071
+NF00092,CAP RUN,70/5 MFD 370V,CAP RUN,"Replaces prior stock. 70/5 MFD, 370V.",12.16,16.86,22.55,USD,EA,Keystone HVAC Supply,K. O'Brien,500,0,6,BIN-100,1,CN-76280
+NF00093,COND COIL,3 ton R-22 2 row,COND COIL,"Replaces prior stock. 3 ton, R-22, 2 row.",301.25,417.87,558.77,USD,EACH,Northfield Wholesale,J. Alvarez,5,0,3,BIN-330,1,CN-51165
+NF00094,XFMR,50 VA 208V pri 24V sec,XFMR,"Replaces prior stock. 50 VA, 208V pri, 24V sec.",51.21,71.03,94.98,USD,EA,Beacon Mechanical,C. Fernandez,75,0,6,BIN-100,10,CN-61745
+NF00095,RELAY,15A 240V coil,RELAY,"Replaces prior stock. 15A, 240V coil.",13.76,19.08,25.52,USD,EACH,Northfield Wholesale,D. Thompson,0,0,3,BIN-412,1,CN-28876
+NF00096,GAS VALVE,1/2 in 24V 250k BTU,GAS VALVE,"Replaces prior stock. 1/2 in, 24V, 250k BTU.",93.83,130.15,174.04,USD,EACH,Beacon Mechanical,B. Nowak,120,0,2,BIN-330,1,CN-50948
+NF00097,XFMR,200 VA 480V pri 240V sec,XFMR,"Replaces prior stock. 200 VA, 480V pri, 240V sec.",21.08,29.24,39.10,USD,EA,Northfield Wholesale,B. Nowak,350,0,3,BIN-330,5,CN-39577
+NF00098,THERMOSTAT,digital 24V,THERMOSTAT,"Replaces prior stock. digital, 24V.",81.91,113.62,151.94,USD,EACH,Northfield Wholesale,T. Schmidt,350,0,1,BIN-330,10,CN-70396
+NF00099,COND COIL,1.5 ton R-22 2 row,COND COIL,"Replaces prior stock. 1.5 ton, R-22, 2 row.",301.25,417.86,558.76,USD,EA,Northfield Wholesale,J. Alvarez,0,100,4,BIN-205,5,CN-69797
+NF00100,MTR BLWR,1HP 460V 3PH 1725 RPM 2P,MTR BLWR,"Replaces prior stock. 1HP, 460V, 3PH, 1725 RPM, 2P.",60.79,84.32,112.76,USD,EACH,Summit Distributing,D. Thompson,50,0,3,BIN-330,1,CN-84543
+NF00101,XFMR,40 VA 208V pri 240V sec,XFMR,"Replaces prior stock. 40 VA, 208V pri, 240V sec.",26.03,36.10,48.28,USD,EA,Northfield Wholesale,H. Yamamoto,5,100,4,BIN-412,1,CN-69277
+NF00102,BELT,3L280 cogged,BELT,"Replaces prior stock. 3L280, cogged.",7.98,11.07,14.80,USD,EACH,Beacon Mechanical,J. Alvarez,0,50,1,BIN-330,10,CN-72597
+NF00103,BLWR WHEEL,11 in 6 in wide CCW,BLWR WHEEL,"Replaces prior stock. 11 in, 6 in wide, CCW.",47.01,65.21,87.20,USD,EA,Northfield Wholesale,J. Alvarez,12,10,5,BIN-330,25,CN-61404
+NF00104,BLWR WHEEL,10 in 6 in wide CCW,BLWR WHEEL,"Replaces prior stock. 10 in, 6 in wide, CCW.",49.09,68.09,91.05,USD,EA,Summit Distributing,A. Rossi,75,0,5,BIN-100,1,CN-90358
+NF00105,EVAP COIL,1 ton R-22 4 row,EVAP COIL,"Replaces prior stock. 1 ton, R-22, 4 row.",218.68,303.33,405.62,USD,EACH,Northfield Wholesale,L. Nguyen,200,10,2,BIN-205,1,CN-44920
+NF00106,COMPRESSOR,2.5 ton 460V 1PH R-22,COMPRESSOR,"Replaces prior stock. 2.5 ton, 460V, 1PH, R-22.",859.05,1191.58,1593.39,USD,EA,Beacon Mechanical,T. Schmidt,0,0,2,BIN-205,10,CN-22326
+NF00107,FUSE,40A 600V blade,FUSE,"Replaces prior stock. 40A, 600V, blade.",3.58,4.96,6.64,USD,EACH,Beacon Mechanical,S. Kowalski,12,50,4,BIN-412,1,CN-62473
+NF00108,MTR INDUCER,3HP 24V 3450 RPM 6P,MTR INDUCER,"Replaces prior stock. 3HP, 24V, 3450 RPM, 6P.",108.40,150.36,201.07,USD,EACH,Keystone HVAC Supply,L. Nguyen,50,50,1,BIN-205,10,CN-38565
+NF00109,MTR INDUCER,1/4HP 115V 3450 RPM 6P,MTR INDUCER,"Replaces prior stock. 1/4HP, 115V, 3450 RPM, 6P.",113.92,158.03,211.31,USD,EA,Northfield Wholesale,C. Fernandez,0,100,1,BIN-412,5,CN-94200
+NF00110,CAP RUN DUAL,50/7.5 MFD 370V,CAP RUN DUAL,"Replaces prior stock. 50/7.5 MFD, 370V.",15.47,21.46,28.69,USD,EACH,Beacon Mechanical,R. Patel,0,25,7,BIN-412,5,CN-55398
+NF00111,MTR COND FAN,1HP 230V 1PH 1075 RPM 4P,MTR COND FAN,"Replaces prior stock. 1HP, 230V, 1PH, 1075 RPM, 4P.",108.31,150.23,200.89,USD,EACH,Summit Distributing,M. Chen,75,50,3,BIN-412,5,CN-88967
+NF00112,CAP RUN,30/5 MFD 440V,CAP RUN,"Replaces prior stock. 30/5 MFD, 440V.",6.67,9.25,12.37,USD,EA,Beacon Mechanical,K. O'Brien,0,0,7,BIN-100,1,CN-50740
+NF00113,MTR COND FAN,1/3HP 120V 1PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/3HP, 120V, 1PH, 3450 RPM, 2P.",66.72,92.55,123.76,USD,EACH,Keystone HVAC Supply,A. Rossi,20,0,7,BIN-100,10,CN-35075
+NF00114,MTR BLWR,5HP 230V 3PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 5HP, 230V, 3PH, 825 RPM, 4P.",78.98,109.55,146.49,USD,EACH,Beacon Mechanical,R. Patel,75,10,2,BIN-205,1,CN-84634
+NF00115,DAMPER,8 in motorized,DAMPER,"Replaces prior stock. 8 in, motorized.",94.85,131.56,175.93,USD,EA,Keystone HVAC Supply,R. Patel,50,25,1,BIN-412,1,CN-66337
+NF00116,CONT,20A 3P 120V coil,CONT,"Replaces prior stock. 20A, 3P, 120V coil.",23.68,32.85,43.93,USD,EACH,Summit Distributing,J. Alvarez,5,25,7,BIN-412,10,CN-29893
+NF00117,CONT,30A 1P 240V coil,CONT,"Replaces prior stock. 30A, 1P, 240V coil.",21.45,29.75,39.78,USD,EA,Beacon Mechanical,K. O'Brien,35,0,4,BIN-412,1,CN-87269
+NF00118,CAP RUN DUAL,20/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 20/5 MFD, 440V.",11.36,15.76,21.08,USD,EACH,Beacon Mechanical,R. Patel,0,0,3,BIN-205,5,CN-27946
+NF00119,CAP START,189 MFD 370V,CAP START,"Replaces prior stock. 189 MFD, 370V.",9.50,13.18,17.62,USD,EACH,Keystone HVAC Supply,R. Patel,200,100,7,BIN-205,1,CN-69446
+NF00120,MTR BLWR,1/3HP 120V 3PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 1/3HP, 120V, 3PH, 825 RPM, 4P.",106.21,147.33,197.01,USD,EACH,Keystone HVAC Supply,D. Thompson,120,100,2,BIN-100,10,CN-93428
+NF00121,MTR BLWR,3/4HP 120V 3PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 3/4HP, 120V, 3PH, 825 RPM, 6P.",114.15,158.34,211.74,USD,EACH,Beacon Mechanical,M. Chen,50,25,7,BIN-100,1,CN-36132
+NF00122,FILTER,16x25x4 MERV 16,FILTER,"Replaces prior stock. 16x25x4, MERV 16.",6.40,8.88,11.88,USD,EACH,Summit Distributing,C. Fernandez,0,10,4,BIN-205,10,CN-31557
+NF00123,DAMPER,10 in manual,DAMPER,"Replaces prior stock. 10 in, manual.",108.94,151.11,202.07,USD,EACH,Keystone HVAC Supply,J. Alvarez,35,0,3,BIN-100,10,CN-65290
+NF00124,COND COIL,4 ton R-22 2 row,COND COIL,"Replaces prior stock. 4 ton, R-22, 2 row.",438.40,608.10,813.15,USD,EACH,Keystone HVAC Supply,L. Nguyen,35,0,6,BIN-330,1,CN-69179
+NF00125,BEARING,1/2 in flange,BEARING,"Replaces prior stock. 1/2 in, flange.",18.62,25.83,34.55,USD,EA,Beacon Mechanical,D. Thompson,75,0,1,BIN-330,5,CN-60012
+NF00126,COMPRESSOR,3 ton 208V 3PH R-22,COMPRESSOR,"Replaces prior stock. 3 ton, 208V, 3PH, R-22.",644.50,893.98,1195.44,USD,EA,Beacon Mechanical,C. Fernandez,50,100,6,BIN-205,1,CN-21911
+NF00127,COMPRESSOR,5 ton 208V 3PH R-32,COMPRESSOR,"Replaces prior stock. 5 ton, 208V, 3PH, R-32.",870.91,1208.04,1615.40,USD,EA,Northfield Wholesale,B. Nowak,50,10,2,BIN-205,25,CN-19692
+NF00128,BLWR WHEEL,10-1/2 in 8 in wide CCW,BLWR WHEEL,"Replaces prior stock. 10-1/2 in, 8 in wide, CCW.",35.54,49.30,65.93,USD,EA,Northfield Wholesale,B. Nowak,50,0,4,BIN-412,1,CN-48045
+NF00129,MTR COND FAN,5HP 115V 1PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 5HP, 115V, 1PH, 1075 RPM, 2P.",77.57,107.60,143.89,USD,EACH,Keystone HVAC Supply,L. Nguyen,20,0,1,BIN-330,1,CN-11082
+NF00130,MTR COND FAN,1/3HP 208V 3PH 825 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/3HP, 208V, 3PH, 825 RPM, 4P.",105.91,146.91,196.44,USD,EACH,Summit Distributing,L. Nguyen,20,10,5,BIN-412,1,CN-45427
+NF00131,FLAME SENSOR,6 in ceramic,FLAME SENSOR,"Replaces prior stock. 6 in, ceramic.",20.39,28.29,37.82,USD,EA,Beacon Mechanical,L. Nguyen,20,0,3,BIN-412,1,CN-35273
+NF00132,THERMOSTAT,non-programmable 24V,THERMOSTAT,"Replaces prior stock. non-programmable, 24V.",41.08,56.98,76.20,USD,EACH,Keystone HVAC Supply,B. Nowak,0,25,7,BIN-100,5,CN-73963
+NF00133,CAP START,88 MFD 370V,CAP START,"Replaces prior stock. 88 MFD, 370V.",8.23,11.42,15.27,USD,EA,Northfield Wholesale,M. Chen,75,50,1,BIN-412,1,CN-62308
+NF00134,FILTER,16x25x1 MERV 13,FILTER,"Replaces prior stock. 16x25x1, MERV 13.",6.55,9.08,12.14,USD,EACH,Beacon Mechanical,B. Nowak,5,50,5,BIN-100,10,CN-95403
+NF00135,MTR INDUCER,3/4HP 460V 1625 RPM 6P,MTR INDUCER,"Replaces prior stock. 3/4HP, 460V, 1625 RPM, 6P.",174.11,241.51,322.95,USD,EACH,Summit Distributing,A. Rossi,75,100,5,BIN-100,1,CN-95550
+NF00136,PRESS SWITCH,1.0 in wc set 0.3 diff,PRESS SWITCH,"Replaces prior stock. 1.0 in wc set, 0.3 diff.",27.08,37.56,50.22,USD,EACH,Summit Distributing,R. Patel,200,0,3,BIN-330,1,CN-93241
+NF00137,CONTROL BOARD,24V blower,CONTROL BOARD,"Replaces prior stock. 24V, blower.",146.89,203.75,272.46,USD,EACH,Keystone HVAC Supply,R. Patel,75,25,3,BIN-412,25,CN-16173
+NF00138,CAP RUN,45/5 MFD 440V,CAP RUN,"Replaces prior stock. 45/5 MFD, 440V.",7.09,9.84,13.16,USD,EACH,Keystone HVAC Supply,M. Chen,50,100,1,BIN-412,1,CN-26796
+NF00139,IGN,24V hot surface,IGN,"Replaces prior stock. 24V, hot surface.",43.00,59.64,79.75,USD,EACH,Summit Distributing,P. Dubois,350,100,5,BIN-412,10,CN-32947
+NF00140,CONT,60A 2P 240V coil,CONT,"Replaces prior stock. 60A, 2P, 240V coil.",39.46,54.73,73.19,USD,EA,Northfield Wholesale,J. Alvarez,5,25,1,BIN-205,25,CN-88697
+NF00141,CAP RUN DUAL,15/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 15/5 MFD, 440V.",17.03,23.62,31.58,USD,EACH,Summit Distributing,K. O'Brien,75,50,2,BIN-205,10,CN-94847
+NF00142,EVAP COIL,5 ton R-32 3 row,EVAP COIL,"Replaces prior stock. 5 ton, R-32, 3 row.",485.84,673.90,901.15,USD,EACH,Keystone HVAC Supply,P. Dubois,5,100,7,BIN-205,1,CN-89266
+NF00143,MTR COND FAN,3HP 115V 1PH 825 RPM 6P,MTR COND FAN,"Replaces prior stock. 3HP, 115V, 1PH, 825 RPM, 6P.",145.01,201.15,268.97,USD,EACH,Keystone HVAC Supply,R. Patel,75,0,1,BIN-205,1,CN-20289
+NF00144,GAS VALVE,1 in 24V 150k BTU,GAS VALVE,"Replaces prior stock. 1 in, 24V, 150k BTU.",77.05,106.87,142.91,USD,EA,Northfield Wholesale,A. Rossi,0,10,2,BIN-330,25,CN-50311
+NF00145,BELT,A38 v-belt,BELT,"Replaces prior stock. A38, v-belt.",8.40,11.65,15.58,USD,EACH,Summit Distributing,C. Fernandez,20,10,2,BIN-330,1,CN-87766
+NF00146,MTR INDUCER,5HP 208V 1625 RPM 4P,MTR INDUCER,"Replaces prior stock. 5HP, 208V, 1625 RPM, 4P.",77.88,108.02,144.45,USD,EA,Summit Distributing,M. Chen,200,50,2,BIN-100,10,CN-78379
+NF00147,EVAP COIL,1 ton R-454B 4 row,EVAP COIL,"Replaces prior stock. 1 ton, R-454B, 4 row.",397.17,550.92,736.69,USD,EA,Beacon Mechanical,T. Schmidt,200,100,3,BIN-205,10,CN-26429
+NF00148,MTR BLWR,3/4HP 208V 1PH 1075 RPM 2P,MTR BLWR,"Replaces prior stock. 3/4HP, 208V, 1PH, 1075 RPM, 2P.",83.78,116.21,155.40,USD,EACH,Keystone HVAC Supply,P. Dubois,50,50,1,BIN-330,1,CN-43949
+NF00149,PRESS SWITCH,0.5 in wc set 0.3 diff,PRESS SWITCH,"Replaces prior stock. 0.5 in wc set, 0.3 diff.",19.31,26.79,35.82,USD,EACH,Keystone HVAC Supply,H. Yamamoto,0,50,4,BIN-205,1,CN-81324
+NF00150,CONT,50A 2P 120V coil,CONT,"Replaces prior stock. 50A, 2P, 120V coil.",39.87,55.30,73.94,USD,EACH,Beacon Mechanical,K. O'Brien,200,25,2,BIN-412,5,CN-42556
+NF00151,MTR COND FAN,1/2HP 115V 3PH 3450 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/2HP, 115V, 3PH, 3450 RPM, 1P.",100.76,139.77,186.90,USD,EA,Summit Distributing,K. O'Brien,0,25,6,BIN-100,1,CN-13917
+NF00152,PRESS SWITCH,1.0 in wc set 0.1 diff,PRESS SWITCH,"Replaces prior stock. 1.0 in wc set, 0.1 diff.",28.08,38.95,52.08,USD,EA,Keystone HVAC Supply,J. Alvarez,35,0,5,BIN-412,1,CN-52598
+NF00153,CAP RUN DUAL,30/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 30/5 MFD, 440V.",20.74,28.77,38.47,USD,EA,Keystone HVAC Supply,M. Chen,20,100,1,BIN-330,10,CN-77418
+NF00154,MTR INDUCER,1HP 230V 825 RPM 4P,MTR INDUCER,"Replaces prior stock. 1HP, 230V, 825 RPM, 4P.",90.04,124.89,167.00,USD,EA,Northfield Wholesale,L. Nguyen,50,10,1,BIN-100,10,CN-41392
+NF00155,MTR BLWR,1/2HP 240V 1PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 1/2HP, 240V, 1PH, 1625 RPM, 1P.",116.98,162.26,216.97,USD,EA,Summit Distributing,A. Rossi,200,100,6,BIN-412,25,CN-80723
+NF00156,CONT,60A 2P 24V coil,CONT,"Replaces prior stock. 60A, 2P, 24V coil.",29.08,40.33,53.93,USD,EA,Northfield Wholesale,L. Nguyen,5,0,5,BIN-412,25,CN-41624
+NF00157,MTR BLWR,2HP 230V 1PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 230V, 1PH, 3450 RPM, 6P.",91.12,126.39,169.02,USD,EACH,Northfield Wholesale,L. Nguyen,35,25,4,BIN-412,25,CN-61434
+NF00158,GAS VALVE,1/2 in 24V 100k BTU,GAS VALVE,"Replaces prior stock. 1/2 in, 24V, 100k BTU.",59.82,82.98,110.96,USD,EA,Northfield Wholesale,B. Nowak,200,0,1,BIN-205,1,CN-89747
+NF00159,BEARING,1-3/16 in flange,BEARING,"Replaces prior stock. 1-3/16 in, flange.",12.71,17.63,23.57,USD,EACH,Beacon Mechanical,D. Thompson,12,0,3,BIN-330,10,CN-45803
+NF00160,MTR BLWR,1-1/2HP 230V 3PH 1075 RPM 6P,MTR BLWR,"Replaces prior stock. 1-1/2HP, 230V, 3PH, 1075 RPM, 6P.",128.42,178.13,238.20,USD,EA,Beacon Mechanical,S. Kowalski,35,10,3,BIN-330,1,CN-55828
+NF00161,MTR COND FAN,1/4HP 230V 3PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/4HP, 230V, 3PH, 3450 RPM, 4P.",56.28,78.07,104.40,USD,EA,Beacon Mechanical,K. O'Brien,20,0,3,BIN-205,1,CN-11760
+NF00162,MTR COND FAN,1-1/2HP 115V 3PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 115V, 3PH, 3450 RPM, 4P.",107.39,148.96,199.19,USD,EACH,Keystone HVAC Supply,B. Nowak,120,10,1,BIN-412,1,CN-95577
+NF00163,FUSE,3A 600V cartridge,FUSE,"Replaces prior stock. 3A, 600V, cartridge.",4.34,6.02,8.05,USD,EACH,Northfield Wholesale,A. Rossi,120,50,1,BIN-205,1,CN-74502
+NF00164,MTR INDUCER,1/3HP 240V 3450 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/3HP, 240V, 3450 RPM, 1P.",60.33,83.69,111.91,USD,EA,Keystone HVAC Supply,M. Chen,12,0,4,BIN-330,1,CN-10330
+NF00165,RELAY,15A 24V coil,RELAY,"Replaces prior stock. 15A, 24V coil.",11.41,15.82,21.16,USD,EA,Summit Distributing,J. Alvarez,5,50,3,BIN-205,5,CN-12826
+NF00166,EVAP COIL,4 ton R-454B 4 row,EVAP COIL,"Replaces prior stock. 4 ton, R-454B, 4 row.",293.21,406.71,543.86,USD,EA,Keystone HVAC Supply,P. Dubois,0,100,5,BIN-205,5,CN-94265
+NF00167,CONTROL BOARD,24V main,CONTROL BOARD,"Replaces prior stock. 24V, main.",135.68,188.20,251.67,USD,EACH,Summit Distributing,L. Nguyen,20,0,4,BIN-412,10,CN-88304
+NF00168,MTR COND FAN,1HP 120V 1PH 3450 RPM 1P,MTR COND FAN,"Replaces prior stock. 1HP, 120V, 1PH, 3450 RPM, 1P.",78.98,109.55,146.49,USD,EACH,Beacon Mechanical,P. Dubois,0,50,6,BIN-412,1,CN-98571
+NF00169,BEARING,1 in sleeve,BEARING,"Replaces prior stock. 1 in, sleeve.",20.59,28.56,38.19,USD,EA,Northfield Wholesale,D. Thompson,20,100,4,BIN-412,10,CN-29649
+NF00170,BLWR WHEEL,12 in 8 in wide CW,BLWR WHEEL,"Replaces prior stock. 12 in, 8 in wide, CW.",64.40,89.33,119.45,USD,EA,Summit Distributing,J. Alvarez,5,25,4,BIN-205,5,CN-67922
+NF00171,CAP RUN DUAL,35/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 35/5 MFD, 440V.",13.97,19.38,25.92,USD,EACH,Beacon Mechanical,R. Patel,5,10,6,BIN-100,1,CN-77734
+NF00172,BEARING,5/8 in sleeve,BEARING,"Replaces prior stock. 5/8 in, sleeve.",13.35,18.52,24.76,USD,EA,Summit Distributing,A. Rossi,0,25,4,BIN-100,1,CN-58678
+NF00173,CAP START,233 MFD 370V,CAP START,"Replaces prior stock. 233 MFD, 370V.",13.32,18.47,24.70,USD,EA,Northfield Wholesale,B. Nowak,500,0,3,BIN-205,1,CN-95210
+NF00174,MTR BLWR,1/6HP 115V 1PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 1/6HP, 115V, 1PH, 825 RPM, 4P.",121.61,168.69,225.57,USD,EA,Summit Distributing,E. Johansson,12,100,3,BIN-100,1,CN-61815
+NF00175,GAS VALVE,3/4 in 24V 200k BTU,GAS VALVE,"Replaces prior stock. 3/4 in, 24V, 200k BTU.",55.38,76.82,102.73,USD,EACH,Northfield Wholesale,M. Chen,0,0,5,BIN-412,1,CN-61362
+NF00176,MTR BLWR,1HP 24V 3PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 1HP, 24V, 3PH, 825 RPM, 6P.",54.87,76.11,101.77,USD,EA,Beacon Mechanical,K. O'Brien,0,50,1,BIN-100,1,CN-77699
+NF00177,BELT,A38 cogged,BELT,"Replaces prior stock. A38, cogged.",14.97,20.76,27.76,USD,EA,Keystone HVAC Supply,R. Patel,20,0,1,BIN-412,1,CN-11497
+NF00178,BEARING,1/2 in pillow block,BEARING,"Replaces prior stock. 1/2 in, pillow block.",10.16,14.09,18.84,USD,EACH,Keystone HVAC Supply,B. Nowak,12,50,6,BIN-205,1,CN-89559
+NF00179,COMPRESSOR,3 ton 208V 1PH R-22,COMPRESSOR,"Replaces prior stock. 3 ton, 208V, 1PH, R-22.",967.42,1341.91,1794.41,USD,EA,Beacon Mechanical,T. Schmidt,350,25,4,BIN-100,5,CN-75595
+NF00180,FAN BLADE,24 in 5 blade CW,FAN BLADE,"Replaces prior stock. 24 in, 5 blade, CW.",35.52,49.27,65.88,USD,EA,Keystone HVAC Supply,K. O'Brien,120,0,7,BIN-100,1,CN-70518
+NF00181,COND COIL,2.5 ton R-22 4 row,COND COIL,"Replaces prior stock. 2.5 ton, R-22, 4 row.",345.79,479.65,641.39,USD,EACH,Northfield Wholesale,P. Dubois,120,10,4,BIN-100,25,CN-50706
+NF00182,FAN BLADE,26 in 5 blade CW,FAN BLADE,"Replaces prior stock. 26 in, 5 blade, CW.",49.92,69.25,92.60,USD,EACH,Keystone HVAC Supply,L. Nguyen,500,50,1,BIN-330,1,CN-19346
+NF00183,FAN BLADE,30 in 3 blade CCW,FAN BLADE,"Replaces prior stock. 30 in, 3 blade, CCW.",27.72,38.45,51.42,USD,EA,Summit Distributing,C. Fernandez,35,10,3,BIN-330,1,CN-67901
+NF00184,MTR BLWR,3HP 24V 3PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 3HP, 24V, 3PH, 3450 RPM, 2P.",135.82,188.40,251.93,USD,EACH,Beacon Mechanical,L. Nguyen,20,100,2,BIN-205,10,CN-28358
+NF00185,IGN,120V hot surface,IGN,"Replaces prior stock. 120V, hot surface.",26.11,36.22,48.44,USD,EA,Beacon Mechanical,H. Yamamoto,200,25,1,BIN-330,5,CN-58118
+NF00186,GAS VALVE,3/4 in 24V 250k BTU,GAS VALVE,"Replaces prior stock. 3/4 in, 24V, 250k BTU.",47.43,65.79,87.97,USD,EACH,Northfield Wholesale,D. Thompson,50,50,4,BIN-330,1,CN-39048
+NF00187,PRESS SWITCH,0.5 in wc set 0.2 diff,PRESS SWITCH,"Replaces prior stock. 0.5 in wc set, 0.2 diff.",18.26,25.33,33.87,USD,EACH,Northfield Wholesale,B. Nowak,12,25,6,BIN-205,1,CN-56941
+NF00188,COND COIL,5 ton R-410A 4 row,COND COIL,"Replaces prior stock. 5 ton, R-410A, 4 row.",303.91,421.55,563.70,USD,EACH,Beacon Mechanical,R. Patel,0,50,6,BIN-412,1,CN-22789
+NF00189,COMPRESSOR,1 ton 460V 3PH R-454B,COMPRESSOR,"Replaces prior stock. 1 ton, 460V, 3PH, R-454B.",538.21,746.55,998.29,USD,EACH,Keystone HVAC Supply,A. Rossi,5,50,6,BIN-205,1,CN-40115
+NF00190,COMPRESSOR,2.5 ton 460V 3PH R-22,COMPRESSOR,"Replaces prior stock. 2.5 ton, 460V, 3PH, R-22.",989.08,1371.95,1834.58,USD,EA,Keystone HVAC Supply,J. Alvarez,0,0,7,BIN-330,1,CN-33913
+NF00191,MTR COND FAN,1/4HP 240V 3PH 1625 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/4HP, 240V, 3PH, 1625 RPM, 6P.",107.10,148.56,198.65,USD,EACH,Northfield Wholesale,P. Dubois,350,10,3,BIN-100,5,CN-50714
+NF00192,EVAP COIL,2 ton R-410A 3 row,EVAP COIL,"Replaces prior stock. 2 ton, R-410A, 3 row.",292.75,406.07,543.00,USD,EACH,Beacon Mechanical,B. Nowak,350,0,3,BIN-205,10,CN-80037
+NF00193,MTR BLWR,1/4HP 24V 3PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 1/4HP, 24V, 3PH, 3450 RPM, 1P.",122.65,170.13,227.49,USD,EA,Summit Distributing,H. Yamamoto,350,10,7,BIN-100,1,CN-14562
+NF00194,CAP START,161 MFD 370V,CAP START,"Replaces prior stock. 161 MFD, 370V.",12.87,17.84,23.86,USD,EACH,Beacon Mechanical,L. Nguyen,500,25,2,BIN-330,5,CN-31363
+NF00195,COMPRESSOR,2 ton 208V 1PH R-32,COMPRESSOR,"Replaces prior stock. 2 ton, 208V, 1PH, R-32.",643.21,892.19,1193.04,USD,EA,Keystone HVAC Supply,A. Rossi,120,100,2,BIN-205,25,CN-34675
+NF00196,FLAME SENSOR,3 in ceramic,FLAME SENSOR,"Replaces prior stock. 3 in, ceramic.",15.74,21.84,29.20,USD,EA,Northfield Wholesale,M. Chen,35,0,2,BIN-412,5,CN-93537
+NF00197,CAP RUN,50/5 MFD 370V,CAP RUN,"Replaces prior stock. 50/5 MFD, 370V.",5.23,7.25,9.69,USD,EACH,Keystone HVAC Supply,H. Yamamoto,5,100,2,BIN-205,25,CN-55805
+NF00198,BEARING,3/4 in ball,BEARING,"Replaces prior stock. 3/4 in, ball.",17.14,23.78,31.80,USD,EACH,Summit Distributing,K. O'Brien,500,100,5,BIN-330,1,CN-82595
+NF00199,MTR BLWR,1/2HP 120V 1PH 1725 RPM 2P,MTR BLWR,"Replaces prior stock. 1/2HP, 120V, 1PH, 1725 RPM, 2P.",73.71,102.25,136.72,USD,EA,Northfield Wholesale,M. Chen,5,0,4,BIN-100,1,CN-52829
+NF00200,COMPRESSOR,4 ton 460V 1PH R-410A,COMPRESSOR,"Replaces prior stock. 4 ton, 460V, 1PH, R-410A.",660.60,916.31,1225.30,USD,EA,Keystone HVAC Supply,D. Thompson,35,25,5,BIN-412,5,CN-28134
+NF00201,BELT,3L280 fractional hp,BELT,"Replaces prior stock. 3L280, fractional hp.",7.48,10.38,13.88,USD,EACH,Beacon Mechanical,B. Nowak,50,100,2,BIN-330,25,CN-54734
+NF00202,COND COIL,2 ton R-32 4 row,COND COIL,"Replaces prior stock. 2 ton, R-32, 4 row.",238.60,330.96,442.57,USD,EACH,Keystone HVAC Supply,J. Alvarez,0,100,3,BIN-330,1,CN-71388
+NF00203,CONT,40A 1P 120V coil,CONT,"Replaces prior stock. 40A, 1P, 120V coil.",26.70,37.04,49.53,USD,EA,Northfield Wholesale,J. Alvarez,35,10,4,BIN-100,25,CN-15865
+NF00204,FAN BLADE,20 in 3 blade CW,FAN BLADE,"Replaces prior stock. 20 in, 3 blade, CW.",44.98,62.39,83.43,USD,EA,Summit Distributing,J. Alvarez,500,100,2,BIN-330,25,CN-19307
+NF00205,COND COIL,2.5 ton R-454B 2 row,COND COIL,"Replaces prior stock. 2.5 ton, R-454B, 2 row.",428.61,594.53,795.01,USD,EA,Beacon Mechanical,P. Dubois,50,50,5,BIN-330,5,CN-14891
+NF00206,MTR BLWR,1/3HP 460V 1PH 1075 RPM 2P,MTR BLWR,"Replaces prior stock. 1/3HP, 460V, 1PH, 1075 RPM, 2P.",94.38,130.92,175.06,USD,EA,Summit Distributing,K. O'Brien,500,10,6,BIN-205,10,CN-87809
+NF00207,MTR INDUCER,3/4HP 24V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 3/4HP, 24V, 1625 RPM, 2P.",72.84,101.03,135.10,USD,EACH,Beacon Mechanical,R. Patel,200,50,2,BIN-412,1,CN-54332
+NF00208,CAP RUN,60/5 MFD 370V,CAP RUN,"Replaces prior stock. 60/5 MFD, 370V.",6.27,8.69,11.63,USD,EA,Keystone HVAC Supply,A. Rossi,12,100,7,BIN-205,10,CN-70481
+NF00209,BEARING,1-3/16 in sleeve,BEARING,"Replaces prior stock. 1-3/16 in, sleeve.",12.35,17.13,22.91,USD,EA,Beacon Mechanical,P. Dubois,0,25,5,BIN-330,1,CN-20719
+NF00210,BLWR WHEEL,9 in 10 in wide CCW,BLWR WHEEL,"Replaces prior stock. 9 in, 10 in wide, CCW.",33.99,47.15,63.05,USD,EA,Summit Distributing,R. Patel,350,10,1,BIN-100,25,CN-80056
+NF00211,XFMR,40 VA 120V pri 24V sec,XFMR,"Replaces prior stock. 40 VA, 120V pri, 24V sec.",35.27,48.92,65.41,USD,EA,Beacon Mechanical,D. Thompson,0,25,3,BIN-205,5,CN-69640
+NF00212,MTR BLWR,1/4HP 460V 1PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 1/4HP, 460V, 1PH, 3450 RPM, 6P.",116.53,161.64,216.14,USD,EACH,Keystone HVAC Supply,C. Fernandez,20,25,6,BIN-412,1,CN-46614
+NF00213,COND COIL,1.5 ton R-32 3 row,COND COIL,"Replaces prior stock. 1.5 ton, R-32, 3 row.",240.80,334.01,446.64,USD,EACH,Keystone HVAC Supply,D. Thompson,5,100,1,BIN-100,1,CN-20030
+NF00214,COMPRESSOR,5 ton 460V 1PH R-22,COMPRESSOR,"Replaces prior stock. 5 ton, 460V, 1PH, R-22.",1027.97,1425.90,1906.72,USD,EACH,Summit Distributing,H. Yamamoto,0,25,1,BIN-330,1,CN-83523
+NF00215,MTR COND FAN,3/4HP 115V 1PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 3/4HP, 115V, 1PH, 3450 RPM, 4P.",99.55,138.08,184.64,USD,EACH,Beacon Mechanical,E. Johansson,500,10,6,BIN-100,1,CN-89731
+NF00216,COMPRESSOR,5 ton 460V 3PH R-32,COMPRESSOR,"Replaces prior stock. 5 ton, 460V, 3PH, R-32.",947.71,1314.56,1757.84,USD,EA,Keystone HVAC Supply,K. O'Brien,35,0,2,BIN-205,1,CN-14083
+NF00217,BEARING,5/8 in pillow block,BEARING,"Replaces prior stock. 5/8 in, pillow block.",19.62,27.21,36.39,USD,EACH,Keystone HVAC Supply,J. Alvarez,120,50,7,BIN-205,5,CN-34175
+NF00218,MTR BLWR,5HP 460V 1PH 1625 RPM 6P,MTR BLWR,"Replaces prior stock. 5HP, 460V, 1PH, 1625 RPM, 6P.",100.52,139.43,186.45,USD,EACH,Beacon Mechanical,T. Schmidt,12,0,4,BIN-330,1,CN-27315
+NF00219,MTR BLWR,1HP 240V 3PH 1625 RPM 4P,MTR BLWR,"Replaces prior stock. 1HP, 240V, 3PH, 1625 RPM, 4P.",138.86,192.61,257.57,USD,EA,Beacon Mechanical,K. O'Brien,75,50,7,BIN-205,1,CN-17732
+NF00220,CONT,50A 2P 240V coil,CONT,"Replaces prior stock. 50A, 2P, 240V coil.",30.28,42.00,56.17,USD,EACH,Summit Distributing,M. Chen,75,100,4,BIN-330,1,CN-39818
+NF00221,DAMPER,10 in motorized,DAMPER,"Replaces prior stock. 10 in, motorized.",64.58,89.58,119.78,USD,EACH,Beacon Mechanical,A. Rossi,75,25,4,BIN-205,25,CN-36241
+NF00222,MTR INDUCER,3HP 115V 3450 RPM 6P,MTR INDUCER,"Replaces prior stock. 3HP, 115V, 3450 RPM, 6P.",113.39,157.29,210.32,USD,EA,Beacon Mechanical,E. Johansson,200,25,6,BIN-205,5,CN-35493
+NF00223,MTR BLWR,1/6HP 460V 1PH 825 RPM 1P,MTR BLWR,"Replaces prior stock. 1/6HP, 460V, 1PH, 825 RPM, 1P.",106.81,148.16,198.12,USD,EACH,Beacon Mechanical,E. Johansson,50,25,5,BIN-205,1,CN-39843
+NF00224,MTR BLWR,1/2HP 115V 1PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 1/2HP, 115V, 1PH, 3450 RPM, 1P.",86.58,120.09,160.59,USD,EA,Beacon Mechanical,H. Yamamoto,12,10,5,BIN-100,5,CN-33048
+NF00225,EVAP COIL,2.5 ton R-410A 2 row,EVAP COIL,"Replaces prior stock. 2.5 ton, R-410A, 2 row.",351.37,487.38,651.73,USD,EACH,Beacon Mechanical,E. Johansson,35,0,6,BIN-100,1,CN-51468
+NF00226,MTR BLWR,3/4HP 115V 3PH 1625 RPM 6P,MTR BLWR,"Replaces prior stock. 3/4HP, 115V, 3PH, 1625 RPM, 6P.",83.68,116.07,155.20,USD,EA,Summit Distributing,L. Nguyen,350,25,1,BIN-205,1,CN-78094
+NF00227,CAP RUN DUAL,40/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 40/5 MFD, 440V.",10.05,13.94,18.64,USD,EA,Beacon Mechanical,R. Patel,50,0,3,BIN-205,1,CN-68463
+NF00228,RELAY,10A 120V coil,RELAY,"Replaces prior stock. 10A, 120V coil.",19.20,26.63,35.62,USD,EA,Beacon Mechanical,K. O'Brien,0,0,3,BIN-100,1,CN-90804
+NF00229,COMPRESSOR,3 ton 208V 3PH R-410A,COMPRESSOR,"Replaces prior stock. 3 ton, 208V, 3PH, R-410A.",733.80,1017.85,1361.08,USD,EA,Keystone HVAC Supply,L. Nguyen,350,0,2,BIN-330,25,CN-47159
+NF00230,CONT,60A 3P 240V coil,CONT,"Replaces prior stock. 60A, 3P, 240V coil.",21.45,29.75,39.78,USD,EACH,Northfield Wholesale,B. Nowak,350,0,4,BIN-205,1,CN-87296
+NF00231,MTR BLWR,3/4HP 115V 1PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 3/4HP, 115V, 1PH, 1625 RPM, 1P.",110.78,153.66,205.48,USD,EACH,Keystone HVAC Supply,B. Nowak,20,25,2,BIN-205,10,CN-95039
+NF00232,BELT,5L450 v-belt,BELT,"Replaces prior stock. 5L450, v-belt.",17.40,24.13,32.27,USD,EACH,Keystone HVAC Supply,J. Alvarez,350,50,5,BIN-205,5,CN-39755
+NF00233,MTR COND FAN,1/4HP 24V 3PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/4HP, 24V, 3PH, 3450 RPM, 4P.",101.72,141.10,188.68,USD,EACH,Beacon Mechanical,J. Alvarez,12,0,7,BIN-412,10,CN-47767
+NF00234,MTR BLWR,2HP 240V 1PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 2HP, 240V, 1PH, 3450 RPM, 2P.",56.80,78.79,105.36,USD,EA,Summit Distributing,L. Nguyen,350,10,5,BIN-205,5,CN-26450
+NF00235,MTR INDUCER,1HP 115V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 1HP, 115V, 1725 RPM, 4P.",109.25,151.54,202.64,USD,EA,Northfield Wholesale,D. Thompson,0,0,5,BIN-412,5,CN-95062
+NF00236,COMPRESSOR,1.5 ton 230V 1PH R-454B,COMPRESSOR,"Replaces prior stock. 1.5 ton, 230V, 1PH, R-454B.",475.43,659.47,881.84,USD,EACH,Beacon Mechanical,H. Yamamoto,0,0,3,BIN-205,1,CN-11727
+NF00237,MTR INDUCER,2HP 120V 825 RPM 1P,MTR INDUCER,"Replaces prior stock. 2HP, 120V, 825 RPM, 1P.",133.61,185.33,247.82,USD,EACH,Northfield Wholesale,M. Chen,0,100,6,BIN-205,1,CN-58805
+NF00238,MTR BLWR,1-1/2HP 460V 3PH 1725 RPM 4P,MTR BLWR,"Replaces prior stock. 1-1/2HP, 460V, 3PH, 1725 RPM, 4P.",62.94,87.31,116.75,USD,EA,Northfield Wholesale,E. Johansson,75,25,1,BIN-330,25,CN-91983
+NF00239,BLWR WHEEL,10-1/2 in 6 in wide CCW,BLWR WHEEL,"Replaces prior stock. 10-1/2 in, 6 in wide, CCW.",45.06,62.50,83.57,USD,EA,Northfield Wholesale,R. Patel,350,10,7,BIN-205,25,CN-42104
+NF00240,CAP START,53 MFD 370V,CAP START,"Replaces prior stock. 53 MFD, 370V.",14.43,20.01,26.76,USD,EA,Summit Distributing,S. Kowalski,12,0,6,BIN-100,1,CN-48373
+NF00241,MTR COND FAN,1/3HP 208V 1PH 825 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/3HP, 208V, 1PH, 825 RPM, 4P.",106.45,147.66,197.45,USD,EACH,Summit Distributing,K. O'Brien,200,50,4,BIN-412,10,CN-39033
+NF00242,FAN BLADE,18 in 5 blade CCW,FAN BLADE,"Replaces prior stock. 18 in, 5 blade, CCW.",38.00,52.71,70.48,USD,EA,Keystone HVAC Supply,L. Nguyen,350,0,4,BIN-205,1,CN-66437
+NF00243,COND COIL,4 ton R-32 2 row,COND COIL,"Replaces prior stock. 4 ton, R-32, 2 row.",417.67,579.35,774.71,USD,EACH,Northfield Wholesale,R. Patel,0,100,3,BIN-100,1,CN-64187
+NF00244,MTR COND FAN,1/3HP 240V 1PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/3HP, 240V, 1PH, 1625 RPM, 2P.",78.06,108.28,144.80,USD,EA,Northfield Wholesale,T. Schmidt,75,100,7,BIN-205,5,CN-74834
+NF00245,MTR INDUCER,5HP 24V 3450 RPM 6P,MTR INDUCER,"Replaces prior stock. 5HP, 24V, 3450 RPM, 6P.",133.48,185.15,247.58,USD,EACH,Northfield Wholesale,B. Nowak,350,10,2,BIN-100,25,CN-81021
+NF00246,MTR INDUCER,1-1/2HP 240V 825 RPM 4P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 240V, 825 RPM, 4P.",151.80,210.56,281.57,USD,EACH,Beacon Mechanical,L. Nguyen,200,50,3,BIN-412,1,CN-51284
+NF00247,MTR INDUCER,3/4HP 24V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 3/4HP, 24V, 1725 RPM, 4P.",128.09,177.68,237.59,USD,EA,Keystone HVAC Supply,J. Alvarez,75,0,2,BIN-205,1,CN-92855
+NF00248,MTR COND FAN,1HP 208V 3PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 1HP, 208V, 3PH, 1075 RPM, 2P.",114.31,158.56,212.03,USD,EA,Keystone HVAC Supply,P. Dubois,200,25,5,BIN-205,1,CN-94826
+NF00249,MTR INDUCER,1HP 115V 825 RPM 6P,MTR INDUCER,"Replaces prior stock. 1HP, 115V, 825 RPM, 6P.",164.63,228.36,305.36,USD,EACH,Keystone HVAC Supply,A. Rossi,20,10,6,BIN-100,1,CN-79372
+NF00250,CAP START,53 MFD 440V,CAP START,"Replaces prior stock. 53 MFD, 440V.",8.23,11.41,15.26,USD,EA,Keystone HVAC Supply,M. Chen,75,0,4,BIN-412,5,CN-61524
+NF00251,COND COIL,1.5 ton R-410A 4 row,COND COIL,"Replaces prior stock. 1.5 ton, R-410A, 4 row.",406.43,563.76,753.87,USD,EACH,Keystone HVAC Supply,E. Johansson,500,25,4,BIN-412,1,CN-60888
+NF00252,MTR COND FAN,1-1/2HP 24V 3PH 1075 RPM 6P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 24V, 3PH, 1075 RPM, 6P.",63.15,87.59,117.13,USD,EA,Summit Distributing,H. Yamamoto,350,10,6,BIN-205,10,CN-66554
+NF00253,CONT,50A 3P 120V coil,CONT,"Replaces prior stock. 50A, 3P, 120V coil.",31.16,43.21,57.79,USD,EACH,Summit Distributing,A. Rossi,0,0,3,BIN-100,1,CN-61226
+NF00254,CONTROL BOARD,120V defrost,CONTROL BOARD,"Replaces prior stock. 120V, defrost.",140.10,194.33,259.87,USD,EA,Summit Distributing,M. Chen,350,50,4,BIN-330,25,CN-79469
+NF00255,BELT,4L320 cogged,BELT,"Replaces prior stock. 4L320, cogged.",6.79,9.42,12.59,USD,EACH,Summit Distributing,H. Yamamoto,0,0,5,BIN-205,1,CN-77859
+NF00256,EVAP COIL,4 ton R-32 2 row,EVAP COIL,"Replaces prior stock. 4 ton, R-32, 2 row.",292.88,406.25,543.24,USD,EACH,Beacon Mechanical,B. Nowak,20,0,1,BIN-100,1,CN-33312
+NF00257,MTR INDUCER,3HP 460V 3450 RPM 6P,MTR INDUCER,"Replaces prior stock. 3HP, 460V, 3450 RPM, 6P.",131.79,182.80,244.44,USD,EA,Summit Distributing,B. Nowak,350,50,1,BIN-330,1,CN-15450
+NF00258,DAMPER,8 in manual,DAMPER,"Replaces prior stock. 8 in, manual.",96.30,133.58,178.62,USD,EA,Beacon Mechanical,J. Alvarez,0,0,6,BIN-412,1,CN-61833
+NF00259,CONT,60A 1P 240V coil,CONT,"Replaces prior stock. 60A, 1P, 240V coil.",24.55,34.05,45.53,USD,EACH,Beacon Mechanical,T. Schmidt,12,50,5,BIN-330,5,CN-57132
+NF00260,CAP RUN DUAL,20/5 MFD 370V,CAP RUN DUAL,"Replaces prior stock. 20/5 MFD, 370V.",19.44,26.97,36.06,USD,EA,Summit Distributing,C. Fernandez,200,50,3,BIN-100,1,CN-11217
+NF00261,FILTER,24x24x1 MERV 13,FILTER,"Replaces prior stock. 24x24x1, MERV 13.",8.12,11.26,15.05,USD,EACH,Northfield Wholesale,A. Rossi,350,100,4,BIN-205,5,CN-35061
+NF00262,MTR BLWR,1HP 240V 3PH 3450 RPM 4P,MTR BLWR,"Replaces prior stock. 1HP, 240V, 3PH, 3450 RPM, 4P.",95.19,132.04,176.56,USD,EACH,Keystone HVAC Supply,L. Nguyen,350,100,5,BIN-412,1,CN-83091
+NF00263,FILTER,20x25x1 MERV 16,FILTER,"Replaces prior stock. 20x25x1, MERV 16.",9.41,13.05,17.46,USD,EACH,Summit Distributing,T. Schmidt,5,0,5,BIN-100,25,CN-34333
+NF00264,XFMR,75 VA 120V pri 240V sec,XFMR,"Replaces prior stock. 75 VA, 120V pri, 240V sec.",25.47,35.33,47.24,USD,EA,Northfield Wholesale,S. Kowalski,500,50,2,BIN-205,1,CN-96232
+NF00265,CAP RUN DUAL,30/5 MFD 370V,CAP RUN DUAL,"Replaces prior stock. 30/5 MFD, 370V.",16.41,22.76,30.44,USD,EACH,Beacon Mechanical,T. Schmidt,75,50,4,BIN-412,1,CN-89239
+NF00266,COND COIL,3 ton R-410A 2 row,COND COIL,"Replaces prior stock. 3 ton, R-410A, 2 row.",282.55,391.92,524.08,USD,EA,Summit Distributing,C. Fernandez,35,0,4,BIN-330,1,CN-82224
+NF00267,EVAP COIL,3 ton R-410A 3 row,EVAP COIL,"Replaces prior stock. 3 ton, R-410A, 3 row.",387.38,537.34,718.53,USD,EA,Keystone HVAC Supply,R. Patel,35,25,3,BIN-205,1,CN-41654
+NF00268,BLWR WHEEL,9 in 8 in wide CW,BLWR WHEEL,"Replaces prior stock. 9 in, 8 in wide, CW.",58.16,80.67,107.87,USD,EACH,Summit Distributing,M. Chen,20,25,1,BIN-412,1,CN-79924
+NF00269,MTR COND FAN,1/6HP 24V 3PH 1725 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/6HP, 24V, 3PH, 1725 RPM, 4P.",95.17,132.01,176.52,USD,EA,Summit Distributing,J. Alvarez,12,25,4,BIN-330,1,CN-86984
+NF00270,MTR INDUCER,3HP 120V 3450 RPM 6P,MTR INDUCER,"Replaces prior stock. 3HP, 120V, 3450 RPM, 6P.",109.63,152.07,203.34,USD,EACH,Keystone HVAC Supply,P. Dubois,0,0,1,BIN-205,1,CN-33225
+NF00271,COND COIL,3 ton R-410A 3 row,COND COIL,"Replaces prior stock. 3 ton, R-410A, 3 row.",257.01,356.50,476.72,USD,EACH,Beacon Mechanical,C. Fernandez,75,50,5,BIN-330,10,CN-52347
+NF00272,CONT,40A 3P 240V coil,CONT,"Replaces prior stock. 40A, 3P, 240V coil.",28.45,39.47,52.77,USD,EA,Northfield Wholesale,R. Patel,35,0,7,BIN-412,25,CN-14353
+NF00273,BLWR WHEEL,12 in 10 in wide CW,BLWR WHEEL,"Replaces prior stock. 12 in, 10 in wide, CW.",68.86,95.51,127.72,USD,EACH,Keystone HVAC Supply,T. Schmidt,500,50,4,BIN-412,1,CN-55227
+NF00274,MTR COND FAN,1/2HP 460V 3PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/2HP, 460V, 3PH, 1075 RPM, 2P.",71.23,98.81,132.12,USD,EA,Keystone HVAC Supply,J. Alvarez,500,0,2,BIN-100,1,CN-29050
+NF00275,MTR COND FAN,1-1/2HP 208V 3PH 3450 RPM 1P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 208V, 3PH, 3450 RPM, 1P.",135.35,187.75,251.06,USD,EA,Beacon Mechanical,P. Dubois,0,100,7,BIN-412,1,CN-36056
+NF00276,GAS VALVE,1 in 24V 100k BTU,GAS VALVE,"Replaces prior stock. 1 in, 24V, 100k BTU.",80.87,112.18,150.01,USD,EACH,Beacon Mechanical,S. Kowalski,120,10,6,BIN-205,5,CN-82005
+NF00277,FUSE,15A 250V blade,FUSE,"Replaces prior stock. 15A, 250V, blade.",4.09,5.68,7.59,USD,EACH,Northfield Wholesale,J. Alvarez,75,100,4,BIN-100,25,CN-92741
+NF00278,MTR BLWR,1/6HP 230V 3PH 1075 RPM 4P,MTR BLWR,"Replaces prior stock. 1/6HP, 230V, 3PH, 1075 RPM, 4P.",73.85,102.44,136.99,USD,EA,Northfield Wholesale,L. Nguyen,200,100,5,BIN-100,25,CN-66980
+NF00279,XFMR,200 VA 240V pri 24V sec,XFMR,"Replaces prior stock. 200 VA, 240V pri, 24V sec.",42.55,59.02,78.92,USD,EACH,Summit Distributing,T. Schmidt,0,0,3,BIN-330,10,CN-10043
+NF00280,FILTER,16x25x4 MERV 13,FILTER,"Replaces prior stock. 16x25x4, MERV 13.",6.20,8.60,11.50,USD,EACH,Keystone HVAC Supply,M. Chen,350,10,3,BIN-412,1,CN-55682
+NF00281,FAN BLADE,22 in 3 blade CCW,FAN BLADE,"Replaces prior stock. 22 in, 3 blade, CCW.",39.75,55.14,73.74,USD,EACH,Keystone HVAC Supply,C. Fernandez,20,0,7,BIN-205,1,CN-78008
+NF00282,XFMR,100 VA 208V pri 24V sec,XFMR,"Replaces prior stock. 100 VA, 208V pri, 24V sec.",20.19,28.00,37.44,USD,EA,Northfield Wholesale,L. Nguyen,500,0,3,BIN-205,1,CN-59269
+NF00283,MTR BLWR,1/3HP 115V 1PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 1/3HP, 115V, 1PH, 825 RPM, 6P.",100.17,138.94,185.79,USD,EACH,Northfield Wholesale,L. Nguyen,12,100,7,BIN-330,10,CN-13650
+NF00284,MTR COND FAN,1/6HP 460V 3PH 3450 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/6HP, 460V, 3PH, 3450 RPM, 6P.",104.50,144.95,193.83,USD,EACH,Beacon Mechanical,B. Nowak,35,50,7,BIN-100,10,CN-55981
+NF00285,FLAME SENSOR,3 in Kanthal,FLAME SENSOR,"Replaces prior stock. 3 in, Kanthal.",26.55,36.83,49.25,USD,EACH,Keystone HVAC Supply,S. Kowalski,0,10,3,BIN-205,1,CN-31470
+NF00286,MTR INDUCER,3HP 24V 1625 RPM 4P,MTR INDUCER,"Replaces prior stock. 3HP, 24V, 1625 RPM, 4P.",176.19,244.39,326.81,USD,EA,Summit Distributing,J. Alvarez,12,25,3,BIN-100,25,CN-47425
+NF00287,MTR INDUCER,1/3HP 230V 3450 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/3HP, 230V, 3450 RPM, 4P.",170.35,236.29,315.97,USD,EA,Beacon Mechanical,H. Yamamoto,5,0,1,BIN-330,10,CN-65306
+NF00288,MTR COND FAN,5HP 208V 1PH 3450 RPM 1P,MTR COND FAN,"Replaces prior stock. 5HP, 208V, 1PH, 3450 RPM, 1P.",109.02,151.22,202.22,USD,EACH,Northfield Wholesale,M. Chen,50,100,2,BIN-412,10,CN-23566
+NF00289,EVAP COIL,2.5 ton R-32 3 row,EVAP COIL,"Replaces prior stock. 2.5 ton, R-32, 3 row.",465.12,645.16,862.72,USD,EACH,Beacon Mechanical,D. Thompson,350,0,1,BIN-205,1,CN-96279
+NF00290,CONT,20A 2P 24V coil,CONT,"Replaces prior stock. 20A, 2P, 24V coil.",43.37,60.16,80.44,USD,EA,Beacon Mechanical,H. Yamamoto,75,25,2,BIN-412,1,CN-22834
+NF00291,MTR COND FAN,1-1/2HP 240V 1PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 240V, 1PH, 1625 RPM, 2P.",80.40,111.52,149.13,USD,EA,Northfield Wholesale,R. Patel,5,0,6,BIN-330,10,CN-59392
+NF00292,COND COIL,2.5 ton R-454B 4 row,COND COIL,"Replaces prior stock. 2.5 ton, R-454B, 4 row.",387.23,537.13,718.26,USD,EACH,Keystone HVAC Supply,P. Dubois,120,10,5,BIN-412,10,CN-66065
+NF00293,MTR COND FAN,1HP 120V 3PH 1075 RPM 4P,MTR COND FAN,"Replaces prior stock. 1HP, 120V, 3PH, 1075 RPM, 4P.",59.19,82.10,109.79,USD,EA,Beacon Mechanical,K. O'Brien,20,0,6,BIN-205,1,CN-26965
+NF00294,COMPRESSOR,4 ton 208V 3PH R-22,COMPRESSOR,"Replaces prior stock. 4 ton, 208V, 3PH, R-22.",878.26,1218.23,1629.03,USD,EACH,Northfield Wholesale,A. Rossi,12,100,6,BIN-412,5,CN-13707
+NF00295,MTR COND FAN,1/4HP 120V 1PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/4HP, 120V, 1PH, 1625 RPM, 1P.",77.25,107.15,143.28,USD,EA,Keystone HVAC Supply,L. Nguyen,50,0,2,BIN-412,1,CN-61644
+NF00296,MTR COND FAN,1/2HP 24V 1PH 3450 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/2HP, 24V, 1PH, 3450 RPM, 6P.",94.48,131.06,175.25,USD,EA,Summit Distributing,S. Kowalski,120,0,4,BIN-412,1,CN-70276
+NF00297,MTR BLWR,1/6HP 120V 3PH 1625 RPM 2P,MTR BLWR,"Replaces prior stock. 1/6HP, 120V, 3PH, 1625 RPM, 2P.",120.06,166.53,222.69,USD,EACH,Northfield Wholesale,K. O'Brien,12,10,1,BIN-100,25,CN-12268
+NF00298,EVAP COIL,5 ton R-22 3 row,EVAP COIL,"Replaces prior stock. 5 ton, R-22, 3 row.",481.01,667.21,892.20,USD,EA,Northfield Wholesale,L. Nguyen,75,10,2,BIN-330,10,CN-55098
+NF00299,MTR COND FAN,1/3HP 120V 1PH 825 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/3HP, 120V, 1PH, 825 RPM, 4P.",124.84,173.16,231.55,USD,EA,Summit Distributing,P. Dubois,5,0,3,BIN-100,1,CN-67716
+NF00300,MTR BLWR,2HP 230V 3PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 230V, 3PH, 3450 RPM, 6P.",144.23,200.06,267.52,USD,EA,Beacon Mechanical,C. Fernandez,50,100,7,BIN-100,1,CN-31198
+NF00301,FILTER,16x25x1 MERV 11,FILTER,"Replaces prior stock. 16x25x1, MERV 11.",13.93,19.32,25.84,USD,EA,Northfield Wholesale,K. O'Brien,350,100,4,BIN-412,5,CN-40430
+NF00302,EVAP COIL,2 ton R-410A 2 row,EVAP COIL,"Replaces prior stock. 2 ton, R-410A, 2 row.",202.49,280.88,375.59,USD,EA,Northfield Wholesale,T. Schmidt,350,100,4,BIN-205,1,CN-99573
+NF00303,CAP RUN,50/5 MFD 440V,CAP RUN,"Replaces prior stock. 50/5 MFD, 440V.",5.31,7.37,9.86,USD,EA,Keystone HVAC Supply,L. Nguyen,120,100,1,BIN-412,25,CN-20245
+NF00304,MTR BLWR,1/4HP 240V 1PH 1625 RPM 2P,MTR BLWR,"Replaces prior stock. 1/4HP, 240V, 1PH, 1625 RPM, 2P.",119.31,165.50,221.31,USD,EACH,Beacon Mechanical,K. O'Brien,35,100,6,BIN-330,25,CN-42871
+NF00305,COND COIL,1 ton R-22 3 row,COND COIL,"Replaces prior stock. 1 ton, R-22, 3 row.",233.93,324.48,433.89,USD,EACH,Keystone HVAC Supply,J. Alvarez,75,10,6,BIN-412,1,CN-79517
+NF00306,COMPRESSOR,2 ton 208V 1PH R-410A,COMPRESSOR,"Replaces prior stock. 2 ton, 208V, 1PH, R-410A.",499.53,692.90,926.55,USD,EA,Northfield Wholesale,B. Nowak,50,100,3,BIN-100,1,CN-92939
+NF00307,MTR BLWR,1/4HP 460V 1PH 1075 RPM 1P,MTR BLWR,"Replaces prior stock. 1/4HP, 460V, 1PH, 1075 RPM, 1P.",120.26,166.81,223.07,USD,EACH,Keystone HVAC Supply,P. Dubois,50,25,3,BIN-330,5,CN-56294
+NF00308,COND COIL,5 ton R-22 2 row,COND COIL,"Replaces prior stock. 5 ton, R-22, 2 row.",286.87,397.92,532.10,USD,EACH,Beacon Mechanical,P. Dubois,5,0,7,BIN-412,1,CN-37795
+NF00309,MTR BLWR,2HP 208V 3PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 208V, 3PH, 825 RPM, 6P.",83.65,116.03,155.16,USD,EA,Keystone HVAC Supply,E. Johansson,0,100,1,BIN-100,5,CN-63040
+NF00310,CAP RUN,35/5 MFD 370V,CAP RUN,"Replaces prior stock. 35/5 MFD, 370V.",9.14,12.69,16.96,USD,EACH,Northfield Wholesale,E. Johansson,500,25,2,BIN-412,1,CN-59735
+NF00311,MTR COND FAN,1/4HP 120V 1PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/4HP, 120V, 1PH, 1625 RPM, 2P.",63.30,87.80,117.40,USD,EACH,Northfield Wholesale,P. Dubois,120,25,1,BIN-100,1,CN-80907
+NF00312,MTR INDUCER,1/2HP 240V 3450 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/2HP, 240V, 3450 RPM, 4P.",156.82,217.53,290.88,USD,EACH,Keystone HVAC Supply,E. Johansson,35,0,2,BIN-205,25,CN-52456
+NF00313,CAP START,124 MFD 440V,CAP START,"Replaces prior stock. 124 MFD, 440V.",15.05,20.88,27.92,USD,EACH,Beacon Mechanical,D. Thompson,12,0,3,BIN-100,10,CN-70877
+NF00314,MTR BLWR,1/2HP 24V 3PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 1/2HP, 24V, 3PH, 1625 RPM, 1P.",72.09,100.00,133.72,USD,EACH,Beacon Mechanical,K. O'Brien,50,100,3,BIN-205,1,CN-94808
+NF00315,CONT,25A 1P 24V coil,CONT,"Replaces prior stock. 25A, 1P, 24V coil.",33.18,46.03,61.55,USD,EA,Northfield Wholesale,K. O'Brien,12,10,5,BIN-100,1,CN-38609
+NF00316,FUSE,30A 600V cartridge,FUSE,"Replaces prior stock. 30A, 600V, cartridge.",4.38,6.08,8.13,USD,EA,Summit Distributing,A. Rossi,500,25,4,BIN-205,25,CN-18122
+NF00317,XFMR,50 VA 480V pri 120V sec,XFMR,"Replaces prior stock. 50 VA, 480V pri, 120V sec.",25.22,34.98,46.77,USD,EACH,Beacon Mechanical,B. Nowak,200,50,2,BIN-412,1,CN-71715
+NF00318,XFMR,100 VA 480V pri 24V sec,XFMR,"Replaces prior stock. 100 VA, 480V pri, 24V sec.",35.28,48.94,65.45,USD,EACH,Keystone HVAC Supply,E. Johansson,35,100,4,BIN-330,5,CN-39450
+NF00319,MTR COND FAN,3HP 460V 1PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 3HP, 460V, 1PH, 1625 RPM, 2P.",92.49,128.29,171.55,USD,EACH,Keystone HVAC Supply,A. Rossi,350,50,4,BIN-205,10,CN-52687
+NF00320,MTR BLWR,3HP 240V 3PH 1725 RPM 1P,MTR BLWR,"Replaces prior stock. 3HP, 240V, 3PH, 1725 RPM, 1P.",83.59,115.95,155.04,USD,EACH,Summit Distributing,H. Yamamoto,5,0,5,BIN-100,25,CN-80414
+NF00321,MTR BLWR,1/3HP 24V 1PH 1725 RPM 2P,MTR BLWR,"Replaces prior stock. 1/3HP, 24V, 1PH, 1725 RPM, 2P.",88.10,122.21,163.41,USD,EA,Keystone HVAC Supply,D. Thompson,35,50,1,BIN-205,25,CN-96819
+NF00322,MTR COND FAN,1-1/2HP 240V 3PH 825 RPM 6P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 240V, 3PH, 825 RPM, 6P.",116.69,161.86,216.44,USD,EACH,Keystone HVAC Supply,M. Chen,35,10,3,BIN-330,1,CN-80119
+NF00323,MTR COND FAN,3/4HP 115V 3PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 3/4HP, 115V, 3PH, 1075 RPM, 2P.",79.79,110.68,148.00,USD,EA,Beacon Mechanical,R. Patel,350,10,2,BIN-412,10,CN-53103
+NF00324,FAN BLADE,20 in 5 blade CCW,FAN BLADE,"Replaces prior stock. 20 in, 5 blade, CCW.",26.13,36.25,48.47,USD,EA,Keystone HVAC Supply,M. Chen,0,0,1,BIN-100,10,CN-56611
+NF00325,MTR BLWR,3HP 240V 1PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 3HP, 240V, 1PH, 825 RPM, 6P.",109.37,151.70,202.86,USD,EACH,Keystone HVAC Supply,K. O'Brien,50,10,4,BIN-412,1,CN-39491
+NF00326,MTR INDUCER,3/4HP 120V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 3/4HP, 120V, 1725 RPM, 4P.",140.76,195.25,261.08,USD,EA,Beacon Mechanical,C. Fernandez,500,0,6,BIN-100,1,CN-97296
+NF00327,MTR INDUCER,1/6HP 460V 825 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/6HP, 460V, 825 RPM, 4P.",91.38,126.75,169.49,USD,EACH,Beacon Mechanical,D. Thompson,20,0,5,BIN-330,25,CN-37879
+NF00328,XFMR,100 VA 240V pri 240V sec,XFMR,"Replaces prior stock. 100 VA, 240V pri, 240V sec.",28.04,38.89,52.00,USD,EACH,Keystone HVAC Supply,L. Nguyen,20,25,1,BIN-205,10,CN-30370
+NF00329,MTR COND FAN,5HP 230V 1PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 5HP, 230V, 1PH, 3450 RPM, 4P.",132.82,184.23,246.35,USD,EA,Northfield Wholesale,C. Fernandez,35,50,4,BIN-100,25,CN-42829
+NF00330,CONT,60A 1P 120V coil,CONT,"Replaces prior stock. 60A, 1P, 120V coil.",35.20,48.83,65.30,USD,EA,Summit Distributing,L. Nguyen,35,0,5,BIN-205,5,CN-27876
+NF00331,MTR INDUCER,1-1/2HP 115V 825 RPM 4P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 115V, 825 RPM, 4P.",128.05,177.62,237.51,USD,EA,Beacon Mechanical,R. Patel,120,25,1,BIN-412,10,CN-99907
+NF00332,MTR COND FAN,1/4HP 115V 3PH 1075 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/4HP, 115V, 3PH, 1075 RPM, 6P.",101.54,140.84,188.34,USD,EACH,Summit Distributing,B. Nowak,0,25,3,BIN-205,25,CN-44224
+NF00333,EVAP COIL,1.5 ton R-410A 3 row,EVAP COIL,"Replaces prior stock. 1.5 ton, R-410A, 3 row.",473.80,657.20,878.82,USD,EACH,Northfield Wholesale,S. Kowalski,75,0,4,BIN-330,5,CN-24161
+NF00334,XFMR,200 VA 208V pri 240V sec,XFMR,"Replaces prior stock. 200 VA, 208V pri, 240V sec.",28.14,39.03,52.19,USD,EA,Beacon Mechanical,M. Chen,12,0,2,BIN-100,10,CN-28961
+NF00335,MTR COND FAN,3HP 460V 3PH 825 RPM 1P,MTR COND FAN,"Replaces prior stock. 3HP, 460V, 3PH, 825 RPM, 1P.",77.12,106.97,143.04,USD,EACH,Northfield Wholesale,J. Alvarez,35,100,6,BIN-330,5,CN-93539
+NF00336,MTR COND FAN,1/2HP 115V 3PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/2HP, 115V, 3PH, 3450 RPM, 2P.",87.52,121.40,162.33,USD,EACH,Summit Distributing,P. Dubois,0,10,1,BIN-330,25,CN-97239
+NF00337,CONTROL BOARD,120V blower,CONTROL BOARD,"Replaces prior stock. 120V, blower.",113.14,156.93,209.85,USD,EACH,Summit Distributing,R. Patel,5,100,2,BIN-100,1,CN-61018
+NF00338,CONT,25A 3P 24V coil,CONT,"Replaces prior stock. 25A, 3P, 24V coil.",39.05,54.17,72.44,USD,EA,Northfield Wholesale,R. Patel,5,25,3,BIN-330,1,CN-86470
+NF00339,COMPRESSOR,2.5 ton 460V 1PH R-410A,COMPRESSOR,"Replaces prior stock. 2.5 ton, 460V, 1PH, R-410A.",623.12,864.33,1155.78,USD,EACH,Keystone HVAC Supply,M. Chen,120,0,4,BIN-330,10,CN-10101
+NF00340,MTR BLWR,3HP 24V 3PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 3HP, 24V, 3PH, 825 RPM, 4P.",108.75,150.85,201.72,USD,EA,Summit Distributing,A. Rossi,75,10,4,BIN-100,1,CN-19922
+NF00341,MTR COND FAN,3/4HP 120V 1PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 3/4HP, 120V, 1PH, 1625 RPM, 4P.",65.95,91.48,122.33,USD,EA,Northfield Wholesale,T. Schmidt,75,0,5,BIN-330,1,CN-96877
+NF00342,MTR COND FAN,1HP 115V 1PH 1725 RPM 1P,MTR COND FAN,"Replaces prior stock. 1HP, 115V, 1PH, 1725 RPM, 1P.",93.11,129.15,172.70,USD,EACH,Northfield Wholesale,B. Nowak,12,100,5,BIN-412,10,CN-47600
+NF00343,MTR COND FAN,1/3HP 115V 1PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/3HP, 115V, 1PH, 3450 RPM, 2P.",86.61,120.13,160.64,USD,EACH,Northfield Wholesale,K. O'Brien,12,100,4,BIN-100,1,CN-25332
+NF00344,FUSE,10A 600V blade,FUSE,"Replaces prior stock. 10A, 600V, blade.",5.13,7.12,9.52,USD,EA,Beacon Mechanical,D. Thompson,120,100,2,BIN-330,1,CN-97195
+NF00345,CAP RUN,35/5 MFD 440V,CAP RUN,"Replaces prior stock. 35/5 MFD, 440V.",11.31,15.69,20.98,USD,EA,Keystone HVAC Supply,E. Johansson,350,0,3,BIN-330,10,CN-73216
+NF00346,COMPRESSOR,4 ton 230V 1PH R-22,COMPRESSOR,"Replaces prior stock. 4 ton, 230V, 1PH, R-22.",823.22,1141.88,1526.94,USD,EACH,Beacon Mechanical,J. Alvarez,35,100,2,BIN-100,25,CN-64418
+NF00347,EVAP COIL,4 ton R-22 4 row,EVAP COIL,"Replaces prior stock. 4 ton, R-22, 4 row.",287.11,398.25,532.54,USD,EA,Northfield Wholesale,C. Fernandez,0,0,5,BIN-100,10,CN-48860
+NF00348,BELT,B42 v-belt,BELT,"Replaces prior stock. B42, v-belt.",11.49,15.94,21.32,USD,EACH,Summit Distributing,K. O'Brien,50,10,2,BIN-330,5,CN-58047
+NF00349,EVAP COIL,2 ton R-454B 4 row,EVAP COIL,"Replaces prior stock. 2 ton, R-454B, 4 row.",437.40,606.71,811.30,USD,EA,Northfield Wholesale,L. Nguyen,5,100,1,BIN-100,5,CN-68685
+NF00350,MTR COND FAN,1/3HP 240V 1PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/3HP, 240V, 1PH, 1075 RPM, 2P.",101.97,141.44,189.14,USD,EACH,Beacon Mechanical,J. Alvarez,0,25,3,BIN-330,10,CN-44786
+NF00351,EVAP COIL,5 ton R-454B 2 row,EVAP COIL,"Replaces prior stock. 5 ton, R-454B, 2 row.",214.76,297.89,398.34,USD,EA,Summit Distributing,P. Dubois,35,50,6,BIN-412,5,CN-44583
+NF00352,FUSE,5A 250V cartridge,FUSE,"Replaces prior stock. 5A, 250V, cartridge.",4.85,6.73,9.00,USD,EA,Beacon Mechanical,T. Schmidt,500,10,1,BIN-100,10,CN-70341
+NF00353,MTR COND FAN,3HP 120V 3PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 3HP, 120V, 3PH, 1075 RPM, 2P.",76.10,105.56,141.15,USD,EA,Beacon Mechanical,H. Yamamoto,5,100,6,BIN-412,5,CN-96750
+NF00354,MTR COND FAN,3HP 240V 1PH 3450 RPM 6P,MTR COND FAN,"Replaces prior stock. 3HP, 240V, 1PH, 3450 RPM, 6P.",115.98,160.88,215.13,USD,EACH,Northfield Wholesale,H. Yamamoto,500,50,5,BIN-100,25,CN-55232
+NF00355,FILTER,20x25x1 MERV 13,FILTER,"Replaces prior stock. 20x25x1, MERV 13.",9.16,12.71,17.00,USD,EA,Beacon Mechanical,A. Rossi,20,10,1,BIN-205,5,CN-23782
+NF00356,COMPRESSOR,1.5 ton 230V 3PH R-22,COMPRESSOR,"Replaces prior stock. 1.5 ton, 230V, 3PH, R-22.",1104.11,1531.51,2047.95,USD,EA,Keystone HVAC Supply,B. Nowak,75,100,2,BIN-330,1,CN-54903
+NF00357,DAMPER,16 in barometric,DAMPER,"Replaces prior stock. 16 in, barometric.",92.86,128.80,172.24,USD,EA,Northfield Wholesale,P. Dubois,35,0,5,BIN-330,5,CN-69149
+NF00358,COMPRESSOR,2.5 ton 230V 3PH R-22,COMPRESSOR,"Replaces prior stock. 2.5 ton, 230V, 3PH, R-22.",475.14,659.06,881.30,USD,EACH,Summit Distributing,E. Johansson,35,0,5,BIN-205,1,CN-78645
+NF00359,COND COIL,5 ton R-22 4 row,COND COIL,"Replaces prior stock. 5 ton, R-22, 4 row.",427.85,593.47,793.59,USD,EA,Beacon Mechanical,H. Yamamoto,120,0,1,BIN-330,5,CN-15275
+NF00360,MTR INDUCER,1-1/2HP 230V 1075 RPM 4P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 230V, 1075 RPM, 4P.",131.75,182.75,244.37,USD,EACH,Northfield Wholesale,S. Kowalski,5,50,7,BIN-205,10,CN-49419
+NF00361,BLWR WHEEL,10-1/2 in 8 in wide CW,BLWR WHEEL,"Replaces prior stock. 10-1/2 in, 8 in wide, CW.",34.68,48.10,64.32,USD,EACH,Keystone HVAC Supply,L. Nguyen,120,10,5,BIN-330,25,CN-26850
+NF00362,MTR BLWR,1/4HP 115V 3PH 1625 RPM 2P,MTR BLWR,"Replaces prior stock. 1/4HP, 115V, 3PH, 1625 RPM, 2P.",68.70,95.30,127.43,USD,EA,Summit Distributing,C. Fernandez,350,10,5,BIN-330,1,CN-24180
+NF00363,DAMPER,12 in motorized,DAMPER,"Replaces prior stock. 12 in, motorized.",58.47,81.11,108.46,USD,EACH,Keystone HVAC Supply,J. Alvarez,75,0,4,BIN-205,1,CN-73318
+NF00364,MTR BLWR,5HP 120V 1PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 5HP, 120V, 1PH, 3450 RPM, 2P.",70.26,97.46,130.33,USD,EA,Keystone HVAC Supply,M. Chen,500,0,6,BIN-412,10,CN-27929
+NF00365,MTR COND FAN,3HP 208V 1PH 1725 RPM 4P,MTR COND FAN,"Replaces prior stock. 3HP, 208V, 1PH, 1725 RPM, 4P.",81.67,113.29,151.49,USD,EA,Summit Distributing,L. Nguyen,5,0,6,BIN-330,25,CN-71960
+NF00366,MTR BLWR,1/6HP 208V 3PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 1/6HP, 208V, 3PH, 3450 RPM, 1P.",89.39,123.99,165.80,USD,EA,Keystone HVAC Supply,B. Nowak,12,10,4,BIN-412,1,CN-53698
+NF00367,MTR COND FAN,2HP 460V 1PH 825 RPM 2P,MTR COND FAN,"Replaces prior stock. 2HP, 460V, 1PH, 825 RPM, 2P.",62.07,86.09,115.13,USD,EACH,Northfield Wholesale,L. Nguyen,5,100,5,BIN-205,1,CN-14113
+NF00368,COMPRESSOR,2 ton 208V 3PH R-32,COMPRESSOR,"Replaces prior stock. 2 ton, 208V, 3PH, R-32.",1045.75,1450.55,1939.69,USD,EA,Summit Distributing,S. Kowalski,12,0,3,BIN-412,10,CN-36172
+NF00369,MTR BLWR,1/6HP 24V 3PH 1075 RPM 4P,MTR BLWR,"Replaces prior stock. 1/6HP, 24V, 3PH, 1075 RPM, 4P.",85.65,118.80,158.86,USD,EA,Beacon Mechanical,H. Yamamoto,12,25,7,BIN-205,10,CN-98996
+NF00370,MTR BLWR,5HP 230V 1PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 5HP, 230V, 1PH, 3450 RPM, 1P.",101.33,140.56,187.96,USD,EACH,Keystone HVAC Supply,E. Johansson,35,50,7,BIN-205,10,CN-83365
+NF00371,BEARING,1 in flange,BEARING,"Replaces prior stock. 1 in, flange.",15.26,21.17,28.31,USD,EA,Northfield Wholesale,R. Patel,5,50,1,BIN-100,10,CN-43022
+NF00372,MTR COND FAN,1HP 115V 3PH 1725 RPM 1P,MTR COND FAN,"Replaces prior stock. 1HP, 115V, 3PH, 1725 RPM, 1P.",98.82,137.07,183.29,USD,EA,Keystone HVAC Supply,M. Chen,120,10,1,BIN-100,1,CN-91905
+NF00373,COMPRESSOR,2.5 ton 208V 1PH R-32,COMPRESSOR,"Replaces prior stock. 2.5 ton, 208V, 1PH, R-32.",920.20,1276.41,1706.83,USD,EA,Summit Distributing,D. Thompson,12,25,2,BIN-330,10,CN-44617
+NF00374,MTR INDUCER,1HP 240V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1HP, 240V, 1625 RPM, 2P.",109.73,152.21,203.54,USD,EACH,Summit Distributing,S. Kowalski,5,100,7,BIN-412,1,CN-11968
+NF00375,MTR BLWR,3HP 24V 3PH 825 RPM 1P,MTR BLWR,"Replaces prior stock. 3HP, 24V, 3PH, 825 RPM, 1P.",68.49,95.00,127.04,USD,EA,Northfield Wholesale,L. Nguyen,0,50,6,BIN-100,1,CN-90158
+NF00376,MTR BLWR,3HP 120V 1PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 3HP, 120V, 1PH, 3450 RPM, 6P.",63.05,87.45,116.94,USD,EACH,Northfield Wholesale,E. Johansson,200,10,6,BIN-330,1,CN-85933
+NF00377,EVAP COIL,1 ton R-454B 3 row,EVAP COIL,"Replaces prior stock. 1 ton, R-454B, 3 row.",229.65,318.54,425.96,USD,EACH,Keystone HVAC Supply,C. Fernandez,0,100,1,BIN-412,25,CN-96460
+NF00378,MTR COND FAN,1/2HP 240V 3PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/2HP, 240V, 3PH, 3450 RPM, 2P.",82.34,114.22,152.73,USD,EA,Northfield Wholesale,R. Patel,120,0,5,BIN-330,1,CN-95391
+NF00379,MTR COND FAN,1HP 115V 3PH 3450 RPM 1P,MTR COND FAN,"Replaces prior stock. 1HP, 115V, 3PH, 3450 RPM, 1P.",124.75,173.04,231.39,USD,EACH,Summit Distributing,C. Fernandez,350,0,7,BIN-205,1,CN-88545
+NF00380,MTR INDUCER,5HP 240V 3450 RPM 2P,MTR INDUCER,"Replaces prior stock. 5HP, 240V, 3450 RPM, 2P.",176.09,244.26,326.62,USD,EACH,Keystone HVAC Supply,H. Yamamoto,20,10,5,BIN-205,5,CN-49486
+NF00381,COMPRESSOR,4 ton 460V 3PH R-22,COMPRESSOR,"Replaces prior stock. 4 ton, 460V, 3PH, R-22.",868.64,1204.89,1611.20,USD,EA,Summit Distributing,D. Thompson,5,25,7,BIN-100,25,CN-29009
+NF00382,COMPRESSOR,2 ton 460V 3PH R-410A,COMPRESSOR,"Replaces prior stock. 2 ton, 460V, 3PH, R-410A.",625.68,867.88,1160.53,USD,EACH,Keystone HVAC Supply,L. Nguyen,75,100,5,BIN-100,1,CN-15877
+NF00383,COMPRESSOR,1 ton 460V 3PH R-410A,COMPRESSOR,"Replaces prior stock. 1 ton, 460V, 3PH, R-410A.",653.37,906.29,1211.89,USD,EA,Beacon Mechanical,L. Nguyen,5,0,3,BIN-412,5,CN-42998
+NF00384,MTR BLWR,1/2HP 240V 1PH 1075 RPM 4P,MTR BLWR,"Replaces prior stock. 1/2HP, 240V, 1PH, 1075 RPM, 4P.",59.02,81.86,109.47,USD,EACH,Northfield Wholesale,A. Rossi,0,25,7,BIN-330,25,CN-55584
+NF00385,FUSE,20A 600V ceramic,FUSE,"Replaces prior stock. 20A, 600V, ceramic.",5.29,7.34,9.81,USD,EA,Summit Distributing,A. Rossi,35,100,6,BIN-100,1,CN-54621
+NF00386,FILTER,20x20x2 MERV 11,FILTER,"Replaces prior stock. 20x20x2, MERV 11.",11.07,15.35,20.53,USD,EA,Beacon Mechanical,S. Kowalski,120,0,3,BIN-412,5,CN-97623
+NF00387,COND COIL,4 ton R-32 3 row,COND COIL,"Replaces prior stock. 4 ton, R-32, 3 row.",244.84,339.62,454.15,USD,EACH,Keystone HVAC Supply,T. Schmidt,5,50,1,BIN-100,1,CN-44834
+NF00388,FUSE,15A 600V cartridge,FUSE,"Replaces prior stock. 15A, 600V, cartridge.",5.63,7.81,10.44,USD,EACH,Summit Distributing,B. Nowak,0,50,5,BIN-330,1,CN-28428
+NF00389,MTR BLWR,3HP 230V 3PH 825 RPM 1P,MTR BLWR,"Replaces prior stock. 3HP, 230V, 3PH, 825 RPM, 1P.",135.25,187.60,250.86,USD,EACH,Summit Distributing,K. O'Brien,5,50,6,BIN-412,25,CN-57535
+NF00390,MTR INDUCER,3HP 208V 1075 RPM 1P,MTR INDUCER,"Replaces prior stock. 3HP, 208V, 1075 RPM, 1P.",68.96,95.65,127.90,USD,EACH,Summit Distributing,R. Patel,200,25,6,BIN-330,1,CN-67536
+NF00391,MTR BLWR,2HP 120V 3PH 1075 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 120V, 3PH, 1075 RPM, 6P.",96.81,134.29,179.57,USD,EACH,Beacon Mechanical,T. Schmidt,75,10,3,BIN-205,1,CN-93612
+NF00392,MTR BLWR,1-1/2HP 230V 3PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 1-1/2HP, 230V, 3PH, 1625 RPM, 1P.",86.24,119.62,159.95,USD,EA,Beacon Mechanical,M. Chen,0,50,2,BIN-205,25,CN-46541
+NF00393,COMPRESSOR,3 ton 208V 1PH R-32,COMPRESSOR,"Replaces prior stock. 3 ton, 208V, 1PH, R-32.",832.09,1154.19,1543.39,USD,EACH,Keystone HVAC Supply,B. Nowak,20,0,3,BIN-330,1,CN-21742
+NF00394,MTR INDUCER,1-1/2HP 24V 3450 RPM 6P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 24V, 3450 RPM, 6P.",108.15,150.02,200.61,USD,EACH,Northfield Wholesale,D. Thompson,75,25,6,BIN-412,25,CN-80311
+NF00395,CAP RUN DUAL,50/5 MFD 370V,CAP RUN DUAL,"Replaces prior stock. 50/5 MFD, 370V.",18.87,26.17,34.99,USD,EACH,Northfield Wholesale,S. Kowalski,35,50,1,BIN-412,25,CN-26233
+NF00396,MTR BLWR,5HP 120V 3PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 5HP, 120V, 3PH, 3450 RPM, 1P.",135.09,187.38,250.56,USD,EA,Northfield Wholesale,E. Johansson,350,25,5,BIN-205,1,CN-63835
+NF00397,COMPRESSOR,2.5 ton 208V 1PH R-22,COMPRESSOR,"Replaces prior stock. 2.5 ton, 208V, 1PH, R-22.",916.17,1270.82,1699.36,USD,EACH,Summit Distributing,L. Nguyen,35,25,6,BIN-205,25,CN-87430
+NF00398,MTR INDUCER,1HP 120V 3450 RPM 4P,MTR INDUCER,"Replaces prior stock. 1HP, 120V, 3450 RPM, 4P.",93.73,130.01,173.85,USD,EA,Northfield Wholesale,R. Patel,0,50,6,BIN-205,1,CN-64448
+NF00399,COND COIL,1.5 ton R-454B 4 row,COND COIL,"Replaces prior stock. 1.5 ton, R-454B, 4 row.",452.71,627.95,839.71,USD,EA,Northfield Wholesale,T. Schmidt,350,0,7,BIN-330,1,CN-44076
+NF00400,MTR BLWR,2HP 120V 1PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 2HP, 120V, 1PH, 3450 RPM, 2P.",74.59,103.46,138.34,USD,EACH,Summit Distributing,S. Kowalski,120,50,4,BIN-330,1,CN-50068
+NF00401,FAN BLADE,18 in 4 blade CW,FAN BLADE,"Replaces prior stock. 18 in, 4 blade, CW.",24.34,33.76,45.15,USD,EACH,Summit Distributing,S. Kowalski,500,10,3,BIN-412,1,CN-10006
+NF00402,COMPRESSOR,3 ton 230V 3PH R-32,COMPRESSOR,"Replaces prior stock. 3 ton, 230V, 3PH, R-32.",513.51,712.29,952.49,USD,EACH,Northfield Wholesale,T. Schmidt,0,0,2,BIN-330,1,CN-59311
+NF00403,MTR INDUCER,3HP 115V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 3HP, 115V, 1725 RPM, 4P.",101.87,141.30,188.94,USD,EA,Northfield Wholesale,R. Patel,20,100,7,BIN-412,1,CN-29899
+NF00404,MTR BLWR,1/4HP 208V 3PH 825 RPM 1P,MTR BLWR,"Replaces prior stock. 1/4HP, 208V, 3PH, 825 RPM, 1P.",65.84,91.33,122.13,USD,EACH,Summit Distributing,L. Nguyen,0,10,4,BIN-412,10,CN-36484
+NF00405,MTR INDUCER,1/2HP 460V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/2HP, 460V, 1625 RPM, 2P.",152.51,211.54,282.88,USD,EACH,Beacon Mechanical,C. Fernandez,0,50,5,BIN-205,10,CN-64950
+NF00406,MTR INDUCER,3/4HP 115V 825 RPM 6P,MTR INDUCER,"Replaces prior stock. 3/4HP, 115V, 825 RPM, 6P.",153.18,212.47,284.12,USD,EACH,Northfield Wholesale,K. O'Brien,200,100,6,BIN-412,5,CN-41145
+NF00407,MTR COND FAN,1-1/2HP 230V 3PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 230V, 3PH, 1625 RPM, 4P.",58.88,81.67,109.22,USD,EA,Northfield Wholesale,E. Johansson,500,0,5,BIN-100,5,CN-94102
+NF00408,MTR COND FAN,1-1/2HP 230V 3PH 1075 RPM 4P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 230V, 3PH, 1075 RPM, 4P.",131.77,182.78,244.42,USD,EACH,Summit Distributing,B. Nowak,0,100,4,BIN-412,25,CN-73934
+NF00409,MTR COND FAN,1/3HP 208V 3PH 1725 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/3HP, 208V, 3PH, 1725 RPM, 2P.",66.50,92.23,123.34,USD,EACH,Keystone HVAC Supply,P. Dubois,0,10,4,BIN-205,1,CN-55003
+NF00410,FILTER,16x25x4 MERV 8,FILTER,"Replaces prior stock. 16x25x4, MERV 8.",11.05,15.33,20.50,USD,EACH,Beacon Mechanical,D. Thompson,0,10,4,BIN-412,5,CN-19471
+NF00411,COMPRESSOR,1.5 ton 230V 1PH R-32,COMPRESSOR,"Replaces prior stock. 1.5 ton, 230V, 1PH, R-32.",988.74,1371.48,1833.95,USD,EA,Beacon Mechanical,E. Johansson,350,100,5,BIN-412,1,CN-46874
+NF00412,BELT,B42 cogged,BELT,"Replaces prior stock. B42, cogged.",17.30,23.99,32.08,USD,EACH,Summit Distributing,L. Nguyen,5,25,3,BIN-412,1,CN-64163
+NF00413,MTR COND FAN,1/2HP 460V 1PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/2HP, 460V, 1PH, 3450 RPM, 2P.",99.49,138.00,184.54,USD,EACH,Summit Distributing,D. Thompson,20,100,6,BIN-330,1,CN-61519
+NF00414,MTR COND FAN,2HP 24V 1PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 2HP, 24V, 1PH, 1625 RPM, 1P.",109.52,151.91,203.14,USD,EACH,Summit Distributing,S. Kowalski,200,50,2,BIN-205,5,CN-21993
+NF00415,BLWR WHEEL,12 in 10 in wide CCW,BLWR WHEEL,"Replaces prior stock. 12 in, 10 in wide, CCW.",32.09,44.51,59.52,USD,EA,Beacon Mechanical,T. Schmidt,5,0,3,BIN-205,10,CN-46696
+NF00416,MTR INDUCER,5HP 24V 825 RPM 1P,MTR INDUCER,"Replaces prior stock. 5HP, 24V, 825 RPM, 1P.",139.95,194.12,259.58,USD,EA,Beacon Mechanical,R. Patel,0,100,6,BIN-205,1,CN-76107
+NF00417,MTR COND FAN,3HP 24V 3PH 825 RPM 4P,MTR COND FAN,"Replaces prior stock. 3HP, 24V, 3PH, 825 RPM, 4P.",64.63,89.65,119.88,USD,EACH,Beacon Mechanical,H. Yamamoto,12,25,2,BIN-100,1,CN-67103
+NF00418,COND COIL,1.5 ton R-454B 3 row,COND COIL,"Replaces prior stock. 1.5 ton, R-454B, 3 row.",506.26,702.23,939.03,USD,EA,Summit Distributing,E. Johansson,500,0,3,BIN-205,25,CN-34373
+NF00419,MTR INDUCER,2HP 460V 1625 RPM 1P,MTR INDUCER,"Replaces prior stock. 2HP, 460V, 1625 RPM, 1P.",115.02,159.55,213.35,USD,EA,Northfield Wholesale,B. Nowak,20,25,7,BIN-205,5,CN-30700
+NF00420,MTR BLWR,1/4HP 240V 1PH 3450 RPM 4P,MTR BLWR,"Replaces prior stock. 1/4HP, 240V, 1PH, 3450 RPM, 4P.",67.10,93.08,124.46,USD,EA,Summit Distributing,D. Thompson,500,25,2,BIN-330,25,CN-88775
+NF00421,MTR INDUCER,2HP 240V 1075 RPM 6P,MTR INDUCER,"Replaces prior stock. 2HP, 240V, 1075 RPM, 6P.",89.09,123.57,165.24,USD,EACH,Keystone HVAC Supply,C. Fernandez,20,25,5,BIN-330,1,CN-35232
+NF00422,MTR INDUCER,1-1/2HP 240V 1075 RPM 6P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 240V, 1075 RPM, 6P.",82.01,113.75,152.11,USD,EA,Keystone HVAC Supply,R. Patel,200,0,2,BIN-205,1,CN-45447
+NF00423,COMPRESSOR,1.5 ton 208V 1PH R-410A,COMPRESSOR,"Replaces prior stock. 1.5 ton, 208V, 1PH, R-410A.",724.42,1004.84,1343.68,USD,EA,Keystone HVAC Supply,T. Schmidt,350,100,5,BIN-100,1,CN-91050
+NF00424,MTR COND FAN,1/2HP 24V 1PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/2HP, 24V, 1PH, 1625 RPM, 1P.",77.73,107.82,144.18,USD,EACH,Northfield Wholesale,B. Nowak,75,0,6,BIN-412,25,CN-64732
+NF00425,MTR INDUCER,1/3HP 115V 3450 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/3HP, 115V, 3450 RPM, 4P.",140.21,194.48,260.06,USD,EA,Summit Distributing,D. Thompson,35,25,3,BIN-412,1,CN-80224
+NF00426,XFMR,50 VA 208V pri 120V sec,XFMR,"Replaces prior stock. 50 VA, 208V pri, 120V sec.",48.41,67.15,89.79,USD,EACH,Beacon Mechanical,J. Alvarez,500,10,6,BIN-330,1,CN-40295
+NF00427,FUSE,3A 600V ceramic,FUSE,"Replaces prior stock. 3A, 600V, ceramic.",3.16,4.39,5.86,USD,EA,Northfield Wholesale,B. Nowak,200,50,5,BIN-412,25,CN-65124
+NF00428,MTR COND FAN,5HP 460V 3PH 1075 RPM 4P,MTR COND FAN,"Replaces prior stock. 5HP, 460V, 3PH, 1075 RPM, 4P.",100.15,138.92,185.77,USD,EA,Beacon Mechanical,L. Nguyen,20,0,1,BIN-412,1,CN-95087
+NF00429,FAN BLADE,26 in 4 blade CW,FAN BLADE,"Replaces prior stock. 26 in, 4 blade, CW.",45.68,63.36,84.73,USD,EA,Keystone HVAC Supply,R. Patel,35,100,1,BIN-205,5,CN-75253
+NF00430,COND COIL,5 ton R-454B 3 row,COND COIL,"Replaces prior stock. 5 ton, R-454B, 3 row.",238.59,330.95,442.54,USD,EA,Northfield Wholesale,P. Dubois,350,10,2,BIN-100,1,CN-78353
+NF00431,MTR INDUCER,3/4HP 208V 1725 RPM 1P,MTR INDUCER,"Replaces prior stock. 3/4HP, 208V, 1725 RPM, 1P.",139.12,192.98,258.05,USD,EACH,Northfield Wholesale,A. Rossi,5,10,2,BIN-330,10,CN-80455
+NF00432,MTR COND FAN,1/4HP 230V 3PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/4HP, 230V, 3PH, 1625 RPM, 1P.",113.72,157.74,210.93,USD,EACH,Beacon Mechanical,C. Fernandez,12,10,2,BIN-330,5,CN-89217
+NF00433,MTR COND FAN,1/3HP 24V 3PH 1075 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/3HP, 24V, 3PH, 1075 RPM, 1P.",72.53,100.60,134.53,USD,EA,Northfield Wholesale,P. Dubois,5,50,5,BIN-330,1,CN-13597
+NF00434,MTR INDUCER,1/6HP 240V 3450 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/6HP, 240V, 3450 RPM, 4P.",121.45,168.47,225.27,USD,EA,Beacon Mechanical,J. Alvarez,0,0,4,BIN-412,10,CN-70542
+NF00435,COMPRESSOR,5 ton 230V 3PH R-22,COMPRESSOR,"Replaces prior stock. 5 ton, 230V, 3PH, R-22.",1076.10,1492.66,1996.00,USD,EACH,Keystone HVAC Supply,J. Alvarez,200,25,2,BIN-100,1,CN-49200
+NF00436,COMPRESSOR,1 ton 208V 1PH R-454B,COMPRESSOR,"Replaces prior stock. 1 ton, 208V, 1PH, R-454B.",928.15,1287.43,1721.56,USD,EACH,Northfield Wholesale,R. Patel,75,100,2,BIN-205,5,CN-49509
+NF00437,MTR BLWR,3/4HP 208V 1PH 1075 RPM 6P,MTR BLWR,"Replaces prior stock. 3/4HP, 208V, 1PH, 1075 RPM, 6P.",145.73,202.14,270.31,USD,EA,Northfield Wholesale,J. Alvarez,120,100,2,BIN-412,10,CN-59989
+NF00438,EVAP COIL,1.5 ton R-22 2 row,EVAP COIL,"Replaces prior stock. 1.5 ton, R-22, 2 row.",366.01,507.69,678.89,USD,EACH,Northfield Wholesale,S. Kowalski,20,100,3,BIN-100,1,CN-97893
+NF00439,MTR BLWR,1/3HP 230V 1PH 1075 RPM 6P,MTR BLWR,"Replaces prior stock. 1/3HP, 230V, 1PH, 1075 RPM, 6P.",89.35,123.94,165.74,USD,EACH,Keystone HVAC Supply,D. Thompson,12,100,3,BIN-100,25,CN-40393
+NF00440,COMPRESSOR,2 ton 230V 1PH R-32,COMPRESSOR,"Replaces prior stock. 2 ton, 230V, 1PH, R-32.",639.85,887.54,1186.82,USD,EA,Beacon Mechanical,E. Johansson,500,25,1,BIN-412,1,CN-31566
+NF00441,MTR BLWR,3HP 115V 3PH 1625 RPM 2P,MTR BLWR,"Replaces prior stock. 3HP, 115V, 3PH, 1625 RPM, 2P.",86.70,120.26,160.82,USD,EA,Beacon Mechanical,J. Alvarez,120,0,3,BIN-205,5,CN-93068
+NF00442,MTR COND FAN,3HP 115V 3PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 3HP, 115V, 3PH, 1075 RPM, 2P.",118.49,164.35,219.78,USD,EA,Northfield Wholesale,J. Alvarez,120,50,5,BIN-100,1,CN-67829
+NF00443,MTR BLWR,3HP 208V 3PH 1625 RPM 4P,MTR BLWR,"Replaces prior stock. 3HP, 208V, 3PH, 1625 RPM, 4P.",85.22,118.21,158.07,USD,EA,Beacon Mechanical,C. Fernandez,12,50,5,BIN-100,10,CN-98475
+NF00444,EVAP COIL,5 ton R-454B 3 row,EVAP COIL,"Replaces prior stock. 5 ton, R-454B, 3 row.",217.55,301.77,403.52,USD,EACH,Beacon Mechanical,A. Rossi,35,0,1,BIN-100,1,CN-23785
+NF00445,MTR COND FAN,1HP 460V 1PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 1HP, 460V, 1PH, 1625 RPM, 2P.",73.79,102.36,136.87,USD,EA,Keystone HVAC Supply,R. Patel,12,25,4,BIN-330,1,CN-47987
+NF00446,MTR INDUCER,5HP 120V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 5HP, 120V, 1725 RPM, 4P.",159.59,221.36,296.01,USD,EACH,Beacon Mechanical,T. Schmidt,50,0,3,BIN-100,1,CN-61397
+NF00447,MTR INDUCER,3HP 240V 3450 RPM 1P,MTR INDUCER,"Replaces prior stock. 3HP, 240V, 3450 RPM, 1P.",178.41,247.47,330.91,USD,EACH,Northfield Wholesale,T. Schmidt,200,25,7,BIN-100,1,CN-52627
+NF00448,FAN BLADE,30 in 3 blade CW,FAN BLADE,"Replaces prior stock. 30 in, 3 blade, CW.",44.68,61.98,82.88,USD,EA,Beacon Mechanical,M. Chen,350,0,1,BIN-412,25,CN-24843
+NF00449,FUSE,15A 250V cartridge,FUSE,"Replaces prior stock. 15A, 250V, cartridge.",5.91,8.20,10.97,USD,EA,Summit Distributing,S. Kowalski,35,50,3,BIN-100,1,CN-77444
+NF00450,MTR INDUCER,1/6HP 460V 1725 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/6HP, 460V, 1725 RPM, 1P.",73.30,101.67,135.95,USD,EACH,Beacon Mechanical,J. Alvarez,20,10,1,BIN-330,5,CN-16738
+NF00451,MTR INDUCER,1/2HP 230V 1725 RPM 6P,MTR INDUCER,"Replaces prior stock. 1/2HP, 230V, 1725 RPM, 6P.",162.14,224.90,300.74,USD,EACH,Summit Distributing,S. Kowalski,35,0,5,BIN-100,5,CN-99564
+NF00452,EVAP COIL,2 ton R-22 3 row,EVAP COIL,"Replaces prior stock. 2 ton, R-22, 3 row.",227.96,316.20,422.82,USD,EA,Summit Distributing,R. Patel,500,25,5,BIN-330,1,CN-57081
+NF00453,MTR COND FAN,5HP 230V 3PH 1725 RPM 1P,MTR COND FAN,"Replaces prior stock. 5HP, 230V, 3PH, 1725 RPM, 1P.",62.11,86.15,115.21,USD,EACH,Summit Distributing,J. Alvarez,0,25,2,BIN-100,1,CN-26827
+NF00454,MTR COND FAN,1/4HP 208V 1PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/4HP, 208V, 1PH, 1625 RPM, 2P.",72.63,100.74,134.71,USD,EA,Summit Distributing,R. Patel,350,50,1,BIN-412,1,CN-85015
+NF00455,MTR BLWR,1/3HP 24V 1PH 1625 RPM 4P,MTR BLWR,"Replaces prior stock. 1/3HP, 24V, 1PH, 1625 RPM, 4P.",123.53,171.35,229.14,USD,EACH,Keystone HVAC Supply,B. Nowak,5,50,5,BIN-205,25,CN-98690
+NF00456,COMPRESSOR,2 ton 230V 3PH R-32,COMPRESSOR,"Replaces prior stock. 2 ton, 230V, 3PH, R-32.",707.40,981.23,1312.12,USD,EACH,Summit Distributing,L. Nguyen,200,10,4,BIN-100,1,CN-79639
+NF00457,XFMR,75 VA 480V pri 120V sec,XFMR,"Replaces prior stock. 75 VA, 480V pri, 120V sec.",38.14,52.90,70.74,USD,EACH,Northfield Wholesale,R. Patel,5,10,1,BIN-330,5,CN-78732
+NF00458,MTR INDUCER,1/3HP 240V 1625 RPM 6P,MTR INDUCER,"Replaces prior stock. 1/3HP, 240V, 1625 RPM, 6P.",123.47,171.26,229.01,USD,EA,Keystone HVAC Supply,D. Thompson,50,100,7,BIN-205,10,CN-35796
+NF00459,MTR BLWR,1/3HP 24V 1PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 1/3HP, 24V, 1PH, 3450 RPM, 1P.",82.85,114.92,153.67,USD,EA,Keystone HVAC Supply,S. Kowalski,5,100,3,BIN-330,1,CN-31890
+NF00460,FAN BLADE,22 in 5 blade CCW,FAN BLADE,"Replaces prior stock. 22 in, 5 blade, CCW.",46.05,63.88,85.42,USD,EACH,Beacon Mechanical,C. Fernandez,12,50,4,BIN-100,1,CN-14128
+NF00461,MTR COND FAN,1HP 230V 1PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 1HP, 230V, 1PH, 3450 RPM, 4P.",111.82,155.11,207.41,USD,EACH,Beacon Mechanical,L. Nguyen,20,0,7,BIN-205,25,CN-34294
+NF00462,MTR BLWR,1HP 240V 1PH 1075 RPM 2P,MTR BLWR,"Replaces prior stock. 1HP, 240V, 1PH, 1075 RPM, 2P.",141.57,196.37,262.59,USD,EACH,Summit Distributing,J. Alvarez,120,0,4,BIN-205,10,CN-75166
+NF00463,MTR INDUCER,1/4HP 120V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/4HP, 120V, 1625 RPM, 2P.",137.79,191.13,255.59,USD,EA,Keystone HVAC Supply,L. Nguyen,500,50,5,BIN-412,1,CN-19871
+NF00464,EVAP COIL,1.5 ton R-410A 4 row,EVAP COIL,"Replaces prior stock. 1.5 ton, R-410A, 4 row.",400.56,555.61,742.97,USD,EA,Beacon Mechanical,S. Kowalski,75,100,3,BIN-412,1,CN-47473
+NF00465,MTR COND FAN,2HP 240V 3PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 2HP, 240V, 3PH, 3450 RPM, 2P.",77.23,107.13,143.26,USD,EACH,Keystone HVAC Supply,K. O'Brien,50,0,5,BIN-330,1,CN-82905
+NF00466,CONT,60A 2P 120V coil,CONT,"Replaces prior stock. 60A, 2P, 120V coil.",34.99,48.53,64.89,USD,EA,Summit Distributing,H. Yamamoto,5,100,3,BIN-330,25,CN-36873
+NF00467,COND COIL,4 ton R-454B 2 row,COND COIL,"Replaces prior stock. 4 ton, R-454B, 2 row.",292.78,406.11,543.05,USD,EACH,Summit Distributing,T. Schmidt,75,50,3,BIN-205,1,CN-55839
+NF00468,MTR INDUCER,2HP 115V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 2HP, 115V, 1725 RPM, 4P.",73.00,101.27,135.41,USD,EACH,Summit Distributing,E. Johansson,12,0,6,BIN-100,1,CN-63967
+NF00469,MTR COND FAN,1/4HP 24V 3PH 1725 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/4HP, 24V, 3PH, 1725 RPM, 1P.",76.72,106.42,142.31,USD,EA,Beacon Mechanical,K. O'Brien,75,0,4,BIN-100,25,CN-23479
+NF00470,MTR BLWR,5HP 230V 3PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 5HP, 230V, 3PH, 3450 RPM, 6P.",56.39,78.22,104.59,USD,EA,Keystone HVAC Supply,H. Yamamoto,200,10,2,BIN-412,1,CN-17658
+NF00471,COMPRESSOR,4 ton 230V 3PH R-32,COMPRESSOR,"Replaces prior stock. 4 ton, 230V, 3PH, R-32.",766.36,1063.01,1421.47,USD,EACH,Keystone HVAC Supply,D. Thompson,500,10,2,BIN-205,1,CN-22794
+NF00472,FUSE,20A 600V blade,FUSE,"Replaces prior stock. 20A, 600V, blade.",5.27,7.31,9.77,USD,EACH,Summit Distributing,C. Fernandez,350,0,3,BIN-412,25,CN-93689
+NF00473,XFMR,40 VA 480V pri 24V sec,XFMR,"Replaces prior stock. 40 VA, 480V pri, 24V sec.",27.11,37.61,50.29,USD,EACH,Beacon Mechanical,C. Fernandez,35,100,1,BIN-100,1,CN-42938
+NF00474,COMPRESSOR,1 ton 208V 3PH R-22,COMPRESSOR,"Replaces prior stock. 1 ton, 208V, 3PH, R-22.",546.47,758.01,1013.62,USD,EACH,Summit Distributing,A. Rossi,12,0,4,BIN-412,25,CN-64914
+NF00475,MTR COND FAN,2HP 120V 3PH 1725 RPM 6P,MTR COND FAN,"Replaces prior stock. 2HP, 120V, 3PH, 1725 RPM, 6P.",60.99,84.60,113.13,USD,EA,Beacon Mechanical,D. Thompson,120,10,3,BIN-205,5,CN-17488
+NF00476,COND COIL,4 ton R-22 3 row,COND COIL,"Replaces prior stock. 4 ton, R-22, 3 row.",514.79,714.07,954.86,USD,EACH,Keystone HVAC Supply,J. Alvarez,20,0,5,BIN-205,1,CN-94994
+NF00477,COMPRESSOR,1 ton 460V 1PH R-32,COMPRESSOR,"Replaces prior stock. 1 ton, 460V, 1PH, R-32.",563.10,781.08,1044.46,USD,EA,Summit Distributing,R. Patel,75,100,3,BIN-100,1,CN-41729
+NF00478,MTR BLWR,1/3HP 208V 1PH 1075 RPM 2P,MTR BLWR,"Replaces prior stock. 1/3HP, 208V, 1PH, 1075 RPM, 2P.",88.68,123.01,164.50,USD,EACH,Northfield Wholesale,A. Rossi,75,50,3,BIN-100,1,CN-48605
+NF00479,XFMR,75 VA 208V pri 120V sec,XFMR,"Replaces prior stock. 75 VA, 208V pri, 120V sec.",32.93,45.68,61.09,USD,EA,Keystone HVAC Supply,L. Nguyen,35,0,7,BIN-330,25,CN-44249
+NF00480,MTR BLWR,5HP 230V 1PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 5HP, 230V, 1PH, 825 RPM, 4P.",92.40,128.17,171.38,USD,EA,Summit Distributing,P. Dubois,20,0,6,BIN-412,1,CN-17910
+NF00481,XFMR,50 VA 120V pri 240V sec,XFMR,"Replaces prior stock. 50 VA, 120V pri, 240V sec.",28.22,39.14,52.34,USD,EACH,Northfield Wholesale,A. Rossi,0,50,5,BIN-330,1,CN-95905
+NF00482,MTR BLWR,1/4HP 24V 3PH 1625 RPM 4P,MTR BLWR,"Replaces prior stock. 1/4HP, 24V, 3PH, 1625 RPM, 4P.",130.76,181.37,242.53,USD,EA,Summit Distributing,R. Patel,5,10,4,BIN-100,25,CN-58747
+NF00483,MTR BLWR,2HP 240V 3PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 2HP, 240V, 3PH, 3450 RPM, 1P.",121.87,169.04,226.04,USD,EA,Keystone HVAC Supply,C. Fernandez,12,100,1,BIN-100,5,CN-91075
+NF00484,FUSE,10A 250V blade,FUSE,"Replaces prior stock. 10A, 250V, blade.",2.68,3.72,4.98,USD,EA,Summit Distributing,M. Chen,35,100,4,BIN-330,25,CN-90082
+NF00485,COND COIL,2.5 ton R-32 4 row,COND COIL,"Replaces prior stock. 2.5 ton, R-32, 4 row.",355.82,493.56,660.00,USD,EACH,Keystone HVAC Supply,S. Kowalski,75,50,5,BIN-205,10,CN-21757
+NF00486,MTR BLWR,1/3HP 208V 3PH 825 RPM 2P,MTR BLWR,"Replaces prior stock. 1/3HP, 208V, 3PH, 825 RPM, 2P.",100.22,139.02,185.90,USD,EA,Beacon Mechanical,P. Dubois,75,100,4,BIN-100,10,CN-29122
+NF00487,MTR BLWR,2HP 120V 1PH 1625 RPM 2P,MTR BLWR,"Replaces prior stock. 2HP, 120V, 1PH, 1625 RPM, 2P.",126.11,174.93,233.92,USD,EA,Northfield Wholesale,M. Chen,350,25,6,BIN-412,1,CN-12685
+NF00488,XFMR,200 VA 240V pri 120V sec,XFMR,"Replaces prior stock. 200 VA, 240V pri, 120V sec.",46.49,64.49,86.24,USD,EA,Keystone HVAC Supply,R. Patel,500,50,7,BIN-205,1,CN-84866
+NF00489,COMPRESSOR,2.5 ton 460V 1PH R-32,COMPRESSOR,"Replaces prior stock. 2.5 ton, 460V, 1PH, R-32.",569.33,789.71,1056.01,USD,EA,Northfield Wholesale,L. Nguyen,200,25,6,BIN-205,1,CN-15948
+NF00490,MTR BLWR,1HP 230V 1PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 1HP, 230V, 1PH, 3450 RPM, 2P.",108.43,150.40,201.11,USD,EACH,Summit Distributing,D. Thompson,50,10,3,BIN-330,1,CN-44018
+NF00491,MTR COND FAN,1/2HP 120V 1PH 1625 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/2HP, 120V, 1PH, 1625 RPM, 6P.",71.06,98.57,131.81,USD,EA,Northfield Wholesale,D. Thompson,50,50,7,BIN-205,25,CN-56566
+NF00492,MTR BLWR,1HP 208V 3PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 1HP, 208V, 3PH, 1625 RPM, 1P.",54.26,75.26,100.64,USD,EACH,Keystone HVAC Supply,S. Kowalski,35,50,4,BIN-330,1,CN-49432
+NF00493,MTR COND FAN,1/6HP 24V 1PH 1725 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/6HP, 24V, 1PH, 1725 RPM, 6P.",88.94,123.37,164.97,USD,EACH,Summit Distributing,S. Kowalski,50,10,1,BIN-205,1,CN-61827
+NF00494,CONT,50A 1P 240V coil,CONT,"Replaces prior stock. 50A, 1P, 240V coil.",27.45,38.08,50.92,USD,EA,Keystone HVAC Supply,D. Thompson,0,10,4,BIN-100,1,CN-65749
+NF00495,MTR INDUCER,1-1/2HP 240V 3450 RPM 4P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 240V, 3450 RPM, 4P.",99.04,137.38,183.70,USD,EACH,Keystone HVAC Supply,P. Dubois,75,10,1,BIN-100,1,CN-82062
+NF00496,MTR BLWR,2HP 24V 1PH 1625 RPM 4P,MTR BLWR,"Replaces prior stock. 2HP, 24V, 1PH, 1625 RPM, 4P.",121.14,168.03,224.69,USD,EA,Northfield Wholesale,C. Fernandez,200,25,3,BIN-205,1,CN-75211
+NF00497,MTR INDUCER,3HP 460V 1075 RPM 6P,MTR INDUCER,"Replaces prior stock. 3HP, 460V, 1075 RPM, 6P.",156.20,216.67,289.73,USD,EA,Keystone HVAC Supply,E. Johansson,0,10,1,BIN-100,1,CN-80840
+NF00498,COMPRESSOR,4 ton 230V 1PH R-410A,COMPRESSOR,"Replaces prior stock. 4 ton, 230V, 1PH, R-410A.",923.36,1280.79,1712.68,USD,EACH,Northfield Wholesale,T. Schmidt,500,0,5,BIN-100,1,CN-55059
+NF00499,COMPRESSOR,2 ton 460V 1PH R-454B,COMPRESSOR,"Replaces prior stock. 2 ton, 460V, 1PH, R-454B.",541.84,751.59,1005.03,USD,EACH,Northfield Wholesale,T. Schmidt,75,10,4,BIN-205,1,CN-12249
+NF00500,MTR COND FAN,2HP 460V 1PH 1075 RPM 6P,MTR COND FAN,"Replaces prior stock. 2HP, 460V, 1PH, 1075 RPM, 6P.",90.42,125.42,167.72,USD,EA,Keystone HVAC Supply,H. Yamamoto,5,100,7,BIN-100,1,CN-45322
+NF00501,MTR COND FAN,3HP 208V 1PH 1725 RPM 6P,MTR COND FAN,"Replaces prior stock. 3HP, 208V, 1PH, 1725 RPM, 6P.",54.94,76.21,101.91,USD,EACH,Northfield Wholesale,B. Nowak,50,10,6,BIN-100,1,CN-41701
+NF00502,MTR INDUCER,1/2HP 460V 1725 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/2HP, 460V, 1725 RPM, 2P.",110.50,153.28,204.96,USD,EA,Summit Distributing,E. Johansson,120,10,3,BIN-412,25,CN-81770
+NF00503,FUSE,20A 250V cartridge,FUSE,"Replaces prior stock. 20A, 250V, cartridge.",3.44,4.77,6.38,USD,EA,Keystone HVAC Supply,T. Schmidt,5,0,3,BIN-412,25,CN-93824
+NF00504,MTR INDUCER,1/4HP 24V 825 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/4HP, 24V, 825 RPM, 2P.",122.20,169.51,226.66,USD,EACH,Keystone HVAC Supply,M. Chen,5,25,1,BIN-330,25,CN-68902
+NF00505,BEARING,5/8 in ball,BEARING,"Replaces prior stock. 5/8 in, ball.",12.42,17.23,23.03,USD,EACH,Keystone HVAC Supply,M. Chen,35,0,3,BIN-100,25,CN-23482
+NF00506,COMPRESSOR,5 ton 208V 3PH R-22,COMPRESSOR,"Replaces prior stock. 5 ton, 208V, 3PH, R-22.",490.00,679.68,908.87,USD,EACH,Summit Distributing,T. Schmidt,20,0,4,BIN-330,10,CN-37853
+NF00507,MTR INDUCER,3HP 460V 1075 RPM 2P,MTR INDUCER,"Replaces prior stock. 3HP, 460V, 1075 RPM, 2P.",124.54,172.75,231.00,USD,EACH,Beacon Mechanical,T. Schmidt,120,0,3,BIN-205,1,CN-24544
+NF00508,MTR BLWR,1/4HP 120V 3PH 3450 RPM 4P,MTR BLWR,"Replaces prior stock. 1/4HP, 120V, 3PH, 3450 RPM, 4P.",114.40,158.69,212.20,USD,EA,Keystone HVAC Supply,D. Thompson,5,25,6,BIN-205,10,CN-10816
+NF00509,MTR INDUCER,1-1/2HP 460V 825 RPM 4P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 460V, 825 RPM, 4P.",130.01,180.34,241.15,USD,EACH,Keystone HVAC Supply,B. Nowak,35,0,1,BIN-412,1,CN-86081
+NF00510,MTR COND FAN,1/6HP 460V 3PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/6HP, 460V, 3PH, 3450 RPM, 4P.",96.40,133.72,178.81,USD,EA,Summit Distributing,T. Schmidt,200,25,3,BIN-100,1,CN-70319
+NF00511,MTR BLWR,1HP 24V 1PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 1HP, 24V, 1PH, 3450 RPM, 6P.",58.70,81.42,108.87,USD,EA,Beacon Mechanical,B. Nowak,0,50,4,BIN-205,10,CN-71118
+NF00512,CAP START,161 MFD 440V,CAP START,"Replaces prior stock. 161 MFD, 440V.",13.67,18.96,25.36,USD,EACH,Northfield Wholesale,K. O'Brien,50,10,4,BIN-205,5,CN-55363
+NF00513,MTR BLWR,1/2HP 240V 1PH 1725 RPM 4P,MTR BLWR,"Replaces prior stock. 1/2HP, 240V, 1PH, 1725 RPM, 4P.",70.14,97.29,130.10,USD,EA,Beacon Mechanical,C. Fernandez,20,25,6,BIN-100,5,CN-45151
+NF00514,MTR COND FAN,1/6HP 460V 3PH 825 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/6HP, 460V, 3PH, 825 RPM, 1P.",125.48,174.06,232.75,USD,EACH,Summit Distributing,K. O'Brien,200,50,6,BIN-205,1,CN-76300
+NF00515,MTR INDUCER,3HP 240V 1725 RPM 2P,MTR INDUCER,"Replaces prior stock. 3HP, 240V, 1725 RPM, 2P.",120.50,167.14,223.50,USD,EACH,Keystone HVAC Supply,T. Schmidt,12,10,6,BIN-412,1,CN-41787
+NF00516,MTR COND FAN,1/2HP 24V 3PH 3450 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/2HP, 24V, 3PH, 3450 RPM, 6P.",57.99,80.44,107.57,USD,EACH,Northfield Wholesale,S. Kowalski,500,50,7,BIN-205,1,CN-30450
+NF00517,MTR BLWR,2HP 115V 1PH 1725 RPM 1P,MTR BLWR,"Replaces prior stock. 2HP, 115V, 1PH, 1725 RPM, 1P.",111.97,155.31,207.68,USD,EA,Northfield Wholesale,A. Rossi,350,0,2,BIN-100,5,CN-75692
+NF00518,MTR BLWR,1/2HP 460V 1PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 1/2HP, 460V, 1PH, 825 RPM, 4P.",110.71,153.56,205.34,USD,EACH,Summit Distributing,P. Dubois,5,10,3,BIN-100,1,CN-42127
+NF00519,MTR COND FAN,5HP 240V 3PH 825 RPM 4P,MTR COND FAN,"Replaces prior stock. 5HP, 240V, 3PH, 825 RPM, 4P.",73.85,102.44,136.99,USD,EA,Keystone HVAC Supply,A. Rossi,0,10,4,BIN-412,1,CN-48631
+NF00520,MTR COND FAN,5HP 208V 1PH 1725 RPM 6P,MTR COND FAN,"Replaces prior stock. 5HP, 208V, 1PH, 1725 RPM, 6P.",61.92,85.89,114.85,USD,EA,Keystone HVAC Supply,M. Chen,35,10,1,BIN-330,1,CN-41719
+NF00521,MTR COND FAN,3/4HP 460V 1PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 3/4HP, 460V, 1PH, 3450 RPM, 4P.",97.58,135.36,181.00,USD,EA,Keystone HVAC Supply,B. Nowak,20,10,4,BIN-330,5,CN-84397
+NF00522,MTR INDUCER,1/4HP 24V 1625 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/4HP, 24V, 1625 RPM, 4P.",79.14,109.77,146.79,USD,EACH,Summit Distributing,T. Schmidt,120,100,6,BIN-205,1,CN-23830
+NF00523,MTR INDUCER,1/2HP 240V 1725 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/2HP, 240V, 1725 RPM, 1P.",84.15,116.72,156.08,USD,EACH,Keystone HVAC Supply,E. Johansson,120,10,6,BIN-205,1,CN-12267
+NF00524,MTR COND FAN,1/6HP 24V 1PH 1725 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/6HP, 24V, 1PH, 1725 RPM, 1P.",102.15,141.69,189.47,USD,EACH,Northfield Wholesale,S. Kowalski,120,100,4,BIN-412,1,CN-19809
+NF00525,MTR BLWR,3HP 230V 1PH 1625 RPM 2P,MTR BLWR,"Replaces prior stock. 3HP, 230V, 1PH, 1625 RPM, 2P.",91.91,127.49,170.48,USD,EACH,Beacon Mechanical,J. Alvarez,120,0,6,BIN-412,1,CN-94917
+NF00526,COND COIL,1 ton R-32 3 row,COND COIL,"Replaces prior stock. 1 ton, R-32, 3 row.",531.38,737.08,985.63,USD,EA,Northfield Wholesale,D. Thompson,200,0,4,BIN-100,1,CN-40893
+NF00527,FILTER,20x20x1 MERV 8,FILTER,"Replaces prior stock. 20x20x1, MERV 8.",12.36,17.15,22.93,USD,EACH,Summit Distributing,D. Thompson,75,25,2,BIN-205,1,CN-33941
+NF00528,MTR COND FAN,1-1/2HP 460V 3PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 460V, 3PH, 1625 RPM, 1P.",128.94,178.85,239.17,USD,EACH,Northfield Wholesale,H. Yamamoto,50,0,5,BIN-330,10,CN-13162
+NF00529,COMPRESSOR,4 ton 208V 1PH R-454B,COMPRESSOR,"Replaces prior stock. 4 ton, 208V, 1PH, R-454B.",753.91,1045.75,1398.39,USD,EA,Beacon Mechanical,L. Nguyen,20,0,3,BIN-330,1,CN-72809
+NF00530,FUSE,40A 250V blade,FUSE,"Replaces prior stock. 40A, 250V, blade.",3.63,5.04,6.74,USD,EA,Summit Distributing,D. Thompson,120,10,6,BIN-330,5,CN-66844
+NF00531,MTR BLWR,1/3HP 240V 3PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 1/3HP, 240V, 3PH, 3450 RPM, 2P.",117.39,162.83,217.74,USD,EACH,Northfield Wholesale,M. Chen,75,50,7,BIN-330,1,CN-60268
+NF00532,MTR BLWR,2HP 120V 3PH 1725 RPM 2P,MTR BLWR,"Replaces prior stock. 2HP, 120V, 3PH, 1725 RPM, 2P.",134.20,186.15,248.92,USD,EACH,Keystone HVAC Supply,L. Nguyen,500,10,7,BIN-330,1,CN-67962
+NF00533,MTR COND FAN,1/6HP 115V 1PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/6HP, 115V, 1PH, 1625 RPM, 1P.",55.76,77.35,103.43,USD,EACH,Summit Distributing,D. Thompson,75,100,4,BIN-330,1,CN-93863
+NF00534,MTR COND FAN,1-1/2HP 208V 1PH 1075 RPM 1P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 208V, 1PH, 1075 RPM, 1P.",90.14,125.04,167.20,USD,EA,Summit Distributing,H. Yamamoto,0,100,5,BIN-330,1,CN-19092
+NF00535,MTR BLWR,3HP 230V 1PH 1625 RPM 4P,MTR BLWR,"Replaces prior stock. 3HP, 230V, 1PH, 1625 RPM, 4P.",79.72,110.58,147.87,USD,EA,Summit Distributing,L. Nguyen,500,100,5,BIN-100,1,CN-41289
+NF00536,MTR COND FAN,5HP 24V 3PH 1725 RPM 2P,MTR COND FAN,"Replaces prior stock. 5HP, 24V, 3PH, 1725 RPM, 2P.",135.35,187.75,251.06,USD,EACH,Beacon Mechanical,E. Johansson,200,100,3,BIN-330,25,CN-45606
+NF00537,XFMR,75 VA 208V pri 24V sec,XFMR,"Replaces prior stock. 75 VA, 208V pri, 24V sec.",28.18,39.09,52.27,USD,EA,Keystone HVAC Supply,S. Kowalski,75,100,2,BIN-330,1,CN-28001
+NF00538,MTR BLWR,3/4HP 240V 3PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 3/4HP, 240V, 3PH, 825 RPM, 6P.",84.86,117.71,157.40,USD,EA,Northfield Wholesale,S. Kowalski,12,50,4,BIN-100,5,CN-13181
+NF00539,MTR COND FAN,1HP 120V 1PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 1HP, 120V, 1PH, 1625 RPM, 4P.",134.05,185.94,248.64,USD,EA,Beacon Mechanical,E. Johansson,120,25,3,BIN-205,10,CN-89731
+NF00540,MTR BLWR,2HP 120V 1PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 120V, 1PH, 3450 RPM, 6P.",94.48,131.05,175.24,USD,EA,Summit Distributing,L. Nguyen,5,10,7,BIN-100,1,CN-43569
+NF00541,MTR BLWR,1HP 460V 3PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 1HP, 460V, 3PH, 825 RPM, 4P.",98.29,136.34,182.32,USD,EA,Beacon Mechanical,H. Yamamoto,200,25,3,BIN-330,25,CN-56438
+NF00542,MTR INDUCER,1/2HP 460V 3450 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/2HP, 460V, 3450 RPM, 1P.",127.66,177.08,236.80,USD,EACH,Keystone HVAC Supply,C. Fernandez,35,10,3,BIN-205,1,CN-72021
+NF00543,MTR COND FAN,5HP 120V 3PH 1725 RPM 6P,MTR COND FAN,"Replaces prior stock. 5HP, 120V, 3PH, 1725 RPM, 6P.",105.63,146.52,195.93,USD,EA,Summit Distributing,D. Thompson,5,25,2,BIN-330,10,CN-39654
+NF00544,MTR COND FAN,1HP 230V 3PH 1075 RPM 4P,MTR COND FAN,"Replaces prior stock. 1HP, 230V, 3PH, 1075 RPM, 4P.",116.16,161.13,215.46,USD,EACH,Beacon Mechanical,J. Alvarez,5,25,4,BIN-100,10,CN-50765
+NF00545,MTR BLWR,1/3HP 208V 3PH 825 RPM 1P,MTR BLWR,"Replaces prior stock. 1/3HP, 208V, 3PH, 825 RPM, 1P.",126.54,175.52,234.70,USD,EACH,Northfield Wholesale,M. Chen,200,100,4,BIN-330,1,CN-18167
+NF00546,MTR COND FAN,1-1/2HP 240V 1PH 1075 RPM 4P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 240V, 1PH, 1075 RPM, 4P.",72.81,100.99,135.04,USD,EACH,Beacon Mechanical,M. Chen,5,0,1,BIN-330,5,CN-46671
+NF00547,XFMR,100 VA 480V pri 240V sec,XFMR,"Replaces prior stock. 100 VA, 480V pri, 240V sec.",35.07,48.65,65.06,USD,EACH,Summit Distributing,B. Nowak,200,10,4,BIN-412,1,CN-84253
+NF00548,BLWR WHEEL,12 in 6 in wide CW,BLWR WHEEL,"Replaces prior stock. 12 in, 6 in wide, CW.",60.87,84.43,112.91,USD,EACH,Summit Distributing,M. Chen,75,25,1,BIN-205,1,CN-48596
+NF00549,MTR BLWR,1/6HP 460V 3PH 3450 RPM 4P,MTR BLWR,"Replaces prior stock. 1/6HP, 460V, 3PH, 3450 RPM, 4P.",90.38,125.36,167.64,USD,EA,Summit Distributing,D. Thompson,50,100,6,BIN-100,10,CN-24097
+NF00550,MTR COND FAN,1/2HP 115V 3PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/2HP, 115V, 3PH, 1625 RPM, 4P.",100.81,139.83,186.98,USD,EACH,Northfield Wholesale,T. Schmidt,0,25,2,BIN-205,5,CN-32149
+NF00551,BLWR WHEEL,12 in 8 in wide CCW,BLWR WHEEL,"Replaces prior stock. 12 in, 8 in wide, CCW.",42.50,58.95,78.83,USD,EACH,Keystone HVAC Supply,S. Kowalski,200,0,2,BIN-330,1,CN-50704
+NF00552,MTR INDUCER,3/4HP 460V 1625 RPM 4P,MTR INDUCER,"Replaces prior stock. 3/4HP, 460V, 1625 RPM, 4P.",151.35,209.93,280.73,USD,EACH,Summit Distributing,P. Dubois,5,25,3,BIN-412,1,CN-85667
+NF00553,MTR BLWR,2HP 115V 1PH 1725 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 115V, 1PH, 1725 RPM, 6P.",104.15,144.46,193.18,USD,EACH,Northfield Wholesale,E. Johansson,0,0,6,BIN-205,10,CN-31016
+NF00554,MTR BLWR,2HP 208V 3PH 1625 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 208V, 3PH, 1625 RPM, 6P.",81.73,113.37,151.60,USD,EACH,Summit Distributing,L. Nguyen,0,50,4,BIN-205,25,CN-57520
+NF00555,MTR BLWR,3HP 208V 1PH 3450 RPM 4P,MTR BLWR,"Replaces prior stock. 3HP, 208V, 1PH, 3450 RPM, 4P.",69.94,97.02,129.73,USD,EA,Keystone HVAC Supply,D. Thompson,500,50,5,BIN-412,1,CN-22173
+NF00556,MTR COND FAN,3/4HP 460V 1PH 825 RPM 6P,MTR COND FAN,"Replaces prior stock. 3/4HP, 460V, 1PH, 825 RPM, 6P.",86.61,120.14,160.65,USD,EA,Keystone HVAC Supply,P. Dubois,350,0,5,BIN-205,1,CN-57209
+NF00557,FUSE,40A 250V ceramic,FUSE,"Replaces prior stock. 40A, 250V, ceramic.",2.48,3.44,4.60,USD,EACH,Keystone HVAC Supply,S. Kowalski,50,25,3,BIN-330,1,CN-51933
+NF00558,MTR COND FAN,1/4HP 120V 3PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/4HP, 120V, 3PH, 1625 RPM, 2P.",85.25,118.25,158.12,USD,EACH,Beacon Mechanical,H. Yamamoto,120,10,6,BIN-412,25,CN-61321
+NF00559,EVAP COIL,3 ton R-454B 2 row,EVAP COIL,"Replaces prior stock. 3 ton, R-454B, 2 row.",477.17,661.88,885.07,USD,EACH,Northfield Wholesale,R. Patel,350,0,2,BIN-330,25,CN-48272
+NF00560,MTR BLWR,1/2HP 230V 3PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 1/2HP, 230V, 3PH, 3450 RPM, 2P.",64.08,88.88,118.85,USD,EA,Beacon Mechanical,D. Thompson,350,50,2,BIN-412,1,CN-58554
+NF00561,FUSE,30A 600V blade,FUSE,"Replaces prior stock. 30A, 600V, blade.",2.67,3.70,4.94,USD,EACH,Northfield Wholesale,P. Dubois,5,0,1,BIN-205,10,CN-53170
+NF00562,MTR BLWR,3HP 24V 3PH 1075 RPM 2P,MTR BLWR,"Replaces prior stock. 3HP, 24V, 3PH, 1075 RPM, 2P.",92.94,128.91,172.38,USD,EACH,Beacon Mechanical,M. Chen,75,50,1,BIN-330,25,CN-73868
+NF00563,MTR COND FAN,5HP 208V 3PH 825 RPM 4P,MTR COND FAN,"Replaces prior stock. 5HP, 208V, 3PH, 825 RPM, 4P.",52.63,73.01,97.62,USD,EACH,Northfield Wholesale,C. Fernandez,120,100,7,BIN-330,1,CN-48453
+NF00564,MTR BLWR,1/2HP 24V 3PH 1725 RPM 4P,MTR BLWR,"Replaces prior stock. 1/2HP, 24V, 3PH, 1725 RPM, 4P.",57.91,80.33,107.42,USD,EACH,Keystone HVAC Supply,K. O'Brien,0,0,6,BIN-205,5,CN-16075
+NF00565,MTR INDUCER,3HP 120V 1075 RPM 4P,MTR INDUCER,"Replaces prior stock. 3HP, 120V, 1075 RPM, 4P.",96.31,133.59,178.64,USD,EACH,Northfield Wholesale,L. Nguyen,20,50,2,BIN-412,25,CN-58335
+NF00566,COND COIL,5 ton R-32 2 row,COND COIL,"Replaces prior stock. 5 ton, R-32, 2 row.",466.53,647.12,865.34,USD,EA,Keystone HVAC Supply,H. Yamamoto,120,10,2,BIN-100,1,CN-81880
+NF00567,MTR BLWR,1/3HP 120V 3PH 1075 RPM 2P,MTR BLWR,"Replaces prior stock. 1/3HP, 120V, 3PH, 1075 RPM, 2P.",97.56,135.32,180.95,USD,EACH,Northfield Wholesale,J. Alvarez,120,50,5,BIN-205,25,CN-71206
+NF00568,MTR COND FAN,3/4HP 460V 1PH 3450 RPM 6P,MTR COND FAN,"Replaces prior stock. 3/4HP, 460V, 1PH, 3450 RPM, 6P.",121.52,168.56,225.40,USD,EA,Summit Distributing,D. Thompson,120,100,3,BIN-412,5,CN-82202
+NF00569,MTR BLWR,1-1/2HP 240V 3PH 1075 RPM 1P,MTR BLWR,"Replaces prior stock. 1-1/2HP, 240V, 3PH, 1075 RPM, 1P.",126.89,176.01,235.36,USD,EACH,Northfield Wholesale,M. Chen,50,25,4,BIN-100,1,CN-16341
+NF00570,MTR INDUCER,1HP 208V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1HP, 208V, 1625 RPM, 2P.",142.61,197.81,264.51,USD,EACH,Beacon Mechanical,S. Kowalski,20,0,2,BIN-412,1,CN-99087
+NF00571,MTR BLWR,3/4HP 208V 3PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 3/4HP, 208V, 3PH, 825 RPM, 4P.",82.35,114.23,152.74,USD,EACH,Keystone HVAC Supply,H. Yamamoto,35,25,6,BIN-330,10,CN-36772
+NF00572,MTR INDUCER,5HP 120V 1075 RPM 6P,MTR INDUCER,"Replaces prior stock. 5HP, 120V, 1075 RPM, 6P.",158.43,219.76,293.86,USD,EA,Keystone HVAC Supply,H. Yamamoto,350,0,5,BIN-205,1,CN-30146
+NF00573,COMPRESSOR,5 ton 230V 3PH R-410A,COMPRESSOR,"Replaces prior stock. 5 ton, 230V, 3PH, R-410A.",1120.21,1553.84,2077.81,USD,EACH,Keystone HVAC Supply,H. Yamamoto,5,0,6,BIN-330,1,CN-47754
+NF00574,COMPRESSOR,1.5 ton 208V 1PH R-32,COMPRESSOR,"Replaces prior stock. 1.5 ton, 208V, 1PH, R-32.",1031.99,1431.47,1914.17,USD,EA,Keystone HVAC Supply,D. Thompson,35,0,2,BIN-330,10,CN-12801
+NF00575,MTR BLWR,3/4HP 208V 1PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 3/4HP, 208V, 1PH, 1625 RPM, 1P.",140.62,195.06,260.83,USD,EACH,Summit Distributing,B. Nowak,75,25,3,BIN-330,10,CN-27320
+NF00576,MTR INDUCER,1/6HP 240V 1625 RPM 6P,MTR INDUCER,"Replaces prior stock. 1/6HP, 240V, 1625 RPM, 6P.",124.48,172.67,230.90,USD,EACH,Beacon Mechanical,D. Thompson,0,0,2,BIN-100,10,CN-43827
+NF00577,MTR INDUCER,2HP 115V 1075 RPM 6P,MTR INDUCER,"Replaces prior stock. 2HP, 115V, 1075 RPM, 6P.",95.06,131.86,176.33,USD,EA,Summit Distributing,B. Nowak,200,0,5,BIN-330,25,CN-88607
+NF00578,MTR BLWR,1HP 460V 1PH 1725 RPM 4P,MTR BLWR,"Replaces prior stock. 1HP, 460V, 1PH, 1725 RPM, 4P.",131.74,182.73,244.35,USD,EACH,Summit Distributing,H. Yamamoto,350,0,2,BIN-330,1,CN-24565
+NF00579,EVAP COIL,1.5 ton R-454B 3 row,EVAP COIL,"Replaces prior stock. 1.5 ton, R-454B, 3 row.",245.68,340.77,455.69,USD,EA,Keystone HVAC Supply,S. Kowalski,0,10,5,BIN-100,25,CN-69755
+NF00580,MTR COND FAN,1-1/2HP 24V 1PH 3450 RPM 4P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 24V, 1PH, 3450 RPM, 4P.",60.42,83.81,112.07,USD,EA,Beacon Mechanical,J. Alvarez,35,50,6,BIN-100,25,CN-45632
+NF00581,MTR BLWR,1/4HP 240V 1PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 1/4HP, 240V, 1PH, 3450 RPM, 6P.",76.97,106.77,142.77,USD,EA,Summit Distributing,P. Dubois,200,50,5,BIN-205,5,CN-51361
+NF00582,FILTER,16x20x1 MERV 11,FILTER,"Replaces prior stock. 16x20x1, MERV 11.",10.89,15.11,20.21,USD,EACH,Summit Distributing,C. Fernandez,20,0,6,BIN-205,1,CN-61533
+NF00583,MTR INDUCER,1/4HP 208V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/4HP, 208V, 1625 RPM, 2P.",118.47,164.33,219.74,USD,EA,Northfield Wholesale,B. Nowak,12,100,1,BIN-412,25,CN-57333
+NF00584,EVAP COIL,2.5 ton R-410A 3 row,EVAP COIL,"Replaces prior stock. 2.5 ton, R-410A, 3 row.",207.63,288.00,385.11,USD,EACH,Summit Distributing,A. Rossi,0,100,3,BIN-205,10,CN-77045
+NF00585,MTR COND FAN,3/4HP 120V 3PH 3450 RPM 1P,MTR COND FAN,"Replaces prior stock. 3/4HP, 120V, 3PH, 3450 RPM, 1P.",92.79,128.71,172.11,USD,EA,Summit Distributing,E. Johansson,120,0,7,BIN-330,25,CN-85551
+NF00586,MTR COND FAN,1/3HP 208V 1PH 1725 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/3HP, 208V, 1PH, 1725 RPM, 4P.",98.69,136.89,183.06,USD,EACH,Summit Distributing,D. Thompson,0,25,4,BIN-205,10,CN-41421
+NF00587,MTR INDUCER,1/4HP 120V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/4HP, 120V, 1725 RPM, 4P.",178.53,247.64,331.14,USD,EACH,Northfield Wholesale,C. Fernandez,0,25,2,BIN-100,1,CN-88423
+NF00588,MTR INDUCER,1HP 460V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1HP, 460V, 1625 RPM, 2P.",96.84,134.33,179.63,USD,EA,Keystone HVAC Supply,R. Patel,500,100,3,BIN-412,10,CN-59623
+NF00589,XFMR,150 VA 208V pri 240V sec,XFMR,"Replaces prior stock. 150 VA, 208V pri, 240V sec.",51.89,71.98,96.25,USD,EACH,Beacon Mechanical,C. Fernandez,50,0,3,BIN-330,10,CN-99028
+NF00590,MTR BLWR,1/6HP 120V 1PH 1625 RPM 1P,MTR BLWR,"Replaces prior stock. 1/6HP, 120V, 1PH, 1625 RPM, 1P.",132.49,183.78,245.75,USD,EA,Keystone HVAC Supply,D. Thompson,35,100,4,BIN-330,10,CN-39738
+NF00591,MTR BLWR,1HP 230V 3PH 1075 RPM 4P,MTR BLWR,"Replaces prior stock. 1HP, 230V, 3PH, 1075 RPM, 4P.",90.39,125.38,167.66,USD,EACH,Northfield Wholesale,L. Nguyen,200,0,3,BIN-412,5,CN-48167
+NF00592,MTR BLWR,1HP 230V 1PH 1625 RPM 6P,MTR BLWR,"Replaces prior stock. 1HP, 230V, 1PH, 1625 RPM, 6P.",92.09,127.74,170.81,USD,EA,Northfield Wholesale,L. Nguyen,120,0,3,BIN-205,5,CN-92030
+NF00593,COMPRESSOR,2 ton 230V 3PH R-410A,COMPRESSOR,"Replaces prior stock. 2 ton, 230V, 3PH, R-410A.",520.51,722.00,965.47,USD,EACH,Northfield Wholesale,E. Johansson,20,50,7,BIN-412,5,CN-73321
+NF00594,MTR BLWR,5HP 24V 1PH 825 RPM 2P,MTR BLWR,"Replaces prior stock. 5HP, 24V, 1PH, 825 RPM, 2P.",119.31,165.50,221.31,USD,EACH,Keystone HVAC Supply,C. Fernandez,75,100,4,BIN-100,25,CN-34233
+NF00595,MTR COND FAN,1/2HP 230V 1PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/2HP, 230V, 1PH, 3450 RPM, 2P.",60.53,83.96,112.27,USD,EA,Beacon Mechanical,R. Patel,0,100,5,BIN-100,25,CN-28202
+NF00596,MTR BLWR,1/4HP 120V 3PH 3450 RPM 6P,MTR BLWR,"Replaces prior stock. 1/4HP, 120V, 3PH, 3450 RPM, 6P.",68.49,95.00,127.04,USD,EACH,Keystone HVAC Supply,E. Johansson,20,10,4,BIN-330,10,CN-17709
+NF00597,MTR BLWR,1/2HP 208V 3PH 825 RPM 2P,MTR BLWR,"Replaces prior stock. 1/2HP, 208V, 3PH, 825 RPM, 2P.",106.89,148.27,198.27,USD,EACH,Northfield Wholesale,C. Fernandez,0,50,6,BIN-205,1,CN-91634
+NF00598,MTR BLWR,5HP 120V 3PH 1075 RPM 4P,MTR BLWR,"Replaces prior stock. 5HP, 120V, 3PH, 1075 RPM, 4P.",153.64,213.12,284.98,USD,EACH,Keystone HVAC Supply,A. Rossi,350,50,6,BIN-205,10,CN-70780
+NF00599,MTR COND FAN,1-1/2HP 230V 1PH 1725 RPM 2P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 230V, 1PH, 1725 RPM, 2P.",111.29,154.37,206.42,USD,EACH,Northfield Wholesale,A. Rossi,0,25,7,BIN-330,1,CN-67063
+NF00600,MTR BLWR,1HP 230V 3PH 3450 RPM 4P,MTR BLWR,"Replaces prior stock. 1HP, 230V, 3PH, 3450 RPM, 4P.",105.52,146.36,195.72,USD,EA,Summit Distributing,A. Rossi,120,0,1,BIN-100,25,CN-44331
+NF00601,MTR COND FAN,2HP 24V 3PH 825 RPM 2P,MTR COND FAN,"Replaces prior stock. 2HP, 24V, 3PH, 825 RPM, 2P.",123.82,171.75,229.67,USD,EACH,Northfield Wholesale,T. Schmidt,5,25,2,BIN-330,1,CN-34411
+NF00602,MTR COND FAN,1-1/2HP 120V 1PH 1075 RPM 1P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 120V, 1PH, 1075 RPM, 1P.",99.10,137.46,183.82,USD,EA,Beacon Mechanical,K. O'Brien,120,50,2,BIN-412,5,CN-82457
+NF00603,MTR INDUCER,1HP 230V 1725 RPM 1P,MTR INDUCER,"Replaces prior stock. 1HP, 230V, 1725 RPM, 1P.",94.41,130.96,175.12,USD,EA,Northfield Wholesale,A. Rossi,0,10,4,BIN-205,25,CN-66485
+NF00604,XFMR,200 VA 240V pri 240V sec,XFMR,"Replaces prior stock. 200 VA, 240V pri, 240V sec.",44.91,62.30,83.31,USD,EA,Keystone HVAC Supply,C. Fernandez,0,0,6,BIN-205,1,CN-78053
+NF00605,COMPRESSOR,1 ton 230V 1PH R-454B,COMPRESSOR,"Replaces prior stock. 1 ton, 230V, 1PH, R-454B.",947.07,1313.68,1756.66,USD,EACH,Summit Distributing,H. Yamamoto,12,0,5,BIN-330,10,CN-91664
+NF00606,MTR BLWR,1/6HP 230V 3PH 3450 RPM 2P,MTR BLWR,"Replaces prior stock. 1/6HP, 230V, 3PH, 3450 RPM, 2P.",83.48,115.80,154.85,USD,EA,Northfield Wholesale,A. Rossi,12,10,4,BIN-205,1,CN-44463
+NF00607,CONT,30A 3P 240V coil,CONT,"Replaces prior stock. 30A, 3P, 240V coil.",29.83,41.37,55.33,USD,EACH,Northfield Wholesale,K. O'Brien,20,0,6,BIN-412,1,CN-44230
+NF00608,MTR INDUCER,3HP 24V 1725 RPM 6P,MTR INDUCER,"Replaces prior stock. 3HP, 24V, 1725 RPM, 6P.",111.50,154.66,206.82,USD,EA,Beacon Mechanical,K. O'Brien,350,100,7,BIN-100,10,CN-15508
+NF00609,MTR COND FAN,5HP 230V 1PH 1725 RPM 1P,MTR COND FAN,"Replaces prior stock. 5HP, 230V, 1PH, 1725 RPM, 1P.",107.75,149.46,199.86,USD,EACH,Keystone HVAC Supply,H. Yamamoto,350,50,6,BIN-100,25,CN-99019
+NF00610,FUSE,20A 250V ceramic,FUSE,"Replaces prior stock. 20A, 250V, ceramic.",3.21,4.45,5.96,USD,EACH,Beacon Mechanical,J. Alvarez,0,0,3,BIN-100,1,CN-70513
+NF00611,MTR INDUCER,3HP 120V 825 RPM 4P,MTR INDUCER,"Replaces prior stock. 3HP, 120V, 825 RPM, 4P.",87.65,121.58,162.58,USD,EACH,Keystone HVAC Supply,D. Thompson,20,50,1,BIN-330,10,CN-43472
+NF00612,FUSE,20A 250V blade,FUSE,"Replaces prior stock. 20A, 250V, blade.",4.25,5.90,7.89,USD,EACH,Summit Distributing,D. Thompson,12,0,3,BIN-205,10,CN-37165
+NF00613,MTR INDUCER,1-1/2HP 115V 1075 RPM 1P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 115V, 1075 RPM, 1P.",79.42,110.16,147.30,USD,EACH,Keystone HVAC Supply,C. Fernandez,50,100,1,BIN-100,1,CN-81809
+NF00614,COMPRESSOR,2 ton 230V 3PH R-22,COMPRESSOR,"Replaces prior stock. 2 ton, 230V, 3PH, R-22.",500.05,693.62,927.52,USD,EA,Summit Distributing,R. Patel,12,50,7,BIN-100,5,CN-25400
+NF00615,MTR BLWR,1/4HP 115V 1PH 1075 RPM 6P,MTR BLWR,"Replaces prior stock. 1/4HP, 115V, 1PH, 1075 RPM, 6P.",140.08,194.30,259.82,USD,EACH,Keystone HVAC Supply,C. Fernandez,200,0,6,BIN-100,1,CN-66229
+NF00616,MTR COND FAN,1/2HP 24V 1PH 825 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/2HP, 24V, 1PH, 825 RPM, 1P.",131.51,182.42,243.94,USD,EA,Keystone HVAC Supply,B. Nowak,0,10,2,BIN-412,1,CN-25810
+NF00617,MTR BLWR,1-1/2HP 115V 1PH 1725 RPM 4P,MTR BLWR,"Replaces prior stock. 1-1/2HP, 115V, 1PH, 1725 RPM, 4P.",101.93,141.39,189.07,USD,EA,Beacon Mechanical,T. Schmidt,75,100,5,BIN-205,25,CN-32896
+NF00618,MTR INDUCER,3HP 208V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 3HP, 208V, 1725 RPM, 4P.",145.16,201.35,269.25,USD,EACH,Summit Distributing,A. Rossi,0,50,6,BIN-412,10,CN-70567
+NF00619,MTR COND FAN,1-1/2HP 24V 3PH 1725 RPM 2P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 24V, 3PH, 1725 RPM, 2P.",92.40,128.17,171.38,USD,EA,Northfield Wholesale,L. Nguyen,35,10,2,BIN-100,1,CN-55574
+NF00620,MTR COND FAN,1/2HP 460V 3PH 1625 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/2HP, 460V, 3PH, 1625 RPM, 6P.",92.53,128.35,171.64,USD,EACH,Beacon Mechanical,K. O'Brien,75,25,3,BIN-412,1,CN-84976
+NF00621,MTR COND FAN,3HP 115V 3PH 1725 RPM 4P,MTR COND FAN,"Replaces prior stock. 3HP, 115V, 3PH, 1725 RPM, 4P.",130.65,181.22,242.33,USD,EA,Keystone HVAC Supply,R. Patel,35,25,4,BIN-412,10,CN-71470
+NF00622,MTR COND FAN,1-1/2HP 120V 3PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 120V, 3PH, 1625 RPM, 1P.",126.98,176.13,235.52,USD,EACH,Northfield Wholesale,B. Nowak,12,100,5,BIN-330,1,CN-60156
+NF00623,MTR COND FAN,3/4HP 208V 3PH 1725 RPM 2P,MTR COND FAN,"Replaces prior stock. 3/4HP, 208V, 3PH, 1725 RPM, 2P.",76.24,105.75,141.40,USD,EACH,Northfield Wholesale,S. Kowalski,35,10,7,BIN-330,1,CN-43156
+NF00624,MTR COND FAN,3HP 240V 1PH 825 RPM 1P,MTR COND FAN,"Replaces prior stock. 3HP, 240V, 1PH, 825 RPM, 1P.",105.89,146.88,196.41,USD,EACH,Summit Distributing,K. O'Brien,75,50,6,BIN-100,1,CN-91006
+NF00625,MTR INDUCER,1/4HP 230V 1725 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/4HP, 230V, 1725 RPM, 4P.",104.62,145.12,194.06,USD,EA,Summit Distributing,B. Nowak,500,10,2,BIN-100,5,CN-48312
+NF00626,MTR COND FAN,5HP 240V 3PH 1725 RPM 6P,MTR COND FAN,"Replaces prior stock. 5HP, 240V, 3PH, 1725 RPM, 6P.",118.15,163.88,219.14,USD,EA,Keystone HVAC Supply,J. Alvarez,75,100,5,BIN-100,1,CN-35078
+NF00627,MTR COND FAN,1-1/2HP 230V 3PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 230V, 3PH, 3450 RPM, 2P.",97.23,134.87,180.34,USD,EA,Keystone HVAC Supply,A. Rossi,75,25,6,BIN-205,10,CN-59463
+NF00628,MTR INDUCER,1HP 240V 1625 RPM 6P,MTR INDUCER,"Replaces prior stock. 1HP, 240V, 1625 RPM, 6P.",86.78,120.37,160.97,USD,EACH,Beacon Mechanical,P. Dubois,0,0,4,BIN-205,5,CN-14968
+NF00629,MTR INDUCER,1/3HP 208V 1725 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/3HP, 208V, 1725 RPM, 1P.",120.03,166.49,222.63,USD,EACH,Northfield Wholesale,P. Dubois,75,100,3,BIN-205,25,CN-69591
+NF00630,MTR BLWR,1HP 240V 1PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 1HP, 240V, 1PH, 825 RPM, 6P.",66.59,92.37,123.52,USD,EA,Keystone HVAC Supply,M. Chen,0,100,7,BIN-412,1,CN-30757
+NF00631,MTR INDUCER,1/6HP 460V 1625 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/6HP, 460V, 1625 RPM, 4P.",118.33,164.14,219.49,USD,EA,Keystone HVAC Supply,J. Alvarez,35,0,7,BIN-205,10,CN-25473
+NF00632,MTR BLWR,1/4HP 115V 1PH 1625 RPM 4P,MTR BLWR,"Replaces prior stock. 1/4HP, 115V, 1PH, 1625 RPM, 4P.",93.96,130.33,174.28,USD,EACH,Northfield Wholesale,B. Nowak,20,100,3,BIN-100,1,CN-54772
+NF00633,MTR COND FAN,1/4HP 208V 3PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/4HP, 208V, 3PH, 1625 RPM, 1P.",112.81,156.48,209.24,USD,EA,Beacon Mechanical,S. Kowalski,50,50,6,BIN-412,1,CN-71476
+NF00634,COND COIL,2.5 ton R-454B 3 row,COND COIL,"Replaces prior stock. 2.5 ton, R-454B, 3 row.",530.45,735.78,983.89,USD,EA,Northfield Wholesale,D. Thompson,200,10,2,BIN-330,1,CN-36456
+NF00635,MTR INDUCER,1/6HP 115V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/6HP, 115V, 1625 RPM, 2P.",125.40,173.94,232.60,USD,EACH,Northfield Wholesale,T. Schmidt,0,25,1,BIN-412,25,CN-46999
+NF00636,MTR COND FAN,3/4HP 24V 1PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 3/4HP, 24V, 1PH, 1625 RPM, 4P.",89.01,123.46,165.09,USD,EA,Keystone HVAC Supply,H. Yamamoto,5,0,4,BIN-205,10,CN-38065
+NF00637,MTR INDUCER,1HP 230V 1625 RPM 1P,MTR INDUCER,"Replaces prior stock. 1HP, 230V, 1625 RPM, 1P.",105.73,146.66,196.12,USD,EACH,Keystone HVAC Supply,E. Johansson,20,50,6,BIN-330,1,CN-99658
+NF00638,MTR COND FAN,5HP 208V 3PH 1725 RPM 6P,MTR COND FAN,"Replaces prior stock. 5HP, 208V, 3PH, 1725 RPM, 6P.",68.96,95.65,127.90,USD,EA,Keystone HVAC Supply,S. Kowalski,35,10,1,BIN-100,1,CN-80286
+NF00639,MTR INDUCER,1/2HP 208V 1075 RPM 6P,MTR INDUCER,"Replaces prior stock. 1/2HP, 208V, 1075 RPM, 6P.",84.69,117.48,157.09,USD,EACH,Summit Distributing,B. Nowak,0,10,3,BIN-330,25,CN-23856
+NF00640,MTR INDUCER,1-1/2HP 208V 3450 RPM 1P,MTR INDUCER,"Replaces prior stock. 1-1/2HP, 208V, 3450 RPM, 1P.",89.43,124.05,165.88,USD,EA,Summit Distributing,M. Chen,5,100,1,BIN-330,10,CN-84553
+NF00641,MTR COND FAN,1-1/2HP 208V 3PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1-1/2HP, 208V, 3PH, 1625 RPM, 1P.",62.70,86.97,116.30,USD,EA,Summit Distributing,B. Nowak,20,0,7,BIN-412,25,CN-32457
+NF00642,COMPRESSOR,4 ton 230V 1PH R-454B,COMPRESSOR,"Replaces prior stock. 4 ton, 230V, 1PH, R-454B.",798.30,1107.32,1480.72,USD,EACH,Beacon Mechanical,P. Dubois,350,10,3,BIN-100,10,CN-78634
+NF00643,MTR BLWR,1/3HP 208V 3PH 1725 RPM 6P,MTR BLWR,"Replaces prior stock. 1/3HP, 208V, 3PH, 1725 RPM, 6P.",66.59,92.36,123.51,USD,EACH,Keystone HVAC Supply,S. Kowalski,200,0,6,BIN-100,25,CN-90088
+NF00644,MTR INDUCER,3/4HP 120V 1075 RPM 1P,MTR INDUCER,"Replaces prior stock. 3/4HP, 120V, 1075 RPM, 1P.",114.11,158.28,211.66,USD,EA,Northfield Wholesale,M. Chen,120,100,4,BIN-412,5,CN-78740
+NF00645,MTR COND FAN,1/4HP 460V 1PH 1075 RPM 6P,MTR COND FAN,"Replaces prior stock. 1/4HP, 460V, 1PH, 1075 RPM, 6P.",73.09,101.39,135.57,USD,EACH,Beacon Mechanical,A. Rossi,500,10,6,BIN-412,25,CN-25400
+NF00646,MTR INDUCER,1HP 240V 1625 RPM 4P,MTR INDUCER,"Replaces prior stock. 1HP, 240V, 1625 RPM, 4P.",129.49,179.61,240.18,USD,EACH,Beacon Mechanical,S. Kowalski,50,10,6,BIN-412,10,CN-89043
+NF00647,MTR INDUCER,1/4HP 24V 1625 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/4HP, 24V, 1625 RPM, 1P.",76.37,105.93,141.65,USD,EACH,Summit Distributing,L. Nguyen,75,25,5,BIN-412,1,CN-29470
+NF00648,MTR INDUCER,3/4HP 120V 1625 RPM 4P,MTR INDUCER,"Replaces prior stock. 3/4HP, 120V, 1625 RPM, 4P.",78.06,108.28,144.80,USD,EACH,Summit Distributing,M. Chen,500,25,3,BIN-330,1,CN-85409
+NF00649,MTR INDUCER,1/4HP 208V 1625 RPM 6P,MTR INDUCER,"Replaces prior stock. 1/4HP, 208V, 1625 RPM, 6P.",159.90,221.80,296.60,USD,EA,Summit Distributing,K. O'Brien,12,25,6,BIN-412,1,CN-87024
+NF00650,MTR COND FAN,5HP 230V 3PH 1725 RPM 2P,MTR COND FAN,"Replaces prior stock. 5HP, 230V, 3PH, 1725 RPM, 2P.",72.45,100.49,134.38,USD,EACH,Northfield Wholesale,T. Schmidt,0,100,5,BIN-100,10,CN-15074
+NF00651,MTR BLWR,1/3HP 120V 3PH 1625 RPM 6P,MTR BLWR,"Replaces prior stock. 1/3HP, 120V, 3PH, 1625 RPM, 6P.",144.99,201.12,268.94,USD,EACH,Beacon Mechanical,M. Chen,200,50,1,BIN-412,1,CN-51989
+NF00652,MTR BLWR,5HP 230V 1PH 1075 RPM 6P,MTR BLWR,"Replaces prior stock. 5HP, 230V, 1PH, 1075 RPM, 6P.",155.33,215.46,288.11,USD,EACH,Northfield Wholesale,S. Kowalski,20,100,6,BIN-100,1,CN-88676
+NF00653,MTR BLWR,1/3HP 460V 1PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 1/3HP, 460V, 1PH, 825 RPM, 6P.",136.15,188.85,252.53,USD,EA,Summit Distributing,A. Rossi,20,100,6,BIN-330,25,CN-73946
+NF00654,MTR BLWR,1/3HP 24V 3PH 1075 RPM 4P,MTR BLWR,"Replaces prior stock. 1/3HP, 24V, 3PH, 1075 RPM, 4P.",138.02,191.45,256.01,USD,EA,Summit Distributing,A. Rossi,20,0,5,BIN-412,1,CN-88296
+NF00655,FAN BLADE,18 in 3 blade CCW,FAN BLADE,"Replaces prior stock. 18 in, 3 blade, CCW.",45.82,63.56,85.00,USD,EA,Northfield Wholesale,D. Thompson,200,0,5,BIN-100,10,CN-72439
+NF00656,COMPRESSOR,1.5 ton 460V 3PH R-454B,COMPRESSOR,"Replaces prior stock. 1.5 ton, 460V, 3PH, R-454B.",927.67,1286.78,1720.69,USD,EA,Beacon Mechanical,J. Alvarez,350,50,2,BIN-412,5,CN-23846
+NF00657,MTR COND FAN,5HP 115V 1PH 1625 RPM 6P,MTR COND FAN,"Replaces prior stock. 5HP, 115V, 1PH, 1625 RPM, 6P.",98.48,136.60,182.67,USD,EACH,Keystone HVAC Supply,A. Rossi,200,0,3,BIN-100,1,CN-34015
+NF00658,MTR COND FAN,1/6HP 120V 3PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 1/6HP, 120V, 3PH, 1625 RPM, 4P.",122.17,169.46,226.61,USD,EACH,Northfield Wholesale,K. O'Brien,5,0,4,BIN-330,1,CN-89702
+NF00659,MTR INDUCER,1/2HP 230V 1075 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/2HP, 230V, 1075 RPM, 1P.",144.63,200.61,268.26,USD,EACH,Summit Distributing,D. Thompson,0,50,6,BIN-330,1,CN-21850
+NF00660,MTR INDUCER,5HP 115V 1725 RPM 6P,MTR INDUCER,"Replaces prior stock. 5HP, 115V, 1725 RPM, 6P.",66.05,91.62,122.51,USD,EACH,Beacon Mechanical,C. Fernandez,12,10,5,BIN-412,1,CN-73672
+NF00661,XFMR,40 VA 240V pri 240V sec,XFMR,"Replaces prior stock. 40 VA, 240V pri, 240V sec.",39.96,55.43,74.12,USD,EACH,Northfield Wholesale,T. Schmidt,0,0,4,BIN-412,5,CN-56351
+NF00662,MTR COND FAN,1HP 230V 1PH 1625 RPM 2P,MTR COND FAN,"Replaces prior stock. 1HP, 230V, 1PH, 1625 RPM, 2P.",81.64,113.24,151.42,USD,EACH,Keystone HVAC Supply,C. Fernandez,35,0,3,BIN-412,1,CN-37166
+NF00663,MTR INDUCER,3HP 24V 1625 RPM 6P,MTR INDUCER,"Replaces prior stock. 3HP, 24V, 1625 RPM, 6P.",65.40,90.71,121.30,USD,EACH,Beacon Mechanical,A. Rossi,75,0,2,BIN-330,1,CN-98577
+NF00664,MTR INDUCER,1/3HP 208V 1725 RPM 6P,MTR INDUCER,"Replaces prior stock. 1/3HP, 208V, 1725 RPM, 6P.",127.00,176.16,235.57,USD,EA,Summit Distributing,L. Nguyen,120,100,1,BIN-205,1,CN-60468
+NF00665,MTR COND FAN,1/2HP 208V 1PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/2HP, 208V, 1PH, 3450 RPM, 2P.",110.19,152.84,204.38,USD,EACH,Northfield Wholesale,L. Nguyen,20,10,3,BIN-330,25,CN-71843
+NF00666,MTR BLWR,1/3HP 230V 3PH 825 RPM 1P,MTR BLWR,"Replaces prior stock. 1/3HP, 230V, 3PH, 825 RPM, 1P.",111.12,154.14,206.11,USD,EA,Beacon Mechanical,S. Kowalski,120,50,3,BIN-330,10,CN-59435
+NF00667,MTR INDUCER,1/3HP 208V 825 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/3HP, 208V, 825 RPM, 4P.",169.42,235.00,314.25,USD,EA,Summit Distributing,A. Rossi,0,100,2,BIN-100,1,CN-49108
+NF00668,COMPRESSOR,2.5 ton 230V 3PH R-32,COMPRESSOR,"Replaces prior stock. 2.5 ton, 230V, 3PH, R-32.",534.32,741.15,991.07,USD,EA,Northfield Wholesale,B. Nowak,5,50,2,BIN-412,1,CN-30467
+NF00669,MTR BLWR,3/4HP 24V 3PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 3/4HP, 24V, 3PH, 3450 RPM, 1P.",58.43,81.05,108.38,USD,EA,Northfield Wholesale,B. Nowak,75,50,5,BIN-100,1,CN-57060
+NF00670,MTR COND FAN,2HP 460V 1PH 1725 RPM 2P,MTR COND FAN,"Replaces prior stock. 2HP, 460V, 1PH, 1725 RPM, 2P.",67.53,93.67,125.26,USD,EACH,Northfield Wholesale,S. Kowalski,20,0,5,BIN-330,5,CN-24390
+NF00671,MTR COND FAN,1HP 460V 3PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 1HP, 460V, 3PH, 1625 RPM, 4P.",56.26,78.04,104.35,USD,EA,Keystone HVAC Supply,M. Chen,0,100,5,BIN-412,10,CN-82818
+NF00672,MTR INDUCER,1/3HP 240V 1725 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/3HP, 240V, 1725 RPM, 2P.",122.83,170.38,227.84,USD,EA,Northfield Wholesale,C. Fernandez,75,0,4,BIN-205,1,CN-15824
+NF00673,MTR BLWR,1/3HP 230V 1PH 3450 RPM 1P,MTR BLWR,"Replaces prior stock. 1/3HP, 230V, 1PH, 3450 RPM, 1P.",68.06,94.41,126.25,USD,EACH,Keystone HVAC Supply,C. Fernandez,35,0,1,BIN-330,1,CN-69706
+NF00674,MTR BLWR,3HP 120V 3PH 1625 RPM 6P,MTR BLWR,"Replaces prior stock. 3HP, 120V, 3PH, 1625 RPM, 6P.",102.94,142.79,190.95,USD,EA,Beacon Mechanical,D. Thompson,35,0,3,BIN-205,1,CN-20639
+NF00675,MTR BLWR,3HP 120V 3PH 1725 RPM 2P,MTR BLWR,"Replaces prior stock. 3HP, 120V, 3PH, 1725 RPM, 2P.",101.72,141.10,188.68,USD,EACH,Northfield Wholesale,A. Rossi,5,10,3,BIN-412,1,CN-41472
+NF00676,MTR INDUCER,2HP 115V 3450 RPM 1P,MTR INDUCER,"Replaces prior stock. 2HP, 115V, 3450 RPM, 1P.",137.05,190.10,254.21,USD,EA,Summit Distributing,S. Kowalski,0,50,3,BIN-330,1,CN-79735
+NF00677,MTR BLWR,3/4HP 460V 3PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 3/4HP, 460V, 3PH, 825 RPM, 4P.",93.35,129.49,173.16,USD,EACH,Summit Distributing,K. O'Brien,0,100,2,BIN-330,1,CN-79326
+NF00678,MTR COND FAN,3/4HP 24V 3PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 3/4HP, 24V, 3PH, 1075 RPM, 2P.",75.13,104.21,139.36,USD,EA,Northfield Wholesale,P. Dubois,120,50,5,BIN-205,10,CN-77858
+NF00679,MTR INDUCER,1/6HP 115V 3450 RPM 1P,MTR INDUCER,"Replaces prior stock. 1/6HP, 115V, 3450 RPM, 1P.",139.70,180.10,235.86,USD,EA,Keystone HVAC Supply,T. Schmidt,0,100,1,BIN-205,1,CN-58878
+NF00680,COMPRESSOR,2.5 ton 460V 1PH R-22,COMPRESSOR,"Replaces prior stock. 2.5 ton, 460V, 1PH, R-22.",896.98,1236.86,1556.59,USD,EA,Beacon Mechanical,T. Schmidt,40,0,2,BIN-205,10,CN-22326
+NF00681,CONT,20A 3P 120V coil,CONT,"Replaces prior stock. 20A, 3P, 120V coil.",23.01,32.93,43.85,USD,EACH,Summit Distributing,J. Alvarez,5,25,7,BIN-412,10,CN-29893
+NF00682,CONT,60A 2P 240V coil,CONT,"Replaces prior stock. 60A, 2P, 240V coil.",40.33,54.38,74.70,USD,EA,Northfield Wholesale,J. Alvarez,90,25,1,BIN-205,25,CN-88697
+NF00683,CAP RUN DUAL,15/5 MFD 440V,CAP RUN DUAL,"Replaces prior stock. 15/5 MFD, 440V.",17.72,24.00,32.72,USD,EACH,Summit Distributing,K. O'Brien,5,50,2,BIN-205,10,CN-94847
+NF00684,MTR BLWR,1/6HP 115V 1PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 1/6HP, 115V, 1PH, 825 RPM, 4P.",116.92,169.34,230.12,USD,EA,Summit Distributing,E. Johansson,40,100,3,BIN-100,1,CN-61815
+NF00685,BELT,5L450 v-belt,BELT,"Replaces prior stock. 5L450, v-belt.",17.41,24.44,31.80,USD,EACH,Keystone HVAC Supply,J. Alvarez,90,50,5,BIN-205,5,CN-39755
+NF00686,COMPRESSOR,1.5 ton 230V 1PH R-454B,COMPRESSOR,"Replaces prior stock. 1.5 ton, 230V, 1PH, R-454B.",478.11,682.09,876.16,USD,EACH,Beacon Mechanical,H. Yamamoto,40,0,3,BIN-205,1,CN-11727
+NF00687,CONTROL BOARD,120V defrost,CONTROL BOARD,"Replaces prior stock. 120V, defrost.",139.83,186.79,253.13,USD,EA,Summit Distributing,M. Chen,5,50,4,BIN-330,25,CN-79469
+NF00688,MTR COND FAN,1HP 120V 3PH 1075 RPM 4P,MTR COND FAN,"Replaces prior stock. 1HP, 120V, 3PH, 1075 RPM, 4P.",56.62,85.00,109.74,USD,EA,Beacon Mechanical,K. O'Brien,90,0,6,BIN-205,1,CN-26965
+NF00689,MTR BLWR,2HP 208V 3PH 825 RPM 6P,MTR BLWR,"Replaces prior stock. 2HP, 208V, 3PH, 825 RPM, 6P.",86.30,116.90,154.06,USD,EA,Keystone HVAC Supply,E. Johansson,5,100,1,BIN-100,5,CN-63040
+NF00690,COMPRESSOR,2.5 ton 460V 1PH R-410A,COMPRESSOR,"Replaces prior stock. 2.5 ton, 460V, 1PH, R-410A.",614.84,846.41,1194.97,USD,EACH,Keystone HVAC Supply,M. Chen,15,0,4,BIN-330,10,CN-10101
+NF00691,MTR BLWR,3HP 24V 3PH 825 RPM 4P,MTR BLWR,"Replaces prior stock. 3HP, 24V, 3PH, 825 RPM, 4P.",109.33,152.29,207.15,USD,EA,Summit Distributing,A. Rossi,0,10,4,BIN-100,1,CN-19922
+NF00692,EVAP COIL,4 ton R-22 4 row,EVAP COIL,"Replaces prior stock. 4 ton, R-22, 4 row.",297.84,379.48,556.63,USD,EA,Northfield Wholesale,C. Fernandez,90,0,5,BIN-100,10,CN-48860
+NF00693,MTR COND FAN,1/3HP 240V 1PH 1075 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/3HP, 240V, 1PH, 1075 RPM, 2P.",102.14,143.02,186.78,USD,EACH,Beacon Mechanical,J. Alvarez,90,25,3,BIN-330,10,CN-44786
+NF00694,COMPRESSOR,1.5 ton 230V 1PH R-32,COMPRESSOR,"Replaces prior stock. 1.5 ton, 230V, 1PH, R-32.",993.10,1394.88,1821.07,USD,EA,Beacon Mechanical,E. Johansson,0,100,5,BIN-412,1,CN-46874
+NF00695,COND COIL,1.5 ton R-454B 3 row,COND COIL,"Replaces prior stock. 1.5 ton, R-454B, 3 row.",484.29,720.53,963.28,USD,EA,Summit Distributing,E. Johansson,90,0,3,BIN-205,25,CN-34373
+NF00696,MTR INDUCER,1/3HP 115V 3450 RPM 4P,MTR INDUCER,"Replaces prior stock. 1/3HP, 115V, 3450 RPM, 4P.",143.41,187.77,267.68,USD,EA,Summit Distributing,D. Thompson,5,25,3,BIN-412,1,CN-80224
+NF00697,MTR BLWR,3/4HP 208V 1PH 1075 RPM 6P,MTR BLWR,"Replaces prior stock. 3/4HP, 208V, 1PH, 1075 RPM, 6P.",152.96,207.00,274.54,USD,EA,Northfield Wholesale,J. Alvarez,40,100,2,BIN-412,10,CN-59989
+NF00698,FAN BLADE,30 in 3 blade CW,FAN BLADE,"Replaces prior stock. 30 in, 3 blade, CW.",43.37,64.56,82.63,USD,EA,Beacon Mechanical,M. Chen,40,0,1,BIN-412,25,CN-24843
+NF00699,MTR INDUCER,1/4HP 120V 1625 RPM 2P,MTR INDUCER,"Replaces prior stock. 1/4HP, 120V, 1625 RPM, 2P.",141.81,184.50,249.29,USD,EA,Keystone HVAC Supply,L. Nguyen,0,50,5,BIN-412,1,CN-19871
+NF00700,COMPRESSOR,1 ton 208V 3PH R-22,COMPRESSOR,"Replaces prior stock. 1 ton, 208V, 3PH, R-22.",565.09,756.99,1042.64,USD,EACH,Summit Distributing,A. Rossi,90,0,4,BIN-412,25,CN-64914
+NF00701,MTR INDUCER,3HP 460V 1075 RPM 2P,MTR INDUCER,"Replaces prior stock. 3HP, 460V, 1075 RPM, 2P.",125.60,170.41,221.83,USD,EACH,Beacon Mechanical,T. Schmidt,40,0,3,BIN-205,1,CN-24544
+NF00702,MTR COND FAN,1/6HP 115V 1PH 1625 RPM 1P,MTR COND FAN,"Replaces prior stock. 1/6HP, 115V, 1PH, 1625 RPM, 1P.",57.27,79.60,99.23,USD,EACH,Summit Distributing,D. Thompson,40,100,4,BIN-330,1,CN-93863
+NF00703,EVAP COIL,1.5 ton R-454B 3 row,EVAP COIL,"Replaces prior stock. 1.5 ton, R-454B, 3 row.",234.76,352.03,450.22,USD,EA,Keystone HVAC Supply,S. Kowalski,40,10,5,BIN-100,25,CN-69755
+NF00704,FILTER,16x20x1 MERV 11,FILTER,"Replaces prior stock. 16x20x1, MERV 11.",10.87,14.72,19.45,USD,EACH,Summit Distributing,C. Fernandez,5,0,6,BIN-205,1,CN-61533
+NF00705,MTR COND FAN,1/2HP 230V 1PH 3450 RPM 2P,MTR COND FAN,"Replaces prior stock. 1/2HP, 230V, 1PH, 3450 RPM, 2P.",57.56,80.15,110.60,USD,EA,Beacon Mechanical,R. Patel,90,100,5,BIN-100,25,CN-28202
+NF00706,MTR BLWR,1-1/2HP 115V 1PH 1725 RPM 4P,MTR BLWR,"Replaces prior stock. 1-1/2HP, 115V, 1PH, 1725 RPM, 4P.",100.10,148.17,181.50,USD,EA,Beacon Mechanical,T. Schmidt,15,100,5,BIN-205,25,CN-32896
+NF00707,MTR COND FAN,3HP 240V 1PH 825 RPM 1P,MTR COND FAN,"Replaces prior stock. 3HP, 240V, 1PH, 825 RPM, 1P.",107.35,151.51,195.28,USD,EACH,Summit Distributing,K. O'Brien,5,50,6,BIN-100,1,CN-91006
+NF00708,MTR COND FAN,3/4HP 24V 1PH 1625 RPM 4P,MTR COND FAN,"Replaces prior stock. 3/4HP, 24V, 1PH, 1625 RPM, 4P.",89.28,124.45,160.03,USD,EA,Keystone HVAC Supply,H. Yamamoto,15,0,4,BIN-205,10,CN-38065
