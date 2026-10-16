@@ -49,14 +49,15 @@ import {
   PROPAGATION_ITEM,
   complianceProducts,
 } from "./lib/queue-data";
+import { productDossiers, riskRecord } from "./lib/risk-catalog";
 import {
   queueComplianceActTurn,
   queueComplianceTurn,
-  queueComplianceViewTurn,
   queueFieldApproveTurn,
   queueFieldReportTurn,
   queuePropagationApplyTurn,
   queuePropagationTurn,
+  viewProductTurn,
 } from "./lib/queue-turns";
 import { PlmChatMessage, type MessageHandlers } from "./components/plm-message";
 import { OpenItemsPanel } from "./components/open-items-panel";
@@ -638,7 +639,7 @@ export default function PlmDemo() {
             push({
               role: "agent",
               kind: "text",
-              text: "DL-2400 uses C36000 forged brass, which carries lead above the RoHS 2027 threshold. At $1.2M in annual revenue it's the top exposure in the DL Series.",
+              text: "DL-2400 uses C36000 forged brass, which carries lead above the RoHS 2027 threshold. With 5,200 units shipped in the last 12 months, it's the top exposure in the DL Series.",
             });
           } else if (/data sheet|spec|back/.test(lower)) {
             push({
@@ -851,7 +852,8 @@ export default function PlmDemo() {
                   ? resolved
                   : [...resolved, PROPAGATION_ITEM];
               });
-              setStage("queue-resolve");
+              setStage("queue-review");
+              streamTurn(queuePropagationTurn(() => setStage("queue-review")));
             }),
           );
           break;
@@ -873,27 +875,36 @@ export default function PlmDemo() {
           });
           setStage("queue-resolve");
           break;
-        case "compliance-view":
+        case "compliance-view": {
           if (!payload) break;
-          setRiskProductId(payload);
+          const productId = payload;
+          setRiskProductId(productId);
           streamTurn(
-            queueComplianceViewTurn(payload, () => setStage("queue-review")),
+            viewProductTurn(productId, () => {
+              addWorkspace(productDossiers[productId] ?? []);
+              setRightTab("workspace");
+              setStage("queue-review");
+            }),
           );
           break;
+        }
         case "compliance-act": {
           const decision = payload as ComplianceAction | undefined;
           if (!decision || !riskProductId) break;
           const nextStatus: QueueItem["status"] =
             decision === "acknowledge" ? "acknowledged" : "tracking";
+          const updatesQueue = riskRecord(riskProductId)?.group === "acs";
           streamTurn(
             queueComplianceActTurn(riskProductId, decision, () => {
-              setQueue((prev) =>
-                prev.map((item) =>
-                  item.id === "compliance-alert"
-                    ? { ...item, status: nextStatus }
-                    : item,
-                ),
-              );
+              if (updatesQueue) {
+                setQueue((prev) =>
+                  prev.map((item) =>
+                    item.id === "compliance-alert"
+                      ? { ...item, status: nextStatus }
+                      : item,
+                  ),
+                );
+              }
               setStage("queue-resolve");
             }),
           );
@@ -917,7 +928,7 @@ export default function PlmDemo() {
           break;
       }
     },
-    [push, riskProductId, streamTurn],
+    [addWorkspace, push, riskProductId, streamTurn],
   );
 
   const openItems = queue.filter((item) => item.status === "open");
@@ -1141,6 +1152,7 @@ export default function PlmDemo() {
                   docs={workspace}
                   references={references}
                   onOpenDoc={openWorkspaceDoc}
+                  onOpenPdf={openPdf}
                   onOpenReference={(ref) =>
                     openSource(
                       ref.docId === "manual" ? "manual" : "spec",

@@ -1,0 +1,85 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 2682 >>
+stream
+BT /F2 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 753.5 Tm (MAA-200 Data Sheet) Tj ET
+BT /F1 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 753.5 Tm (1 / 1) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 746 m 558 746 l S
+BT /F2 17 Tf 0.13 0.12 0.1 rg 1 0 0 1 54 715 Tm (MAA-200 - Split System) Tj ET
+BT /F2 11.5 Tf 0.44 0.3 0.12 rg 1 0 0 1 54 691.5 Tm (Product Data Sheet) Tj ET
+0.95 0.9 0.74 rg 54 653 504 31 re f
+0.78 0.63 0.15 RG 0.9 w 54 653 504 31 re S
+BT /F2 11 Tf 0.44 0.3 0.12 rg 1 0 0 1 69 665 Tm (Control: 2-wire | Refrigerant: R-410A) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 630.5 Tm (Published data sheet. Values reflect the last released revision and may not match the current) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 615.5 Tm (engineering specification.) Tj ET
+0.955 0.94 0.915 rg 54 583 504 20 re f
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 60 588.5 Tm (Property) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 261.6 588.5 Tm (Value) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 568.5 Tm (Nominal capacity) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 568.5 Tm (24,000 BTU/h) Tj ET
+0.995 0.992 0.985 rg 54 543 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 548.5 Tm (Refrigerant) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 548.5 Tm (R-410A) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 528.5 Tm (Control wiring) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 528.5 Tm (2-wire) Tj ET
+0.995 0.992 0.985 rg 54 503 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 508.5 Tm (Operating range) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 508.5 Tm (-10 to 46 deg C) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 488.5 Tm (Sound pressure) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 488.5 Tm (56 dB\(A\)) Tj ET
+0.995 0.992 0.985 rg 54 463 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 468.5 Tm (Revision) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 468.5 Tm (B - 2019) Tj ET
+0.74 0.72 0.68 RG 0.5 w 54 603 m 558 603 l S
+0.74 0.72 0.68 RG 0.5 w 54 583 m 558 583 l S
+0.74 0.72 0.68 RG 0.5 w 54 563 m 558 563 l S
+0.74 0.72 0.68 RG 0.5 w 54 543 m 558 543 l S
+0.74 0.72 0.68 RG 0.5 w 54 523 m 558 523 l S
+0.74 0.72 0.68 RG 0.5 w 54 503 m 558 503 l S
+0.74 0.72 0.68 RG 0.5 w 54 483 m 558 483 l S
+0.74 0.72 0.68 RG 0.5 w 54 463 m 558 463 l S
+0.74 0.72 0.68 RG 0.5 w 54 603 m 54 463 l S
+0.74 0.72 0.68 RG 0.5 w 255.60000000000002 603 m 255.60000000000002 463 l S
+0.74 0.72 0.68 RG 0.5 w 558 603 m 558 463 l S
+0.74 0.72 0.68 RG 0.7 w 54 54 m 558 54 l S
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 40.5 Tm (MAA-200 Data Sheet | Rev B | Prototype sample) Tj ET
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 40.5 Tm (Page 1) Tj ET
+endstream
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000260 00000 n 
+0000000328 00000 n 
+0000000406 00000 n 
+0000000562 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+3295
+%%EOF

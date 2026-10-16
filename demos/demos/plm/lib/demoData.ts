@@ -2,11 +2,14 @@ import type {
   AffectedDocumentRow,
   ChangeSummary,
   DataSheetRow,
+  DiffLine,
+  DiffSegment,
+  DocDiff,
+  DocDiffHunk,
   DocHealthRow,
   FlagDetail,
   LegacyPartRow,
   ManualDraftRow,
-  RegulationRiskRow,
   SpecDoc,
   TemplateField,
   UnmappedAttribute,
@@ -289,15 +292,8 @@ export const approvedChanges: ChangeSummary[] = [
 
 export const legacyQuery = "brass latch 2-3/8 backset 1980s";
 
-/** Detour — sorted by annual revenue descending by default. */
-export const regulationRisks: RegulationRiskRow[] = [
-  { product: "DL-2400", regulation: "RoHS 2027", risk: "High", reason: "Lead in C36000 brass body", annualRevenue: "$1.2M", annualRevenueValue: 1200000 },
-  { product: "DL-1800", regulation: "EU Chrome Restriction 2026", risk: "High", reason: "Chrome finish detected", annualRevenue: "$890K", annualRevenueValue: 890000 },
-  { product: "DL-3200", regulation: "RoHS 2027", risk: "Medium", reason: "Lead content above threshold", annualRevenue: "$450K", annualRevenueValue: 450000 },
-  { product: "DL-2200", regulation: "EU Chrome Restriction 2026", risk: "Medium", reason: "Chrome in strike plate", annualRevenue: "$310K", annualRevenueValue: 310000 },
-  { product: "DL-1500", regulation: "RoHS 2027", risk: "Low", reason: "No restricted substances", annualRevenue: "$120K", annualRevenueValue: 120000 },
-  { product: "DL-900", regulation: "EU Chrome Restriction 2026", risk: "Low", reason: "Discontinued", annualRevenue: "$0", annualRevenueValue: 0 },
-];
+/** Detour — the DL Series portfolio, ranked by units shipped by default. */
+export { dlRiskProducts as regulationRisks } from "./risk-catalog";
 
 export const legacyParts: LegacyPartRow[] = [
   { partNumber: "DL-2400", description: 'Heavy-Duty Brass Door Latch, 2-3/8" backset', matchPct: 96, year: "1987", matchedOn: ["material=brass", "backset 2.375 in", "1980s"] },
@@ -420,3 +416,227 @@ export const manualChangeSummary: ChangeSummary[] = [
   { field: "Throw Adjustment", from: "—", to: "New step", kind: "set" },
   { field: "Torque Spec", from: "15 in-lb", to: "Removed", kind: "set" },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Document diffs (git-style line changes)                             */
+/* ------------------------------------------------------------------ */
+
+function tokenize(text: string): string[] {
+  return text.split(/(\s+)/).filter((token) => token.length > 0);
+}
+
+/** Word-level diff: marks the tokens that differ between two lines. */
+function wordDiff(
+  oldText: string,
+  newText: string,
+): { old: DiffSegment[]; next: DiffSegment[] } {
+  const a = tokenize(oldText);
+  const b = tokenize(newText);
+  const m = a.length;
+  const n = b.length;
+  const table: number[][] = Array.from({ length: m + 1 }, () =>
+    new Array<number>(n + 1).fill(0),
+  );
+  for (let i = m - 1; i >= 0; i -= 1) {
+    for (let j = n - 1; j >= 0; j -= 1) {
+      table[i][j] =
+        a[i] === b[j]
+          ? table[i + 1][j + 1] + 1
+          : Math.max(table[i + 1][j], table[i][j + 1]);
+    }
+  }
+  const commonA = new Set<number>();
+  const commonB = new Set<number>();
+  let i = 0;
+  let j = 0;
+  while (i < m && j < n) {
+    if (a[i] === b[j]) {
+      commonA.add(i);
+      commonB.add(j);
+      i += 1;
+      j += 1;
+    } else if (table[i + 1][j] >= table[i][j + 1]) {
+      i += 1;
+    } else {
+      j += 1;
+    }
+  }
+  return {
+    old: a.map((text, index) => ({ text, emphasis: !commonA.has(index) })),
+    next: b.map((text, index) => ({ text, emphasis: !commonB.has(index) })),
+  };
+}
+
+function contextLine(text: string, oldLine: number, newLine: number): DiffLine {
+  return { kind: "context", segments: [{ text }], oldLine, newLine };
+}
+
+function addedLine(text: string, newLine: number): DiffLine {
+  return { kind: "add", segments: [{ text }], newLine };
+}
+
+function removedLine(text: string, oldLine: number): DiffLine {
+  return { kind: "remove", segments: [{ text }], oldLine };
+}
+
+/** A changed line: an old line removed and the new line added, word-diffed. */
+function changedLine(
+  oldText: string,
+  oldLine: number,
+  newText: string,
+  newLine: number,
+): DiffLine[] {
+  const { old, next } = wordDiff(oldText, newText);
+  return [
+    { kind: "remove", segments: old, oldLine },
+    { kind: "add", segments: next, newLine },
+  ];
+}
+
+function buildDiff(path: string, hunks: DocDiffHunk[]): DocDiff {
+  let added = 0;
+  let removed = 0;
+  for (const hunk of hunks) {
+    for (const line of hunk.lines) {
+      if (line.kind === "add") added += 1;
+      else if (line.kind === "remove") removed += 1;
+    }
+  }
+  return { path, stats: { added, removed }, hunks };
+}
+
+/** MAA-200 Installation Manual §7.2 — rev A (2-wire) → rev C (3-wire). */
+export const maa200WiringDiff: DocDiff = buildDiff(
+  "MAA-200 Installation Manual · §7.2 Wiring",
+  [
+    {
+      heading: "§7.2 Wiring",
+      context: "rev A p.14 → rev C",
+      lines: [
+        contextLine(
+          "Route control wiring through the grommet on the left-hand panel.",
+          12,
+          12,
+        ),
+        ...changedLine(
+          "Connect the thermostat to terminals R and C.",
+          13,
+          "Connect the thermostat to terminals R, C, and W.",
+          13,
+        ),
+        ...changedLine(
+          "Diagram 7.2 shows a two-wire control connection.",
+          14,
+          "Diagram 7.2 shows a three-wire control connection.",
+          14,
+        ),
+        contextLine("Seal the grommet after routing.", 15, 15),
+      ],
+    },
+  ],
+);
+
+/** MAA-200 Product Page — 2-wire → 3-wire control. Auto-updated. */
+export const maa200ProductPageDiff: DocDiff = buildDiff(
+  "MAA-200 Product Page · Specifications",
+  [
+    {
+      heading: "Specifications",
+      context: "published → draft",
+      lines: [
+        contextLine("Efficiency: 14.3 SEER2", 4, 4),
+        ...changedLine("Control wiring: 2-wire", 5, "Control wiring: 3-wire", 5),
+        contextLine("Refrigerant: R-410A", 6, 6),
+      ],
+    },
+  ],
+);
+
+/** MAA-200 Sell Sheet — 2-wire → 3-wire control. Auto-updated. */
+export const maa200SellSheetDiff: DocDiff = buildDiff(
+  "MAA-200 Sell Sheet · Features",
+  [
+    {
+      heading: "Features",
+      context: "published → draft",
+      lines: [
+        contextLine("Quiet operation at 58 dB", 2, 2),
+        ...changedLine(
+          "Simple 2-wire control connection",
+          3,
+          "Simple 3-wire control connection",
+          3,
+        ),
+        contextLine("10-year limited warranty", 4, 4),
+      ],
+    },
+  ],
+);
+
+/** MAA-200 Data Sheet — 2-wire → 3-wire control. Needs authoring. */
+export const maa200DataSheetDiff: DocDiff = buildDiff(
+  "MAA-200 Data Sheet · Electrical",
+  [
+    {
+      heading: "Electrical",
+      context: "rev A → intended",
+      lines: [
+        contextLine("Voltage: 208/230 V", 7, 7),
+        ...changedLine(
+          "Control circuit: 24 VAC, 2-wire",
+          8,
+          "Control circuit: 24 VAC, 3-wire",
+          8,
+        ),
+        addedLine("Thermostat terminals: R, C, W", 9),
+      ],
+    },
+  ],
+);
+
+/** DL-2400 Installation Manual — rev A → rev C. */
+export const dl2400ManualDiff: DocDiff = buildDiff(
+  "DL-2400 Installation Manual",
+  [
+    {
+      heading: "§3 Install Latch",
+      context: "rev A p.6 → rev C",
+      lines: [
+        contextLine("Insert the latch into the bore.", 5, 5),
+        ...changedLine(
+          "Throw: 0.625 in standard.",
+          6,
+          "Throw: 0.75 in standard.",
+          6,
+        ),
+      ],
+    },
+    {
+      heading: "§4 Strike Plate",
+      context: "rev A p.7 → rev C",
+      lines: [
+        contextLine("Align the strike with the latch bolt.", 8, 8),
+        addedLine(
+          "Widen the strike opening to clear the 0.75 in throw.",
+          9,
+        ),
+      ],
+    },
+    {
+      heading: "§5 Throw Adjustment (new)",
+      context: "rev C",
+      lines: [
+        addedLine("Rotate the cam to set the throw.", 10),
+        addedLine("Verify the throw measures 0.75 in.", 11),
+      ],
+    },
+    {
+      heading: "§6 Fasteners",
+      context: "rev A p.9 → rev C",
+      lines: [
+        removedLine("Torque fasteners to 15 in-lb.", 12),
+        addedLine("Reference the rev C fastener torque spec (§5).", 12),
+      ],
+    },
+  ],
+);

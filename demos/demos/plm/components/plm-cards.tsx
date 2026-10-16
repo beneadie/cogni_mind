@@ -632,10 +632,14 @@ export function DocHealthCard({
   );
 }
 
-export function RegulationCard() {
+export function RegulationCard({
+  onViewProduct,
+}: {
+  onViewProduct?: (product: string) => void;
+}) {
   return (
     <div className="h-[30rem]">
-      <ScreenRegulation />
+      <ScreenRegulation onViewProduct={onViewProduct} />
     </div>
   );
 }

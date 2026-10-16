@@ -1,4 +1,12 @@
-import type { DocChange, ImpactRow, QueueItem, RegulationRiskRow } from "./types";
+import type { DocChange, ImpactRow, QueueItem } from "./types";
+
+export { acsRiskProducts as complianceProducts } from "./risk-catalog";
+import {
+  maa200DataSheetDiff,
+  maa200ProductPageDiff,
+  maa200SellSheetDiff,
+  maa200WiringDiff,
+} from "./demoData";
 
 /**
  * Brand names are mocked. Swap these labels in one place if the demo needs a
@@ -55,6 +63,7 @@ export const fieldReportChange: DocChange = {
     from: "§7.2 Wiring — 2-wire diagram (rev A)",
     to: "§7.2 Wiring — 3-wire diagram (rev C)",
   },
+  diff: maa200WiringDiff,
 };
 
 /** Where-used impact of the §7.2 change, with a disposition per document. */
@@ -66,6 +75,7 @@ export const impactRows: ImpactRow[] = [
     disposition: "auto",
     owner: "Web team",
     status: "Auto-update ready",
+    diff: maa200ProductPageDiff,
   },
   {
     document: "MAA-200 Sell Sheet",
@@ -74,6 +84,7 @@ export const impactRows: ImpactRow[] = [
     disposition: "auto",
     owner: "Web team",
     status: "Auto-update ready",
+    diff: maa200SellSheetDiff,
   },
   {
     document: "MAA-200 Data Sheet",
@@ -84,34 +95,10 @@ export const impactRows: ImpactRow[] = [
     status: "Needs authoring",
     pdfId: "maa-200-datasheet",
     page: 1,
+    diff: maa200DataSheetDiff,
   },
 ];
 
 /** The regulation's compliance deadline, used for reminders and change requests. */
 export const BAN_EFFECTIVE = "1 Jan 2027";
 export const REVIEW_DATE = "1 Sep 2026";
-
-export const complianceProducts: RegulationRiskRow[] = [
-  {
-    product: "MAA-200",
-    company: "Meridian Air",
-    substance: "R-410A",
-    regulation: "2027 Refrigerant Ban",
-    risk: "High",
-    reason: "Uses R-410A, banned from 2027",
-    annualRevenue: "$2.4M",
-    annualRevenueValue: 2400000,
-    owner: "J. Alvarez",
-  },
-  {
-    product: "NA-1500",
-    company: "Northline",
-    substance: "R-410A",
-    regulation: "2027 Refrigerant Ban",
-    risk: "High",
-    reason: "Uses R-410A, banned from 2027",
-    annualRevenue: "$1.8M",
-    annualRevenueValue: 1800000,
-    owner: "M. Okafor",
-  },
-];

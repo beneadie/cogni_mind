@@ -1,0 +1,321 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 4606 >>
+stream
+0.44 0.3 0.12 RG 1.6 w 306 690 m 356.2294734194974 661 l 356.2294734194974 603 l 306 574 l 255.77052658050258 603 l 255.77052658050252 661 l h S
+0.6 0.5 0.25 RG 0.8 w 306 666.8 m 336.13768405169844 649.4 l 336.13768405169844 614.6 l 306 597.2 l 275.86231594830156 614.6 l 275.8623159483015 649.4 l h S
+0.44 0.3 0.12 rg 308.2 690 m 308.2 691.21506 307.21506 692.2 306 692.2 c 304.78494 692.2 303.8 691.21506 303.8 690 c 303.8 688.78494 304.78494 687.8 306 687.8 c 307.21506 687.8 308.2 688.78494 308.2 690 c f
+0.44 0.3 0.12 rg 358.4294734194974 661 m 358.4294734194974 662.21506 357.4445334194974 663.2 356.2294734194974 663.2 c 355.01441341949743 663.2 354.02947341949744 662.21506 354.02947341949744 661 c 354.02947341949744 659.78494 355.01441341949743 658.8 356.2294734194974 658.8 c 357.4445334194974 658.8 358.4294734194974 659.78494 358.4294734194974 661 c f
+0.44 0.3 0.12 rg 358.4294734194974 603 m 358.4294734194974 604.21506 357.4445334194974 605.2 356.2294734194974 605.2 c 355.01441341949743 605.2 354.02947341949744 604.21506 354.02947341949744 603 c 354.02947341949744 601.78494 355.01441341949743 600.8 356.2294734194974 600.8 c 357.4445334194974 600.8 358.4294734194974 601.78494 358.4294734194974 603 c f
+0.44 0.3 0.12 rg 308.2 574 m 308.2 575.21506 307.21506 576.2 306 576.2 c 304.78494 576.2 303.8 575.21506 303.8 574 c 303.8 572.78494 304.78494 571.8 306 571.8 c 307.21506 571.8 308.2 572.78494 308.2 574 c f
+0.44 0.3 0.12 rg 257.97052658050256 603 m 257.97052658050256 604.21506 256.98558658050257 605.2 255.77052658050258 605.2 c 254.55546658050258 605.2 253.5705265805026 604.21506 253.5705265805026 603 c 253.5705265805026 601.78494 254.55546658050258 600.8 255.77052658050258 600.8 c 256.98558658050257 600.8 257.97052658050256 601.78494 257.97052658050256 603 c f
+0.44 0.3 0.12 rg 257.9705265805025 661 m 257.9705265805025 662.21506 256.9855865805025 663.2 255.77052658050252 663.2 c 254.55546658050253 663.2 253.57052658050253 662.21506 253.57052658050253 661 c 253.57052658050253 659.78494 254.55546658050253 658.8 255.77052658050252 658.8 c 256.9855865805025 658.8 257.9705265805025 659.78494 257.9705265805025 661 c f
+0.44 0.3 0.12 rg 308.2 632 m 308.2 633.21506 307.21506 634.2 306 634.2 c 304.78494 634.2 303.8 633.21506 303.8 632 c 303.8 630.78494 304.78494 629.8 306 629.8 c 307.21506 629.8 308.2 630.78494 308.2 632 c f
+BT /F2 22 Tf 0.13 0.12 0.1 rg 1 0 0 1 130.54999999999998 520 Tm (MAA-200 Product Specification) Tj ET
+BT /F1 12 Tf 0.28 0.26 0.24 rg 1 0 0 1 189 498 Tm (Model MAA-200 | Rev C | Engineering) Tj ET
+BT /F3 9 Tf 0.5 0.48 0.45 rg 1 0 0 1 273.6 481 Tm (SPEC-MAA-200) Tj ET
+BT /F4 9.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 0 432.5 Tm (Prototype sample document for the clickable demo. Not an official publication.) Tj ET
+0.955 0.94 0.915 rg 54 362 504 20 re f
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 60 367.5 Tm (Rev) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 127.84615384615384 367.5 Tm (Date) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 234.46153846153845 367.5 Tm (Description) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 347.5 Tm (A) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 127.84615384615384 347.5 Tm (2016-01) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 234.46153846153845 347.5 Tm (Initial release.) Tj ET
+0.995 0.992 0.985 rg 54 322 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 327.5 Tm (B) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 127.84615384615384 327.5 Tm (2019-05) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 234.46153846153845 327.5 Tm (Updated capacity and refrigerant data.) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 307.5 Tm (C) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 127.84615384615384 307.5 Tm (2023-05) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 234.46153846153845 307.5 Tm (Three-wire control connection required.) Tj ET
+0.74 0.72 0.68 RG 0.5 w 54 382 m 558 382 l S
+0.74 0.72 0.68 RG 0.5 w 54 362 m 558 362 l S
+0.74 0.72 0.68 RG 0.5 w 54 342 m 558 342 l S
+0.74 0.72 0.68 RG 0.5 w 54 322 m 558 322 l S
+0.74 0.72 0.68 RG 0.5 w 54 302 m 558 302 l S
+0.74 0.72 0.68 RG 0.5 w 54 382 m 54 302 l S
+0.74 0.72 0.68 RG 0.5 w 121.84615384615384 382 m 121.84615384615384 302 l S
+0.74 0.72 0.68 RG 0.5 w 228.46153846153845 382 m 228.46153846153845 302 l S
+0.74 0.72 0.68 RG 0.5 w 558 382 m 558 302 l S
+0.985 0.965 0.9 rg 54 263 504 27 re f
+0.44 0.3 0.12 rg 54 263 3 27 re f
+BT /F1 9.5 Tf 0.42 0.3 0.12 rg 1 0 0 1 67 273.5 Tm (For professional use only. Service work must be performed by qualified personnel.) Tj ET
+BT /F1 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 231.625 83.5 Tm (Cognimind | Field Support Copilot) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 2205 >>
+stream
+BT /F2 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 753.5 Tm (MAA-200 Engineering Specification) Tj ET
+BT /F1 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 753.5 Tm (2 / 6) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 746 m 558 746 l S
+BT /F2 17 Tf 0.13 0.12 0.1 rg 1 0 0 1 54 715 Tm (Contents) Tj ET
+0.955 0.94 0.915 rg 54 683 504 20 re f
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 60 688.5 Tm (Section) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 463.20000000000005 688.5 Tm (Page) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 668.5 Tm (Scope and Ratings) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 463.20000000000005 668.5 Tm (3) Tj ET
+0.995 0.992 0.985 rg 54 643 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 648.5 Tm (Control Wiring Requirements) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 463.20000000000005 648.5 Tm (4) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 628.5 Tm (Electrical Characteristics) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 463.20000000000005 628.5 Tm (5) Tj ET
+0.995 0.992 0.985 rg 54 603 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 608.5 Tm (Performance) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 463.20000000000005 608.5 Tm (6) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 588.5 Tm (Revision History) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 463.20000000000005 588.5 Tm (6) Tj ET
+0.74 0.72 0.68 RG 0.5 w 54 703 m 558 703 l S
+0.74 0.72 0.68 RG 0.5 w 54 683 m 558 683 l S
+0.74 0.72 0.68 RG 0.5 w 54 663 m 558 663 l S
+0.74 0.72 0.68 RG 0.5 w 54 643 m 558 643 l S
+0.74 0.72 0.68 RG 0.5 w 54 623 m 558 623 l S
+0.74 0.72 0.68 RG 0.5 w 54 603 m 558 603 l S
+0.74 0.72 0.68 RG 0.5 w 54 583 m 558 583 l S
+0.74 0.72 0.68 RG 0.5 w 54 703 m 54 583 l S
+0.74 0.72 0.68 RG 0.5 w 457.20000000000005 703 m 457.20000000000005 583 l S
+0.74 0.72 0.68 RG 0.5 w 558 703 m 558 583 l S
+0.985 0.965 0.9 rg 54 544 504 27 re f
+0.44 0.3 0.12 rg 54 544 3 27 re f
+BT /F1 9.5 Tf 0.42 0.3 0.12 rg 1 0 0 1 67 554.5 Tm (Page numbers refer to the printed page footer.) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 54 m 558 54 l S
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 40.5 Tm (MAA-200 Engineering Spec | Rev C | Prototype sample) Tj ET
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 40.5 Tm (Page 2) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 2864 >>
+stream
+BT /F2 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 753.5 Tm (MAA-200 Engineering Specification) Tj ET
+BT /F1 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 753.5 Tm (3 / 6) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 746 m 558 746 l S
+BT /F2 17 Tf 0.13 0.12 0.1 rg 1 0 0 1 54 715 Tm (Control Wiring Requirements) Tj ET
+BT /F2 11.5 Tf 0.44 0.3 0.12 rg 1 0 0 1 54 691.5 Tm (Section 7.2: Control Wiring) Tj ET
+0.95 0.9 0.74 rg 54 653 504 31 re f
+0.78 0.63 0.15 RG 0.9 w 54 653 504 31 re S
+BT /F2 11 Tf 0.44 0.3 0.12 rg 1 0 0 1 69 665 Tm (Three-wire control connection required \(rev C\).) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 630.5 Tm (The control circuit requires a three-wire connection to the indoor unit. Terminals R, C, and G) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 615.5 Tm (must be wired.) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 592.5 Tm (This supersedes the two-wire arrangement documented in earlier revisions.) Tj ET
+0.955 0.94 0.915 rg 54 560 504 20 re f
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 60 565.5 Tm (Terminal) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 192.63157894736844 565.5 Tm (Wire) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 325.2631578947369 565.5 Tm (Function) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 545.5 Tm (R) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 192.63157894736844 545.5 Tm (RED) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 325.2631578947369 545.5 Tm (24VAC supply) Tj ET
+0.995 0.992 0.985 rg 54 520 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 525.5 Tm (C) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 192.63157894736844 525.5 Tm (WHT) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 325.2631578947369 525.5 Tm (Common return) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 505.5 Tm (G) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 192.63157894736844 505.5 Tm (GRN) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 325.2631578947369 505.5 Tm (Fan / 3-wire enable) Tj ET
+0.74 0.72 0.68 RG 0.5 w 54 580 m 558 580 l S
+0.74 0.72 0.68 RG 0.5 w 54 560 m 558 560 l S
+0.74 0.72 0.68 RG 0.5 w 54 540 m 558 540 l S
+0.74 0.72 0.68 RG 0.5 w 54 520 m 558 520 l S
+0.74 0.72 0.68 RG 0.5 w 54 500 m 558 500 l S
+0.74 0.72 0.68 RG 0.5 w 54 580 m 54 500 l S
+0.74 0.72 0.68 RG 0.5 w 186.63157894736844 580 m 186.63157894736844 500 l S
+0.74 0.72 0.68 RG 0.5 w 319.2631578947369 580 m 319.2631578947369 500 l S
+0.74 0.72 0.68 RG 0.5 w 558.0000000000001 580 m 558.0000000000001 500 l S
+0.985 0.965 0.9 rg 54 461 504 27 re f
+0.44 0.3 0.12 rg 54 461 3 27 re f
+BT /F1 9.5 Tf 0.42 0.3 0.12 rg 1 0 0 1 67 471.5 Tm (Engineering source of truth. Supersedes the two-wire arrangement in rev A and rev B.) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 54 m 558 54 l S
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 40.5 Tm (MAA-200 Engineering Spec | Rev C | Prototype sample) Tj ET
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 40.5 Tm (Page 3) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 14 0 R >>
+endobj
+14 0 obj
+<< /Length 4219 >>
+stream
+BT /F2 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 753.5 Tm (MAA-200 Engineering Specification) Tj ET
+BT /F1 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 753.5 Tm (4 / 6) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 746 m 558 746 l S
+BT /F2 17 Tf 0.13 0.12 0.1 rg 1 0 0 1 54 715 Tm (Electrical Characteristics) Tj ET
+BT /F2 11.5 Tf 0.44 0.3 0.12 rg 1 0 0 1 54 691.5 Tm (Section 4: Electrical Characteristics) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 673.5 Tm (Component and connector locations are shown in the reference drawings. Confirm each pin against) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 658.5 Tm (the drawing before probing or reconnecting any harness.) Tj ET
+BT /F2 11.5 Tf 0.44 0.3 0.12 rg 1 0 0 1 54 634.5 Tm (Procedure notes) Tj ET
+0.44 0.3 0.12 rg 59.5 620 m 59.5 620.82845 58.82845 621.5 58 621.5 c 57.17155 621.5 56.5 620.82845 56.5 620 c 56.5 619.17155 57.17155 618.5 58 618.5 c 58.82845 618.5 59.5 619.17155 59.5 620 c f
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 69 616.5 Tm (Use only factory-approved parts.) Tj ET
+0.44 0.3 0.12 rg 59.5 605 m 59.5 605.82845 58.82845 606.5 58 606.5 c 57.17155 606.5 56.5 605.82845 56.5 605 c 56.5 604.17155 57.17155 603.5 58 603.5 c 58.82845 603.5 59.5 604.17155 59.5 605 c f
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 69 601.5 Tm (Match the full part number and revision.) Tj ET
+0.44 0.3 0.12 rg 59.5 590 m 59.5 590.82845 58.82845 591.5 58 591.5 c 57.17155 591.5 56.5 590.82845 56.5 590 c 56.5 589.17155 57.17155 588.5 58 588.5 c 58.82845 588.5 59.5 589.17155 59.5 590 c f
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 69 586.5 Tm (Transfer configuration settings where fitted.) Tj ET
+0.44 0.3 0.12 rg 59.5 575 m 59.5 575.82845 58.82845 576.5 58 576.5 c 57.17155 576.5 56.5 575.82845 56.5 575 c 56.5 574.17155 57.17155 573.5 58 573.5 c 58.82845 573.5 59.5 574.17155 59.5 575 c f
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 69 571.5 Tm (Confirm routing against the reference drawings.) Tj ET
+0.44 0.3 0.12 rg 59.5 560 m 59.5 560.82845 58.82845 561.5 58 561.5 c 57.17155 561.5 56.5 560.82845 56.5 560 c 56.5 559.17155 57.17155 558.5 58 558.5 c 58.82845 558.5 59.5 559.17155 59.5 560 c f
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 69 556.5 Tm (Run a full startup sequence after assembly.) Tj ET
+0.955 0.94 0.915 rg 54 524 504 20 re f
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 60 529.5 Tm (Terminal) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 228 529.5 Tm (Wire) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 396 529.5 Tm (Function) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 509.5 Tm (R) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 228 509.5 Tm (RED) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 396 509.5 Tm (24VAC supply) Tj ET
+0.995 0.992 0.985 rg 54 484 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 489.5 Tm (C) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 228 489.5 Tm (WHT) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 396 489.5 Tm (Common return) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 469.5 Tm (W) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 228 469.5 Tm (BLU) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 396 469.5 Tm (Call for heat) Tj ET
+0.995 0.992 0.985 rg 54 444 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 449.5 Tm (G) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 228 449.5 Tm (GRN) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 396 449.5 Tm (Call for fan) Tj ET
+0.74 0.72 0.68 RG 0.5 w 54 544 m 558 544 l S
+0.74 0.72 0.68 RG 0.5 w 54 524 m 558 524 l S
+0.74 0.72 0.68 RG 0.5 w 54 504 m 558 504 l S
+0.74 0.72 0.68 RG 0.5 w 54 484 m 558 484 l S
+0.74 0.72 0.68 RG 0.5 w 54 464 m 558 464 l S
+0.74 0.72 0.68 RG 0.5 w 54 444 m 558 444 l S
+0.74 0.72 0.68 RG 0.5 w 54 544 m 54 444 l S
+0.74 0.72 0.68 RG 0.5 w 222 544 m 222 444 l S
+0.74 0.72 0.68 RG 0.5 w 390 544 m 390 444 l S
+0.74 0.72 0.68 RG 0.5 w 558 544 m 558 444 l S
+0.985 0.965 0.9 rg 54 405 504 27 re f
+0.44 0.3 0.12 rg 54 405 3 27 re f
+BT /F1 9.5 Tf 0.42 0.3 0.12 rg 1 0 0 1 67 415.5 Tm (Always confirm 0VAC and 0VDC before making resistance measurements.) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 54 m 558 54 l S
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 40.5 Tm (MAA-200 Engineering Spec | Rev C | Prototype sample) Tj ET
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 40.5 Tm (Page 4) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 16 0 R >>
+endobj
+16 0 obj
+<< /Length 2021 >>
+stream
+BT /F2 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 753.5 Tm (MAA-200 Engineering Specification) Tj ET
+BT /F1 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 753.5 Tm (5 / 6) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 746 m 558 746 l S
+BT /F2 17 Tf 0.13 0.12 0.1 rg 1 0 0 1 54 715 Tm (Performance) Tj ET
+BT /F2 11.5 Tf 0.44 0.3 0.12 rg 1 0 0 1 54 691.5 Tm (Section 9: Performance) Tj ET
+BT /F1 10.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 54 673.5 Tm (Nominal capacity is rated at 24,000 BTU/h in cooling. Values are at standard rating conditions.) Tj ET
+0.955 0.94 0.915 rg 54 641 504 20 re f
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 60 646.5 Tm (Property) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 261.6 646.5 Tm (Value) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 626.5 Tm (Nominal capacity) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 626.5 Tm (24,000 BTU/h) Tj ET
+0.995 0.992 0.985 rg 54 601 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 606.5 Tm (Refrigerant) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 606.5 Tm (R-410A) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 586.5 Tm (Operating range) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 586.5 Tm (-10 to 46 deg C) Tj ET
+0.995 0.992 0.985 rg 54 561 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 566.5 Tm (Sound pressure) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 261.6 566.5 Tm (56 dB\(A\)) Tj ET
+0.74 0.72 0.68 RG 0.5 w 54 661 m 558 661 l S
+0.74 0.72 0.68 RG 0.5 w 54 641 m 558 641 l S
+0.74 0.72 0.68 RG 0.5 w 54 621 m 558 621 l S
+0.74 0.72 0.68 RG 0.5 w 54 601 m 558 601 l S
+0.74 0.72 0.68 RG 0.5 w 54 581 m 558 581 l S
+0.74 0.72 0.68 RG 0.5 w 54 561 m 558 561 l S
+0.74 0.72 0.68 RG 0.5 w 54 661 m 54 561 l S
+0.74 0.72 0.68 RG 0.5 w 255.60000000000002 661 m 255.60000000000002 561 l S
+0.74 0.72 0.68 RG 0.5 w 558 661 m 558 561 l S
+0.74 0.72 0.68 RG 0.7 w 54 54 m 558 54 l S
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 40.5 Tm (MAA-200 Engineering Spec | Rev C | Prototype sample) Tj ET
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 40.5 Tm (Page 5) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 18 0 R >>
+endobj
+18 0 obj
+<< /Length 2034 >>
+stream
+BT /F2 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 753.5 Tm (MAA-200 Engineering Specification) Tj ET
+BT /F1 8.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 753.5 Tm (6 / 6) Tj ET
+0.74 0.72 0.68 RG 0.7 w 54 746 m 558 746 l S
+BT /F2 17 Tf 0.13 0.12 0.1 rg 1 0 0 1 54 715 Tm (Revision History) Tj ET
+0.955 0.94 0.915 rg 54 683 504 20 re f
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 60 688.5 Tm (Rev) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 127.84615384615384 688.5 Tm (Date) Tj ET
+BT /F2 9.5 Tf 0.13 0.12 0.1 rg 1 0 0 1 234.46153846153845 688.5 Tm (Description) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 668.5 Tm (A) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 127.84615384615384 668.5 Tm (2016-01) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 234.46153846153845 668.5 Tm (Initial release.) Tj ET
+0.995 0.992 0.985 rg 54 643 504 20 re f
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 648.5 Tm (B) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 127.84615384615384 648.5 Tm (2019-05) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 234.46153846153845 648.5 Tm (Updated capacity and refrigerant data.) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 60 628.5 Tm (C) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 127.84615384615384 628.5 Tm (2023-05) Tj ET
+BT /F1 9.5 Tf 0.28 0.26 0.24 rg 1 0 0 1 234.46153846153845 628.5 Tm (Three-wire control connection required.) Tj ET
+0.74 0.72 0.68 RG 0.5 w 54 703 m 558 703 l S
+0.74 0.72 0.68 RG 0.5 w 54 683 m 558 683 l S
+0.74 0.72 0.68 RG 0.5 w 54 663 m 558 663 l S
+0.74 0.72 0.68 RG 0.5 w 54 643 m 558 643 l S
+0.74 0.72 0.68 RG 0.5 w 54 623 m 558 623 l S
+0.74 0.72 0.68 RG 0.5 w 54 703 m 54 623 l S
+0.74 0.72 0.68 RG 0.5 w 121.84615384615384 703 m 121.84615384615384 623 l S
+0.74 0.72 0.68 RG 0.5 w 228.46153846153845 703 m 228.46153846153845 623 l S
+0.74 0.72 0.68 RG 0.5 w 558 703 m 558 623 l S
+0.74 0.72 0.68 RG 0.7 w 54 54 m 558 54 l S
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 54 40.5 Tm (MAA-200 Engineering Spec | Rev C | Prototype sample) Tj ET
+BT /F1 7.5 Tf 0.5 0.48 0.45 rg 1 0 0 1 498 40.5 Tm (Page 6) Tj ET
+endstream
+endobj
+xref
+0 19
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000149 00000 n 
+0000000219 00000 n 
+0000000294 00000 n 
+0000000362 00000 n 
+0000000440 00000 n 
+0000000596 00000 n 
+0000005253 00000 n 
+0000005410 00000 n 
+0000007667 00000 n 
+0000007825 00000 n 
+0000010741 00000 n 
+0000010899 00000 n 
+0000015170 00000 n 
+0000015328 00000 n 
+0000017401 00000 n 
+0000017559 00000 n 
+trailer
+<< /Size 19 /Root 1 0 R >>
+startxref
+19645
+%%EOF

@@ -1,5 +1,6 @@
 import type { TurnBeat, TurnPlan, WorkBeat } from "./flow";
 import { systems } from "./ingest-data";
+import { dl2400ManualDiff } from "./demoData";
 
 export type Resolution = {
   flagId: string;
@@ -432,7 +433,10 @@ export function manualDraftTurn(onDone: () => void): TurnPlan {
         result: "4 changes",
         ms: 1150,
       },
-      { kind: "card", message: { role: "agent", kind: "diff" } },
+      {
+        kind: "card",
+        message: { role: "agent", kind: "doc-diff", diff: dl2400ManualDiff },
+      },
       { kind: "card", message: { role: "agent", kind: "manual-changes" } },
       {
         kind: "text",
@@ -533,15 +537,15 @@ export function regulationTurn(onDone: () => void): TurnPlan {
       },
       {
         kind: "action",
-        label: "Scoring exposure by annual revenue",
-        command: "score(exposure = revenue × risk)",
+        label: "Ranking by affected volume",
+        command: "rank(units × risk)",
         result: "ranked",
         ms: 950,
       },
       { kind: "card", message: { role: "agent", kind: "regulation" } },
       {
         kind: "text",
-        text: "DL-2400 is the largest exposure — lead in the brass body, $1.2M in annual revenue.",
+        text: "DL-2400 is the largest exposure — lead in the brass body, 5,200 units shipped in the last 12 months.",
       },
     ],
     onDone,

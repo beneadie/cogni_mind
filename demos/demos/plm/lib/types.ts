@@ -177,8 +177,16 @@ export type RegulationRiskRow = {
   regulation: string;
   risk: RegulationRisk;
   reason: string;
-  annualRevenue: string;
-  annualRevenueValue: number;
+  /** Units shipped in the last 12 months, e.g. "8,400". */
+  unitsShipped: string;
+  /** Numeric form of `unitsShipped`, for sorting. */
+  unitsShippedValue: number;
+  /** Units on open (unfulfilled) orders. */
+  openOrders: string;
+  /** Numeric form of `openOrders`, for sorting. */
+  openOrdersValue: number;
+  /** Date the restriction takes effect, e.g. "1 Jan 2027". */
+  deadline?: string;
   /** Owning company, shown for cross-company (ACS group) views. */
   company?: string;
   /** Refrigerant or restricted substance under review. */
@@ -286,6 +294,14 @@ export type ComplianceAction =
   | "reminder"
   | "acknowledge";
 
+/** A suggested reply chip the user can click to dispatch a queue action. */
+export type PromptOption = {
+  id: string;
+  label: string;
+  action: QueueCardAction;
+  payload?: string;
+};
+
 /** One proposed documentation change, governed by an engineering change request. */
 export type DocChange = {
   document: string;
@@ -301,6 +317,44 @@ export type DocChange = {
   whereUsed: number;
   /** Before/after summary shown as a redline. */
   redline: { from: string; to: string };
+  /** Line-level document diff, shown in the change proposal. */
+  diff?: DocDiff;
+};
+
+/* ------------------------------------------------------------------ */
+/* Document diff (git-style, +/- lines)                                */
+/* ------------------------------------------------------------------ */
+
+export type DiffLineKind = "context" | "add" | "remove";
+
+export type DiffSegment = {
+  text: string;
+  /** Highlighted as a word-level change within the line. */
+  emphasis?: boolean;
+};
+
+export type DiffLine = {
+  kind: DiffLineKind;
+  segments: DiffSegment[];
+  /** Line number in the old document, if present. */
+  oldLine?: number;
+  /** Line number in the new document, if present. */
+  newLine?: number;
+};
+
+export type DocDiffHunk = {
+  /** Section heading the hunk sits under, e.g. "§7.2 Wiring". */
+  heading: string;
+  /** Optional range marker, e.g. "rev A p.14 → rev C". */
+  context?: string;
+  lines: DiffLine[];
+};
+
+export type DocDiff = {
+  /** Document path shown in the header, e.g. "MAA-200 Installation Manual". */
+  path: string;
+  stats: { added: number; removed: number };
+  hunks: DocDiffHunk[];
 };
 
 /** How a downstream document is handled when upstream content changes. */
@@ -317,4 +371,6 @@ export type ImpactRow = {
   /** Sample PDF to open for this document, if one is available. */
   pdfId?: string;
   page?: number;
+  /** Line-level change this update would make to the document. */
+  diff?: DocDiff;
 };

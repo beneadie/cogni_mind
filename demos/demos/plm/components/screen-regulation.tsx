@@ -12,7 +12,8 @@ type SortKey =
   | "regulation"
   | "risk"
   | "reason"
-  | "revenue";
+  | "units"
+  | "openOrders";
 
 const RISK_RANK: Record<RegulationRisk, number> = {
   High: 3,
@@ -29,7 +30,7 @@ const RISK_STYLE: Record<RegulationRisk, { dot: string; chip: string }> = {
 export function ScreenRegulation({
   rows = regulationRisks,
   title = "Products at Risk from Upcoming Regulations",
-  subtitle = "Ranked by annual revenue so the biggest exposure surfaces first.",
+  subtitle = "Ranked by units shipped so the products with the most affected volume surface first.",
   onViewProduct,
 }: {
   rows?: RegulationRiskRow[];
@@ -37,7 +38,7 @@ export function ScreenRegulation({
   subtitle?: string;
   onViewProduct?: (product: string) => void;
 }) {
-  const [sortKey, setSortKey] = useState<SortKey>("revenue");
+  const [sortKey, setSortKey] = useState<SortKey>("units");
   const [dir, setDir] = useState<"asc" | "desc">("desc");
   const [filter, setFilter] = useState("All regulations");
 
@@ -54,8 +55,10 @@ export function ScreenRegulation({
       (row) => filter === "All regulations" || row.regulation === filter,
     );
     const compare = (a: RegulationRiskRow, b: RegulationRiskRow) => {
-      if (sortKey === "revenue")
-        return a.annualRevenueValue - b.annualRevenueValue;
+      if (sortKey === "units")
+        return a.unitsShippedValue - b.unitsShippedValue;
+      if (sortKey === "openOrders")
+        return a.openOrdersValue - b.openOrdersValue;
       if (sortKey === "risk") return RISK_RANK[a.risk] - RISK_RANK[b.risk];
       const av = (a[sortKey] ?? "") as string;
       const bv = (b[sortKey] ?? "") as string;
@@ -72,7 +75,11 @@ export function ScreenRegulation({
       setDir((value) => (value === "asc" ? "desc" : "asc"));
     } else {
       setSortKey(key);
-      setDir(key === "revenue" || key === "risk" ? "desc" : "asc");
+      setDir(
+        key === "units" || key === "openOrders" || key === "risk"
+          ? "desc"
+          : "asc",
+      );
     }
   };
 
@@ -80,14 +87,12 @@ export function ScreenRegulation({
     { key: "product", label: "Product" },
   ];
   if (showCompany) headers.push({ key: "company", label: "Company" });
-  if (showSubstance) {
-    headers.push({ key: "substance", label: "Refrigerant" });
-  } else {
-    headers.push({ key: "regulation", label: "Regulation" });
-    headers.push({ key: "risk", label: "Risk" });
-    headers.push({ key: "reason", label: "Reason" });
-  }
-  headers.push({ key: "revenue", label: "Annual Revenue", className: "text-right" });
+  headers.push({ key: "risk", label: "Risk" });
+  headers.push({ key: "reason", label: "Why" });
+  if (showSubstance)
+    headers.push({ key: "substance", label: "Restricted substance" });
+  headers.push({ key: "units", label: "Units shipped", className: "text-right" });
+  headers.push({ key: "openOrders", label: "Open orders", className: "text-right" });
 
   return (
     <div className="scroll-soft flex h-full min-h-0 flex-col gap-4 overflow-y-auto">
@@ -155,16 +160,25 @@ export function ScreenRegulation({
                 key={`${row.product}-${row.regulation}`}
                 className="border-b border-line/70 last:border-0 hover:bg-elevated/50"
               >
-                <td className="px-4 py-3 font-mono text-[0.82rem] font-semibold tracking-[0.02em] text-ink">
-                  {row.product}
-                  {onViewProduct ? (
-                    <button
-                      type="button"
-                      onClick={() => onViewProduct(row.product)}
-                      className="ml-3 rounded-full border border-line-strong px-2.5 py-1 font-mono text-[0.56rem] font-medium uppercase tracking-[0.08em] text-ink-soft transition-colors hover:bg-elevated hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                    >
-                      View product
-                    </button>
+                <td className="px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[0.82rem] font-semibold tracking-[0.02em] text-ink">
+                      {row.product}
+                    </span>
+                    {onViewProduct ? (
+                      <button
+                        type="button"
+                        onClick={() => onViewProduct(row.product)}
+                        className="rounded-full border border-line-strong px-2.5 py-1 font-mono text-[0.56rem] font-medium uppercase tracking-[0.08em] text-ink-soft transition-colors hover:bg-elevated hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                      >
+                        View product
+                      </button>
+                    ) : null}
+                  </div>
+                  {row.regulation ? (
+                    <span className="mt-1 block font-mono text-[0.58rem] uppercase tracking-[0.08em] text-muted">
+                      {row.regulation}
+                    </span>
                   ) : null}
                 </td>
                 {showCompany ? (
@@ -172,6 +186,19 @@ export function ScreenRegulation({
                     {row.company}
                   </td>
                 ) : null}
+                <td className="px-4 py-3">
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.08em] ${RISK_STYLE[row.risk].chip}`}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full ${RISK_STYLE[row.risk].dot}`}
+                    />
+                    {row.risk}
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-[0.82rem] text-ink-soft">
+                  {row.reason}
+                </td>
                 {showSubstance ? (
                   <td className="px-4 py-3">
                     <span className="inline-flex items-center gap-1.5 rounded-full border border-danger/40 bg-danger-soft px-2.5 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.08em] text-danger">
@@ -179,28 +206,12 @@ export function ScreenRegulation({
                       {row.substance}
                     </span>
                   </td>
-                ) : (
-                  <>
-                    <td className="px-4 py-3 text-[0.82rem] text-ink-soft">
-                      {row.regulation}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.08em] ${RISK_STYLE[row.risk].chip}`}
-                      >
-                        <span
-                          className={`h-1.5 w-1.5 rounded-full ${RISK_STYLE[row.risk].dot}`}
-                        />
-                        {row.risk}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-[0.82rem] text-ink-soft">
-                      {row.reason}
-                    </td>
-                  </>
-                )}
+                ) : null}
                 <td className="px-4 py-3 text-right font-mono text-[0.82rem] font-medium text-ink">
-                  {row.annualRevenue}
+                  {row.unitsShipped}
+                </td>
+                <td className="px-4 py-3 text-right font-mono text-[0.82rem] text-ink-soft">
+                  {row.openOrders}
                 </td>
               </tr>
             ))}
@@ -212,7 +223,7 @@ export function ScreenRegulation({
             sorted by{" "}
             {headers
               .find((header) => header.key === sortKey)
-              ?.label.toLowerCase() ?? "revenue"}
+              ?.label.toLowerCase() ?? "units"}
           </p>
         </div>
       </div>

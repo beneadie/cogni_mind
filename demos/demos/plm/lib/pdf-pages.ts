@@ -16,6 +16,8 @@ export type PdfFile = {
   id: string;
   title: string;
   file: string;
+  /** Real sample PDF served from /public/manuals, if one exists. */
+  url?: string;
   pages: PdfPageContent[];
 };
 
@@ -24,6 +26,7 @@ export const PDF_FILES: Record<string, PdfFile> = {
     id: "dl-2400-spec",
     title: "DL-2400 Engineering Specification",
     file: "DL-2400_revC.pdf",
+    url: "/manuals/dl-2400-spec.pdf",
     pages: [
       {
         page: 1,
@@ -75,6 +78,7 @@ export const PDF_FILES: Record<string, PdfFile> = {
     id: "dl-2400-datasheet",
     title: "DL-2400 Data Sheet (rev B)",
     file: "DL-2400_datasheet_2019.pdf",
+    url: "/manuals/dl-2400-datasheet.pdf",
     pages: [
       {
         page: 1,
@@ -105,6 +109,7 @@ export const PDF_FILES: Record<string, PdfFile> = {
     id: "dl-2400-manual",
     title: "DL-2400 Installation Manual (rev A)",
     file: "DL-2400_installation_2019.pdf",
+    url: "/manuals/dl-2400-manual.pdf",
     pages: [
       {
         page: 4,
@@ -150,6 +155,7 @@ export const PDF_FILES: Record<string, PdfFile> = {
     id: "maa-200-manual",
     title: "MAA-200 Installation Manual (rev A)",
     file: "MAA-200_installation_revA.pdf",
+    url: "/manuals/maa-200-manual.pdf",
     pages: [
       {
         page: 1,
@@ -196,6 +202,7 @@ export const PDF_FILES: Record<string, PdfFile> = {
     id: "maa-200-spec",
     title: "MAA-200 Engineering Specification (rev C)",
     file: "MAA-200_spec_revC.pdf",
+    url: "/manuals/maa-200-spec.pdf",
     pages: [
       {
         page: 1,
@@ -233,6 +240,7 @@ export const PDF_FILES: Record<string, PdfFile> = {
     id: "maa-200-datasheet",
     title: "MAA-200 Data Sheet (2019)",
     file: "MAA-200_datasheet_2019.pdf",
+    url: "/manuals/maa-200-datasheet.pdf",
     pages: [
       {
         page: 1,

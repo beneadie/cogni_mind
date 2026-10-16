@@ -1,5 +1,6 @@
-export type Tone = "info" | "warn" | "good";
+import type { DocDiff, PromptOption } from "./types";
 
+export type Tone = "info" | "warn" | "good";
 /** One visible unit of the agent's work in a turn. */
 export type WorkBeat =
   | { kind: "thought"; text: string; ms?: number }
@@ -44,6 +45,7 @@ export type PlmMessageKind =
   | "work"
   | "text"
   | "finding"
+  | "warning"
   | "upload"
   | "source"
   | "connections"
@@ -62,7 +64,8 @@ export type PlmMessageKind =
   | "legacy"
   | "change-proposal"
   | "queue-regulation"
-  | "compliance-actions"
+  | "prompts"
+  | "doc-diff"
   | "queue-propagation";
 
 export type PlmMessage = {
@@ -84,8 +87,18 @@ export type PlmMessage = {
   proposalId?: string;
   /** Queue card that triggered this message, if any. */
   queueItemId?: string;
-  /** Product id, for `kind: "compliance-actions"`. */
+  /** Product id, for `kind: "prompts"`. */
   productId?: string;
+  /** Suggested replies, for `kind: "prompts"`. */
+  prompts?: PromptOption[];
+  /** Heading for a `warning` callout (defaults to "Warning"). */
+  title?: string;
+  /** Fact chips shown under a `warning` callout. */
+  items?: string[];
+  /** Document diff, for `kind: "doc-diff"`. */
+  diff?: DocDiff;
+  /** Whether the diff has been applied (vs. proposed), for `kind: "doc-diff"`. */
+  applied?: boolean;
 };
 
 export type TurnBeat =

@@ -1,16 +1,18 @@
 import type { TurnPlan } from "./flow";
-import type { ComplianceAction } from "./types";
+import type { ComplianceAction, PromptOption } from "./types";
 import {
   BAN_EFFECTIVE,
   ECN_ID,
   REVIEW_DATE,
-  complianceProducts,
   fieldReportChange,
 } from "./queue-data";
-
-function riskProduct(productId: string) {
-  return complianceProducts.find((product) => product.product === productId);
-}
+import {
+  maa200DataSheetDiff,
+  maa200ProductPageDiff,
+  maa200SellSheetDiff,
+  maa200WiringDiff,
+} from "./demoData";
+import { productDossiers, riskRecord } from "./risk-catalog";
 
 /** Field report → documentation change. The work is already done. */
 export function queueFieldReportTurn(onDone: () => void): TurnPlan {
@@ -69,8 +71,24 @@ export function queueFieldApproveTurn(onDone: () => void): TurnPlan {
         text: `Manual published to rev C under ${ECN_ID}. Case CS-4821 is notified and closed, and the change is logged for audit.`,
       },
       {
-        kind: "text",
-        text: "That change leaves 3 documents referencing §7.2 stale — I've added a propagation task to your queue.",
+        kind: "card",
+        message: {
+          role: "agent",
+          kind: "doc-diff",
+          diff: maa200WiringDiff,
+          applied: true,
+        },
+      },
+      {
+        kind: "card",
+        message: {
+          role: "agent",
+          kind: "warning",
+          title: "Warning · Downstream impact",
+          text: "That change leaves 3 documents referencing §7.2 stale — review before they drift further.",
+          emphasis: "3 documents referencing §7.2 stale",
+          items: ["2 can auto-update", "1 needs authoring"],
+        },
       },
     ],
     onDone,
@@ -83,11 +101,11 @@ export function queuePropagationTurn(onDone: () => void): TurnPlan {
     beats: [
       {
         kind: "thought",
-        text: "Checking where the changed §7.2 content is referenced across the document set.",
+        text: "Checking what else used the changed §7.2 wiring.",
       },
       {
         kind: "action",
-        label: "Running where-used on §7.2",
+        label: "Finding every document that used §7.2",
         command: "whereused('§7.2')",
         result: "3 documents",
         ms: 1050,
@@ -120,11 +138,37 @@ export function queuePropagationApplyTurn(onDone: () => void): TurnPlan {
         ms: 1100,
       },
       {
+        kind: "card",
+        message: {
+          role: "agent",
+          kind: "doc-diff",
+          diff: maa200ProductPageDiff,
+          applied: true,
+        },
+      },
+      {
+        kind: "card",
+        message: {
+          role: "agent",
+          kind: "doc-diff",
+          diff: maa200SellSheetDiff,
+          applied: true,
+        },
+      },
+      {
         kind: "action",
         label: "Raising an authoring task",
         command: "task.create(doc='MAA-200 Data Sheet', team='Docs')",
         result: "TASK-7781",
         ms: 950,
+      },
+      {
+        kind: "card",
+        message: {
+          role: "agent",
+          kind: "doc-diff",
+          diff: maa200DataSheetDiff,
+        },
       },
       {
         kind: "text",
@@ -141,7 +185,7 @@ export function queueComplianceTurn(onDone: () => void): TurnPlan {
     beats: [
       {
         kind: "text",
-        text: "I checked the ACS group catalog against the 2027 refrigerant ban and cross-referenced sales data. Two products are exposed.",
+        text: "I checked the ACS group catalog against the 2027 refrigerant ban and cross-referenced shipped units and open orders. Two products are affected.",
       },
       {
         kind: "card",
@@ -149,40 +193,120 @@ export function queueComplianceTurn(onDone: () => void): TurnPlan {
       },
       {
         kind: "text",
-        text: "MAA-200 is the largest exposure. Open a product to see what would need to change.",
+        text: "MAA-200 has the most volume affected. Open a product to pull everything we have on it.",
       },
     ],
     onDone,
   };
 }
 
-export function queueComplianceViewTurn(
+/** The four mitigation paths offered as suggested replies. */
+export const MITIGATION_PROMPTS: PromptOption[] = [
+  {
+    id: "open-cr",
+    label: "Open change request",
+    action: "compliance-act",
+    payload: "open-cr",
+  },
+  {
+    id: "declaration",
+    label: "Request declaration",
+    action: "compliance-act",
+    payload: "declaration",
+  },
+  {
+    id: "reminder",
+    label: "Set a reminder",
+    action: "compliance-act",
+    payload: "reminder",
+  },
+  {
+    id: "acknowledge",
+    label: "Acknowledge risk",
+    action: "compliance-act",
+    payload: "acknowledge",
+  },
+];
+
+/**
+ * Open a product: fetch everything on file into the workspace, then surface a
+ * sourced finding (units, not revenue) and the resolution options.
+ */
+export function viewProductTurn(
   productId: string,
   onDone: () => void,
 ): TurnPlan {
-  const product = riskProduct(productId);
-  const company = product?.company ?? "the group";
-  const substance = product?.substance ?? "a restricted substance";
-  const revenue = product?.annualRevenue ?? "material revenue";
+  const record = riskRecord(productId);
+  const company = record?.company ?? "the group";
+  const substance = record?.substance ?? "a restricted substance";
+  const regulation = record?.regulation ?? "the upcoming restriction";
+  const deadline = record?.deadline ?? BAN_EFFECTIVE;
+  const units = record?.unitsShipped ?? "0";
+  const orders = record?.openOrders ?? "0";
+  const count = productDossiers[productId]?.length ?? 0;
 
   return {
     beats: [
+      {
+        kind: "thought",
+        text: `Pulling everything we have on ${productId} — the product record, the parts list, the material declaration, shipped units and open orders, the spec and data sheet, and open cases.`,
+      },
+      {
+        kind: "action",
+        label: `Fetching the ${productId} product record`,
+        command: `erp.item('${productId}')`,
+        result: "1 record",
+        ms: 850,
+      },
+      {
+        kind: "action",
+        label: "Fetching the parts list",
+        command: `bom.get('${productId}')`,
+        result: "14 components",
+        ms: 800,
+      },
+      {
+        kind: "action",
+        label: "Fetching the material declaration",
+        command: `fmd.get('${productId}')`,
+        result: substance,
+        ms: 800,
+      },
+      {
+        kind: "action",
+        label: "Fetching shipped units and open orders",
+        command: `sales.units('${productId}')`,
+        result: `${units} shipped`,
+        ms: 850,
+      },
+      {
+        kind: "action",
+        label: "Fetching the current spec and data sheet",
+        command: `vault.get('${productId}')`,
+        result: "2 files",
+        ms: 800,
+      },
+      {
+        kind: "note",
+        text: `${count} records added to the workspace.`,
+        tone: "info",
+      },
       {
         kind: "card",
         message: {
           role: "agent",
           kind: "finding",
-          text: `${productId} (${company}) uses ${substance}, which is banned from 2027. That's ${revenue} in annual revenue exposed — this needs a mitigation decision, not just a note.`,
-          emphasis: "banned from 2027",
+          text: `${productId} (${company}) carries ${substance}, restricted under ${regulation} from ${deadline}. ERP shows ${units} units shipped in the last 12 months with ${orders} on open orders — it needs a mitigation plan, not just a note.`,
+          emphasis: `restricted under ${regulation}`,
         },
       },
       {
         kind: "card",
         message: {
           role: "agent",
-          kind: "compliance-actions",
-          queueItemId: "compliance-alert",
+          kind: "prompts",
           productId,
+          prompts: MITIGATION_PROMPTS,
         },
       },
     ],
@@ -196,9 +320,10 @@ export function queueComplianceActTurn(
   action: ComplianceAction,
   onDone: () => void,
 ): TurnPlan {
-  const product = riskProduct(productId);
-  const company = product?.company ?? "the group";
-  const owner = product?.owner ?? "the product owner";
+  const record = riskRecord(productId);
+  const company = record?.company ?? "the group";
+  const owner = record?.owner ?? "the product owner";
+  const deadline = record?.deadline ?? BAN_EFFECTIVE;
 
   if (action === "open-cr") {
     return {
@@ -210,7 +335,7 @@ export function queueComplianceActTurn(
         {
           kind: "action",
           label: `Opening a change request for ${productId}`,
-          command: `cr.open('${productId}', type='refrigerant-swap')`,
+          command: `cr.open('${productId}', type='material-swap')`,
           result: "CR-118",
           ms: 1100,
         },
@@ -230,7 +355,7 @@ export function queueComplianceActTurn(
         },
         {
           kind: "text",
-          text: `Done — CR-118 is open and assigned to ${owner} at ${company}, with a review reminder for ${REVIEW_DATE}, ahead of the ${BAN_EFFECTIVE} ban. I'll track it to closure.`,
+          text: `Done — CR-118 is open and assigned to ${owner} at ${company}, with a review reminder for ${REVIEW_DATE}, ahead of the ${deadline} deadline. I'll track it to closure.`,
         },
       ],
       onDone,
@@ -247,13 +372,13 @@ export function queueComplianceActTurn(
         {
           kind: "action",
           label: "Requesting a substance declaration",
-          command: `fmd.request('${productId}', substance='${product?.substance ?? "restricted"}')`,
+          command: `fmd.request('${productId}', substance='${record?.substance ?? "restricted"}')`,
           result: "requested",
           ms: 950,
         },
         {
           kind: "text",
-          text: `Requested a full material declaration for ${productId} from the supplier. I'll attach it to the compliance file when it arrives, and track it against the ${BAN_EFFECTIVE} deadline in the meantime.`,
+          text: `Requested a full material declaration for ${productId} from the supplier. I'll attach it to the compliance file when it arrives, and track it against the ${deadline} deadline in the meantime.`,
         },
       ],
       onDone,
@@ -265,7 +390,7 @@ export function queueComplianceActTurn(
       beats: [
         {
           kind: "thought",
-          text: "Scheduling a review reminder ahead of the ban.",
+          text: "Scheduling a review reminder ahead of the deadline.",
         },
         {
           kind: "action",
@@ -276,7 +401,7 @@ export function queueComplianceActTurn(
         },
         {
           kind: "text",
-          text: `Reminder set for ${REVIEW_DATE}. I'll bring ${productId} back to you then — ahead of the ${BAN_EFFECTIVE} ban — unless a mitigation is opened sooner.`,
+          text: `Reminder set for ${REVIEW_DATE}. I'll bring ${productId} back to you then — ahead of the ${deadline} deadline — unless a mitigation is opened sooner.`,
         },
       ],
       onDone,
@@ -287,7 +412,7 @@ export function queueComplianceActTurn(
     beats: [
       {
         kind: "text",
-        text: `Noted — ${productId} is recorded as an accepted risk pending the ${BAN_EFFECTIVE} review, with the rationale on file. I'll flag it automatically if the exposure changes.`,
+        text: `Noted — ${productId} is recorded as an accepted risk pending the ${deadline} review, with the rationale on file. I'll flag it automatically if the exposure changes.`,
       },
     ],
     onDone,

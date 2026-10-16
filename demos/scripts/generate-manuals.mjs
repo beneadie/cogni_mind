@@ -51,6 +51,7 @@ class Page {
   constructor() {
     this.ops = [];
     this.y = MARGIN + 6;
+    this.footer = "Carrier 38MURA  |  Confidential  |  Prototype sample";
   }
 
   pdfY(yTop) {
@@ -197,7 +198,7 @@ class Page {
       lw: 0.7,
     });
     this.drawText(
-      "Carrier 38MURA  |  Confidential  |  Prototype sample",
+      this.footer,
       MARGIN,
       yTop,
       { font: "F1", size: 7.5, color: MUTED, maxWidth: CONTENT_W - 70, leading: 9 },
@@ -677,7 +678,8 @@ function coverPage(p, ctx) {
   p.centerText(ctx.model, 0, 282, PAGE_W, { font: "F1", size: 12, color: SOFT });
   p.centerText(ctx.docNo, 0, 302, PAGE_W, { font: "F3", size: 9, color: MUTED });
   p.drawText(
-    "Prototype sample document for the clickable demo. Not an official Carrier publication.",
+    ctx.coverNote ??
+      "Prototype sample document for the clickable demo. Not an official publication.",
     0,
     350,
     { font: "F4", size: 9.5, color: MUTED, maxWidth: PAGE_W },
@@ -685,16 +687,19 @@ function coverPage(p, ctx) {
   p.y = 410;
   p.table(
     ["Rev", "Date", "Description"],
-    [
+    ctx.revisions ?? [
       ["1.0", "2019-05", "Initial release for the 2019 model year."],
       ["1.1", "2019-09", "Updated CN2 pinout and fault-code table."],
       ["1.2", "2020-02", "Added inverter diagnostics and torque values."],
     ],
     [0.7, 1.1, 3.4],
   );
-  p.note("For professional use only. Service work must be performed by qualified personnel.");
+  p.note(
+    ctx.coverWarn ??
+      "For professional use only. Service work must be performed by qualified personnel.",
+  );
   p.y = 700;
-  p.centerText("Cognimind  |  Field Support Copilot", 0, 700, PAGE_W, {
+  p.centerText(ctx.coverFooter ?? "Cognimind  |  Field Support Copilot", 0, 700, PAGE_W, {
     font: "F1",
     size: 8.5,
     color: MUTED,
@@ -1046,10 +1051,411 @@ const manuals = [
 ];
 
 mkdirSync(outDir, { recursive: true });
+
+// --- PLM (ACS) sample documents ---------------------------------------
+// Realistic, dependency-free PDFs for the Product Data demo. Content mirrors
+// demos/plm/lib/pdf-pages.ts so the on-screen and PDF views agree.
+
+const NEUTRAL_PARAS = [
+  "This section covers the recommended field procedure. Follow the steps in order and verify each measurement before moving on. Record every reading on the commissioning worksheet.",
+  "Before opening any panel, disconnect power at the service switch and wait for the DC bus to discharge. Confirm 0VAC and 0VDC at the board before proceeding.",
+  "Use a calibrated multimeter with a true-RMS function for all AC measurements. Resistance checks must be made with the unit de-energized and the harness disconnected.",
+  "All work must follow the applicable local and national codes. Only factory-approved replacement parts may be used, matched to the full part number including the revision suffix.",
+  "Component and connector locations are shown in the reference drawings. Confirm each pin against the drawing before probing or reconnecting any harness.",
+  "Torque all electrical terminations to the value shown in the specifications table. Loose terminations overheat and can damage the terminals over time.",
+  "When a reading is out of range, do not replace the component until the associated wiring and connectors have been verified good. Most returned parts test good on the bench.",
+  "Document the final readings and any parts used on the work order. Accurate records shorten the next visit and support the warranty claim.",
+];
+
+const NEUTRAL_BULLETS = [
+  ["Disconnect and lock out power.", "Confirm 0VAC and 0VDC.", "Inspect connectors for corrosion.", "Record baseline readings before any change.", "Reassemble and re-check operation."],
+  ["Use only factory-approved parts.", "Match the full part number and revision.", "Transfer configuration settings where fitted.", "Confirm routing against the reference drawings.", "Run a full startup sequence after assembly."],
+  ["Measure with the unit in the same mode as the fault.", "Allow readings to stabilize before recording.", "Note the ambient temperature at the time of test.", "Repeat any suspect measurement twice.", "Compare to the published range, not an assumption."],
+];
+
+const NEUTRAL_TABLES = [
+  { headers: ["Item", "Expected", "Notes"], rows: [["Line voltage", "208-230 VAC", "+/-10%"], ["Low voltage", "24 VAC", "+/-10%"], ["Control signal", "24 VAC", "Call for operation"], ["Ambient", "see chart", "Record at test"]] },
+  { headers: ["Terminal", "Wire", "Function"], rows: [["R", "RED", "24VAC supply"], ["C", "WHT", "Common return"], ["W", "BLU", "Call for heat"], ["G", "GRN", "Call for fan"]] },
+  { headers: ["Code", "Meaning", "Action"], rows: [["E1", "High pressure", "Check charge and airflow"], ["E2", "Low pressure", "Check charge and leak"], ["E5", "AC overcurrent", "See Section 5.2"], ["E6", "Communication", "Check harness"]] },
+];
+
+const NEUTRAL_NOTES = [
+  "Always confirm 0VAC and 0VDC before making resistance measurements.",
+  "Record the ambient and suction-line temperatures together for an accurate comparison.",
+  "If a fault returns after clearing, inspect the harness before replacing any board.",
+  "Use the wiring diagram in Appendix D to confirm pinouts before probing.",
+];
+
+const LATCH_PARAS = [
+  "This section covers the installation of the DL series heavy-duty brass door latch. Follow the steps in order and verify each dimension before fastening.",
+  "The latch body is forged brass, alloy C36000, with phosphor-bronze springs. The standard finish is US3 polished brass.",
+  "Prepare the door and frame before fitting the latch. Confirm the backset and bore diameter against the rough-opening table for the door thickness.",
+  "Do not force any component into place. If the latch does not seat freely, re-check the bore and the face-plate mortise.",
+  "All fasteners must be snug, not over-tightened. Over-torquing can distort the face plate and bind the mechanism.",
+];
+
+function docPage(p, ctx, spec) {
+  const n = ctx.pageNum;
+  p.pageHeader(ctx.title, n, ctx.total);
+  p.heading(spec.heading);
+  if (spec.sub) p.subheading(spec.sub);
+  if (spec.highlight) p.highlight(spec.highlight);
+  (spec.paras ?? []).forEach((para) => p.paragraph(para));
+  if (spec.bullets) {
+    if (spec.bulletsHeading) p.subheading(spec.bulletsHeading);
+    p.bullets(spec.bullets);
+  }
+  if (spec.table) {
+    p.table(
+      spec.table.headers,
+      spec.table.rows,
+      spec.table.widths ?? spec.table.headers.map(() => 1),
+    );
+  }
+  if (spec.diagram) {
+    p.diagram(spec.diagram.kind, spec.diagram.caption, spec.diagram.height ?? 150);
+  }
+  if (spec.note) p.note(spec.note, spec.noteTone);
+  p.pageFooter(n);
+}
+
+function buildExact(doc) {
+  const total = doc.pages.length;
+  const ctx = {
+    title: doc.title,
+    docNo: doc.docNo,
+    total,
+    footer: doc.footer,
+    coverTitle: doc.coverTitle ?? doc.title,
+    model: doc.model ?? "",
+    coverNote: doc.coverNote,
+    revisions: doc.revisions,
+    coverWarn: doc.coverWarn,
+    coverFooter: doc.coverFooter,
+  };
+  const streams = [];
+  for (let n = 1; n <= total; n++) {
+    const page = new Page();
+    page.footer = doc.footer ?? page.footer;
+    ctx.pageNum = n;
+    doc.pages[n - 1](page, ctx);
+    streams.push(page.toStream());
+  }
+  return streams;
+}
+
+const coverFn = (p, ctx) => coverPage(p, ctx);
+const page = (heading, extra = {}) => (p, ctx) =>
+  docPage(p, ctx, { heading, ...extra });
+const sectionPage = (heading, extra = {}) => (p, ctx) => {
+  const n = ctx.pageNum;
+  docPage(p, ctx, {
+    heading,
+    sub: `Section ${n}: ${heading}`,
+    paras: [pick(NEUTRAL_PARAS, n)],
+    bulletsHeading: "Procedure notes",
+    bullets: pick(NEUTRAL_BULLETS, n),
+    table: pick(NEUTRAL_TABLES, n),
+    note: pick(NEUTRAL_NOTES, n),
+    ...extra,
+  });
+};
+const contentsFn = (topics) => (p, ctx) =>
+  docPage(p, ctx, {
+    heading: "Contents",
+    table: {
+      headers: ["Section", "Page"],
+      widths: [3.2, 0.8],
+      rows: topics.map((topic, index) => [
+        topic,
+        String(Math.min(index + 3, ctx.total)),
+      ]),
+    },
+    note: "Page numbers refer to the printed page footer.",
+  });
+
+const plmDocs = [
+  {
+    file: "maa-200-manual.pdf",
+    title: "MAA-200 Installation Manual",
+    docNo: "IM-MAA-200",
+    footer: "MAA-200 Installation Manual  |  Rev A  |  Prototype sample",
+    coverTitle: "MAA-200 Split System - Installation Manual",
+    model: "Model MAA-200  |  Rev A  |  2019",
+    revisions: [
+      ["A", "2019-04", "Initial release."],
+      ["B", "2021-02", "Updated clearances and line-set tables."],
+      ["C", "2023-06", "Electrical and control-wiring updates."],
+    ],
+    pages: [
+      coverFn,
+      contentsFn(["Scope", "Safety", "Tools Required", "Clearances", "Mounting the Outdoor Unit", "Refrigerant Line Sets", "Brazing and Purge", "Pressure Testing", "Evacuation", "Electrical Service", "Low-Voltage Wiring", "Thermostat Wiring", "Control Wiring Diagram", "Condensate Drainage", "Startup and Checkout"]),
+      sectionPage("Safety"),
+      sectionPage("Tools Required"),
+      sectionPage("Clearances"),
+      sectionPage("Mounting the Outdoor Unit"),
+      sectionPage("Refrigerant Line Sets"),
+      sectionPage("Brazing and Purge"),
+      sectionPage("Pressure Testing"),
+      sectionPage("Evacuation"),
+      sectionPage("Electrical Service"),
+      sectionPage("Low-Voltage Wiring"),
+      sectionPage("Thermostat Wiring"),
+      page("Control Wiring Diagram", {
+        sub: "Section 7.2: Wiring",
+        highlight: "Two-wire control connection (rev A).",
+        paras: [
+          "Route the control wiring through the grommet on the left-hand panel. Connect the thermostat to terminals R and C. Diagram 7.2 shows a two-wire control connection.",
+        ],
+        table: {
+          headers: ["Terminal", "Wire", "Function"],
+          widths: [1, 1, 1.8],
+          rows: [["R", "RED", "24VAC supply"], ["C", "WHT", "Common return"]],
+        },
+        diagram: {
+          kind: "block",
+          caption: "Two-wire control connection - thermostat to control board",
+        },
+        note: "This revision of the manual shows a two-wire arrangement. Confirm the engineering spec revision before wiring.",
+      }),
+      sectionPage("Condensate Drainage"),
+      page("Startup and Checkout", {
+        sub: "Section 3.1: Startup",
+        paras: [
+          "Power the unit and confirm the control board completes its startup sequence. Record any fault code before it clears.",
+        ],
+        bulletsHeading: "Startup steps",
+        bullets: [
+          "Confirm all electrical and refrigerant connections are complete.",
+          "Energize the unit at the service switch.",
+          "Observe the control board startup sequence.",
+          "Record any fault code before it clears.",
+        ],
+        table: {
+          headers: ["Code", "Meaning", "Reference"],
+          widths: [0.8, 1.6, 1.8],
+          rows: [["E1", "High pressure", "Service Manual 5.3"], ["E2", "Low pressure", "Service Manual 5.3"], ["E5", "AC overcurrent", "Service Manual 5.2"]],
+        },
+        note: "Load the Service Manual to complete any diagnostic procedure.",
+      }),
+    ],
+  },
+  {
+    file: "maa-200-spec.pdf",
+    title: "MAA-200 Engineering Specification",
+    docNo: "SPEC-MAA-200",
+    footer: "MAA-200 Engineering Spec  |  Rev C  |  Prototype sample",
+    coverTitle: "MAA-200 Product Specification",
+    model: "Model MAA-200  |  Rev C  |  Engineering",
+    revisions: [
+      ["A", "2016-01", "Initial release."],
+      ["B", "2019-05", "Updated capacity and refrigerant data."],
+      ["C", "2023-05", "Three-wire control connection required."],
+    ],
+    pages: [
+      coverFn,
+      contentsFn(["Scope and Ratings", "Control Wiring Requirements", "Electrical Characteristics", "Performance", "Revision History"]),
+      page("Control Wiring Requirements", {
+        sub: "Section 7.2: Control Wiring",
+        highlight: "Three-wire control connection required (rev C).",
+        paras: [
+          "The control circuit requires a three-wire connection to the indoor unit. Terminals R, C, and G must be wired.",
+          "This supersedes the two-wire arrangement documented in earlier revisions.",
+        ],
+        table: {
+          headers: ["Terminal", "Wire", "Function"],
+          widths: [1, 1, 1.8],
+          rows: [["R", "RED", "24VAC supply"], ["C", "WHT", "Common return"], ["G", "GRN", "Fan / 3-wire enable"]],
+        },
+        note: "Engineering source of truth. Supersedes the two-wire arrangement in rev A and rev B.",
+      }),
+      sectionPage("Electrical Characteristics"),
+      page("Performance", {
+        sub: "Section 9: Performance",
+        paras: ["Nominal capacity is rated at 24,000 BTU/h in cooling. Values are at standard rating conditions."],
+        table: {
+          headers: ["Property", "Value"],
+          widths: [1.6, 2.4],
+          rows: [["Nominal capacity", "24,000 BTU/h"], ["Refrigerant", "R-410A"], ["Operating range", "-10 to 46 deg C"], ["Sound pressure", "56 dB(A)"]],
+        },
+      }),
+      page("Revision History", {
+        table: {
+          headers: ["Rev", "Date", "Description"],
+          widths: [0.7, 1.1, 3.4],
+          rows: [["A", "2016-01", "Initial release."], ["B", "2019-05", "Updated capacity and refrigerant data."], ["C", "2023-05", "Three-wire control connection required."]],
+        },
+      }),
+    ],
+  },
+  {
+    file: "maa-200-datasheet.pdf",
+    title: "MAA-200 Data Sheet",
+    docNo: "DS-MAA-200",
+    footer: "MAA-200 Data Sheet  |  Rev B  |  Prototype sample",
+    pages: [
+      (p, ctx) =>
+        docPage(p, ctx, {
+          heading: "MAA-200 - Split System",
+          sub: "Product Data Sheet",
+          highlight: "Control: 2-wire  |  Refrigerant: R-410A",
+          paras: [
+            "Published data sheet. Values reflect the last released revision and may not match the current engineering specification.",
+          ],
+          table: {
+            headers: ["Property", "Value"],
+            widths: [1.6, 2.4],
+            rows: [["Nominal capacity", "24,000 BTU/h"], ["Refrigerant", "R-410A"], ["Control wiring", "2-wire"], ["Operating range", "-10 to 46 deg C"], ["Sound pressure", "56 dB(A)"], ["Revision", "B - 2019"]],
+          },
+        }),
+    ],
+  },
+  {
+    file: "dl-2400-spec.pdf",
+    title: "DL-2400 Engineering Specification",
+    docNo: "SPEC-DL-2400",
+    footer: "DL-2400 Engineering Spec  |  Rev C  |  Prototype sample",
+    coverTitle: "DL-2400 Heavy-Duty Brass Door Latch - Engineering Specification",
+    model: "Model DL-2400  |  Rev C  |  Engineering",
+    revisions: [
+      ["A", "1978-05", "Initial release."],
+      ["B", "1983-02", "Updated materials and certifications."],
+      ["C", "1987-03", "Throw dimension revised to 0.75 in."],
+    ],
+    pages: [
+      coverFn,
+      page("Materials", {
+        sub: "Section 2.1: Materials",
+        paras: ["All materials are as specified. Substitutions require an approved engineering deviation."],
+        table: {
+          headers: ["Component", "Material"],
+          widths: [1.4, 2.6],
+          rows: [["Latch body", "Forged brass, alloy C36000"], ["Springs", "Phosphor bronze"], ["Finish", "US3 polished brass"], ["Certification", "ANSI/BHMA A156.13 Grade 1"]],
+        },
+      }),
+      page("Dimensions", {
+        sub: "Section 3.2: Dimensions",
+        highlight: "Throw: 0.75 in",
+        paras: ["Dimensions are in inches unless otherwise noted."],
+        table: {
+          headers: ["Dimension", "Value"],
+          widths: [1.6, 2.4],
+          rows: [["Overall length", "4.5 in"], ["Backset", "2.375 in"], ["Throw", "0.75 in"], ["Bore diameter", "2-1/8 in"]],
+        },
+        note: "This revision supersedes all prior published dimensions. The latch throw changed from 0.625 in to 0.75 in.",
+      }),
+      page("Performance", {
+        sub: "Section 5.1: Performance",
+        paras: ["Cycle and corrosion ratings are verified to the referenced standards."],
+        table: {
+          headers: ["Property", "Value"],
+          widths: [1.6, 2.4],
+          rows: [["Cycle rating", "500,000 cycles minimum"], ["Corrosion resistance", "96 hours salt spray"], ["Certification", "ANSI/BHMA A156.13 Grade 1"]],
+        },
+      }),
+      page("Notes", {
+        sub: "Section 7: Notes",
+        paras: ["This revision supersedes all prior published data sheets."],
+        bullets: ["Finish: US3 polished brass.", "Certifications: ANSI/BHMA A156.13 Grade 1."],
+      }),
+    ],
+  },
+  {
+    file: "dl-2400-datasheet.pdf",
+    title: "DL-2400 Data Sheet",
+    docNo: "DS-DL-2400",
+    footer: "DL-2400 Data Sheet  |  Rev B  |  Prototype sample",
+    pages: [
+      (p, ctx) =>
+        docPage(p, ctx, {
+          heading: "DL-2400 - Heavy-Duty Brass Door Latch",
+          sub: "Product Data Sheet",
+          highlight: "Throw: 0.625 in (published value)",
+          paras: ["Published product data sheet for the DL-2400."],
+          table: {
+            headers: ["Property", "Value"],
+            widths: [1.6, 2.4],
+            rows: [["Material", "Forged brass, C36000"], ["Overall length", "4.5 in"], ["Throw", "0.625 in"], ["Cycle rating", "500,000 cycles"], ["Finish", "US3 polished brass"], ["Warranty", "10 years"]],
+          },
+        }),
+      (p, ctx) =>
+        docPage(p, ctx, {
+          heading: "Warranty and Support",
+          paras: ["Limited warranty: 10 years from date of purchase.", "Contact support for replacement parts."],
+          highlight: "Warranty: 10 years",
+        }),
+    ],
+  },
+  {
+    file: "dl-2400-manual.pdf",
+    title: "DL-2400 Installation Manual",
+    docNo: "IM-DL-2400",
+    footer: "DL-2400 Installation Manual  |  Rev A  |  Prototype sample",
+    coverTitle: "DL-2400 Heavy-Duty Brass Door Latch - Installation Manual",
+    model: "Model DL-2400  |  Rev A  |  2019",
+    revisions: [
+      ["A", "2019-06", "Initial release."],
+    ],
+    pages: [
+      coverFn,
+      contentsFn(["Prepare the Door", "Tools Required", "Rough Opening", "Install Latch", "Strike Plate", "Final Adjustment", "Fasteners"]),
+      page("Prepare the Door", {
+        sub: "Section 1: Preparation",
+        paras: [LATCH_PARAS[2], LATCH_PARAS[3]],
+      }),
+      page("Tools Required", {
+        sub: "Section 1: Tools Required",
+        paras: ["The following tools are required for installation."],
+        bullets: ["Drill with 1 in spade bit", "Phillips screwdriver", "Tape measure", "Chisel (mortise)"],
+      }),
+      page("Rough Opening", {
+        sub: "Section 2: Rough Opening",
+        paras: ["Prepare the rough opening to the dimensions below."],
+        table: {
+          headers: ["Dimension", "Value"],
+          widths: [1.6, 2.4],
+          rows: [["Backset", "2-3/8 in (60 mm)"], ["Bore diameter", "2-1/8 in (54 mm)"], ["Door thickness", "1-3/4 in"]],
+        },
+      }),
+      page("Install Latch", {
+        sub: "Section 3: Install Latch",
+        highlight: "Throw: 0.625 in standard.",
+        paras: ["Insert the latch into the bore and confirm it seats freely."],
+      }),
+      page("Strike Plate", {
+        sub: "Section 4: Strike Plate",
+        paras: ["Align the strike with the latch bolt and fasten to the frame."],
+      }),
+      page("Final Adjustment", {
+        sub: "Section 5: Adjustment",
+        paras: [LATCH_PARAS[4]],
+        bullets: ["Confirm the latch engages the strike.", "Check the throw against the spec.", "Confirm smooth operation from both sides."],
+      }),
+      page("Fasteners", {
+        sub: "Section 6: Fasteners",
+        table: {
+          headers: ["Item", "Torque"],
+          widths: [2.4, 1.6],
+          rows: [["Face-plate screws", "15 in-lb"], ["Strike screws", "15 in-lb"]],
+        },
+        note: "Torque fasteners to 15 in-lb. Over-tightening can distort the face plate.",
+      }),
+    ],
+  },
+];
+
 for (const manual of manuals) {
   const streams = buildManual(manual);
   const buffer = buildPdf(streams);
   const target = join(outDir, manual.file);
+  writeFileSync(target, buffer);
+  console.log(`wrote ${target} (${streams.length} pages, ${buffer.length} bytes)`);
+}
+
+for (const doc of plmDocs) {
+  const streams = buildExact(doc);
+  const buffer = buildPdf(streams);
+  const target = join(outDir, doc.file);
   writeFileSync(target, buffer);
   console.log(`wrote ${target} (${streams.length} pages, ${buffer.length} bytes)`);
 }

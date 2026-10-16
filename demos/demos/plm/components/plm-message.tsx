@@ -26,9 +26,11 @@ import {
 import {
   ChangePropagationCard,
   ChangeProposalCard,
-  ComplianceActionCard,
   QueueRegulationCard,
 } from "./queue-cards";
+import { SuggestedReplies } from "./suggested-replies";
+import { DocDiff } from "./doc-diff";
+import { WarningBlock } from "./warning-block";
 import type { QueueCardAction } from "../lib/types";
 
 function FindingBlock({
@@ -106,7 +108,7 @@ export function PlmChatMessage({
   return (
     <div className="flex justify-start">
       <div className="w-full max-w-[46rem] space-y-3">
-        {message.text && message.kind !== "finding" ? (
+        {message.text && message.kind !== "finding" && message.kind !== "warning" ? (
           <div className="whitespace-pre-line text-[0.92rem] leading-relaxed text-ink">
             <Typewriter text={message.text} />
           </div>
@@ -114,6 +116,15 @@ export function PlmChatMessage({
 
         {message.kind === "finding" && message.text ? (
           <FindingBlock text={message.text} emphasis={message.emphasis} />
+        ) : null}
+
+        {message.kind === "warning" && message.text ? (
+          <WarningBlock
+            title={message.title}
+            text={message.text}
+            emphasis={message.emphasis}
+            items={message.items}
+          />
         ) : null}
 
         {message.kind === "upload" ? (
@@ -183,7 +194,13 @@ export function PlmChatMessage({
           <DocHealthCard publishedDocIds={handlers.publishedDocIds} />
         ) : null}
 
-        {message.kind === "regulation" ? <RegulationCard /> : null}
+        {message.kind === "regulation" ? (
+          <RegulationCard
+            onViewProduct={(product) =>
+              handlers.onQueueAction("compliance-view", product)
+            }
+          />
+        ) : null}
 
         {message.kind === "legacy" ? <LegacyCard /> : null}
 
@@ -204,13 +221,17 @@ export function PlmChatMessage({
           />
         ) : null}
 
-        {message.kind === "compliance-actions" && message.productId ? (
-          <ComplianceActionCard
-            productId={message.productId}
-            onAction={(action) =>
-              handlers.onQueueAction("compliance-act", action)
+        {message.kind === "prompts" && message.prompts ? (
+          <SuggestedReplies
+            options={message.prompts}
+            onSelect={(option) =>
+              handlers.onQueueAction(option.action, option.payload)
             }
           />
+        ) : null}
+
+        {message.kind === "doc-diff" && message.diff ? (
+          <DocDiff diff={message.diff} applied={message.applied} />
         ) : null}
 
         {message.kind === "queue-propagation" ? (

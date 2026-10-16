@@ -1,0 +1,60 @@
+Goal
+Build three simple clickable demos that ACS's team can open and click through on their own: PLM, quality control, and tech and product support. Each one should feel like ACS's world and solve a pain they named
+These are demos, not a full build. Jenn wants to show her team how AI helps with their real work, so they can get behind it before anything goes to the CEO..
+Who we spoke with: Jenn (our champion) and Jack (product side). ACS is a group of HVAC companies, including Marvair, Northern Air, and Above Air, and it keeps buying more
+Demo 1: PLM
+User story: As a product manager, I need AI to draft and check data sheets and manual updates from our engineering files, flag which products upcoming regulations could put at risk, and help find old parts when the drawings are missing.
+What ACS said
+* Manuals are written by eng., product teams and technicians use them. Feedback to update the manuals come from technicians through the sales team.
+* Jack wants a way to quickly create and check data sheet information (includes specification for dimensions
+* Jenn said Jack's team keeps getting pinged for literature and website updates.
+* Sireesha noted the installation manuals are often out of date.
+   * Manuals exist but are not easy to find - eg unit sold 15 years ago by company that was acquired.
+* Jack mentioned using past sales to spot products at risk from upcoming regulations.
+* Finding legacy parts with no drawings eats team time, like a two-generation-old door latch nobody had a drawing for.
+   * Some people/teams/companies can communicate information very differently - eg by drawings vs written instructions
+Simple version (one flow): upload an engineering spec, and AI drafts the data sheet, flagging anything missing or conflicting for a person to check. Regulation risk, old part search, and manual updates become talking points.
+Full version (four steps)
+1. Upload an engineering spec, and AI drafts a data sheet in a standard format, flagging any missing or conflicting values for a person to check.
+2. When a spec changes, AI lists which manuals and web pages need updating.
+3. A simple list of products, sorted by risk from an upcoming regulation, with the reason for each.
+4. Search for an old part by description or photo, and AI suggests likely matches from past records.
+
+
+Demo 2: Quality control
+User story: As a quality manager, I need AI to read incoming warranty and quality issues, including messy free-text ones, sort them by product and failure type, and alert me when the same failure keeps showing up across our companies, so we fix root causes instead of answering the same complaint again.
+What ACS said
+* Jack called quality one of their top two problems.
+* Their old intake form was a free-text box, so issues weren't sorted. They're switching to forced choices, like compressor leak vs. coil leak.
+* Years of old issue records are buried in free text, or missing.
+* Nobody looks across tickets to find what keeps going wrong.
+* Jack wants help sorting warranty and quality issues as they come in.
+Simple version (one flow): a messy free-text complaint comes in, AI tags it with product and failure type, and an alert shows the same failure repeating across companies, with a few example tickets.
+Full version (four steps)
+1. A messy free-text complaint comes in, and AI tags it with product, model, and failure type, like compressor leak or coil leak.
+2. AI goes back through old free-text records and sorts them the same way.
+3. A simple view of the most common failures by product and by company, with an alert when one starts repeating.
+4. Each alert shows a few example tickets, so the quality team can see the evidence.
+Demo 3: Tech and product support
+User story: As a tech support agent, I need AI that searches our manuals, past tickets, and what our veteran experts have answered before, then drafts a reply for me and routes harder cases to the right expert, so newer people can handle common questions without waiting on the one person who knows.
+What ACS said
+* Three veterans at Northern Air and one at Above Air hold most of the know-how, and they can't hire more.
+* Jenn wants something that learns from the veterans' answers and handles common questions, without forcing every customer to a chatbot.
+* Jack wants support questions routed to the right expert team.
+* The same customer may call 10 times about one issue.
+* They use Zoho and monday.com, mainly to track how fast they respond.
+Simple version (one flow): a support question comes in, and AI drafts a reply showing the manual page and past ticket it came from, for the agent to check and send. Routing and customer history become talking points.
+Full version (four steps)
+1. A support question comes in, by email or a messy form. AI finds the answer in the manuals and past tickets, and drafts a reply for the agent to check and send.
+2. Every draft shows where the answer came from, like the manual page or a past ticket.
+3. Harder cases get routed to the right expert team, with a short summary so the expert doesn't start from scratch.
+4. When a customer calls back about the same issue, AI shows the full history.
+Keep it distinct from Demo 2: both use ticket data, but support answers the customer fast, and quality finds why they called. That's a good story for Jenn: the same data, used two ways.
+Rules for all three demos
+* Opens with one link in any browser. Jack couldn't open the HTML file last time.
+* Fake but realistic data, labeled "Illustrative." A few products from Marvair, Northern Air, and Above Air, a handful of messy free-text tickets, and one sample manual.
+* Show their tools by name, like Zoho and their ERP, so it feels like their world -> like connecting their systems. E.g: ticket from zoho-> AI->ERP
+* A person approves before anything changes. Every AI action should show a review step.
+* Same look across all three.
+* Only show what we can actually build. No features we'd have to walk back later.
+* No real data from Captain Fresh or any other client.
