@@ -98,7 +98,14 @@ export type FlagAction = {
   label: string;
   primary?: boolean;
   outcome?: FlagActionOutcome;
+  /** Value applied when this action resolves the field. */
+  value?: string;
+  /** Prompt the user for a value before resolving. */
+  input?: boolean;
 };
+
+/** Resolved values per flag id, overriding the seeded data-sheet value. */
+export type ResolvedValues = Record<string, string>;
 
 export type MissingFlagDetail = {
   id: string;
@@ -172,6 +179,12 @@ export type RegulationRiskRow = {
   reason: string;
   annualRevenue: string;
   annualRevenueValue: number;
+  /** Owning company, shown for cross-company (ACS group) views. */
+  company?: string;
+  /** Refrigerant or restricted substance under review. */
+  substance?: string;
+  /** Person accountable for the mitigation. */
+  owner?: string;
 };
 
 export type LegacyPartRow = {
@@ -228,4 +241,80 @@ export type ManualDraftRow = {
   source?: SourceRef;
   flagId?: string;
   note?: string;
+};
+
+/* ------------------------------------------------------------------ */
+/* Product Care Inbox — cross-conversation work queue                  */
+/* ------------------------------------------------------------------ */
+
+export type QueueSeverity = "red" | "amber" | "green";
+
+export type QueueStatus =
+  | "open"
+  | "tracking"
+  | "resolved"
+  | "declined"
+  | "acknowledged";
+
+export type QueueActionVerb = "Review" | "Search" | "Draft";
+
+export type QueueItem = {
+  id: string;
+  severity: QueueSeverity;
+  /** Small uppercase label, e.g. "FIELD REPORT". */
+  type: string;
+  /** Product or scope the item applies to. */
+  scope: string;
+  summary: string;
+  action: QueueActionVerb;
+  status: QueueStatus;
+};
+
+/** Actions emitted from queue cards, handled centrally by the page. */
+export type QueueCardAction =
+  | "field-approve"
+  | "field-edit"
+  | "field-reject"
+  | "compliance-view"
+  | "compliance-act"
+  | "propagation-apply";
+
+/** A committed mitigation path for a regulation-exposed product. */
+export type ComplianceAction =
+  | "open-cr"
+  | "declaration"
+  | "reminder"
+  | "acknowledge";
+
+/** One proposed documentation change, governed by an engineering change request. */
+export type DocChange = {
+  document: string;
+  section: string;
+  currentManual: string;
+  currentSpec: string;
+  reportedBy: string;
+  warning?: string;
+  proposed: string;
+  /** Engineering change request raised for this change. */
+  ecrId: string;
+  /** How many documents reference the changed section. */
+  whereUsed: number;
+  /** Before/after summary shown as a redline. */
+  redline: { from: string; to: string };
+};
+
+/** How a downstream document is handled when upstream content changes. */
+export type ImpactDisposition = "auto" | "author" | "review" | "none";
+
+export type ImpactRow = {
+  document: string;
+  type: string;
+  /** The changed section/attribute that affects this document. */
+  trigger: string;
+  disposition: ImpactDisposition;
+  owner: string;
+  status: string;
+  /** Sample PDF to open for this document, if one is available. */
+  pdfId?: string;
+  page?: number;
 };

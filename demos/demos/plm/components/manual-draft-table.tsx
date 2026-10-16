@@ -27,6 +27,7 @@ export function ManualDraftTable({
   rows,
   revealedCount,
   resolvedFlagIds,
+  resolvedValues,
   pinnedLineIds,
   onHoverLines,
   onPinLines,
@@ -35,6 +36,7 @@ export function ManualDraftTable({
   rows: ManualDraftRow[];
   revealedCount: number;
   resolvedFlagIds: string[];
+  resolvedValues: Record<string, string>;
   pinnedLineIds: string[];
   onHoverLines: (lineIds: string[]) => void;
   onPinLines: (lineIds: string[]) => void;
@@ -107,7 +109,9 @@ export function ManualDraftTable({
                     {row.field}
                   </td>
                   <td className="px-4 py-2 align-middle text-[0.82rem] font-medium text-ink">
-                    {row.value}
+                    {resolved && row.flagId && resolvedValues[row.flagId]
+                      ? resolvedValues[row.flagId]
+                      : row.value}
                   </td>
                   <td className="px-4 py-2 align-middle">
                     {row.source ? (

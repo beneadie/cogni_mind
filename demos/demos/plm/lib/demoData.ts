@@ -128,8 +128,8 @@ export const flagDetails: Record<string, FlagDetail> = {
       "CAD file metadata",
     ],
     actions: [
-      { label: "Enter value", primary: true },
-      { label: "Mark N/A" },
+      { label: "Enter value", primary: true, input: true },
+      { label: "Use 1.2 lbs", value: "1.2 lbs" },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -144,8 +144,8 @@ export const flagDetails: Record<string, FlagDetail> = {
       "ANSI/BHMA test reports",
     ],
     actions: [
-      { label: "Enter value", primary: true },
-      { label: "Mark N/A" },
+      { label: "Enter value", primary: true, input: true },
+      { label: "Mark N/A", value: "N/A" },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -163,9 +163,9 @@ export const flagDetails: Record<string, FlagDetail> = {
       source: "DL-2400_revC.pdf, §3.2 p.2",
     },
     actions: [
-      { label: "Keep spec (0.75 in)", primary: true },
-      { label: "Keep published (0.625 in)" },
-      { label: "Enter value" },
+      { label: "Keep spec (0.75 in)", primary: true, value: "0.75 in" },
+      { label: "Keep published (0.625 in)", value: "0.625 in" },
+      { label: "Enter value", input: true },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -180,9 +180,9 @@ export const flagDetails: Record<string, FlagDetail> = {
       { value: "5,000,000 cycles", confidence: 0.07, source: "OCR alternate read" },
     ],
     actions: [
-      { label: "Confirm 500,000", primary: true },
-      { label: "Use 50,000" },
-      { label: "Enter value" },
+      { label: "Confirm 500,000", primary: true, value: "500,000 cycles" },
+      { label: "Use 50,000", value: "50,000 cycles" },
+      { label: "Enter value", input: true },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -196,8 +196,8 @@ export const flagDetails: Record<string, FlagDetail> = {
       source: "DL-2400_datasheet_2019.pdf, p.2",
     },
     actions: [
-      { label: "Keep 10 years", primary: true },
-      { label: "Enter new value" },
+      { label: "Keep 10 years", primary: true, value: "10 years" },
+      { label: "Enter new value", input: true },
       { label: "Defer", outcome: "defer" },
     ],
   },
@@ -210,9 +210,9 @@ export const flagDetails: Record<string, FlagDetail> = {
     from: { value: "0.625 in", source: "Rev A §3 Install Latch, p.6" },
     to: { value: "0.75 in", source: "DL-2400_revC §3.2" },
     actions: [
-      { label: "Accept change", primary: true },
-      { label: "Keep old value" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept change", primary: true, value: "0.75 in" },
+      { label: "Keep old value", value: "0.625 in" },
+      { label: "Edit", input: true },
     ],
   },
   "strike-manual": {
@@ -224,9 +224,9 @@ export const flagDetails: Record<string, FlagDetail> = {
     from: { value: "Standard strike opening", source: "Rev A §4 Strike Plate, p.7" },
     to: { value: "Widened to 0.75 in throw", source: "DL-2400_revC §3.2" },
     actions: [
-      { label: "Accept change", primary: true },
-      { label: "Keep old value" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept change", primary: true, value: "Widened to 0.75 in throw" },
+      { label: "Keep old value", value: "Standard strike opening" },
+      { label: "Edit", input: true },
     ],
   },
   "adjust-added": {
@@ -237,9 +237,9 @@ export const flagDetails: Record<string, FlagDetail> = {
     body: "A new adjustment step is drafted to set the throw after installation.",
     to: { value: "Rotate the cam to set throw", source: "DL-2400_revC §3.2" },
     actions: [
-      { label: "Accept addition", primary: true },
-      { label: "Remove" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept addition", primary: true, value: "Rotate the cam to set throw" },
+      { label: "Remove", value: "Removed" },
+      { label: "Edit", input: true },
     ],
   },
   "torque-removed": {
@@ -250,9 +250,22 @@ export const flagDetails: Record<string, FlagDetail> = {
     body: "The legacy torque step is superseded by the rev C fastener spec and can be removed.",
     from: { value: "Torque fasteners to 15 in-lb", source: "Rev A §6 Fasteners, p.9" },
     actions: [
-      { label: "Accept removal", primary: true },
-      { label: "Keep step" },
-      { label: "Edit", outcome: "defer" },
+      { label: "Accept removal", primary: true, value: "Removed — superseded" },
+      { label: "Keep step", value: "Torque fasteners to 15 in-lb" },
+      { label: "Edit", input: true },
+    ],
+  },
+  "wire-manual": {
+    id: "wire-manual",
+    kind: "manual-change",
+    changeType: "changed",
+    field: "Wiring Diagram §7.2",
+    body: "The MAA-200 installation manual shows a 2-wire diagram, but the rev C spec requires 3 wires. Update the manual to match.",
+    from: { value: "2-wire diagram", source: "MAA-200 Installation Manual rev A, §7.2" },
+    to: { value: "3-wire diagram", source: "MAA-200 spec rev C" },
+    actions: [
+      { label: "Accept change", primary: true, value: "3-wire diagram" },
+      { label: "Keep old value", value: "2-wire diagram" },
     ],
   },
 };

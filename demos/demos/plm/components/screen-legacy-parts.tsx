@@ -1,7 +1,16 @@
 import { Camera, DoorClosed, Search } from "lucide-react";
 import { legacyParts, legacyQuery } from "../lib/demoData";
+import type { LegacyPartRow } from "../lib/types";
 
-export function ScreenLegacyParts() {
+export function ScreenLegacyParts({
+  rows = legacyParts,
+  query = legacyQuery,
+  onSelect,
+}: {
+  rows?: LegacyPartRow[];
+  query?: string;
+  onSelect?: (partNumber: string) => void;
+}) {
   return (
     <div className="scroll-soft flex h-full min-h-0 flex-col gap-4 overflow-y-auto">
       <div className="shrink-0">
@@ -17,7 +26,7 @@ export function ScreenLegacyParts() {
         <Search className="h-4 w-4 shrink-0 text-muted" />
         <input
           type="text"
-          defaultValue={legacyQuery}
+          defaultValue={query}
           placeholder='Try "brass latch 2-3/8 backset 1980s"'
           aria-label="Search legacy parts"
           className="min-w-0 flex-1 bg-transparent py-2 text-[0.9rem] text-ink placeholder:text-muted focus:outline-none"
@@ -38,15 +47,15 @@ export function ScreenLegacyParts() {
             Results
           </span>
           <span className="font-mono text-[0.6rem] uppercase tracking-[0.1em] text-muted">
-            {legacyParts.length} matches
+            {rows.length} matches
           </span>
         </div>
 
         <ul className="divide-y divide-line">
-          {legacyParts.map((part) => (
+          {rows.map((part) => (
             <li
               key={part.partNumber}
-              className="flex items-center gap-4 px-4 py-3.5 transition-colors hover:bg-elevated/50"
+              className="flex flex-wrap items-center gap-4 px-4 py-3.5 transition-colors hover:bg-elevated/50"
             >
               <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-line-strong bg-canvas text-ink-soft">
                 <DoorClosed className="h-5 w-5" />
@@ -87,6 +96,16 @@ export function ScreenLegacyParts() {
               <span className="shrink-0 font-mono text-[0.68rem] uppercase tracking-[0.08em] text-muted">
                 {part.year}
               </span>
+
+              {onSelect ? (
+                <button
+                  type="button"
+                  onClick={() => onSelect(part.partNumber)}
+                  className="shrink-0 rounded-full bg-accent px-3.5 py-1.5 font-mono text-[0.6rem] font-medium uppercase tracking-[0.1em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                >
+                  Select this part
+                </button>
+              ) : null}
             </li>
           ))}
         </ul>

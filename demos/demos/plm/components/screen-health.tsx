@@ -1,6 +1,6 @@
-import { docHealthRows, manualTargetDocId } from "../lib/demoData";
+import { docHealthRows } from "../lib/demoData";
 import type { DocHealthRow, DocStatus } from "../lib/types";
-import { Archive, ArrowRight, CheckCircle2, FileWarning, XCircle } from "lucide-react";
+import { Archive, CheckCircle2, FileWarning, XCircle } from "lucide-react";
 
 const STATUS_META: Record<
   DocStatus,
@@ -29,10 +29,8 @@ function effectiveStatus(row: DocHealthRow, published: string[]): DocStatus {
 
 export function ScreenHealth({
   publishedDocIds,
-  onUpdate,
 }: {
   publishedDocIds: string[];
-  onUpdate: () => void;
 }) {
   const rows = docHealthRows.map((row) => {
     const status = effectiveStatus(row, publishedDocIds);
@@ -115,14 +113,12 @@ export function ScreenHealth({
               <th className="px-4 py-2.5 font-mono text-[0.6rem] font-medium uppercase tracking-[0.14em] text-muted">
                 Status
               </th>
-              <th className="px-4 py-2.5" />
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => {
               const meta = STATUS_META[row.status];
               const Icon = meta.icon;
-              const actionable = row.status === "out-of-date";
               return (
                 <tr
                   key={row.id}
@@ -149,20 +145,6 @@ export function ScreenHealth({
                       <Icon className="h-3 w-3" />
                       {meta.label}
                     </span>
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    {actionable ? (
-                      <button
-                        type="button"
-                        onClick={onUpdate}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 font-mono text-[0.6rem] font-medium uppercase tracking-[0.1em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                      >
-                        {row.id === manualTargetDocId
-                          ? "Update this manual"
-                          : "Update"}
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </button>
-                    ) : null}
                   </td>
                 </tr>
               );

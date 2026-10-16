@@ -7,16 +7,24 @@ import { Check, ChevronDown, Info, Layers, X } from "lucide-react";
 export function TemplateFields({
   fields,
   rows,
+  resolvedFlagIds,
   unmapped,
 }: {
   fields: TemplateField[];
   rows: DataSheetRow[];
+  resolvedFlagIds: string[];
   unmapped: UnmappedAttribute[];
 }) {
   const [open, setOpen] = useState(false);
 
   const missing = new Set(
-    rows.filter((row) => row.state === "missing").map((row) => row.field),
+    rows
+      .filter(
+        (row) =>
+          row.state === "missing" &&
+          !(row.flagId && resolvedFlagIds.includes(row.flagId)),
+      )
+      .map((row) => row.field),
   );
   const requiredCount = fields.filter((field) => field.required).length;
 

@@ -19,15 +19,15 @@ export type Demo = {
 export const demos: Demo[] = [
   {
     slug: "hvac-support-copilot",
-    name: "HVAC Tech Support",
-    tagline: "Manual-grounded triage, diagnosis, and human handoff.",
+    name: "HVAC Field Support",
+    tagline: "One copilot, in the field: manual-grounded diagnosis and human handoff.",
     href: "/",
     status: "live",
   },
   {
     slug: "plm",
-    name: "PLM Copilot",
-    tagline: "Draft and check data sheets, track regulation risk, find legacy parts.",
+    name: "Product Data (PLM)",
+    tagline: "A product-care inbox: field reports, legacy parts, compliance, and docs from one queue.",
     href: "/plm",
     status: "live",
   },

@@ -5,25 +5,31 @@ import { FileText } from "lucide-react";
 export function SpecDocument({
   doc,
   highlightedLineIds,
+  label = "Engineering Spec",
+  showHeader = true,
 }: {
   doc: SpecDoc;
   highlightedLineIds: string[];
+  label?: string;
+  showHeader?: boolean;
 }) {
   const isLit = (id: string) => highlightedLineIds.includes(id);
 
   return (
     <section className="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-line-strong bg-surface">
-      <header className="flex items-center gap-2.5 border-b border-line bg-elevated/60 px-4 py-3">
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-amber-soft text-amber">
-          <FileText className="h-4 w-4" />
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className="text-[0.82rem] font-medium text-ink">Engineering Spec</p>
-          <p className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-muted">
-            {doc.file} · scanned · rev C · 1987
-          </p>
-        </div>
-      </header>
+      {showHeader ? (
+        <header className="flex items-center gap-2.5 border-b border-line bg-elevated/60 px-4 py-3">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-amber-soft text-amber">
+            <FileText className="h-4 w-4" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[0.82rem] font-medium text-ink">{label}</p>
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-muted">
+              {doc.file} · {doc.revision} · {doc.date}
+            </p>
+          </div>
+        </header>
+      ) : null}
 
       <div className="scroll-soft min-h-0 flex-1 overflow-y-auto p-3 sm:p-4">
         <article className="rounded-lg border border-line bg-canvas px-5 py-5">

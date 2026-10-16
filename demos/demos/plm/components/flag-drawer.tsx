@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CircleDot, X } from "lucide-react";
-import type { FlagActionOutcome, FlagDetail } from "../lib/types";
+import type { FlagAction, FlagActionOutcome, FlagDetail } from "../lib/types";
 import { STATE_META } from "./field-state";
 import { MANUAL_STATE_META } from "./manual-state";
 
@@ -38,10 +39,19 @@ export function FlagDrawer({
 }: {
   detail: FlagDetail | null;
   onClose: () => void;
-  onAction: (flagId: string, outcome: FlagActionOutcome) => void;
+  onAction: (
+    flagId: string,
+    outcome: FlagActionOutcome,
+    value?: string,
+  ) => void;
 }) {
   const meta = detail ? headerMeta(detail) : null;
   const Icon = meta?.icon;
+  const [entry, setEntry] = useState<{ id: string; action: FlagAction } | null>(
+    null,
+  );
+  const [draft, setDraft] = useState("");
+  const entering = detail && entry && entry.id === detail.id ? entry.action : null;
 
   return (
     <AnimatePresence>
@@ -190,21 +200,70 @@ export function FlagDrawer({
               ) : null}
             </div>
 
-            <footer className="flex flex-wrap items-center gap-2 border-t border-line bg-elevated/40 px-5 py-3.5">
-              {detail.actions.map((action) => (
-                <button
-                  key={action.label}
-                  type="button"
-                  onClick={() => onAction(detail.id, action.outcome ?? "resolve")}
-                  className={
-                    action.primary
-                      ? "inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                      : "inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                  }
+            <footer className="border-t border-line bg-elevated/40 px-5 py-3.5">
+              {entering ? (
+                <form
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    const value = draft.trim();
+                    if (!value) return;
+                    onAction(detail.id, "resolve", value);
+                    setEntry(null);
+                  }}
+                  className="space-y-2.5"
                 >
-                  {action.label}
-                </button>
-              ))}
+                  <label className="block font-mono text-[0.6rem] font-medium uppercase tracking-[0.14em] text-muted">
+                    {entering.label} · {detail.field}
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      autoFocus
+                      value={draft}
+                      onChange={(event) => setDraft(event.target.value)}
+                      placeholder="Type a value…"
+                      className="min-w-0 flex-1 rounded-xl border border-line-strong bg-canvas px-3 py-2 text-[0.84rem] text-ink placeholder:text-muted focus:border-accent/40 focus:outline-none"
+                    />
+                    <button
+                      type="submit"
+                      disabled={!draft.trim()}
+                      className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                    >
+                      Apply
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEntry(null)}
+                      className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <div className="flex flex-wrap items-center gap-2">
+                  {detail.actions.map((action) => (
+                    <button
+                      key={action.label}
+                      type="button"
+                      onClick={() => {
+                        if (action.input) {
+                          setEntry({ id: detail.id, action });
+                          setDraft("");
+                          return;
+                        }
+                        onAction(detail.id, action.outcome ?? "resolve", action.value);
+                      }}
+                      className={
+                        action.primary
+                          ? "inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                          : "inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                      }
+                    >
+                      {action.label}
+                    </button>
+                  ))}
+                </div>
+              )}
             </footer>
           </motion.aside>
         </motion.div>
