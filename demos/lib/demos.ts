@@ -31,6 +31,13 @@ export const demos: Demo[] = [
     href: "/plm",
     status: "live",
   },
+  {
+    slug: "quality",
+    name: "Quality Control",
+    tagline: "Sort messy warranty and quality complaints and spot failures repeating across companies.",
+    href: "/quality",
+    status: "live",
+  },
 ];
 
 export function isDemoActive(demo: Demo, pathname: string): boolean {
