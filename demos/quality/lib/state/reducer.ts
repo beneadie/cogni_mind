@@ -4,6 +4,7 @@
 
 import { activeClassifier } from "../classifier/index";
 import type { ClassifyResponse, CompanyId, FailureType, Filters, ModelId, ProductId, Ticket, TicketId, TicketKind } from "../contracts";
+import { modelById } from "../data/catalog";
 import { SEED_TICKETS } from "../data/synthetic";
 import { DEFAULT_FILTERS, isHistoricalFreeText } from "../selectors/records";
 import { DEMO_NOW } from "../time";
@@ -11,22 +12,24 @@ import { DEMO_NOW } from "../time";
 /** An incoming complaint and its classification, waiting for a person before it becomes a ticket. */
 export type Draft = {
   ticketId: TicketId;
-  companyId: CompanyId;
+  /** Null when the intake did not say and no identified model points to a company; a person fills it in. */
+  companyId: CompanyId | null;
   kind: TicketKind;
   text: string;
   modelRaw?: string;
   response: ClassifyResponse;
 };
 
-/** Tags a person sets when correcting; both product and failure are required so the ticket can count. */
-export type Correction = { productId: ProductId; modelId: ModelId | null; failureType: FailureType };
+/** Tags a person sets when correcting; both product and failure are required so the ticket can count.
+ *  companyId applies to the incoming draft only; an existing ticket keeps its company. */
+export type Correction = { productId: ProductId; modelId: ModelId | null; failureType: FailureType; companyId?: CompanyId };
 
 /** Everything the Quality demo remembers. */
 export type QualityState = { tickets: Ticket[]; draft: Draft | null; filters: Filters };
 
 /** Every way the state can change. */
 export type QualityAction =
-  | { type: "draft/classify"; companyId: CompanyId; kind: TicketKind; text: string; modelRaw?: string }
+  | { type: "draft/classify"; companyId?: CompanyId; kind?: TicketKind; text: string; modelRaw?: string }
   | { type: "draft/confirm" }
   | { type: "draft/correct"; correction: Correction }
   | { type: "draft/discard" }
@@ -57,10 +60,10 @@ function confirmable(tags: { productId: ProductId | null; failureType: FailureTy
 }
 
 /** Turns a reviewed draft into a ticket dated DEMO_NOW, keeping the classifier output as provenance. */
-function ticketFromDraft(draft: Draft, tags: Ticket["tags"]): Ticket {
+function ticketFromDraft(draft: Draft, companyId: CompanyId, tags: Ticket["tags"]): Ticket {
   return {
     id: draft.ticketId,
-    companyId: draft.companyId,
+    companyId,
     date: DEMO_NOW,
     kind: draft.kind,
     intake: "free_text",
@@ -83,20 +86,24 @@ export function qualityReducer(state: QualityState, action: QualityAction): Qual
     case "draft/classify": {
       const ticketId = nextTicketId(state.tickets);
       const response = activeClassifier.classify({ ticketId, text: action.text, companyId: action.companyId, modelRaw: action.modelRaw });
-      return { ...state, draft: { ticketId, companyId: action.companyId, kind: action.kind, text: action.text, modelRaw: action.modelRaw, response } };
+      // Company comes from the intake when given, else from the identified legacy model's owner; never guessed.
+      const companyId = action.companyId ?? (response.modelId ? modelById(response.modelId).companyId : null);
+      return { ...state, draft: { ticketId, companyId, kind: action.kind ?? "warranty", text: action.text, modelRaw: action.modelRaw, response } };
     }
     // HUMAN-GATE: the person accepts the suggested tags. Only now does the ticket join the records,
     // so alerts, trends and counters recompute with it.
     case "draft/confirm": {
       const { draft } = state;
-      if (!draft || !confirmable(draft.response)) return state;
+      if (!draft || !draft.companyId || !confirmable(draft.response)) return state;
       const { productId, modelId, failureType } = draft.response;
-      return { ...state, draft: null, tickets: [...state.tickets, ticketFromDraft(draft, { productId, modelId, failureType, status: "confirmed" })] };
+      return { ...state, draft: null, tickets: [...state.tickets, ticketFromDraft(draft, draft.companyId, { productId, modelId, failureType, status: "confirmed" })] };
     }
     // HUMAN-GATE: the person overrides the suggestion (or fills in a needs-review draft) before it joins the records.
     case "draft/correct": {
-      if (!state.draft) return state;
-      return { ...state, draft: null, tickets: [...state.tickets, ticketFromDraft(state.draft, { ...action.correction, status: "corrected" })] };
+      const companyId = action.correction.companyId ?? state.draft?.companyId;
+      if (!state.draft || !companyId) return state;
+      const { productId, modelId, failureType } = action.correction;
+      return { ...state, draft: null, tickets: [...state.tickets, ticketFromDraft(state.draft, companyId, { productId, modelId, failureType, status: "corrected" })] };
     }
     case "draft/discard":
       return state.draft ? { ...state, draft: null } : state;
@@ -107,8 +114,10 @@ export function qualityReducer(state: QualityState, action: QualityAction): Qual
       return { ...state, tickets: updateTicket(state.tickets, action.ticketId, (ticket) => ({ ...ticket, tags: { ...ticket.tags, status: "confirmed" } })) };
     }
     // HUMAN-GATE: correcting any ticket's tags; trends and alerts recompute from the new tags immediately.
-    case "ticket/correct":
-      return { ...state, tickets: updateTicket(state.tickets, action.ticketId, (ticket) => ({ ...ticket, tags: { ...action.correction, status: "corrected" } })) };
+    case "ticket/correct": {
+      const { productId, modelId, failureType } = action.correction;
+      return { ...state, tickets: updateTicket(state.tickets, action.ticketId, (ticket) => ({ ...ticket, tags: { productId, modelId, failureType, status: "corrected" } })) };
+    }
     // Trigger: "Classify historical tickets". Same classifier as intake; results land as suggested or
     // needs_review, never confirmed. Original text is untouched; the response is kept as provenance.
     case "backfill/run": {

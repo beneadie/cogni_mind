@@ -1,8 +1,8 @@
-// PURPOSE: Quality's top bar: demo switcher, brand, title, "Demo data / Illustrative" badge, hint and Reset Demo.
+// PURPOSE: Quality's top bar: demo switcher, brand, title, "Demo data / Illustrative" badge and Reset Demo.
 // ROLE: component. USED BY: demos/quality/page.tsx.
 // Look-alike of Support's AppHeader (its title and "Online" badge are hardcoded); imports only the shared Brand and DemoNav.
 
-import { Info, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { Brand } from "@/components/brand";
 import { DemoNav } from "@/components/demo-nav";
 import { BUTTON } from "./ui";
@@ -27,11 +27,6 @@ export function QualityHeader({ onReset }: { onReset: () => void }) {
         <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-ink-soft">
           <span className="inline-flex h-2 w-2 rounded-full bg-gold" />
           Demo data / Illustrative
-        </span>
-
-        <span className="hidden items-center gap-1.5 rounded-full border border-line px-2.5 py-1 font-mono text-[0.62rem] tracking-[0.04em] text-muted xl:inline-flex">
-          <Info className="h-3 w-3 text-gold" />
-          Try a sample complaint, confirm its tags, then classify historical tickets
         </span>
 
         <button type="button" onClick={onReset} className={BUTTON.secondary}>

@@ -6,6 +6,21 @@ import type { CompanyId, FailureType, Filters, ProductId, Ticket } from "../cont
 import { COMPANIES, failureOrder } from "../data/catalog";
 import { applyFilters, countedTickets } from "./records";
 
+/** Which tickets one "N confirmed" / "N suggested" label under a bar stands for. companyId is set in the By company view. */
+export type TrendScope = { productId?: ProductId; companyId?: CompanyId; failureType: FailureType; status: "confirmed" | "suggested" };
+
+/** The counted (deduplicated, tagged) tickets behind one trend label; same rule as the bars, so the numbers agree.
+ *  "confirmed" covers corrected tickets too, since both passed a person. */
+export function trendTickets(tickets: readonly Ticket[], scope: TrendScope): Ticket[] {
+  return countedTickets(tickets).filter(
+    (ticket) =>
+      ticket.tags.failureType === scope.failureType &&
+      (scope.productId === undefined || ticket.tags.productId === scope.productId) &&
+      (scope.companyId === undefined || ticket.companyId === scope.companyId) &&
+      (scope.status === "suggested") === (ticket.tags.status === "suggested"),
+  );
+}
+
 /** One ranked bar: how many counted tickets share a key, and how many of those are unconfirmed. */
 export type TrendRow<K> = K & { count: number; unconfirmed: number };
 

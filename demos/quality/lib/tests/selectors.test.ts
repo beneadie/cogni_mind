@@ -7,7 +7,7 @@ import type { CompanyId, Ticket, TicketId } from "../contracts";
 import { SAMPLE_COMPLAINT } from "../data/synthetic";
 import { alertEvidence, selectAlerts } from "../selectors/alerts";
 import { backfillProgress, ticketCounters } from "../selectors/records";
-import { trendsByCompany, trendsByProduct } from "../selectors/trends";
+import { trendTickets, trendsByCompany, trendsByProduct } from "../selectors/trends";
 import { type QualityAction, type QualityState, initialState, qualityReducer } from "../state/reducer";
 import { ALERT_WINDOW_DAYS, EXAMPLE_TICKETS_SHOWN } from "../thresholds";
 import { isoDaysBefore } from "../time";
@@ -177,5 +177,26 @@ describe("state", () => {
     assert.deepEqual(reset, initialState());
     assert.equal(selectAlerts(reset.tickets).length, 0);
     assert.notEqual(reset.tickets[0].tags, initialState().tickets[0].tags);
+  });
+});
+
+// Each clickable "N confirmed / N suggested" label opens exactly N records, using the chart's own counting.
+describe("trend drill-down", () => {
+  test("every product and company label lists as many tickets as it shows", () => {
+    const withSample = qualityReducer(qualityReducer(initialState(), { type: "draft/classify", ...SAMPLE_COMPLAINT }), { type: "draft/confirm" });
+    const { tickets } = qualityReducer(withSample, { type: "backfill/run" });
+    const all = { companyId: "all", range: "all" } as const;
+    for (const row of trendsByProduct(tickets, all)) {
+      const scope = { productId: row.productId, failureType: row.failureType };
+      assert.equal(trendTickets(tickets, { ...scope, status: "confirmed" }).length, row.count - row.unconfirmed);
+      assert.equal(trendTickets(tickets, { ...scope, status: "suggested" }).length, row.unconfirmed);
+    }
+    for (const company of trendsByCompany(tickets, all)) {
+      for (const row of company.rows) {
+        const scope = { companyId: company.companyId, failureType: row.failureType };
+        assert.equal(trendTickets(tickets, { ...scope, status: "confirmed" }).length, row.count - row.unconfirmed);
+        assert.equal(trendTickets(tickets, { ...scope, status: "suggested" }).length, row.unconfirmed);
+      }
+    }
   });
 });

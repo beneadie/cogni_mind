@@ -9,9 +9,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, ListChecks, Quote } from "lucide-react";
 import type { ClassifyResponse } from "../lib/contracts";
 
-/** Collapsible "how it was classified" block; open by default so the reasoning is visible next to the tags. */
+/** Collapsible "How was this identified?" block; closed by default so the matching detail is there only when asked for. */
 export function ClassificationSteps({ response }: { response: ClassifyResponse }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const stepCount = response.rulesFired.length + response.evidence.length;
 
   return (
@@ -23,7 +23,7 @@ export function ClassificationSteps({ response }: { response: ClassifyResponse }
         className="flex w-full items-center gap-2 px-4 py-2.5 text-left transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
         <ListChecks className="h-4 w-4 text-amber" />
-        <span className="font-mono text-[0.72rem] font-medium uppercase tracking-[0.1em] text-muted">How it was classified</span>
+        <span className="font-mono text-[0.72rem] font-medium uppercase tracking-[0.1em] text-muted">How was this identified?</span>
         <span className="ml-auto inline-flex items-center gap-1 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
           {open ? "Collapse" : `${stepCount} steps`}
           <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -55,7 +55,7 @@ export function ClassificationSteps({ response }: { response: ClassifyResponse }
                   <span className="text-ink-soft">{rule}</span>
                 </li>
               ))}
-              <li className="pt-1 text-[0.66rem] uppercase tracking-[0.1em] text-muted">Demo classification · {response.classifierVersion}</li>
+              <li className="pt-1 text-[0.66rem] uppercase tracking-[0.1em] text-muted">Rule-based demo classifier · {response.classifierVersion}</li>
             </ol>
           </motion.div>
         ) : null}

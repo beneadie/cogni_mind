@@ -1,67 +1,75 @@
 "use client";
 
-// PURPOSE: "Recurring failure alerts": one card per alert from selectAlerts, expanding to its example tickets.
-// ROLE: component. USED BY: demos/quality/page.tsx.
-// Client component for the expand / "Show all N" toggles. Renders selector output only; no counting happens here.
+// PURPOSE: "Recurring failure alerts": one card per alert from selectAlerts, plus the supporting-complaints detail for the modal.
+// ROLE: component. USED BY: dashboard.tsx (cards), demos/quality/page.tsx (detail in the modal).
+// Client component for the "Show all N" and flag toggles. Renders selector output only; no counting happens here.
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { AlertTriangle, ChevronDown, Flag, Merge } from "lucide-react";
+import { AlertTriangle, ArrowRight, Flag, Merge } from "lucide-react";
 import type { QualityAlert, Ticket, TicketId } from "../lib/contracts";
 import { companyName, failureLabel, productName } from "../lib/data/catalog";
 import { alertEvidence } from "../lib/selectors/alerts";
-import { ALERT_CAVEAT, ALERT_RULE_TEXT } from "../lib/thresholds";
+import { DUPLICATE_RULE_TEXT } from "../lib/selectors/records";
+import { ALERT_CAVEAT, ALERT_RULE_TEXT, ALERT_WINDOW_DAYS } from "../lib/thresholds";
 import { formatDay } from "../lib/time";
-import { BUTTON, Chip, EmptyState, HighlightedText, SectionLabel, StatusTag, UnconfirmedNote } from "./ui";
+import { BUTTON, Chip, EmptyState, HighlightedText, RECURRING, SectionLabel, StatusTag, UnconfirmedNote } from "./ui";
 
 /** Headline for an alert: failure type on canonical product. */
 export function alertTitle(alert: QualityAlert): string {
   return `${failureLabel(alert.failureType)} · ${productName(alert.productId)}`;
 }
 
-/** One example ticket as evidence: ID, date, company, original words with matches highlighted, tags. */
-function EvidenceTicket({ ticket, onOpen }: { ticket: Ticket; onOpen: () => void }) {
+/** The alert rule, tucked away for anyone who asks. */
+function RuleDisclosure() {
+  return (
+    <details className="group text-[0.74rem] leading-relaxed text-muted">
+      <summary className="cursor-pointer list-none font-mono text-[0.62rem] uppercase tracking-[0.1em] hover:text-ink">How alerts work</summary>
+      <p className="mt-1.5">
+        {ALERT_RULE_TEXT} {DUPLICATE_RULE_TEXT} {ALERT_CAVEAT}
+      </p>
+    </details>
+  );
+}
+
+/** One supporting complaint: ID, date, company, product, original words, failure type and review status. Opens the full record. */
+function SupportingTicket({ ticket, onOpen }: { ticket: Ticket; onOpen: () => void }) {
   return (
     <li>
       <button
         type="button"
         onClick={onOpen}
-        className="w-full space-y-1.5 rounded-xl border border-line bg-canvas px-3 py-2.5 text-left transition-colors hover:border-line-strong hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        className="w-full space-y-2 rounded-xl border border-line bg-surface px-4 py-3 text-left transition-colors hover:border-line-strong hover:bg-elevated/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
-        <div className="flex flex-wrap items-center gap-2 font-mono text-[0.64rem] uppercase tracking-[0.08em] text-muted">
+        <span className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.64rem] uppercase tracking-[0.08em] text-muted">
           <span className="font-medium text-ink">{ticket.id}</span>
-          <span>{formatDay(ticket.date, true)}</span>
           <span>{companyName(ticket.companyId)}</span>
+          <span>{formatDay(ticket.date, true)}</span>
           <span className="ml-auto">
             <StatusTag status={ticket.tags.status} />
           </span>
-        </div>
-        <HighlightedText text={ticket.text} evidence={ticket.classification?.evidence ?? []} className="line-clamp-3 text-[0.8rem] leading-relaxed text-ink-soft" />
-        <div className="flex flex-wrap gap-1.5">
+        </span>
+        <HighlightedText text={ticket.text} evidence={ticket.classification?.evidence ?? []} className="text-[0.86rem] leading-relaxed text-ink" />
+        <span className="flex flex-wrap gap-1.5">
           {ticket.tags.productId ? <Chip>{productName(ticket.tags.productId)}</Chip> : null}
           {ticket.tags.failureType ? <Chip>{failureLabel(ticket.tags.failureType)}</Chip> : null}
-          <Chip>{ticket.intake === "forced_choice" ? "Forced-choice form" : "Free text"}</Chip>
-        </div>
+          <Chip>{ticket.intake === "forced_choice" ? "Structured form" : "Free text"}</Chip>
+        </span>
       </button>
     </li>
   );
 }
 
-/** One alert: summary always visible; examples, rule caveat and the demo-only flag when expanded. */
-function AlertCard({
+/** Drawer body for one alert: summary, supporting complaints (newest first) and the demo-only flag. */
+export function AlertDetail({
   alert,
   tickets,
-  expanded,
   flagged,
-  onToggle,
   onFlag,
   onOpenTicket,
 }: {
   alert: QualityAlert;
   tickets: readonly Ticket[];
-  expanded: boolean;
   flagged: boolean;
-  onToggle: () => void;
   onFlag: () => void;
   onOpenTicket: (id: TicketId) => void;
 }) {
@@ -70,120 +78,94 @@ function AlertCard({
   const shown = showAll ? evidence.all : evidence.examples;
 
   return (
-    <motion.li layout="position" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="overflow-hidden rounded-2xl border border-amber/40 bg-surface">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={expanded}
-        className="flex w-full items-start gap-3 bg-amber-soft px-4 py-3 text-left transition-colors hover:bg-amber/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-      >
-        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
-        <span className="min-w-0 flex-1 space-y-1">
-          <span className="block text-[0.9rem] font-medium text-ink">{alertTitle(alert)}</span>
-          <span className="block font-mono text-[0.64rem] uppercase tracking-[0.08em] text-ink-soft">
-            {alert.ticketIds.length} tickets · {alert.companyIds.length} companies · {formatDay(alert.windowStart)} – {formatDay(alert.windowEnd, true)}
-          </span>
-          <span className="block text-[0.74rem] text-muted">{alert.companyIds.map(companyName).join(", ")}</span>
-          <UnconfirmedNote count={alert.unconfirmedCount} />
-        </span>
-        <ChevronDown className={`mt-0.5 h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
-      </button>
+    <div className="space-y-4">
+      <div className={`space-y-1.5 rounded-2xl border px-4 py-3 ${RECURRING.card}`}>
+        <p className="text-[0.95rem] font-medium text-ink">{alertTitle(alert)}</p>
+        <p className="font-mono text-[0.64rem] uppercase tracking-[0.08em] text-ink-soft">
+          {alert.ticketIds.length} complaints · {alert.companyIds.length} companies · {formatDay(alert.windowStart)} – {formatDay(alert.windowEnd, true)}
+        </p>
+        <p className="text-[0.78rem] text-ink-soft">{alert.companyIds.map(companyName).join(", ")}</p>
+        <UnconfirmedNote count={alert.unconfirmedCount} />
+      </div>
 
-      <AnimatePresence initial={false}>
-        {expanded ? (
-          <motion.div
-            key="body"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="space-y-3 border-t border-amber/30 px-4 py-3">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <SectionLabel>Example tickets · newest first</SectionLabel>
-                {evidence.duplicatesMerged > 0 ? (
-                  <Chip>
-                    <Merge className="h-3 w-3" />
-                    {evidence.duplicatesMerged} {evidence.duplicatesMerged === 1 ? "duplicate" : "duplicates"} merged
-                  </Chip>
-                ) : null}
-              </div>
-              <ul className="space-y-2">
-                {shown.map((ticket) => (
-                  <EvidenceTicket key={ticket.id} ticket={ticket} onOpen={() => onOpenTicket(ticket.id)} />
-                ))}
-              </ul>
-              {evidence.hiddenCount > 0 ? (
-                <button type="button" onClick={() => setShowAll((value) => !value)} className={BUTTON.secondary}>
-                  {showAll ? "Show fewer" : `Show all ${evidence.all.length}`}
-                </button>
-              ) : null}
-              <p className="text-[0.74rem] leading-relaxed text-muted">
-                {ALERT_RULE_TEXT} {ALERT_CAVEAT}
-              </p>
-              <div className="flex flex-wrap items-center justify-end gap-2">
-                {/* DEMO-ONLY: no engineering ticket or PLM task is created; the flag only marks this card. */}
-                <Chip tone="amber">Demo / not submitted</Chip>
-                <button type="button" onClick={onFlag} disabled={flagged} className={BUTTON.primary}>
-                  <Flag className="h-3.5 w-3.5" />
-                  {flagged ? "Flagged for engineering review" : "Flag for engineering review"}
-                </button>
-              </div>
-            </div>
-          </motion.div>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <SectionLabel>Supporting complaints · newest first</SectionLabel>
+        {evidence.duplicatesMerged > 0 ? (
+          <Chip>
+            <Merge className="h-3 w-3" />
+            {evidence.duplicatesMerged} {evidence.duplicatesMerged === 1 ? "duplicate" : "duplicates"} merged
+          </Chip>
         ) : null}
-      </AnimatePresence>
-    </motion.li>
+      </div>
+      <ul className="space-y-2">
+        {shown.map((ticket) => (
+          <SupportingTicket key={ticket.id} ticket={ticket} onOpen={() => onOpenTicket(ticket.id)} />
+        ))}
+      </ul>
+      {evidence.hiddenCount > 0 ? (
+        <button type="button" onClick={() => setShowAll((value) => !value)} className={BUTTON.secondary}>
+          {showAll ? "Show fewer" : `Show all ${evidence.all.length}`}
+        </button>
+      ) : null}
+
+      <div className="flex flex-wrap items-center justify-end gap-2 border-t border-line pt-4">
+        <span className="mr-auto">
+          <RuleDisclosure />
+        </span>
+        {/* DEMO-ONLY: no engineering ticket or PLM task is created; the flag only marks this alert. */}
+        <Chip tone="amber">Demo · not submitted</Chip>
+        <button type="button" onClick={onFlag} disabled={flagged} className={BUTTON.primary}>
+          <Flag className="h-3.5 w-3.5" />
+          {flagged ? "Flagged for engineering" : "Flag for engineering review"}
+        </button>
+      </div>
+    </div>
   );
 }
 
-/** Alert list with its empty state; the selected alert is expanded and drives the Evidence rail. */
-export function AlertsPanel({
-  alerts,
-  tickets,
-  selectedAlertId,
-  flaggedAlertIds,
-  onSelect,
-  onFlag,
-  onOpenTicket,
-}: {
-  alerts: readonly QualityAlert[];
-  tickets: readonly Ticket[];
-  selectedAlertId: string | null;
-  flaggedAlertIds: readonly string[];
-  onSelect: (id: string | null) => void;
-  onFlag: (id: string) => void;
-  onOpenTicket: (id: TicketId) => void;
-}) {
+/** Alert cards with their empty state; `highlightedId` rings the alert a just-created ticket belongs to. */
+export function AlertsPanel({ alerts, highlightedId, onOpen }: { alerts: readonly QualityAlert[]; highlightedId: string | null; onOpen: (id: string) => void }) {
   return (
-    <section className="space-y-2" aria-labelledby="alerts-title">
+    <section className="space-y-3" aria-labelledby="alerts-title">
       <div className="flex items-baseline justify-between gap-2">
-        <h2 id="alerts-title" className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-ink">
-          Recurring failure alerts
+        <h2 id="alerts-title" className="font-serif text-lg text-ink">
+          Recurring failures
         </h2>
-        <span aria-live="polite" className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-muted">{alerts.length} active</span>
+        <span aria-live="polite" className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-muted">
+          {alerts.length} active
+        </span>
       </div>
       {alerts.length === 0 ? (
-        <EmptyState>No failure is repeating across companies right now. Alerts appear here when one meets the rule: {ALERT_RULE_TEXT}</EmptyState>
+        <EmptyState>No failure is repeating across companies right now. Watching every new and historical complaint.</EmptyState>
       ) : (
         <ul className="space-y-3">
-          <AnimatePresence initial={false}>
-            {alerts.map((alert) => (
-              <AlertCard
-                key={alert.id}
-                alert={alert}
-                tickets={tickets}
-                expanded={alert.id === selectedAlertId}
-                flagged={flaggedAlertIds.includes(alert.id)}
-                onToggle={() => onSelect(alert.id === selectedAlertId ? null : alert.id)}
-                onFlag={() => onFlag(alert.id)}
-                onOpenTicket={onOpenTicket}
-              />
-            ))}
-          </AnimatePresence>
+          {alerts.map((alert) => (
+            <li key={alert.id}>
+              <button
+                type="button"
+                onClick={() => onOpen(alert.id)}
+                className={`flex w-full items-start gap-3 rounded-2xl border px-4 py-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${RECURRING.card} ${RECURRING.hover} ${
+                  alert.id === highlightedId ? RECURRING.highlight : ""
+                }`}
+              >
+                <AlertTriangle className={`mt-0.5 h-5 w-5 shrink-0 ${RECURRING.icon}`} />
+                <span className="min-w-0 flex-1 space-y-1">
+                  <span className="block text-[1rem] font-medium text-ink">{alertTitle(alert)}</span>
+                  <span className="block text-[0.8rem] text-ink-soft">
+                    {alert.ticketIds.length} complaints from {alert.companyIds.length} companies in the last {ALERT_WINDOW_DAYS} days · {alert.companyIds.map(companyName).join(", ")}
+                  </span>
+                  <UnconfirmedNote count={alert.unconfirmedCount} />
+                </span>
+                <span className="hidden shrink-0 items-center gap-1 self-center font-mono text-[0.62rem] uppercase tracking-[0.1em] text-ink sm:inline-flex">
+                  View complaints
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </button>
+            </li>
+          ))}
         </ul>
       )}
+      <RuleDisclosure />
     </section>
   );
 }

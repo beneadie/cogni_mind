@@ -14,7 +14,7 @@ export const STATUS_LABEL: Record<TagStatus | "alert", string> = {
   needs_review: "Needs review",
   confirmed: "Confirmed",
   corrected: "Corrected",
-  alert: "Alert",
+  alert: "Recurring",
 };
 
 /** Plain-language explanation for each reason the classifier left a ticket for a person. */
@@ -36,14 +36,45 @@ export function SectionLabel({ children, className = "" }: { children: ReactNode
 
 // --- Chips and tags ---
 
-/** Visual tone of a chip; each maps to existing palette tokens only. */
-export type ChipTone = "neutral" | "amber" | "online" | "danger";
+// --- Data palette (QC only; the shared theme tokens stay untouched) ---
+// Ranking bars are one muted blue on a light-gray track (length = total, nothing else). Status badges are soft
+// fills: confirmed green, suggested blue, needs review orange. Muted terracotta only where the alert rule fired,
+// never because a count is high. Every color sits next to a text label. Literal strings so Tailwind sees them.
+
+/** Fills for bars and swatches. */
+export const DATA_FILL = {
+  ranking: "bg-[#5C83A3]",
+  track: "bg-[#ECEAE5]",
+  recurring: "bg-[#BB7468]",
+} as const;
+
+/** Text tone for needs-review counts (matches the "review" chip). */
+export const REVIEW_TEXT = "text-[#B65E16]";
+
+/** Text tone matching DATA_FILL.ranking, for icons. */
+export const DATA_TEXT_RANKING = "text-[#4a6d8a]";
+
+/** Recurring-failure alert surfaces (cards, highlight, icon). */
+export const RECURRING = {
+  card: "border-[#BB7468]/40 bg-[#BB7468]/[0.07]",
+  hover: "hover:bg-[#BB7468]/[0.12]",
+  highlight: "border-[#BB7468] ring-2 ring-[#BB7468]/35",
+  icon: "text-[#9c5a4f]",
+  text: "text-[#9c5a4f]",
+} as const;
+
+/** Visual tone of a chip. */
+export type ChipTone = "neutral" | "amber" | "online" | "danger" | "suggested" | "review" | "recurring" | "gray";
 
 const CHIP_TONES: Record<ChipTone, string> = {
   neutral: "border-line-strong text-ink-soft",
   amber: "border-amber/30 bg-amber-soft text-amber",
-  online: "border-online/40 text-online",
+  online: "border-[#2E7D32]/15 bg-[#E8F5E9] text-[#2E7D32]",
   danger: "border-danger/30 bg-danger-soft text-danger",
+  suggested: "border-[#1565C0]/15 bg-[#E3F2FD] text-[#1565C0]",
+  review: "border-[#B65E16]/20 bg-[#FFF3E0] text-[#B65E16]",
+  recurring: "border-[#BB7468]/40 bg-[#BB7468]/10 text-[#8f4c41]",
+  gray: "border-line-strong bg-elevated text-muted",
 };
 
 /** Compact rounded tag. */
@@ -55,13 +86,14 @@ export function Chip({ tone = "neutral", children }: { tone?: ChipTone; children
   );
 }
 
+// The label always carries the status; color only reinforces it. "Recurring" follows the alert rule only.
 const STATUS_TONE: Record<TagStatus | "alert", ChipTone> = {
-  unclassified: "neutral",
-  suggested: "neutral",
-  needs_review: "amber",
+  unclassified: "gray",
+  suggested: "suggested",
+  needs_review: "review",
   confirmed: "online",
   corrected: "online",
-  alert: "danger",
+  alert: "recurring",
 };
 
 /** Status tag for a ticket; pass inAlert to show "Alert" instead of the review status. */

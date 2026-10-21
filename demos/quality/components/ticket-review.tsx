@@ -80,7 +80,7 @@ export function TicketReview({
         </div>
 
         <div className="space-y-2">
-          <SectionLabel>{classification ? "Suggested tags · Demo classification" : "Tags"}</SectionLabel>
+          <SectionLabel>{classification ? "Suggested tags · rule-based demo classifier" : "Tags"}</SectionLabel>
           <div className="rounded-xl border border-line px-3 py-1">
             <TagRow label="Product" value={tags.productId ? productName(tags.productId) : null} />
             <TagRow label="Model" value={tags.modelId ? modelById(tags.modelId).label : null} raw={ticket.modelRaw} />
@@ -130,7 +130,7 @@ export function TicketReview({
       ) : (
         <div className="flex flex-wrap items-center justify-end gap-2">
           {pending ? (
-            <p className="mr-auto text-[0.74rem] text-muted">A person confirms or corrects before this joins the records.</p>
+            <p className="mr-auto text-[0.74rem] text-muted">Review the details, then create the ticket.</p>
           ) : null}
           {onDiscard ? (
             <button type="button" onClick={onDiscard} className={BUTTON.secondary}>
