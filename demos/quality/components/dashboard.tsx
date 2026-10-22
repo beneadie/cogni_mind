@@ -110,7 +110,7 @@ export function Dashboard({
           }
           onClick={() => onOpenRecords("all")}
         />
-        <SummaryCard label="Recurring Failures" value={alerts.length} detail="Same failure, several companies" tone="recurring" />
+        <SummaryCard label="Recurring Failures" value={alerts.length} detail="Same failure, several companies" tone="recurring" onClick={() => onOpenRecords("recurring")} />
         <SummaryCard label="Needs Review" value={needsReview} detail="Details a person must fill in" tone="review" onClick={() => onOpenRecords("needs_review")} />
       </div>
 
