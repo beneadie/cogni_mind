@@ -15,6 +15,8 @@ import {
   GREETING_TEXT,
   PLACEHOLDERS,
   sessions,
+  type PermissionDecision,
+  type PermissionRequest,
   type PlmSession,
   type PlmStage,
   type UploadedFile,
@@ -41,6 +43,7 @@ import {
   auditIntroTurn,
   auditPublishTurn,
   auditScanTurn,
+  auditSkippedTurn,
   auditSubagentsTurn,
 } from "./lib/audit-turns";
 import {
@@ -57,6 +60,7 @@ import {
 } from "./lib/demoData";
 import type {
   ComplianceAction,
+  ComplianceOutcome,
   FlagActionOutcome,
   QueueCardAction,
   QueueItem,
@@ -65,10 +69,18 @@ import {
   COMPLIANCE_ALERT_ITEM,
   DOCUMENTATION_ALERT_ITEM,
   INITIAL_QUEUE,
+  complianceProducts,
+  impactRows,
   PROPAGATION_ITEM,
 } from "./lib/queue-data";
+import {
+  CHROME_YEAR,
+  REFRIGERANT_YEAR,
+  ROHS_YEAR,
+} from "./lib/dates";
 import { productDossiers, riskRecord } from "./lib/risk-catalog";
 import {
+  complianceOutcomeFor,
   queueComplianceActTurn,
   queueComplianceTurn,
   queueDocumentationTurn,
@@ -135,6 +147,18 @@ export default function PlmDemo() {
   const [rightTab, setRightTab] = useState<"items" | "workspace">("items");
   const [isAutoFilling, setIsAutoFilling] = useState(false);
   const [queue, setQueue] = useState<QueueItem[]>(INITIAL_QUEUE);
+  const [propagationSentIds, setPropagationSentIds] = useState<string[]>([]);
+  const [specialistPermission, setSpecialistPermission] = useState(false);
+  const [rememberedOwners, setRememberedOwners] = useState<string[]>([]);
+  const [complianceActiveProductId, setComplianceActiveProductId] = useState<
+    string | null
+  >(null);
+  const [complianceOutcomes, setComplianceOutcomes] = useState<
+    Record<string, ComplianceOutcome>
+  >({});
+  const [pendingPropagationIds, setPendingPropagationIds] = useState<
+    string[] | null
+  >(null);
   const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const [riskProductId, setRiskProductId] = useState<string | null>(null);
   const [resolvedValues, setResolvedValues] = useState<Record<string, string>>(
@@ -339,14 +363,14 @@ export default function PlmDemo() {
         addWorkspace([
           {
             id: "rohs",
-            title: "RoHS 2027",
+            title: `RoHS ${ROHS_YEAR}`,
             meta: "Restriction text · Pb · Cd · Cr6",
             status: "Loaded",
             tone: "muted",
           },
           {
             id: "chrome",
-            title: "EU Chrome Restriction 2026",
+            title: `EU Chrome Restriction ${CHROME_YEAR}`,
             meta: "Restriction text · Cr",
             status: "Loaded",
             tone: "muted",
@@ -426,6 +450,8 @@ export default function PlmDemo() {
     setUploadedFile(null);
     setAuditPublished(false);
     setAuditReviewValues({ ...DEFAULT_AUDIT_REVIEW_VALUES });
+    setPropagationSentIds([]);
+    setPendingPropagationIds(null);
     streamTurn(
       auditIntroTurn(() => {
         setStage("audit-upload");
@@ -469,6 +495,46 @@ export default function PlmDemo() {
     [addAlert],
   );
 
+  const runSpecialistChecks = useCallback(
+    (remembered: boolean) => {
+      setStage("audit-delegating");
+      streamTurn(
+        auditSubagentsTurn(() => {
+          setStage((current) =>
+            current === "audit-review" ? current : "alerts",
+          );
+        }, remembered),
+      );
+    },
+    [streamTurn],
+  );
+
+  const requestSpecialistChecks = useCallback(() => {
+    if (specialistPermission) {
+      push({
+        role: "agent",
+        kind: "text",
+        text: "Using the permission you saved for specialist checks.",
+      });
+      runSpecialistChecks(true);
+      return;
+    }
+    setStage("audit-permission");
+    const permission: PermissionRequest = {
+      id: "specialist-checks",
+      title: "Run the three specialist checks?",
+      detail:
+        "I'll compare the draft against compliance, the manual, and the published sheet, then create alerts for anything that needs review. These checks only read data.",
+      readOnly: true,
+      items: [
+        `Compliance agent — ${REFRIGERANT_YEAR} refrigerant rules and ERP exposure`,
+        "Manuals & drawings agent — §7.2 against spec rev C",
+        "Published data sheet agent — current customer-facing revision",
+      ],
+    };
+    push({ role: "agent", kind: "permission", permission });
+  }, [push, runSpecialistChecks, specialistPermission]);
+
   const handleUpload = useCallback(
     (file: UploadedFile) => {
       if (isThinking) return;
@@ -500,18 +566,18 @@ export default function PlmDemo() {
       setStage("audit-reading");
       streamTurn(
         auditScanTurn(file.name, file.kind, () => {
-          setStage("audit-delegating");
-          streamTurn(
-            auditSubagentsTurn(() => {
-              setStage((current) =>
-                current === "audit-review" ? current : "alerts",
-              );
-            }),
-          );
+          requestSpecialistChecks();
         }),
       );
     },
-    [addWorkspace, isThinking, push, stopAutofill, streamTurn],
+    [
+      addWorkspace,
+      isThinking,
+      push,
+      requestSpecialistChecks,
+      stopAutofill,
+      streamTurn,
+    ],
   );
 
   const openUploadedFile = useCallback(() => {
@@ -857,7 +923,7 @@ export default function PlmDemo() {
             push({
               role: "agent",
               kind: "text",
-              text: "DL-2400 uses C36000 forged brass, which carries lead above the RoHS 2027 threshold. With 5,200 units shipped in the last 12 months, it's the top exposure in the DL Series.",
+              text: `DL-2400 uses C36000 forged brass, which carries lead above the RoHS ${ROHS_YEAR} threshold. With 5,200 units shipped in the last 12 months, it's the top exposure in the DL Series.`,
             });
           } else if (/data sheet|spec|back/.test(lower)) {
             push({
@@ -942,6 +1008,7 @@ export default function PlmDemo() {
 
   const composerLocked =
     stage === "audit-upload" ||
+    stage === "audit-permission" ||
     stage === "audit-review" ||
     stage === "queue-review" ||
     stage === "queue-apply" ||
@@ -1019,6 +1086,12 @@ export default function PlmDemo() {
     setNewAlertIds([]);
     setResolvedFlagIds([]);
     setPublishedDocIds([]);
+    setPropagationSentIds([]);
+    setSpecialistPermission(false);
+    setRememberedOwners([]);
+    setComplianceActiveProductId(null);
+    setComplianceOutcomes({});
+    setPendingPropagationIds(null);
     setOpenFlagId(null);
     setViewer(null);
     setReferences([]);
@@ -1084,9 +1157,18 @@ export default function PlmDemo() {
         case "documentation-mismatch":
           streamTurn(queueDocumentationTurn(() => setStage("queue-review")));
           break;
-        case "compliance-alert":
+        case "compliance-alert": {
+          const primary = complianceProducts[0]?.product ?? null;
+          setComplianceActiveProductId(primary);
+          setComplianceOutcomes({});
+          setRiskProductId(primary);
+          if (primary) {
+            addWorkspace(productDossiers[primary] ?? []);
+            setRightTab("workspace");
+          }
           streamTurn(queueComplianceTurn(() => setStage("queue-review")));
           break;
+        }
         case "propagation":
           streamTurn(queuePropagationTurn(() => setStage("queue-review")));
           break;
@@ -1094,7 +1176,7 @@ export default function PlmDemo() {
           break;
       }
     },
-    [addAlert, resetChatState, stage, streamTurn],
+    [addAlert, addWorkspace, resetChatState, stage, streamTurn],
   );
 
   const updateAuditReviewValue = useCallback((id: string, value: string) => {
@@ -1123,6 +1205,80 @@ export default function PlmDemo() {
     [auditPublished, isThinking, streamTurn],
   );
 
+  const executePropagationSend = useCallback(
+    (selectedIds: string[]) => {
+      if (selectedIds.length === 0) return;
+      const nextSentIds = Array.from(
+        new Set([...propagationSentIds, ...selectedIds]),
+      );
+      const remaining = impactRows.filter(
+        (row) => !nextSentIds.includes(row.document),
+      );
+      const sentRows = impactRows.filter((row) =>
+        selectedIds.includes(row.document),
+      );
+      const allSent = remaining.length === 0;
+      streamTurn(
+        queuePropagationApplyTurn(sentRows, remaining.length, () => {
+          setPropagationSentIds(nextSentIds);
+          const next = queue.map((item) =>
+            item.id === "propagation"
+              ? {
+                  ...item,
+                  status: allSent ? ("tracking" as const) : ("open" as const),
+                  summary: allSent
+                    ? "All §7.2 proposals sent to owners"
+                    : `${remaining.length} document${remaining.length === 1 ? "" : "s"} still need the §7.2 proposal`,
+                }
+              : item,
+          );
+          setQueue(next);
+          if (allSent) setActiveItemId(null);
+          setStage(allSent ? queueStage(next) : "queue-review");
+        }),
+      );
+    },
+    [propagationSentIds, queue, streamTurn],
+  );
+
+  const requestPropagationSend = useCallback(
+    (selectedIds: string[]): boolean => {
+      if (pendingPropagationIds) return false;
+      const rows = impactRows.filter((row) =>
+        selectedIds.includes(row.document),
+      );
+      const owners = Array.from(new Set(rows.map((row) => row.owner)));
+      const newOwners = owners.filter(
+        (owner) => !rememberedOwners.includes(owner),
+      );
+      if (newOwners.length === 0) {
+        const ownerText =
+          owners.length === 1
+            ? owners[0]
+            : `${owners.slice(0, -1).join(", ")} and ${owners[owners.length - 1]}`;
+        push({
+          role: "agent",
+          kind: "text",
+          text: `Using the permission you saved for ${ownerText}.`,
+        });
+        executePropagationSend(selectedIds);
+        return true;
+      }
+
+      setPendingPropagationIds(selectedIds);
+      const permission: PermissionRequest = {
+        id: "document-proposals",
+        title: "Send these proposals to the owners?",
+        detail:
+          "These teams need to approve the §7.2 change. Nothing is edited in their systems until they accept.",
+        items: rows.map((row) => `${row.document} · ${row.owner}`),
+      };
+      push({ role: "agent", kind: "permission", permission });
+      return false;
+    },
+    [executePropagationSend, pendingPropagationIds, push, rememberedOwners],
+  );
+
   const handleQueueAction = useCallback(
     (action: QueueCardAction, payload?: string) => {
       switch (action) {
@@ -1144,7 +1300,7 @@ export default function PlmDemo() {
               setStage("queue-review");
               setActiveItemId(PROPAGATION_ITEM.id);
               streamTurn(queuePropagationTurn(() => setStage("queue-review")));
-            }),
+            }, payload),
           );
           break;
         case "field-reject": {
@@ -1178,11 +1334,22 @@ export default function PlmDemo() {
         case "compliance-act": {
           const decision = payload as ComplianceAction | undefined;
           if (!decision || !riskProductId) break;
-          const nextStatus: QueueItem["status"] =
-            decision === "close" ? "resolved" : "tracking";
+          const outcome = complianceOutcomeFor(riskProductId, decision);
+          const nextStatus: QueueItem["status"] = outcome.status;
           const updatesQueue = riskRecord(riskProductId)?.group === "acs";
           streamTurn(
             queueComplianceActTurn(riskProductId, decision, () => {
+              addWorkspace([
+                {
+                  id: `${riskProductId}-${outcome.referenceId}`,
+                  title: outcome.title,
+                  meta: `${outcome.referenceId} · ${outcome.product}`,
+                  status:
+                    outcome.status === "tracking" ? "Tracking" : "Acknowledged",
+                  tone: outcome.status === "tracking" ? "danger" : "muted",
+                  group: riskProductId,
+                },
+              ]);
               if (updatesQueue) {
                 const next = queue.map((item) =>
                   item.id === "compliance-alert"
@@ -1198,24 +1365,167 @@ export default function PlmDemo() {
           );
           break;
         }
-        case "propagation-apply":
-          streamTurn(
-            queuePropagationApplyTurn(() => {
-              const next = queue.map((item) =>
-                item.id === "propagation"
-                  ? { ...item, status: "tracking" as const }
-                  : item,
-              );
-              setQueue(next);
-              setStage(queueStage(next));
-            }),
+        case "compliance-case-select": {
+          if (!payload) break;
+          if (!complianceProducts.some((product) => product.product === payload))
+            break;
+          setComplianceActiveProductId(payload);
+          setRiskProductId(payload);
+          addWorkspace(productDossiers[payload] ?? []);
+          setRightTab("workspace");
+          setStage("queue-review");
+          break;
+        }
+        case "compliance-case-act": {
+          const [productId, rawAction] = (payload ?? "").split("|");
+          const decision = rawAction as ComplianceAction | undefined;
+          if (!productId || !decision || complianceOutcomes[productId]) break;
+          if (!complianceProducts.some((product) => product.product === productId))
+            break;
+
+          const outcome = complianceOutcomeFor(productId, decision);
+          const nextOutcomes = { ...complianceOutcomes, [productId]: outcome };
+          setComplianceOutcomes(nextOutcomes);
+          setComplianceActiveProductId(productId);
+          setRiskProductId(productId);
+          addWorkspace([
+            {
+              id: `${productId}-${outcome.referenceId}`,
+              title: outcome.title,
+              meta: `${outcome.referenceId} · ${outcome.product}`,
+              status:
+                outcome.status === "tracking" ? "Tracking" : "Acknowledged",
+              tone: outcome.status === "tracking" ? "danger" : "muted",
+              group: productId,
+            },
+          ]);
+
+          const decided = complianceProducts.filter(
+            (product) => nextOutcomes[product.product],
+          ).length;
+          const allDecided = decided === complianceProducts.length;
+          const nextStatus: QueueItem["status"] = allDecided
+            ? complianceProducts.every(
+                (product) =>
+                  nextOutcomes[product.product]?.status === "acknowledged",
+              )
+              ? "acknowledged"
+              : "tracking"
+            : "open";
+          const next = queue.map((item) =>
+            item.id === "compliance-alert"
+              ? {
+                  ...item,
+                  status: nextStatus,
+                  summary: `${decided} of ${complianceProducts.length} products decided${
+                    allDecided
+                      ? nextStatus === "acknowledged"
+                        ? " — risks acknowledged"
+                        : " — mitigation tracking"
+                      : ""
+                  }`,
+                }
+              : item,
           );
+          setQueue(next);
+          if (allDecided) {
+            setActiveItemId(null);
+            setStage(queueStage(next));
+          } else {
+            setStage("queue-review");
+          }
+          break;
+        }
+        case "propagation-cancel":
+          setPendingPropagationIds(null);
+          push({
+            role: "agent",
+            kind: "text",
+            text:
+              propagationSentIds.length > 0
+                ? "Canceled — no further proposals sent. The Document updates alert stays open for the remaining documents."
+                : "Canceled — no proposals sent. The Document updates alert stays open.",
+          });
           break;
         default:
           break;
       }
     },
-    [addWorkspace, push, queue, riskProductId, streamTurn],
+    [
+      addWorkspace,
+      complianceOutcomes,
+      propagationSentIds,
+      push,
+      queue,
+      riskProductId,
+      streamTurn,
+    ],
+  );
+
+  const handlePermissionDecision = useCallback(
+    (id: PermissionRequest["id"], decision: PermissionDecision) => {
+      if (id === "specialist-checks") {
+        if (decision === "deny") {
+          streamTurn(auditSkippedTurn(() => setStage("alerts")));
+          return;
+        }
+        const remembered = decision === "always";
+        if (remembered) {
+          setSpecialistPermission(true);
+          push({
+            role: "agent",
+            kind: "text",
+            text: "I'll remember that permission for this session.",
+          });
+        }
+        runSpecialistChecks(remembered);
+        return;
+      }
+
+      const ids = pendingPropagationIds;
+      if (!ids) return;
+      setPendingPropagationIds(null);
+
+      if (decision === "deny") {
+        push({
+          role: "agent",
+          kind: "text",
+          text: "Okay — no proposals were sent. The Document updates alert stays open.",
+        });
+        return;
+      }
+
+      if (decision === "always") {
+        const owners = Array.from(
+          new Set(
+            impactRows
+              .filter((row) => ids.includes(row.document))
+              .map((row) => row.owner),
+          ),
+        );
+        setRememberedOwners((prev) =>
+          Array.from(new Set([...prev, ...owners])),
+        );
+        const ownerText =
+          owners.length === 1
+            ? owners[0]
+            : `${owners.slice(0, -1).join(", ")} and ${owners[owners.length - 1]}`;
+        push({
+          role: "agent",
+          kind: "text",
+          text: `I'll remember ${ownerText} for this session, so future proposals won't ask again.`,
+        });
+      }
+
+      executePropagationSend(ids);
+    },
+    [
+      executePropagationSend,
+      pendingPropagationIds,
+      push,
+      runSpecialistChecks,
+      streamTurn,
+    ],
   );
 
   const openItems = queue.filter((item) => item.status === "open");
@@ -1227,12 +1537,17 @@ export default function PlmDemo() {
   const summaryRows: string[] = [];
   const resolvedCount = statusCount("resolved");
   const trackingCount = statusCount("tracking");
+  const acknowledgedCount = statusCount("acknowledged");
   const declinedCount = statusCount("declined");
   if (resolvedCount > 0)
     summaryRows.push(`${resolvedCount} item${resolvedCount === 1 ? "" : "s"} resolved`);
   if (trackingCount > 0)
     summaryRows.push(
       `${trackingCount} item${trackingCount === 1 ? "" : "s"} tracking to closure`,
+    );
+  if (acknowledgedCount > 0)
+    summaryRows.push(
+      `${acknowledgedCount} item${acknowledgedCount === 1 ? "" : "s"} acknowledged`,
     );
   if (declinedCount > 0)
     summaryRows.push(
@@ -1298,6 +1613,10 @@ export default function PlmDemo() {
     resolvedFlagIds,
     resolvedValues,
     publishedDocIds,
+    propagationSentIds,
+    rememberedOwners,
+    complianceActiveProductId,
+    complianceOutcomes,
     uploadedFile,
     auditPublished,
     auditReviewValues,
@@ -1312,6 +1631,8 @@ export default function PlmDemo() {
     onHoverSource: hoverSource,
     onOpenPdf: openPdf,
     onQueueAction: handleQueueAction,
+    onPropagate: requestPropagationSend,
+    onPermissionDecision: handlePermissionDecision,
   };
 
   return (

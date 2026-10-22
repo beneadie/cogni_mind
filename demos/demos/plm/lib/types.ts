@@ -185,7 +185,7 @@ export type RegulationRiskRow = {
   openOrders: string;
   /** Numeric form of `openOrders`, for sorting. */
   openOrdersValue: number;
-  /** Date the restriction takes effect, e.g. "1 Jan 2027". */
+  /** Date the restriction takes effect. */
   deadline?: string;
   /** Owning company, shown for cross-company (ACS group) views. */
   company?: string;
@@ -284,10 +284,35 @@ export type QueueCardAction =
   | "field-reject"
   | "compliance-view"
   | "compliance-act"
-  | "propagation-apply";
+  | "compliance-case-select"
+  | "compliance-case-act"
+  | "propagation-cancel";
 
 /** A committed mitigation path for a regulation-exposed product. */
-export type ComplianceAction = "reminder" | "close" | "assign";
+export type ComplianceAction =
+  | "change-request"
+  | "request-declaration"
+  | "acknowledge";
+
+/** One mitigation option shown on the compliance decision card. */
+export type ComplianceOption = {
+  id: ComplianceAction;
+  label: string;
+  description: string;
+  result: string;
+  primary?: boolean;
+};
+
+/** The structured record produced after a compliance action is chosen. */
+export type ComplianceOutcome = {
+  action: ComplianceAction;
+  product: string;
+  title: string;
+  referenceId: string;
+  status: "tracking" | "acknowledged";
+  summary: string;
+  details: { label: string; value: string }[];
+};
 
 /** A suggested reply chip the user can click to dispatch a queue action. */
 export type PromptOption = {

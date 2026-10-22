@@ -221,11 +221,16 @@ function AgentColumn({
 
 export function SubagentRun({
   agents,
+  launchDelayMs = 0,
+  permissionRemembered = false,
   onComplete,
 }: {
   agents: SubagentSpec[];
+  launchDelayMs?: number;
+  permissionRemembered?: boolean;
   onComplete: (id: string) => void;
 }) {
+  const [launched, setLaunched] = useState(launchDelayMs <= 0);
   const [progress, setProgress] = useState<Record<string, AgentProgress>>(
     () =>
       Object.fromEntries(
@@ -241,6 +246,14 @@ export function SubagentRun({
   }, [onComplete]);
 
   useEffect(() => {
+    if (launched) return;
+    const timer = window.setTimeout(() => setLaunched(true), launchDelayMs);
+    return () => window.clearTimeout(timer);
+  }, [launchDelayMs, launched]);
+
+  useEffect(() => {
+    if (!launched) return;
+
     agents.forEach((agent) => {
       agent.beats.forEach((_beat, beatIndex) => {
         const revealAt = (beatIndex + 1) * BEAT_MS;
@@ -280,7 +293,7 @@ export function SubagentRun({
       timersRef.current.forEach((id) => window.clearTimeout(id));
       timersRef.current = [];
     };
-  }, [agents]);
+  }, [agents, launched]);
 
   const totals = useMemo(() => {
     const total = agents.reduce((sum, agent) => sum + agent.beats.length, 0);
@@ -298,6 +311,35 @@ export function SubagentRun({
     };
   }, [agents, progress]);
 
+  if (!launched) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden rounded-2xl border border-line-strong bg-elevated/40"
+      >
+        <div className="flex items-center gap-3 px-4 py-5">
+          <CubeLoader size={30} />
+          <div className="min-w-0 flex-1">
+            <p className="text-[0.78rem] font-medium text-ink">Orchestrator</p>
+            <p className="mt-0.5 font-mono text-[0.54rem] uppercase tracking-[0.12em] text-muted">
+              Starting {agents.length} specialist checks
+            </p>
+            {permissionRemembered ? (
+              <p className="mt-0.5 font-mono text-[0.5rem] uppercase tracking-[0.08em] text-online">
+                Permission remembered
+              </p>
+            ) : null}
+          </div>
+          <span className="font-mono text-[0.52rem] uppercase tracking-[0.1em] text-muted">
+            Waiting
+          </span>
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <div className="overflow-hidden rounded-2xl border border-line-strong bg-elevated/40">
       <div className="flex items-center gap-2.5 border-b border-line bg-surface px-3 py-2">
@@ -307,6 +349,11 @@ export function SubagentRun({
           <p className="mt-0.5 font-mono text-[0.52rem] uppercase tracking-[0.12em] text-muted">
             Delegating {agents.length} specialist checks
           </p>
+          {permissionRemembered ? (
+            <p className="mt-0.5 font-mono text-[0.5rem] uppercase tracking-[0.08em] text-online">
+              Permission remembered
+            </p>
+          ) : null}
         </div>
         <div className="text-right">
           <p className="font-mono text-[0.56rem] uppercase tracking-[0.08em] text-ink-soft">

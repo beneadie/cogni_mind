@@ -1,3 +1,4 @@
+import { REFRIGERANT_YEAR } from "./dates";
 import type { TurnPlan } from "./flow";
 import {
   AUDIT_PAGE_COUNT,
@@ -13,7 +14,7 @@ export function auditIntroTurn(onDone: () => void): TurnPlan {
     beats: [
       {
         kind: "text",
-        text: "Attach the new MAA-200 engineering spec and I'll draft the standard data sheet. I'll flag missing or conflicting values for you, then compare the draft to the installation manual, the published sheet, and the 2027 refrigerant rules.",
+        text: `Attach the new MAA-200 engineering spec and I'll draft the standard data sheet. I'll flag missing or conflicting values for you, then compare the draft to the installation manual, the published sheet, and the ${REFRIGERANT_YEAR} refrigerant rules.`,
       },
     ],
     onDone,
@@ -99,18 +100,36 @@ export function auditScanTurn(
 }
 
 /** Run the three specialists and let them create alerts as they finish. */
-export function auditSubagentsTurn(onDone: () => void): TurnPlan {
+export function auditSubagentsTurn(
+  onDone: () => void,
+  permissionRemembered = false,
+): TurnPlan {
   return {
     beats: [
       {
         kind: "subagents",
         agents: AUDIT_SUBAGENTS,
         ms: 9000,
-        launchDelayMs: 900,
+        launchDelayMs: 1500,
+        permissionRemembered,
       },
       {
         kind: "text",
-        text: `I read the spec, drafted ${EXTRACTED_FIELDS.length} fields, and flagged ${AUDIT_REVIEW_FIELDS.length} values for a human. The draft requires 3-wire control while the manual and published sheet still show 2-wire, and it keeps R-410A ahead of the 2027 ban. The flagged values still need a decision before I can publish the sheet. I created two alerts and put the full picture below.`,
+        text: `I read the spec, drafted ${EXTRACTED_FIELDS.length} fields, and flagged ${AUDIT_REVIEW_FIELDS.length} values for a human. I created two alerts above; the draft is ready for review below.`,
+      },
+      { kind: "card", message: { role: "agent", kind: "audit-summary" } },
+    ],
+    onDone,
+  };
+}
+
+/** The user declined the specialist checks; keep the draft review path open. */
+export function auditSkippedTurn(onDone: () => void): TurnPlan {
+  return {
+    beats: [
+      {
+        kind: "text",
+        text: "Okay — I won't run the specialist checks. I'll leave the draft ready for review and won't create downstream alerts.",
       },
       { kind: "card", message: { role: "agent", kind: "audit-summary" } },
     ],

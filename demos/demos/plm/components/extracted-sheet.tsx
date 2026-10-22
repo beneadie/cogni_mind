@@ -11,6 +11,7 @@ import {
   AUDIT_REVIEW_FIELDS,
   EXTRACTED_FIELDS,
 } from "../lib/audit-data";
+import { CURRENT_YEAR_LABEL } from "../lib/dates";
 
 export function ExtractedSheetCard({ onOpenFile }: { onOpenFile?: () => void }) {
   return (
@@ -24,7 +25,7 @@ export function ExtractedSheetCard({ onOpenFile }: { onOpenFile?: () => void }) 
             Draft data sheet · MAA-200
           </p>
           <p className="mt-0.5 font-mono text-[0.58rem] uppercase tracking-[0.1em] text-muted">
-            {AUDIT_FILE.name} · template v2 · 2026
+            {AUDIT_FILE.name} · template v2 · {CURRENT_YEAR_LABEL}
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-end gap-1.5">

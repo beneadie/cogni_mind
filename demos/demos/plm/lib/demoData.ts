@@ -293,7 +293,7 @@ export const affectedDocuments: AffectedDocumentRow[] = [
   { document: "DL-2400 Installation Manual", type: "Manual", lastUpdated: "2019-06", status: "needs-update", trigger: "Throw dimension" },
   { document: "DL-2400 Product Page", type: "Web", lastUpdated: "2021-02", status: "needs-update", trigger: "Throw · Weight" },
   { document: "DL-2400 Data Sheet", type: "Data Sheet", lastUpdated: "2019-06", status: "needs-update", trigger: "Throw · Weight · Warranty" },
-  { document: "DL-2400 Sell Sheet", type: "Web", lastUpdated: "2020-11", status: "needs-update", trigger: "Throw dimension" },
+  { document: "DL-2400 Installer Quick-Start Guide", type: "Guide", lastUpdated: "2020-11", status: "needs-update", trigger: "Throw dimension" },
   { document: "DL Series Catalog", type: "Manual", lastUpdated: "2018-09", status: "needs-update", trigger: "Weight" },
   { document: "DL-2400 FAQ", type: "Web", lastUpdated: "2022-04", status: "review", trigger: "Warranty wording" },
 ];
@@ -324,7 +324,7 @@ export const manualTargetDocId = "install";
 export const docHealthRows: DocHealthRow[] = [
   { id: "install", document: "DL-2400 Installation Manual", type: "Manual", lastUpdated: "2019-06", status: "out-of-date", revisionsBehind: 4 },
   { id: "product", document: "DL-2400 Product Page", type: "Web", lastUpdated: "2021-02", status: "out-of-date", revisionsBehind: 2 },
-  { id: "sell", document: "DL-2400 Sell Sheet", type: "Web", lastUpdated: "2020-11", status: "out-of-date", revisionsBehind: 1 },
+  { id: "sell", document: "DL-2400 Installer Quick-Start Guide", type: "Guide", lastUpdated: "2020-11", status: "out-of-date", revisionsBehind: 1 },
   { id: "datasheet", document: "DL-2400 Data Sheet", type: "Data Sheet", lastUpdated: "2025-01", status: "current", revisionsBehind: 0 },
   { id: "legacy", document: "DL-900 Legacy Datasheet", type: "Data Sheet", lastUpdated: "2011-03", status: "archived", revisionsBehind: 0 },
 ];
@@ -500,24 +500,57 @@ export const maa200WiringDiff: DocDiff = buildDiff(
       heading: "§7.2 Wiring",
       context: "rev A p.14 → rev C",
       lines: [
+        contextLine("Control Wiring Diagram", 12, 12),
+        ...changedLine(
+          "Two-wire control connection (rev A).",
+          13,
+          "Three-wire control connection (rev C).",
+          13,
+        ),
         contextLine(
-          "Route control wiring through the grommet on the left-hand panel.",
-          12,
-          12,
+          "Disconnect power at the service switch and confirm 0 VAC.",
+          14,
+          14,
+        ),
+        contextLine("Remove the control-box cover.", 15, 15),
+        contextLine(
+          "Route the thermostat cable through the left-hand grommet.",
+          16,
+          16,
+        ),
+        contextLine(
+          "Strip 1/4 in (6 mm) of insulation from each conductor.",
+          17,
+          17,
         ),
         ...changedLine(
           "Connect the thermostat to terminals R and C.",
-          13,
-          "Connect the thermostat to terminals R, C, and W.",
-          13,
+          18,
+          "Connect the thermostat to terminals R, C, and G.",
+          18,
+        ),
+        contextLine(
+          "Tighten the terminal screws to 0.5 N·m (4.4 in-lb).",
+          19,
+          19,
         ),
         ...changedLine(
           "Diagram 7.2 shows a two-wire control connection.",
-          14,
+          20,
           "Diagram 7.2 shows a three-wire control connection.",
-          14,
+          20,
         ),
-        contextLine("Seal the grommet after routing.", 15, 15),
+        contextLine(
+          "Label the thermostat cable and record the configuration in the startup checklist.",
+          21,
+          21,
+        ),
+        contextLine("Seal the grommet after routing.", 22, 22),
+        contextLine(
+          "Restore power and verify 24 VAC between R and C.",
+          23,
+          23,
+        ),
       ],
     },
   ],
@@ -539,22 +572,30 @@ export const maa200ProductPageDiff: DocDiff = buildDiff(
   ],
 );
 
-/** MAA-200 Sell Sheet — 2-wire → 3-wire control. Sent to the Web team. */
-export const maa200SellSheetDiff: DocDiff = buildDiff(
-  "MAA-200 Sell Sheet · Features",
+/** MAA-200 Installer Quick-Start Guide — 2-wire → 3-wire control. Sent to the Field team. */
+export const maa200QuickStartDiff: DocDiff = buildDiff(
+  "MAA-200 Installer Quick-Start Guide · Wiring",
   [
     {
-      heading: "Features",
+      heading: "Wiring",
       context: "published → draft",
       lines: [
-        contextLine("Quiet operation at 58 dB", 2, 2),
+        contextLine(
+          "Mount the indoor unit and connect line voltage.",
+          2,
+          2,
+        ),
         ...changedLine(
           "Simple 2-wire control connection",
           3,
-          "Simple 3-wire control connection",
+          "Simple 3-wire control connection (R, C, G)",
           3,
         ),
-        contextLine("10-year limited warranty", 4, 4),
+        contextLine(
+          "Set the thermostat and confirm airflow.",
+          4,
+          4,
+        ),
       ],
     },
   ],
@@ -575,7 +616,7 @@ export const maa200DataSheetDiff: DocDiff = buildDiff(
           "Control circuit: 24 VAC, 3-wire",
           8,
         ),
-        addedLine("Thermostat terminals: R, C, W", 9),
+        addedLine("Thermostat terminals: R, C, G", 9),
       ],
     },
   ],

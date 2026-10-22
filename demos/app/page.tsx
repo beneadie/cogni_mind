@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AppHeader } from "@/components/app-header";
 import { CaseHistory } from "@/components/case-history";
 import { ChatMessage } from "@/components/chat-message";
@@ -10,19 +10,13 @@ import {
   VoiceRecordingPill,
   VoiceToggleButton,
 } from "@/components/voice-controls";
-import {
-  CornerDownLeft,
-  PanelLeftOpen,
-  PanelRightOpen,
-  Send,
-} from "lucide-react";
+import { PanelLeftOpen, PanelRightOpen, Send } from "lucide-react";
 import {
   SERVICE_MANUAL,
   CALLBACK_SLA,
   SUPPORT_EMAIL,
   manualResearch,
   mockActivity,
-  mockCaseHistory,
   mockManuals,
   mockPart,
   mockPdfPages,
@@ -35,8 +29,6 @@ import {
 } from "@/lib/mock-data";
 import { buildEmailDraft } from "@/lib/email-draft";
 import type { ActivityStep, Message, Stage } from "@/lib/types";
-
-const LIVE_CASE_ID = "case-live";
 
 const BOOKMARK_LABELS: Record<number, string> = {
   3: "Control Box Assembly",
@@ -98,7 +90,6 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [isAutoFilling, setIsAutoFilling] = useState(false);
   const [voiceMode, setVoiceMode] = useState(false);
-  const [activeCaseId, setActiveCaseId] = useState<string>(LIVE_CASE_ID);
   const [leftOpen, setLeftOpen] = useState(true);
   const [rightOpen, setRightOpen] = useState(true);
 
@@ -111,8 +102,6 @@ export default function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const timeoutsRef = useRef<number[]>([]);
   const autofillRef = useRef<number | null>(null);
-
-  const isLiveCase = activeCaseId === LIVE_CASE_ID;
 
   const stopAutofill = useCallback(() => {
     if (autofillRef.current !== null) {
@@ -164,16 +153,6 @@ export default function Home() {
     setVoiceMode(false);
   }, []);
 
-  const startNewCase = useCallback(() => {
-    resetDemo();
-    setActiveCaseId(LIVE_CASE_ID);
-  }, [resetDemo]);
-
-  const selectCase = useCallback((id: string) => {
-    setVoiceMode(false);
-    setActiveCaseId(id);
-  }, []);
-
   useEffect(() => {
     return () => {
       timeoutsRef.current.forEach((id) => window.clearTimeout(id));
@@ -183,21 +162,12 @@ export default function Home() {
     };
   }, []);
 
-  const shownMessages = useMemo(
-    () =>
-      isLiveCase
-        ? messages
-        : (mockCaseHistory.find((item) => item.id === activeCaseId)?.thread ??
-          []),
-    [activeCaseId, isLiveCase, messages],
-  );
-
   useEffect(() => {
     const node = scrollRef.current;
     if (node) {
       node.scrollTo({ top: node.scrollHeight, behavior: "smooth" });
     }
-  }, [shownMessages, isThinking]);
+  }, [messages, isThinking]);
 
   const push = useCallback(
     (message: Omit<Message, "id">) =>
@@ -561,28 +531,20 @@ export default function Home() {
 
   const submit = useCallback(
     (override?: string) => {
-      if (!isLiveCase) return;
       const text = (override ?? input).trim();
       if (!text || isThinking || voiceMode) return;
       stopAutofill();
       setInput("");
       processTurn(text, stage);
     },
-    [input, isLiveCase, isThinking, processTurn, stage, stopAutofill, voiceMode],
+    [input, isThinking, processTurn, stage, stopAutofill, voiceMode],
   );
 
   const handleInputFocus = useCallback(() => {
-    if (
-      !isLiveCase ||
-      isThinking ||
-      stage === "load" ||
-      stage === "complete" ||
-      input
-    )
-      return;
+    if (isThinking || stage === "load" || stage === "complete" || input) return;
     const target = EXPECTED_INPUT[stage];
     if (target) startAutofill(target);
-  }, [input, isLiveCase, isThinking, stage, startAutofill]);
+  }, [input, isThinking, stage, startAutofill]);
 
   const handleInputChange = useCallback(
     (value: string) => {
@@ -800,14 +762,12 @@ export default function Home() {
   );
 
   const inputLocked =
-    !isLiveCase ||
     isThinking ||
     stage === "load" ||
     stage === "callback" ||
     stage === "email" ||
     stage === "complete";
-  const manualHint = isLiveCase && stage === "load" && !isThinking;
-  const viewingCase = mockCaseHistory.find((item) => item.id === activeCaseId);
+  const manualHint = stage === "load" && !isThinking;
 
   const enterVoiceMode = useCallback(() => {
     if (inputLocked) return;
@@ -820,16 +780,13 @@ export default function Home() {
 
   return (
     <div className="flex h-dvh flex-col bg-canvas">
-      <AppHeader onReset={startNewCase} />
+      <AppHeader onReset={resetDemo} />
 
       <div className="relative flex min-h-0 flex-1">
         {leftOpen ? (
           <div className="hidden w-48 shrink-0 lg:block">
             <CaseHistory
-              cases={mockCaseHistory}
-              activeCaseId={activeCaseId}
-              onSelectCase={selectCase}
-              onNewCase={startNewCase}
+              onNewCase={resetDemo}
               onCollapse={() => setLeftOpen(false)}
             />
           </div>
@@ -841,29 +798,15 @@ export default function Home() {
             className="scroll-soft flex-1 overflow-y-auto px-4 py-6 sm:px-6"
           >
             <div className="mx-auto w-full max-w-3xl space-y-4">
-              {!isLiveCase && viewingCase ? (
-                <div className="flex items-center gap-2 rounded-xl border border-dashed border-line-strong bg-elevated/60 px-3.5 py-2 font-mono text-[0.66rem] uppercase tracking-[0.1em] text-muted">
-                  Viewing a past case
-                  <button
-                    type="button"
-                    onClick={() => setActiveCaseId(LIVE_CASE_ID)}
-                    className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-line-strong px-2.5 py-1 text-ink-soft transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                  >
-                    <CornerDownLeft className="h-3.5 w-3.5" />
-                    Back to active case
-                  </button>
-                </div>
-              ) : null}
-
-              {shownMessages.map((message) => (
+              {messages.map((message) => (
                 <ChatMessage
                   key={message.id}
                   message={message}
-                  selectedManualIds={isLiveCase ? selectedManualIds : []}
-                  manualsLocked={!isLiveCase || stage !== "load" || isThinking}
+                  selectedManualIds={selectedManualIds}
+                  manualsLocked={stage !== "load" || isThinking}
                   manualHint={manualHint}
-                  onToggleManual={isLiveCase ? toggleManual : undefined}
-                  onLoadSelected={isLiveCase ? loadSelected : undefined}
+                  onToggleManual={toggleManual}
+                  onLoadSelected={loadSelected}
                   onCitation={openPage}
                   onRequestStockCheck={handleRequestStockCheck}
                   onCallbackConfirm={handleCallbackConfirm}
@@ -900,11 +843,7 @@ export default function Home() {
                   }}
                   disabled={inputLocked || voiceMode}
                   placeholder={
-                    voiceMode
-                      ? "Listening…"
-                      : isLiveCase
-                        ? PLACEHOLDERS[stage]
-                        : "Viewing a past case. Start a new case to chat."
+                    voiceMode ? "Listening…" : PLACEHOLDERS[stage]
                   }
                   className="scroll-soft min-w-0 flex-1 resize-none bg-transparent py-2 text-[0.88rem] leading-relaxed text-ink placeholder:text-muted focus:outline-none disabled:cursor-not-allowed"
                 />
@@ -937,11 +876,11 @@ export default function Home() {
         {rightOpen ? (
           <div className="hidden w-[30%] min-w-[18rem] max-w-md shrink-0 lg:block">
             <ContextSidebar
-              availableManuals={isLiveCase ? availableManuals : []}
-              activeManuals={isLiveCase ? activeManuals : []}
-              bookmarks={isLiveCase ? bookmarks : []}
-              selectedManualIds={isLiveCase ? selectedManualIds : []}
-              selectionEnabled={isLiveCase && stage === "load" && !isThinking}
+              availableManuals={availableManuals}
+              activeManuals={activeManuals}
+              bookmarks={bookmarks}
+              selectedManualIds={selectedManualIds}
+              selectionEnabled={stage === "load" && !isThinking}
               onToggleManual={toggleManual}
               onOpenBookmark={openPage}
               onCollapse={() => setRightOpen(false)}
@@ -953,7 +892,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => setLeftOpen(true)}
-            aria-label="Show cases"
+            aria-label="Show chat history"
             className="absolute left-2 top-2 z-20 hidden h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface/90 text-muted shadow-sm backdrop-blur transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 lg:inline-flex"
           >
             <PanelLeftOpen className="h-4 w-4" />

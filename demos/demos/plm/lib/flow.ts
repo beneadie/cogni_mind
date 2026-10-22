@@ -1,4 +1,10 @@
-import type { DocDiff, PromptOption, QueueItem } from "./types";
+import type {
+  ComplianceOption,
+  ComplianceOutcome,
+  DocDiff,
+  PromptOption,
+  QueueItem,
+} from "./types";
 
 export type Tone = "info" | "warn" | "good";
 /** One visible unit of the agent's work in a turn. */
@@ -38,12 +44,23 @@ export type SubagentSpec = {
   alert: "compliance" | "documentation";
 };
 
+export type PermissionRequest = {
+  id: "specialist-checks" | "document-proposals";
+  title: string;
+  detail: string;
+  items: string[];
+  readOnly?: boolean;
+};
+
+export type PermissionDecision = "once" | "always" | "deny";
+
 export type PlmFlowKind = "audit" | "spec" | "docs" | "ingest" | "care";
 
 export type PlmStage =
   | "launcher"
   | "audit-upload"
   | "audit-reading"
+  | "audit-permission"
   | "audit-delegating"
   | "audit-review"
   | "alerts"
@@ -98,10 +115,14 @@ export type PlmMessageKind =
   | "regulation"
   | "legacy"
   | "change-proposal"
-  | "queue-regulation"
+  | "compliance-case"
+  | "compliance-exposure"
+  | "compliance-options"
+  | "compliance-outcome"
   | "prompts"
   | "doc-diff"
-  | "queue-propagation";
+  | "queue-propagation"
+  | "permission";
 
 export type PlmMessage = {
   id: string;
@@ -126,6 +147,10 @@ export type PlmMessage = {
   productId?: string;
   /** Suggested replies, for `kind: "prompts"`. */
   prompts?: PromptOption[];
+  /** Mitigation choices, for `kind: "compliance-options"`. */
+  complianceOptions?: ComplianceOption[];
+  /** Committed mitigation record, for `kind: "compliance-outcome"`. */
+  complianceOutcome?: ComplianceOutcome;
   /** Heading for a `warning` callout (defaults to "Warning"). */
   title?: string;
   /** Fact chips shown under a `warning` callout. */
@@ -144,6 +169,12 @@ export type PlmMessage = {
   fileUrl?: string;
   /** Specialist agents, for `kind: "subagents"`. */
   subagents?: SubagentSpec[];
+  /** Delay before the specialist columns launch. */
+  subagentDelayMs?: number;
+  /** Whether specialist checks were allowed by a remembered permission. */
+  subagentPermissionRemembered?: boolean;
+  /** Permission request, for `kind: "permission"`. */
+  permission?: PermissionRequest;
   /** Alert created by the audit, for `kind: "alert-created"`. */
   queueItem?: QueueItem;
 };
@@ -157,6 +188,7 @@ export type TurnBeat =
       agents: SubagentSpec[];
       ms: number;
       launchDelayMs?: number;
+      permissionRemembered?: boolean;
     };
 
 export type TurnPlan = {
@@ -188,7 +220,7 @@ export const sessions: PlmSession[] = [
   {
     id: "regulation",
     title: "Regulation Risk",
-    subtitle: "RoHS 2027 · EU Chrome 2026",
+    subtitle: "Refrigerant · RoHS · chrome rules",
     query: "Show regulation risk across the portfolio.",
   },
   {
@@ -236,6 +268,7 @@ export const PLACEHOLDERS: Record<PlmStage, string> = {
   launcher: "Ask about specs, documents, regulations, or suppliers…",
   "audit-upload": "Use the upload card to attach the spec…",
   "audit-reading": "Drafting the data sheet and flagging gaps…",
+  "audit-permission": "Use the permission card to continue…",
   "audit-delegating": "Checking compliance and documentation…",
   "audit-review": "Use the review card to continue…",
   alerts: "Review the data sheet, or ask about the findings…",

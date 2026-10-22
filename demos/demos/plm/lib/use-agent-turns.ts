@@ -137,16 +137,17 @@ export function useAgentTurns() {
 
         if (beat.kind === "subagents") {
           finishWork();
-          after(beat.launchDelayMs ?? 0, () => {
-            push({
-              role: "agent",
-              kind: "subagents",
-              subagents: beat.agents,
-            });
-            after(beat.ms, () => {
-              workId = nextId();
-              runNext();
-            });
+          const launchDelay = beat.launchDelayMs ?? 0;
+          push({
+            role: "agent",
+            kind: "subagents",
+            subagents: beat.agents,
+            subagentDelayMs: launchDelay,
+            subagentPermissionRemembered: beat.permissionRemembered,
+          });
+          after(launchDelay + beat.ms, () => {
+            workId = nextId();
+            runNext();
           });
           return;
         }

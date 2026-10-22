@@ -184,6 +184,7 @@ export const PDF_FILES: Record<string, PdfFile> = {
           "Route control wiring through the grommet on the left-hand panel.",
           "Connect the thermostat to terminals R and C.",
           "Diagram 7.2 shows a two-wire control connection.",
+          "Seal the grommet after routing.",
         ],
       },
       {

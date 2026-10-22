@@ -7,8 +7,6 @@ import {
   Check,
   CheckCircle2,
   FileSpreadsheet,
-  FileWarning,
-  ShieldAlert,
   Sparkles,
 } from "lucide-react";
 import {
@@ -20,13 +18,13 @@ import {
   type AuditReviewKind,
   type AuditReviewValues,
 } from "../lib/audit-data";
+import { CURRENT_YEAR_LABEL } from "../lib/dates";
 import { ChangeSummaryCard } from "./plm-cards";
 
 const STATS = [
   { label: "pages read", value: AUDIT_PAGE_COUNT },
   { label: "fields drafted", value: EXTRACTED_FIELDS.length },
   { label: "need review", value: AUDIT_REVIEW_FIELDS.length },
-  { label: "alerts", value: 2 },
 ];
 
 const REVIEW_KIND_META: Record<
@@ -74,7 +72,7 @@ export function AuditSummaryCard({
             {fileName}
           </p>
           <p className="mt-0.5 text-[0.72rem] text-muted">
-            MAA-200 split system · draft rev D · 2026
+            MAA-200 split system · draft rev D · {CURRENT_YEAR_LABEL}
           </p>
         </div>
         <span
@@ -92,13 +90,13 @@ export function AuditSummaryCard({
           ) : (
             <>
               <Sparkles className="h-3 w-3" />
-              2 alerts created
+              {AUDIT_REVIEW_FIELDS.length} values need review
             </>
           )}
         </span>
       </div>
 
-      <div className="grid grid-cols-2 divide-x divide-line border-b border-line sm:grid-cols-4">
+      <div className="grid grid-cols-1 divide-y divide-line border-b border-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {STATS.map((stat) => (
           <div key={stat.label} className="px-3.5 py-2.5">
             <p className="font-serif text-[1.35rem] leading-none text-ink">
@@ -142,49 +140,13 @@ export function AuditSummaryCard({
             </button>
           )}
         </li>
-
-        <li className="flex flex-wrap items-start gap-3 px-4 py-3">
-          <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-amber/30 bg-amber-soft text-amber">
-            <FileWarning className="h-4 w-4" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="text-[0.82rem] font-medium text-ink">
-              Documentation · 2 documents disagree
-            </p>
-            <p className="mt-0.5 text-[0.74rem] leading-relaxed text-ink-soft">
-              Manual §7.2 and the published sheet still show 2-wire. The §7.2
-              change also touches 3 related documents.
-            </p>
-          </div>
-          <span className="inline-flex items-center rounded-full border border-line-strong bg-canvas px-2.5 py-1 font-mono text-[0.56rem] uppercase tracking-[0.08em] text-muted">
-            In Alerts
-          </span>
-        </li>
-
-        <li className="flex flex-wrap items-start gap-3 px-4 py-3">
-          <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-danger/30 bg-danger-soft text-danger">
-            <ShieldAlert className="h-4 w-4" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="text-[0.82rem] font-medium text-ink">
-              Compliance · 2 products exposed
-            </p>
-            <p className="mt-0.5 text-[0.74rem] leading-relaxed text-ink-soft">
-              MAA-200 and NA-1500 use R-410A, banned 1 Jan 2027. Together they
-              account for 14,400 units shipped and 2,100 open orders.
-            </p>
-          </div>
-          <span className="inline-flex items-center rounded-full border border-line-strong bg-canvas px-2.5 py-1 font-mono text-[0.56rem] uppercase tracking-[0.08em] text-muted">
-            In Alerts
-          </span>
-        </li>
       </ul>
 
       <div className="flex flex-wrap items-center gap-1.5 border-t border-line bg-elevated/40 px-4 py-2">
         <AlertTriangle className="h-3 w-3 text-muted" />
         <p className="font-mono text-[0.54rem] uppercase tracking-[0.08em] text-muted">
           Sources: uploaded spec rev C · ERP material master · manual rev A ·
-          published sheet rev B · 2027 refrigerant rule
+          published sheet rev B
         </p>
       </div>
     </div>

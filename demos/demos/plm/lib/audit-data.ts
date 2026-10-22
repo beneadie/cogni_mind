@@ -1,3 +1,8 @@
+import {
+  AUDIT_MODIFIED,
+  REFRIGERANT_DEADLINE_LABEL,
+  REFRIGERANT_YEAR,
+} from "./dates";
 import type { SubagentSpec } from "./flow";
 import type { ChangeSummary } from "./types";
 
@@ -18,7 +23,7 @@ export const AUDIT_FILE: AuditFile = {
   name: "MAA-200_spec_revC.pdf",
   kind: "pdf",
   size: "2.4 MB",
-  modified: "22/10/2026 09:38",
+  modified: AUDIT_MODIFIED,
   description: "Engineering spec · rev C",
   url: "/manuals/maa-200-spec.pdf",
 };
@@ -160,7 +165,7 @@ export const EXTRACTED_FIELDS: ExtractedField[] = [
     field: "Refrigerant",
     value: "R-410A",
     source: "spec rev C · p.1",
-    note: "Restricted from 2027",
+    note: `Restricted from ${REFRIGERANT_YEAR}`,
   },
   {
     field: "Control wiring",
@@ -222,7 +227,7 @@ export const AUDIT_SUBAGENTS: SubagentSpec[] = [
   {
     id: "compliance",
     name: "Compliance agent",
-    role: "Checks the draft against 2027 refrigerant rules and the ERP.",
+    role: `Checks the draft against ${REFRIGERANT_YEAR} refrigerant rules and the ERP.`,
     icon: "compliance",
     alert: "compliance",
     beats: [
@@ -232,8 +237,8 @@ export const AUDIT_SUBAGENTS: SubagentSpec[] = [
         "R-410A",
       ),
       action(
-        "Loading the 2027 refrigerant ban",
-        "regulation.load('2027_refrigerant_ban')",
+        `Loading the ${REFRIGERANT_YEAR} refrigerant ban`,
+        `regulation.load('${REFRIGERANT_YEAR}_refrigerant_ban')`,
         "R-410A · R-32",
       ),
       action(
@@ -252,10 +257,10 @@ export const AUDIT_SUBAGENTS: SubagentSpec[] = [
         "2 products",
       ),
       observe(
-        "R-410A is banned from 1 Jan 2027. MAA-200 has 8,400 units shipped and 1,200 on open orders; NA-1500 adds 6,000 shipped and 900 open.",
+        `R-410A is banned from ${REFRIGERANT_DEADLINE_LABEL}. MAA-200 has 8,400 units shipped and 1,200 on open orders; NA-1500 adds 6,000 shipped and 900 open.`,
       ),
     ],
-    finding: "MAA-200 and NA-1500 are exposed to the 2027 refrigerant ban.",
+    finding: `MAA-200 and NA-1500 are exposed to the ${REFRIGERANT_YEAR} refrigerant ban.`,
   },
   {
     id: "manual",

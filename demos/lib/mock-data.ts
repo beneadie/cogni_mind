@@ -1,5 +1,3 @@
-import type { Message } from "./types";
-
 export type Manual = {
   id: string;
   brand: string;
@@ -59,16 +57,6 @@ export type ManualResearch = {
   pagesReferenced: number[];
   /** One-line summary used when composing a reply from multiple manuals. */
   contribution: string;
-};
-
-export type MockCase = {
-  id: string;
-  title: string;
-  subtitle: string;
-  tag: string;
-  group: "Today" | "Previous 7 days";
-  isLive?: boolean;
-  thread?: Message[];
 };
 
 export const mockManuals: Manual[] = [
@@ -191,80 +179,6 @@ export const mockRecommendation: Recommendation = {
   partNumber: "CB-38MURA-2019",
   note: "Assistant recommendation. Technician verifies before ordering.",
 };
-
-export const mockCaseHistory: MockCase[] = [
-  {
-    id: "case-live",
-    title: "New conversation",
-    subtitle: "",
-    tag: "Active",
-    group: "Today",
-    isLive: true,
-  },
-  {
-    id: "case-2",
-    title: "Trane XR15 firing E4 on startup",
-    subtitle: "Thermostat code, compressor protection",
-    tag: "11:24 AM",
-    group: "Today",
-    thread: [
-      {
-        id: "c2-1",
-        role: "user",
-        kind: "text",
-        text: "Trane XR15 with an E4 code. What does it point to?",
-      },
-      {
-        id: "c2-2",
-        role: "agent",
-        kind: "text",
-        text: "E4 on the XR15 usually points to a locked-rotor or high-pressure condition. The service manual lists E4 under the compressor protection codes on page 21.",
-      },
-    ],
-  },
-  {
-    id: "case-3",
-    title: "Carrier 58MCA won't fire, pressure switch fault",
-    subtitle: "No heat call, inducer and pressure switch",
-    tag: "Yesterday",
-    group: "Previous 7 days",
-    thread: [
-      {
-        id: "c3-1",
-        role: "user",
-        kind: "text",
-        text: "58MCA furnace won't fire, I'm getting a pressure switch fault. Where do I start?",
-      },
-      {
-        id: "c3-2",
-        role: "agent",
-        kind: "text",
-        text: "Start with the pressure switch tubing and the inducer. Page 18 of the service manual covers the pressure switch sequence and the common causes of a false fault.",
-      },
-    ],
-  },
-  {
-    id: "case-4",
-    title: "Lennox EL296 runs but no airflow",
-    subtitle: "Blower and board output to the motor",
-    tag: "Mon",
-    group: "Previous 7 days",
-    thread: [
-      {
-        id: "c4-1",
-        role: "user",
-        kind: "text",
-        text: "Lennox EL296 runs but there's no airflow at the vents.",
-      },
-      {
-        id: "c4-2",
-        role: "agent",
-        kind: "text",
-        text: "Check the blower motor and the board output to it first. The EL296 wiring and blower diagnostics are on pages 22 and 23 of the service manual.",
-      },
-    ],
-  },
-];
 
 /** Each step is its own timed "tool call". `parallel: true` runs it at the
  *  same time as the previous step (used for concurrent searches). */

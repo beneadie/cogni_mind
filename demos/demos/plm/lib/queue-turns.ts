@@ -1,6 +1,17 @@
+import { CURRENT_YEAR, REFRIGERANT_YEAR } from "./dates";
 import type { TurnPlan } from "./flow";
-import type { ComplianceAction, PromptOption } from "./types";
-import { BAN_EFFECTIVE, REVIEW_DATE, fieldReportChange } from "./queue-data";
+import type {
+  ComplianceAction,
+  ComplianceOption,
+  ComplianceOutcome,
+  ImpactRow,
+} from "./types";
+import {
+  BAN_EFFECTIVE,
+  REVIEW_DATE,
+  complianceProducts,
+  fieldReportChange,
+} from "./queue-data";
 import { productDossiers, riskRecord } from "./risk-catalog";
 
 /** Documentation mismatch → documentation change. The audit already did the work. */
@@ -37,8 +48,12 @@ export function queueDocumentationTurn(onDone: () => void): TurnPlan {
   };
 }
 
-export function queueFieldApproveTurn(onDone: () => void): TurnPlan {
+export function queueFieldApproveTurn(
+  onDone: () => void,
+  proposal = fieldReportChange.proposed,
+): TurnPlan {
   const { ecrId } = fieldReportChange;
+  const proposed = proposal.trim() || fieldReportChange.proposed;
   return {
     beats: [
       {
@@ -54,7 +69,7 @@ export function queueFieldApproveTurn(onDone: () => void): TurnPlan {
       },
       {
         kind: "text",
-        text: "Proposal sent to the Docs team. The manual stays rev A until they accept, and I'll track it to closure.",
+        text: `Proposal sent to the Docs team: “${proposed}” The manual stays rev A until they accept, and I'll track it to closure.`,
       },
     ],
     onDone,
@@ -89,80 +104,164 @@ export function queuePropagationTurn(onDone: () => void): TurnPlan {
   };
 }
 
-export function queuePropagationApplyTurn(onDone: () => void): TurnPlan {
+export function queuePropagationApplyTurn(
+  sentRows: ImpactRow[],
+  remainingCount: number,
+  onDone: () => void,
+): TurnPlan {
+  const count = sentRows.length;
+  const owners = Array.from(new Set(sentRows.map((row) => row.owner)));
+  const ownerText =
+    owners.length === 0
+      ? "the owners"
+      : owners.length === 1
+        ? owners[0]
+        : `${owners.slice(0, -1).join(", ")} and ${owners[owners.length - 1]}`;
+
   return {
     beats: [
       {
         kind: "thought",
-        text: "Sending the §7.2 proposal to each document owner.",
+        text: "Sending the §7.2 proposal to the selected document owners.",
       },
       {
         kind: "action",
-        label: "Sending proposals to the Web and Docs teams",
-        command: "proposal.send(docs=3)",
-        result: "3 sent",
-        ms: 1050,
+        label: `Sending proposals to ${ownerText}`,
+        command: `proposal.send(docs=${count})`,
+        result: `${count} sent`,
+        ms: 900,
+      },
+      {
+        kind: "text",
+        text:
+          remainingCount > 0
+            ? `Sent ${count} proposal${count === 1 ? "" : "s"} to ${ownerText}. ${remainingCount} document${remainingCount === 1 ? "" : "s"} still need a proposal, so the alert stays open.`
+            : `Proposals sent to ${ownerText}. Each owner will apply the change in their own system.`,
+      },
+    ],
+    onDone,
+  };
+}
+
+/** Compliance alert → review both exposed products in one case. */
+export function queueComplianceTurn(onDone: () => void): TurnPlan {
+  const topProduct = [...complianceProducts].sort(
+    (a, b) => b.unitsShippedValue - a.unitsShippedValue,
+  )[0];
+
+  return {
+    beats: [
+      {
+        kind: "text",
+        text: `I checked the refrigerant on the new MAA-200 data sheet against the ${REFRIGERANT_YEAR} refrigerant ban, then cross-referenced the ACS group catalog, shipped units, and open orders. MAA-200 and NA-1500 are affected.`,
       },
       {
         kind: "card",
         message: {
           role: "agent",
-          kind: "queue-propagation",
-          queueItemId: "propagation",
-          sent: true,
+          kind: "compliance-case",
+          queueItemId: "compliance-alert",
         },
       },
       {
         kind: "text",
-        text: "Proposals sent to the Web and Docs teams. Each owner will apply the change in their own system.",
+        text: `${topProduct?.product ?? "MAA-200"} has the most volume affected. Review each product in the case, then choose one mitigation per product.`,
       },
     ],
     onDone,
   };
 }
 
-/** Compliance alert → inspect an exposed product. The scan is already done. */
-export function queueComplianceTurn(onDone: () => void): TurnPlan {
-  return {
-    beats: [
-      {
-        kind: "text",
-        text: "I checked the refrigerant on the new MAA-200 data sheet against the 2027 refrigerant ban, then cross-referenced the ACS group catalog, shipped units, and open orders. MAA-200 and NA-1500 are affected.",
-      },
-      {
-        kind: "card",
-        message: { role: "agent", kind: "queue-regulation", queueItemId: "compliance-alert" },
-      },
-      {
-        kind: "text",
-        text: "MAA-200 has the most volume affected. Open a product to pull everything we have on it.",
-      },
-    ],
-    onDone,
-  };
-}
-
-/** The three mitigation paths offered as suggested replies. */
-export const MITIGATION_PROMPTS: PromptOption[] = [
+/** The three mitigation paths offered on the decision card. */
+export const COMPLIANCE_OPTIONS: ComplianceOption[] = [
   {
-    id: "reminder",
-    label: "Set a reminder",
-    action: "compliance-act",
-    payload: "reminder",
+    id: "change-request",
+    label: "Open change request",
+    description:
+      "Assign the mitigation to the product owner and set a future review reminder.",
+    result: "Tracking",
+    primary: true,
   },
   {
-    id: "close",
-    label: "Close issue",
-    action: "compliance-act",
-    payload: "close",
+    id: "request-declaration",
+    label: "Request declaration",
+    description:
+      "Ask the owner for an updated material declaration for the restricted substance.",
+    result: "Tracking",
   },
   {
-    id: "assign",
-    label: "Send to responsible person",
-    action: "compliance-act",
-    payload: "assign",
+    id: "acknowledge",
+    label: "Acknowledge risk",
+    description:
+      "Record the exposure without opening mitigation work.",
+    result: "Acknowledged",
   },
 ];
+
+function ownerSystemFor(company: string): string {
+  return `${company} compliance queue`;
+}
+
+/** Build the structured record shown after a mitigation choice. */
+export function complianceOutcomeFor(
+  productId: string,
+  action: ComplianceAction,
+): ComplianceOutcome {
+  const record = riskRecord(productId);
+  const company = record?.company ?? "ACS Group";
+  const owner = record?.owner ?? "the product owner";
+  const deadline = record?.deadline ?? BAN_EFFECTIVE;
+  const ownerSystem = ownerSystemFor(company);
+
+  if (action === "change-request") {
+    return {
+      action,
+      product: productId,
+      title: "Change request opened",
+      referenceId: `CR-${CURRENT_YEAR}-0143`,
+      status: "tracking",
+      summary: `The mitigation is assigned to ${owner} with a review reminder for ${REVIEW_DATE}. The alert stays in Tracking until the change is resolved.`,
+      details: [
+        { label: "Owner", value: `${owner} · ${company}` },
+        { label: "Review reminder", value: REVIEW_DATE },
+        { label: "Reminder sent to", value: ownerSystem },
+        { label: "Mitigation due", value: deadline },
+      ],
+    };
+  }
+
+  if (action === "request-declaration") {
+    return {
+      action,
+      product: productId,
+      title: "Declaration requested",
+      referenceId: `REQ-${CURRENT_YEAR}-0088`,
+      status: "tracking",
+      summary: `I asked ${owner} for an updated material declaration on ${productId}. The request is in their compliance queue and the alert stays in Tracking.`,
+      details: [
+        { label: "Requested from", value: `${owner} · ${company}` },
+        { label: "Response due", value: REVIEW_DATE },
+        { label: "Request sent to", value: ownerSystem },
+        { label: "Restricted substance", value: record?.substance ?? "—" },
+      ],
+    };
+  }
+
+  return {
+    action,
+    product: productId,
+    title: "Risk acknowledged",
+    referenceId: `ACK-${CURRENT_YEAR}-0031`,
+    status: "acknowledged",
+    summary: `You acknowledged the ${productId} exposure. No mitigation work was opened; the risk record stays on file and I'll flag it if the exposure changes.`,
+    details: [
+      { label: "Recorded by", value: "You" },
+      { label: "Product", value: `${productId} · ${company}` },
+      { label: "Mitigation work", value: "None opened" },
+      { label: "Deadline", value: deadline },
+    ],
+  };
+}
 
 /**
  * Open a product: fetch everything on file into the workspace, then surface a
@@ -173,10 +272,7 @@ export function viewProductTurn(
   onDone: () => void,
 ): TurnPlan {
   const record = riskRecord(productId);
-  const company = record?.company ?? "the group";
   const substance = record?.substance ?? "a restricted substance";
-  const regulation = record?.regulation ?? "the upcoming restriction";
-  const deadline = record?.deadline ?? BAN_EFFECTIVE;
   const units = record?.unitsShipped ?? "0";
   const orders = record?.openOrders ?? "0";
   const count = productDossiers[productId]?.length ?? 0;
@@ -212,7 +308,7 @@ export function viewProductTurn(
         kind: "action",
         label: "Fetching shipped units and open orders",
         command: `sales.units('${productId}')`,
-        result: `${units} shipped`,
+        result: `${units} shipped · ${orders} open`,
         ms: 850,
       },
       {
@@ -231,18 +327,17 @@ export function viewProductTurn(
         kind: "card",
         message: {
           role: "agent",
-          kind: "finding",
-          text: `${productId} (${company}) carries ${substance}, restricted under ${regulation} from ${deadline}. ERP shows ${units} units shipped in the last 12 months with ${orders} on open orders — it needs a mitigation plan, not just a note.`,
-          emphasis: `restricted under ${regulation}`,
+          kind: "compliance-exposure",
+          productId,
         },
       },
       {
         kind: "card",
         message: {
           role: "agent",
-          kind: "prompts",
+          kind: "compliance-options",
           productId,
-          prompts: MITIGATION_PROMPTS,
+          complianceOptions: COMPLIANCE_OPTIONS,
         },
       },
     ],
@@ -250,57 +345,72 @@ export function viewProductTurn(
   };
 }
 
-/** Perform the committed mitigation: remind, close, or assign the owner. */
+/** Perform the committed mitigation and show the resulting record. */
 export function queueComplianceActTurn(
   productId: string,
   action: ComplianceAction,
   onDone: () => void,
 ): TurnPlan {
   const record = riskRecord(productId);
-  const company = record?.company ?? "the group";
+  const company = record?.company ?? "ACS Group";
   const owner = record?.owner ?? "the product owner";
-  const deadline = record?.deadline ?? BAN_EFFECTIVE;
+  const outcome = complianceOutcomeFor(productId, action);
 
-  if (action === "reminder") {
+  if (action === "change-request") {
     return {
       beats: [
         {
           kind: "thought",
-          text: "Scheduling a review reminder ahead of the deadline.",
+          text: "Opening a change request and assigning the mitigation owner.",
         },
         {
           kind: "action",
-          label: "Setting a review reminder",
-          command: `remind('${productId}', date='${REVIEW_DATE}')`,
-          result: REVIEW_DATE,
+          label: `Assigning the change request to ${owner}`,
+          command: `changeRequest.open('${productId}', owner='${owner}')`,
+          result: outcome.referenceId,
           ms: 900,
         },
         {
-          kind: "text",
-          text: `Reminder set for ${REVIEW_DATE}. I'll bring ${productId} back to you then — ahead of the ${deadline} deadline — unless a mitigation is opened sooner.`,
+          kind: "action",
+          label: `Sending the review reminder to ${company}`,
+          command: `remind('${outcome.referenceId}', date='${REVIEW_DATE}')`,
+          result: REVIEW_DATE,
+          ms: 800,
+        },
+        {
+          kind: "card",
+          message: {
+            role: "agent",
+            kind: "compliance-outcome",
+            complianceOutcome: outcome,
+          },
         },
       ],
       onDone,
     };
   }
 
-  if (action === "assign") {
+  if (action === "request-declaration") {
     return {
       beats: [
         {
           kind: "thought",
-          text: "Sending the exposure to the responsible owner.",
+          text: `Requesting an updated material declaration from ${owner}.`,
         },
         {
           kind: "action",
-          label: `Sending to ${owner} at ${company}`,
-          command: `assign('${productId}', owner='${owner}')`,
-          result: "sent",
+          label: `Sending the declaration request to ${owner}`,
+          command: `declaration.request('${productId}', owner='${owner}')`,
+          result: outcome.referenceId,
           ms: 900,
         },
         {
-          kind: "text",
-          text: `Sent to ${owner} at ${company}. They own the mitigation plan for ${productId}, and I'll track it to closure.`,
+          kind: "card",
+          message: {
+            role: "agent",
+            kind: "compliance-outcome",
+            complianceOutcome: outcome,
+          },
         },
       ],
       onDone,
@@ -311,18 +421,22 @@ export function queueComplianceActTurn(
     beats: [
       {
         kind: "thought",
-        text: "Closing the compliance alert.",
+        text: "Recording the risk acknowledgement.",
       },
       {
         kind: "action",
-        label: `Closing the ${productId} compliance alert`,
-        command: `issue.close('${productId}')`,
-        result: "closed",
+        label: `Acknowledging the ${productId} exposure`,
+        command: `risk.acknowledge('${productId}')`,
+        result: outcome.referenceId,
         ms: 900,
       },
       {
-        kind: "text",
-        text: `Compliance alert closed. The risk record for ${productId} stays on file, and I'll flag it if the exposure changes.`,
+        kind: "card",
+        message: {
+          role: "agent",
+          kind: "compliance-outcome",
+          complianceOutcome: outcome,
+        },
       },
     ],
     onDone,

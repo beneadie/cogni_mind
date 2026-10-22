@@ -91,7 +91,7 @@ email → handoff → callback`.
 
 ## Screen layout
 
-- **Left rail** — case history (live case + past cases you can peek at). Collapsible.
+- **Left rail** — **Chat History**, empty for a fresh account, with a New case action. Collapsible.
 - **Center** — the conversation, with activity "thinking" blocks, manual cards,
   citations, part/stock-check cards, and the composer.
 - **Right rail** — *Loaded Context*: manuals available/loaded, bookmarked manual pages, and the planned Zoho / monday.com CRM integrations.
@@ -205,12 +205,12 @@ Start fresh: open `/` and, if needed, click **Reset** in the header.
 | `components/chat-message.tsx` | Renders each message kind (text, thinking, manuals, citations, part, stock check, recommendation, callback, email). |
 | `components/manual-card.tsx` | Selectable manual card + "Load N into context" button. |
 | `components/activity-block.tsx` | The timed "thinking / tool call" steps. |
-| `components/case-history.tsx` | Left rail: live + past cases. |
+| `components/case-history.tsx` | Left rail: empty Chat History and New case action. |
 | `components/context-sidebar.tsx` | Right rail: available/loaded manuals, bookmarks, and planned CRM integrations. |
 | `components/crm-integrations.tsx` | Illustrative Zoho and monday.com marks labelled as planned integration. |
 | `components/part-card.tsx`, `stock-check-card.tsx`, `recommendation-card.tsx`, `callback-card.tsx`, `email-card.tsx` | The structured cards. |
 | `components/pdf-modal.tsx` | PDF page viewer opened by citations/bookmarks. |
 | `components/voice-controls.tsx` | Appearance-only voice-mode toggle and animated recording pill. |
-| `lib/mock-data.ts` | Manuals, part, stock check, case history, activity steps, PDF pages, profile/support addresses. |
+| `lib/mock-data.ts` | Manuals, part, stock check, activity steps, PDF pages, profile/support addresses. |
 | `lib/email-draft.ts` | Builds the email subject and body from the reported problem and current stage. |
 | `lib/types.ts` | `Stage`, `Message`, `MessageKind`, `EmailDraft`, etc. |
