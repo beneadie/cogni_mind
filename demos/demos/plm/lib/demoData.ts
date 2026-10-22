@@ -156,7 +156,7 @@ export const flagDetails: Record<string, FlagDetail> = {
     id: "throw",
     kind: "conflict",
     field: "Throw",
-    body: "The spec and the published data sheet disagree. Decide which value is authoritative.",
+    body: "The spec and the published data sheet disagree. Decide which value is correct.",
     published: {
       value: "0.625 in",
       source: "DL-2400_datasheet_2019.pdf, p.1 §3.2",
@@ -258,19 +258,6 @@ export const flagDetails: Record<string, FlagDetail> = {
       { label: "Edit", input: true },
     ],
   },
-  "wire-manual": {
-    id: "wire-manual",
-    kind: "manual-change",
-    changeType: "changed",
-    field: "Wiring Diagram §7.2",
-    body: "The MAA-200 installation manual shows a 2-wire diagram, but the rev C spec requires 3 wires. Update the manual to match.",
-    from: { value: "2-wire diagram", source: "MAA-200 Installation Manual rev A, §7.2" },
-    to: { value: "3-wire diagram", source: "MAA-200 spec rev C" },
-    actions: [
-      { label: "Accept change", primary: true, value: "3-wire diagram" },
-      { label: "Keep old value", value: "2-wire diagram" },
-    ],
-  },
 };
 
 export const walkthroughSteps: WalkthroughStep[] = [
@@ -301,7 +288,7 @@ export const legacyParts: LegacyPartRow[] = [
   { partNumber: "BL-400", description: 'Brass Latch Assembly, 2" backset', matchPct: 71, year: "1979", matchedOn: ["material=brass", "backset ≈2 in", "late 1970s"] },
 ];
 
-/** Detour — documents made stale by the approved change. */
+/** Detour — documents that need updating after the approved change. */
 export const affectedDocuments: AffectedDocumentRow[] = [
   { document: "DL-2400 Installation Manual", type: "Manual", lastUpdated: "2019-06", status: "needs-update", trigger: "Throw dimension" },
   { document: "DL-2400 Product Page", type: "Web", lastUpdated: "2021-02", status: "needs-update", trigger: "Throw · Weight" },
@@ -536,7 +523,7 @@ export const maa200WiringDiff: DocDiff = buildDiff(
   ],
 );
 
-/** MAA-200 Product Page — 2-wire → 3-wire control. Auto-updated. */
+/** MAA-200 Product Page — 2-wire → 3-wire control. Sent to the Web team. */
 export const maa200ProductPageDiff: DocDiff = buildDiff(
   "MAA-200 Product Page · Specifications",
   [
@@ -552,7 +539,7 @@ export const maa200ProductPageDiff: DocDiff = buildDiff(
   ],
 );
 
-/** MAA-200 Sell Sheet — 2-wire → 3-wire control. Auto-updated. */
+/** MAA-200 Sell Sheet — 2-wire → 3-wire control. Sent to the Web team. */
 export const maa200SellSheetDiff: DocDiff = buildDiff(
   "MAA-200 Sell Sheet · Features",
   [
@@ -573,7 +560,7 @@ export const maa200SellSheetDiff: DocDiff = buildDiff(
   ],
 );
 
-/** MAA-200 Data Sheet — 2-wire → 3-wire control. Needs authoring. */
+/** MAA-200 Data Sheet — 2-wire → 3-wire control. Sent to the Docs team. */
 export const maa200DataSheetDiff: DocDiff = buildDiff(
   "MAA-200 Data Sheet · Electrical",
   [

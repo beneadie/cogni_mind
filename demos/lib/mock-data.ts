@@ -26,12 +26,14 @@ export type PdfPage = {
   highlight: string;
 };
 
-export type Availability = {
+export type StockCheck = {
   part: string;
   partNumber: string;
-  availability: string;
-  warehouses: string;
-  leadTime: string;
+  status: string;
+  assignee: string;
+  assigneeRole: string;
+  scope: string;
+  note: string;
 };
 
 export type Recommendation = {
@@ -154,16 +156,28 @@ export const mockPart = {
   description: "Control Board (2019 Carrier 38MURA)",
 };
 
-export const mockAvailability: Availability = {
+export const mockStockCheck: StockCheck = {
   part: "Control Board (CB-38MURA-2019)",
   partNumber: "CB-38MURA-2019",
-  availability: "In Stock",
-  warehouses: "3 regional warehouses",
-  leadTime: "1-2 days",
+  status: "Assigned",
+  assignee: "John Smith",
+  assigneeRole: "Regional Parts Specialist",
+  scope: "Nearby warehouses",
+  note: "No availability or lead time confirmed yet. John will update this case after checking nearby warehouses.",
 };
 
-/** The technician's profile, used when briefing a human for a callback. */
+/** The customer-support inbox used when drafting an email escalation. */
+export const SUPPORT_EMAIL = "support@acshvac.example";
+
+/** The live case number shown in the email subject and body. */
+export const CASE_ID = "CS-4821";
+
+/** The technician's profile, used when briefing a human or drafting an email. */
 export const mockUserProfile = {
+  name: "Your Name",
+  role: "Field Technician",
+  company: "Northern Air",
+  email: "yourname@mail.com",
   phone: "+1 (555) 014-2287",
 };
 
@@ -258,8 +272,9 @@ export const mockActivity: {
   discover: ActivityStepDef[];
   voltage: ActivityStepDef[];
   flashes: ActivityStepDef[];
-  availability: ActivityStepDef[];
+  stockCheck: ActivityStepDef[];
   handoff: ActivityStepDef[];
+  email: ActivityStepDef[];
 } = {
   discover: [
     { label: 'Searching "Carrier 38MURA E5 blower not working"', ms: 1250 },
@@ -275,18 +290,24 @@ export const mockActivity: {
     { label: 'Searching "control board 3 flashes"', ms: 1200 },
     { label: "Reading 5 results", ms: 1000 },
     { label: "Match: p.11 (Control Board Fault: 3-Flash Code)", ms: 950 },
-    { label: "Identifying replacement part CB-38MURA-2019", ms: 1150 },
+    { label: "Identifying the replacement part", ms: 1150 },
   ],
-  availability: [
-    { label: "Checking inventory for CB-38MURA-2019", ms: 1150 },
-    { label: "Querying 3 regional warehouses", ms: 1050 },
-    { label: "Confirming lead time", ms: 1000 },
+  stockCheck: [
+    { label: "Preparing a stock-check request", ms: 1000 },
+    { label: "Routing to the regional parts desk", ms: 1050 },
+    { label: "Assigning the request to a parts specialist", ms: 900 },
+    { label: "Attaching the part and case details", ms: 950 },
   ],
   handoff: [
     { label: "Preparing a brief of this conversation", ms: 1150 },
-    { label: "Routing to the on-call technician team", ms: 1050 },
+    { label: "Routing to a senior controls specialist", ms: 1050 },
     { label: "Attaching case notes, readings, and manual pages", ms: 1100 },
     { label: "Confirming the callback window", ms: 950 },
+  ],
+  email: [
+    { label: "Pulling the case details and troubleshooting steps", ms: 1150 },
+    { label: `Drafting an email to ${SUPPORT_EMAIL}`, ms: 1200 },
+    { label: "Adding your reply-to contact details", ms: 950 },
   ],
 };
 

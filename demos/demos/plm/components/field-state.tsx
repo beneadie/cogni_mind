@@ -41,7 +41,7 @@ export const STATE_META: Record<
     dot: "bg-danger",
   },
   "carried-over": {
-    label: "Carried over",
+    label: "From last sheet",
     icon: MinusCircle,
     className: "text-muted",
     chip: "border-line-strong bg-elevated text-muted",

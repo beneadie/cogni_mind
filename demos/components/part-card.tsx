@@ -3,11 +3,11 @@ import { Package, Search } from "lucide-react";
 export function PartCard({
   partNumber,
   description,
-  onCheckAvailability,
+  onRequestStockCheck,
 }: {
   partNumber: string;
   description: string;
-  onCheckAvailability?: () => void;
+  onRequestStockCheck?: () => void;
 }) {
   return (
     <div className="rounded-2xl border border-line-strong bg-surface p-4">
@@ -28,11 +28,11 @@ export function PartCard({
 
       <button
         type="button"
-        onClick={() => onCheckAvailability?.()}
+        onClick={() => onRequestStockCheck?.()}
         className="mt-3.5 inline-flex items-center gap-1.5 rounded-full border border-line-strong bg-canvas px-3.5 py-1.5 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
         <Search className="h-3.5 w-3.5" />
-        Check Availability
+        Request Stock Check
       </button>
     </div>
   );

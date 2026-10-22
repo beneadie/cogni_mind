@@ -6,6 +6,7 @@ import {
   FileText,
   PanelRightClose,
 } from "lucide-react";
+import { CrmIntegrations } from "./crm-integrations";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -187,6 +188,8 @@ export function ContextSidebar({
             </ul>
           )}
         </div>
+
+        <CrmIntegrations />
       </div>
     </aside>
   );

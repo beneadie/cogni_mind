@@ -10,6 +10,7 @@ import {
 } from "../lib/flow";
 
 const FLOW_LABEL: Record<PlmFlowKind, string> = {
+  audit: "Data Sheet Audit",
   spec: "Spec → Data Sheet",
   docs: "Documentation Health",
   ingest: "Ingest & Connect",

@@ -5,7 +5,7 @@ export type RiskGroup = "acs" | "dl";
 export type RiskProduct = RegulationRiskRow & { group: RiskGroup };
 
 /**
- * One authoritative list of products exposed to an upcoming restriction.
+ * One list of products exposed to an upcoming restriction.
  * `acs` = the cross-company refrigerant group surfaced by the Product Care
  * inbox; `dl` = the DL Series portfolio surfaced by the Ask-side scan.
  * Figures are mocked; no revenue is stated — only units shipped and open

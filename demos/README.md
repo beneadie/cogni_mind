@@ -76,23 +76,25 @@ content in `lib/mock-data.ts`, shared types in `lib/types.ts`.
 
 A field technician asks about a fault on a specific unit. The copilot loads the
 right service-manual pages, guides a **manual-grounded** diagnosis step by step,
-offers a likely part, checks availability, and — when it hits something it can't
-answer (pricing, scheduling) — **hands off to a human** with a briefing instead of
-guessing. The theme: the technician stays in control, and the agent never invents
-answers outside the loaded manuals.
+offers a likely part, escalates a nearby-warehouse stock check to a named parts
+specialist, and — when it hits something it can't answer (pricing, scheduling) —
+**hands off to a human** with a briefing instead of guessing. It can also **draft an email to customer support** with the problem, the
+steps already tried, and the technician's reply-to details. The theme: the technician
+stays in control, and the agent never invents answers outside the loaded manuals.
 
 ## The scenario (fixed, scripted)
 
 A 2019 Carrier **38MURA** shows error **E5** and the blower won't spin. The path is
 always: `E5 → check 24VAC at CN2 → read the board flashes → 3 flashes = board fault
-→ part CB-38MURA-2019 → availability → handoff → callback`.
+→ part CB-38MURA-2019 → stock check assigned to John Smith → replacement procedure →
+email → handoff → callback`.
 
 ## Screen layout
 
 - **Left rail** — case history (live case + past cases you can peek at). Collapsible.
 - **Center** — the conversation, with activity "thinking" blocks, manual cards,
-  citations, part/availability cards, and the composer.
-- **Right rail** — *Loaded Context*: manuals available/loaded and bookmarked manual pages.
+  citations, part/stock-check cards, and the composer.
+- **Right rail** — *Loaded Context*: manuals available/loaded, bookmarked manual pages, and the planned Zoho / monday.com CRM integrations.
 - **Header** — brand, demo switcher, Reset.
 
 ## The composer trick (important)
@@ -100,6 +102,15 @@ always: `E5 → check 24VAC at CN2 → read the board flashes → 3 flashes = bo
 You mostly don't type. **Click the composer box** and it auto-types the exact prompt
 that stage expects; press **Enter** to send. The prompt it fills is driven by
 `EXPECTED_INPUT` in `app/page.tsx`. You can always type your own text instead.
+
+Guided prompts stop when a branch reaches its planned end. After the email is sent
+or discarded, or the callback is confirmed, the composer locks and no next-step
+prompt is auto-filled. Use **Reset Demo** to run another path.
+
+**Voice mode is appearance-only.** The mic button in the composer switches to a
+spoken-interface state: the composer locks, shows *"Listening…"*, and displays an
+animated waveform with a stop control. No microphone permission is requested and no
+audio is recorded, transcribed, or played. Click the stop square to return to typing.
 
 ## Click-by-click walkthrough
 
@@ -118,6 +129,9 @@ Start fresh: open `/` and, if needed, click **Reset** in the header.
      overcurrent fault… start by checking for 24VAC at connector CN2*, with a
      **citations** block (p.6, p.8, p.14). Pages are added to the right rail as
      bookmarks. Stage → `reportVoltage`.
+   - The selected manual cards stay checked after loading. If extra manuals were
+     loaded, the answer appends an **Also loaded** line naming the manual and its
+     finding.
    - Tip: click any citation or bookmark to open that page in the **PDF viewer**.
 
 3. **Report the reading.** Click the composer → *"No voltage at CN2."* → **Enter**.
@@ -128,30 +142,44 @@ Start fresh: open `/` and, if needed, click **Reset** in the header.
    - Agent: *3 flashes = internal control-board fault; likely fix is to replace the
      board. Part CB-38MURA-2019* — plus a **part card** and a **recommendation card**
      (explicitly labelled as a recommendation, not a confirmed diagnosis). Then:
-     *"Want me to check availability?"* Stage → `recommend`.
+     *"Want me to ask the parts desk to check nearby warehouse stock?"* Stage →
+     `recommend`.
 
-5. **Check availability.** Either press **Enter** (the composer fills *"Yes, check
-   availability."*) or click the recommendation card's action.
-   - Agent runs the inventory steps and shows an **availability card**: in stock, 3
-     regional warehouses, 1–2 day lead time. Stage → `discussion`.
+5. **Request a stock check.** Either press **Enter** (the composer fills *"Yes,
+   request a stock check."*) or click **Request Stock Check** on the part card.
+   - Agent explains it cannot see live warehouse inventory, then shows a **stock
+     check request card**: assigned to **John Smith**, Regional Parts Specialist, to
+     check nearby warehouses. No stock or lead time is claimed; both are pending.
+     Stage → `discussion`.
 
 6. **Optional follow-ups at `discussion`.** Try:
    - *"Show the replacement procedure"* → the 5-step control-board swap from p.18,
-     **and the composer auto-fills `@human`** (stage → `handoff`).
+     **and the composer auto-fills `@email`** (stage → `handoff`).
    - *"Start another unit"* / *"Add a note"* → other canned replies.
-   - Alternatively, at any point type `@human` yourself to jump to handoff.
+   - Alternatively, at any point type `@human` yourself to jump to handoff, or
+     `@email` to draft an email instead.
 
-7. **Hand off (human-in-the-loop).** Send `@human` (or take the auto-filled path).
-   - Agent: *"I can't quote pricing or an install window from here, but I can connect
-     you with a human specialist. Let me brief them first…"* then *"Briefing sent —
-     this conversation, the CN2 readings, the recommended part, and the manual pages
-     are attached."* A **callback card** appears (SLA ~2 minutes). Stage → `callback`
-     (composer locked).
+7. **Draft the email (`@email`).** Send `@email` (or take the auto-filled path after
+   the replacement procedure).
+   - Agent drafts an email to the customer-support inbox. The **Email Draft** card
+     shows the recipient and subject, the problem as reported, the troubleshooting
+     steps completed so far, and the technician's name, role, email, and phone.
+   - Choose **Send email** (approval step) or **Discard draft**. Sending shows a
+     confirmation and logs the case for quality-control review. Either action ends
+     this branch and locks the composer; nothing leaves the browser.
 
-8. **Confirm the callback.** On the callback card:
+8. **Hand off (human-in-the-loop).** Before drafting the email — or from
+   `discussion` — send `@human` manually.
+   - Agent: *"I can't quote pricing or an install window from here, but I can route
+     this to a senior controls specialist — 15 years on Carrier boards and blower
+     faults. Let me brief them first…"* then *"Briefing sent — this conversation, the
+     CN2 readings, the recommended part, and the manual pages are attached."* A
+     **callback card** appears (SLA ~2 minutes). Stage → `callback` (composer locked).
+
+9. **Confirm the callback.** On the callback card:
    - **"Yes, call this number"** uses the profile number, **or**
    - **"No, use a different number"** reveals a phone field → **Confirm number**.
-   - Agent confirms the callback and returns to `discussion`.
+   - Agent confirms the callback, ends the branch, and locks the composer.
 
 **Reset** from the header clears everything back to `ask`.
 
@@ -159,8 +187,14 @@ Start fresh: open `/` and, if needed, click **Reset** in the header.
 
 - Grounding: every claim ties to a manual page via a citation you can open.
 - The recommendation is explicitly *not* a confirmed diagnosis ("technician verifies").
-- The agent refuses out-of-scope asks (pricing/scheduling) and hands off **with a
-  briefing** rather than guessing.
+- Stock is never asserted: the agent escalates the check to **John Smith**, a named
+  parts specialist, instead of pretending to query live inventory.
+- The planned **Zoho** and **monday.com** marks show intended direct CRM sync; the
+  right rail labels them as illustrative with no live connection.
+- The agent refuses out-of-scope asks (pricing/scheduling) and routes to a **senior
+  controls specialist** with a briefing rather than guessing.
+- The email is a **reviewable draft**: the technician sends or discards it, and the
+  reply-to contact is always included.
 - The technician stays in control at each step (confirm the reading, decide to load).
 
 ## Files
@@ -168,12 +202,15 @@ Start fresh: open `/` and, if needed, click **Reset** in the header.
 | File | Role |
 | --- | --- |
 | `app/page.tsx` | Whole demo: stages, turn streaming, autofill, handlers, layout. |
-| `components/chat-message.tsx` | Renders each message kind (text, thinking, manuals, citations, part, availability, recommendation, callback). |
+| `components/chat-message.tsx` | Renders each message kind (text, thinking, manuals, citations, part, stock check, recommendation, callback, email). |
 | `components/manual-card.tsx` | Selectable manual card + "Load N into context" button. |
 | `components/activity-block.tsx` | The timed "thinking / tool call" steps. |
 | `components/case-history.tsx` | Left rail: live + past cases. |
-| `components/context-sidebar.tsx` | Right rail: available/loaded manuals + bookmarks. |
-| `components/part-card.tsx`, `availability-card.tsx`, `recommendation-card.tsx`, `callback-card.tsx` | The structured cards. |
+| `components/context-sidebar.tsx` | Right rail: available/loaded manuals, bookmarks, and planned CRM integrations. |
+| `components/crm-integrations.tsx` | Illustrative Zoho and monday.com marks labelled as planned integration. |
+| `components/part-card.tsx`, `stock-check-card.tsx`, `recommendation-card.tsx`, `callback-card.tsx`, `email-card.tsx` | The structured cards. |
 | `components/pdf-modal.tsx` | PDF page viewer opened by citations/bookmarks. |
-| `lib/mock-data.ts` | Manuals, part, availability, case history, activity steps, PDF pages. |
-| `lib/types.ts` | `Stage`, `Message`, `MessageKind`, etc. |
+| `components/voice-controls.tsx` | Appearance-only voice-mode toggle and animated recording pill. |
+| `lib/mock-data.ts` | Manuals, part, stock check, case history, activity steps, PDF pages, profile/support addresses. |
+| `lib/email-draft.ts` | Builds the email subject and body from the reported problem and current stage. |
+| `lib/types.ts` | `Stage`, `Message`, `MessageKind`, `EmailDraft`, etc. |

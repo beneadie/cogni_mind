@@ -36,7 +36,7 @@ export function CallbackCard({
           </span>
           <div className="min-w-0">
             <p className="text-[0.9rem] font-medium text-ink">
-              A specialist will call {confirmed}
+              A senior controls specialist will call {confirmed}
             </p>
             <p className="mt-0.5 text-[0.8rem] text-ink-soft">
               Usually within {callback.sla}. The briefing is attached to this

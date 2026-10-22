@@ -210,7 +210,7 @@ export type AffectedDocumentRow = {
   type: string;
   lastUpdated: string;
   status: DocumentStatus;
-  /** Which approved change makes this document stale. */
+  /** Which approved change makes this document need updating. */
   trigger: string;
 };
 
@@ -269,7 +269,7 @@ export type QueueActionVerb = "Review" | "Search" | "Draft";
 export type QueueItem = {
   id: string;
   severity: QueueSeverity;
-  /** Small uppercase label, e.g. "FIELD REPORT". */
+  /** Small uppercase label, e.g. "DOCUMENTATION MISMATCH". */
   type: string;
   /** Product or scope the item applies to. */
   scope: string;
@@ -281,18 +281,13 @@ export type QueueItem = {
 /** Actions emitted from queue cards, handled centrally by the page. */
 export type QueueCardAction =
   | "field-approve"
-  | "field-edit"
   | "field-reject"
   | "compliance-view"
   | "compliance-act"
   | "propagation-apply";
 
 /** A committed mitigation path for a regulation-exposed product. */
-export type ComplianceAction =
-  | "open-cr"
-  | "declaration"
-  | "reminder"
-  | "acknowledge";
+export type ComplianceAction = "reminder" | "close" | "assign";
 
 /** A suggested reply chip the user can click to dispatch a queue action. */
 export type PromptOption = {
@@ -357,15 +352,11 @@ export type DocDiff = {
   hunks: DocDiffHunk[];
 };
 
-/** How a downstream document is handled when upstream content changes. */
-export type ImpactDisposition = "auto" | "author" | "review" | "none";
-
 export type ImpactRow = {
   document: string;
   type: string;
   /** The changed section/attribute that affects this document. */
   trigger: string;
-  disposition: ImpactDisposition;
   owner: string;
   status: string;
   /** Sample PDF to open for this document, if one is available. */

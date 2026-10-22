@@ -14,47 +14,49 @@ import {
  */
 export const ACS_GROUP = "ACS Group";
 
-export const INITIAL_QUEUE: QueueItem[] = [
-  {
-    id: "field-report",
-    severity: "red",
-    type: "Field report",
-    scope: "MAA-200",
-    summary: "Wiring diagram on §7.2 doesn't match the unit",
-    action: "Review",
-    status: "open",
-  },
-  {
-    id: "compliance-alert",
-    severity: "amber",
-    type: "Compliance alert",
-    scope: ACS_GROUP,
-    summary: "2 products exposed to the 2027 refrigerant ban",
-    action: "Review",
-    status: "open",
-  },
-];
+/** The inbox starts empty. Alerts are created by the spec audit. */
+export const INITIAL_QUEUE: QueueItem[] = [];
 
-/** Injected when the field report resolves, to show the change cascade. */
-export const PROPAGATION_ITEM: QueueItem = {
-  id: "propagation",
-  severity: "amber",
-  type: "Change propagation",
+/** Created when the compliance subagent discovers the refrigerant exposure. */
+export const COMPLIANCE_ALERT_ITEM: QueueItem = {
+  id: "compliance-alert",
+  severity: "red",
+  type: "Compliance alert",
   scope: "MAA-200",
-  summary: "§7.2 change leaves 3 documents stale",
+  summary: "Uses R-410A, banned from 2027 — 8,400 shipped, 1,200 open",
   action: "Review",
   status: "open",
 };
 
-export const ECN_ID = "ECN-2026-0088";
+/** Created when the manual and published-sheet subagents compare wiring. */
+export const DOCUMENTATION_ALERT_ITEM: QueueItem = {
+  id: "documentation-mismatch",
+  severity: "amber",
+  type: "Documentation mismatch",
+  scope: "MAA-200",
+  summary: "New sheet requires 3-wire; manual §7.2 and published sheet show 2-wire",
+  action: "Review",
+  status: "open",
+};
+
+/** Injected when the documentation mismatch resolves, to show the cascade. */
+export const PROPAGATION_ITEM: QueueItem = {
+  id: "propagation",
+  severity: "amber",
+  type: "Document updates",
+  scope: "MAA-200",
+  summary: "3 documents need the §7.2 update",
+  action: "Review",
+  status: "open",
+};
 
 export const fieldReportChange: DocChange = {
   document: "MAA-200 Installation Manual",
   section: "§7.2 Wiring",
   currentManual: "2-wire diagram (rev A, 2019)",
   currentSpec: "3-wire (rev C, 2023)",
-  reportedBy: "Field technician · case CS-4821",
-  warning: "Manual contradicts the released spec.",
+  reportedBy: "Detected by the data-sheet audit · MAA-200",
+  warning: "The drafted data sheet and spec rev C contradict the manual.",
   proposed:
     "Update §7.2 to show the 3-wire configuration, matching spec rev C.",
   ecrId: "ECR-2026-0142",
@@ -66,33 +68,30 @@ export const fieldReportChange: DocChange = {
   diff: maa200WiringDiff,
 };
 
-/** Where-used impact of the §7.2 change, with a disposition per document. */
+/** Documents affected by the §7.2 change, each owned by a team. */
 export const impactRows: ImpactRow[] = [
   {
     document: "MAA-200 Product Page",
     type: "Web",
     trigger: "§7.2 wiring",
-    disposition: "auto",
     owner: "Web team",
-    status: "Auto-update ready",
+    status: "Proposal ready",
     diff: maa200ProductPageDiff,
   },
   {
     document: "MAA-200 Sell Sheet",
     type: "Web",
     trigger: "§7.2 wiring",
-    disposition: "auto",
     owner: "Web team",
-    status: "Auto-update ready",
+    status: "Proposal ready",
     diff: maa200SellSheetDiff,
   },
   {
     document: "MAA-200 Data Sheet",
     type: "Data sheet",
     trigger: "§7.2 wiring",
-    disposition: "author",
     owner: "Docs team",
-    status: "Needs authoring",
+    status: "Proposal ready",
     pdfId: "maa-200-datasheet",
     page: 1,
     diff: maa200DataSheetDiff,

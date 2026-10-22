@@ -13,6 +13,8 @@ export type WorkspaceDoc = {
   /** Mock PDF to open for this record, if one exists. */
   pdfId?: string;
   page?: number;
+  /** Real file URL (for an uploaded CSV or sample export). */
+  url?: string;
 };
 
 export type WorkspaceReference = {
@@ -50,11 +52,17 @@ function DocList({
         <li key={doc.id}>
           <button
             type="button"
-            onClick={() =>
-              doc.pdfId && onOpenPdf
-                ? onOpenPdf(doc.pdfId, doc.page ?? 1)
-                : onOpenDoc(doc.id)
-            }
+            onClick={() => {
+              if (doc.url) {
+                window.open(doc.url, "_blank", "noopener,noreferrer");
+                return;
+              }
+              if (doc.pdfId && onOpenPdf) {
+                onOpenPdf(doc.pdfId, doc.page ?? 1);
+                return;
+              }
+              onOpenDoc(doc.id);
+            }}
             className="flex w-full items-start gap-2.5 rounded-lg border border-line bg-surface px-3 py-2.5 text-left transition-colors hover:border-line-strong hover:bg-canvas focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             <FileText className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber" />
@@ -66,7 +74,7 @@ function DocList({
                 {doc.meta}
               </span>
             </span>
-            {doc.pdfId ? (
+            {doc.pdfId || doc.url ? (
               <ExternalLink className="mt-0.5 h-3 w-3 shrink-0 text-muted" />
             ) : null}
             {doc.status ? (

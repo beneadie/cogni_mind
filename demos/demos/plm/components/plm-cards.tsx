@@ -26,7 +26,6 @@ import type {
 import {
   ArrowRight,
   CheckCircle2,
-  Download,
   FileText,
   FileWarning,
   GitBranch,
@@ -487,22 +486,8 @@ export function ApprovalCard() {
       subtitle="Ready to approve"
       changes={approvedChanges}
       source={SPEC_FILE_NAME}
-      actions={
-        <button
-          type="button"
-          onClick={handleDownloadPlaceholder}
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-line-strong bg-canvas px-4 py-2.5 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-        >
-          <Download className="h-3.5 w-3.5" />
-          Download PDF
-        </button>
-      }
     />
   );
-}
-
-function handleDownloadPlaceholder() {
-  /* mock download — no file is produced in this prototype. */
 }
 
 export function PublishSummaryCard() {
@@ -555,7 +540,7 @@ function PropagationGraph() {
         Sell sheet
       </span>
       <span className="ml-auto font-mono text-[0.58rem] uppercase tracking-[0.1em] text-muted">
-        3 documents stale
+        3 documents need updating
       </span>
     </div>
   );

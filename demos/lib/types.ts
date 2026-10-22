@@ -1,8 +1,4 @@
-import type {
-  Availability,
-  Manual,
-  Recommendation,
-} from "./mock-data";
+import type { Manual, Recommendation, StockCheck } from "./mock-data";
 
 export type MessageKind =
   | "text"
@@ -10,9 +6,10 @@ export type MessageKind =
   | "manuals"
   | "citations"
   | "part"
-  | "availability"
+  | "stockCheck"
   | "recommendation"
-  | "callback";
+  | "callback"
+  | "email";
 
 export type ActivityStepState = "pending" | "running" | "done";
 
@@ -33,6 +30,19 @@ export type Callback = {
   confirmedPhone?: string;
 };
 
+export type EmailStatus = "draft" | "sent" | "discarded";
+
+export type EmailDraft = {
+  to: string;
+  subject: string;
+  body: string;
+  replyToName: string;
+  replyToRole: string;
+  replyToEmail: string;
+  replyToPhone: string;
+  status: EmailStatus;
+};
+
 export type Message = {
   id: string;
   role: "user" | "agent";
@@ -44,9 +54,10 @@ export type Message = {
   manuals?: Manual[];
   citations?: number[];
   part?: { partNumber: string; description: string };
-  availability?: Availability;
+  stockCheck?: StockCheck;
   recommendation?: Recommendation;
   callback?: Callback;
+  email?: EmailDraft;
 };
 
 export type Stage =
@@ -57,4 +68,6 @@ export type Stage =
   | "recommend"
   | "discussion"
   | "handoff"
-  | "callback";
+  | "callback"
+  | "email"
+  | "complete";

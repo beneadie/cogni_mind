@@ -20,16 +20,37 @@ import type { ImpactRow } from "../lib/types";
 
 export function ChangeProposalCard({
   onApprove,
-  onEdit,
   onReject,
   onOpenDoc,
 }: {
   onApprove: () => void;
-  onEdit: () => void;
   onReject: () => void;
   onOpenDoc: (docId: string, page: number) => void;
 }) {
   const change = fieldReportChange;
+  const [status, setStatus] = useState<"idle" | "sent" | "rejected">("idle");
+  const [editing, setEditing] = useState(false);
+  const [proposal, setProposal] = useState(change.proposed);
+  const [draft, setDraft] = useState(change.proposed);
+
+  const startEditing = () => {
+    if (status !== "idle") return;
+    setDraft(proposal);
+    setEditing(true);
+  };
+
+  const saveEdit = () => {
+    const next = draft.trim();
+    if (!next) return;
+    setProposal(next);
+    setEditing(false);
+  };
+
+  const cancelEdit = () => {
+    setDraft(proposal);
+    setEditing(false);
+  };
+
   return (
     <div className="overflow-hidden rounded-2xl border border-gold/50 bg-surface">
       <div className="flex items-center justify-between gap-3 border-b border-line bg-gold/10 px-4 py-2.5">
@@ -117,42 +138,93 @@ export function ChangeProposalCard({
           <p className="font-mono text-[0.6rem] font-medium uppercase tracking-[0.14em] text-muted">
             Proposed change
           </p>
-          <p className="mt-1 flex items-start gap-2 text-[0.86rem] leading-relaxed text-ink">
-            <ArrowRight className="mt-1 h-3.5 w-3.5 shrink-0 text-amber" />
-            {change.proposed}
-          </p>
+          {editing ? (
+            <div className="mt-1.5 space-y-2">
+              <textarea
+                autoFocus
+                value={draft}
+                onChange={(event) => setDraft(event.target.value)}
+                rows={3}
+                className="w-full resize-y rounded-xl border border-line-strong bg-canvas px-3 py-2.5 text-[0.86rem] leading-relaxed text-ink focus:border-accent/40 focus:outline-none"
+              />
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={saveEdit}
+                  disabled={!draft.trim()}
+                  className="inline-flex items-center gap-2 rounded-full bg-accent px-3.5 py-1.5 font-mono text-[0.62rem] font-medium uppercase tracking-[0.1em] text-canvas transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  onClick={cancelEdit}
+                  className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-1.5 font-mono text-[0.62rem] font-medium uppercase tracking-[0.1em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-1 flex items-start gap-2 text-[0.86rem] leading-relaxed text-ink">
+              <ArrowRight className="mt-1 h-3.5 w-3.5 shrink-0 text-amber" />
+              {proposal}
+            </p>
+          )}
         </div>
       </div>
 
       <footer className="flex flex-wrap items-center gap-2 border-t border-line bg-elevated/40 px-4 py-3.5">
-        <button
-          type="button"
-          onClick={onApprove}
-          className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-        >
-          Approve and apply
-        </button>
-        <button
-          type="button"
-          onClick={onEdit}
-          className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          onClick={onReject}
-          className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-danger transition-colors hover:bg-danger-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger/40"
-        >
-          Reject
-        </button>
+        {status === "sent" ? (
+          <span className="inline-flex items-center rounded-full border border-amber/40 bg-amber-soft px-3 py-1.5 font-mono text-[0.6rem] font-medium uppercase tracking-[0.1em] text-amber">
+            Proposal sent
+          </span>
+        ) : status === "rejected" ? (
+          <span className="inline-flex items-center rounded-full border border-line-strong bg-canvas px-3 py-1.5 font-mono text-[0.6rem] font-medium uppercase tracking-[0.1em] text-muted">
+            Rejected
+          </span>
+        ) : editing ? (
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.1em] text-muted">
+            Editing proposal…
+          </span>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                setStatus("sent");
+                onApprove();
+              }}
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            >
+              Send proposal
+            </button>
+            <button
+              type="button"
+              onClick={startEditing}
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setStatus("rejected");
+                onReject();
+              }}
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-canvas px-3.5 py-2 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-danger transition-colors hover:bg-danger-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger/40"
+            >
+              Reject
+            </button>
+          </>
+        )}
       </footer>
     </div>
   );
 }
 
-const AUTO_CHIP = "border-online/40 bg-online/10 text-online";
-const HUMAN_CHIP = "border-amber/40 bg-amber-soft text-amber";
+const UPDATE_CHIP = "border-amber/40 bg-amber-soft text-amber";
+const SENT_CHIP = "border-online/40 bg-online/10 text-online";
 
 function ImpactRowItem({
   row,
@@ -263,16 +335,18 @@ function ImpactGroup({
 export function ChangePropagationCard({
   onPropagate,
   onOpenDoc,
+  sent = false,
 }: {
   onPropagate: () => void;
   onOpenDoc: (docId: string, page: number) => void;
+  sent?: boolean;
 }) {
   const change = fieldReportChange;
-  const auto = impactRows.filter((row) => row.disposition === "auto");
-  const human = impactRows.filter((row) => row.disposition !== "auto");
   const found = impactRows.length;
   const from = change.redline.from.replace(`${change.section} — `, "");
   const to = change.redline.to.replace(`${change.section} — `, "");
+  const [hasSent, setHasSent] = useState(sent);
+  const isSent = sent || hasSent;
 
   return (
     <div className="space-y-3">
@@ -291,57 +365,57 @@ export function ChangePropagationCard({
           </span>
         </div>
         <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">
-          Other documents reused the old wiring. Here&apos;s everything the
-          change touches.
+          {isSent
+            ? `The same §7.2 proposal went to each owner of the ${found} related documents. They apply it in their own system.`
+            : `The §7.2 proposal affects ${found} other documents. I'll send each owner the proposal so they can apply it.`}
         </p>
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-line-strong bg-surface">
         <div className="flex items-center justify-between border-b border-line bg-elevated/60 px-4 py-2.5">
           <span className="font-mono text-[0.66rem] font-medium uppercase tracking-[0.14em] text-ink-soft">
-            Documents affected by this change
+            {isSent ? "Proposals sent to the owners" : "Documents affected by this change"}
           </span>
-          <span className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-amber">
-            {found} found
+          <span
+            className={`font-mono text-[0.62rem] uppercase tracking-[0.1em] ${
+              isSent ? "text-online" : "text-amber"
+            }`}
+          >
+            {isSent ? `${found} sent` : `${found} to update`}
           </span>
         </div>
 
-        {auto.length > 0 ? (
-          <ImpactGroup
-            title="AI can update these automatically"
-            hint="They reuse the wiring text from one source — no judgment needed."
-            chip={AUTO_CHIP}
-            label="Auto-fix"
-            rows={auto}
-            onOpenDoc={onOpenDoc}
-          />
-        ) : null}
-        {human.length > 0 ? (
-          <ImpactGroup
-            title="A person needs to edit these"
-            hint="They're controlled documents, so someone on the team makes the change."
-            chip={HUMAN_CHIP}
-            label="Needs edit"
-            rows={human}
-            onOpenDoc={onOpenDoc}
-          />
-        ) : null}
+        <ImpactGroup
+          title={isSent ? "Sent to the document owners" : "Send these proposals to the owners"}
+          hint={
+            isSent
+              ? "Each owner has the proposed §7.2 change for their own system."
+              : "Each owner will get the proposed §7.2 change to apply in their own system."
+          }
+          chip={isSent ? SENT_CHIP : UPDATE_CHIP}
+          label={isSent ? "Sent" : "Proposal"}
+          rows={impactRows}
+          onOpenDoc={onOpenDoc}
+        />
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-elevated/40 px-4 py-3">
           <p className="text-[0.76rem] text-ink-soft">
-            <span className="text-online">
-              {auto.length} fixed automatically
-            </span>
-            {" · "}
-            <span className="text-amber">{human.length} sent to the team</span>
+            {isSent
+              ? `${found} proposals sent to their owners`
+              : `${found} documents need the same proposal`}
           </p>
-          <button
-            type="button"
-            onClick={onPropagate}
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[0.64rem] font-medium uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-          >
-            Approve — update {auto.length}, task {human.length}
-          </button>
+          {isSent ? null : (
+            <button
+              type="button"
+              onClick={() => {
+                setHasSent(true);
+                onPropagate();
+              }}
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[0.64rem] font-medium uppercase tracking-[0.12em] text-canvas transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            >
+              Send {found} proposals
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -379,9 +453,9 @@ export function QueueSummaryCard({
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <div>
-          <p className="text-[0.95rem] font-medium text-ink">Today</p>
+          <p className="text-[0.95rem] font-medium text-ink">Audit complete</p>
           <p className="mt-0.5 font-mono text-[0.64rem] uppercase tracking-[0.1em] text-muted">
-            Queue cleared
+            Alerts handled
           </p>
         </div>
       </div>

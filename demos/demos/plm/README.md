@@ -1,282 +1,230 @@
-# Demo — Product Data / PLM ("Product Care Inbox")
+# Demo — Product Data / PLM ("Product Data Copilot")
 
 **Route:** `/plm` → thin wrapper at `app/plm/page.tsx` → renders `demos/plm/page.tsx`.
 **Code:** everything under `demos/plm/` (`page.tsx`, `lib/`, `components/`).
 
 ## What it shows
 
-A product-data copilot that works **across conversations** on one product family
-(the DL-2400 brass door latch and the ACS product group). It shows two kinds of AI
-work sitting side by side:
+The demo opens as a normal chat, not a pre-filled inbox. The user asks the
+copilot to draft a new HVAC data sheet, uploads an engineering spec, and watches
+the agent:
 
-- **Ask** — you pull: turn a scanned spec into a governed data sheet, check
-  documentation health, scan regulation exposure, find legacy parts, ingest supplier
-  catalogs. These are the classic "chat with the agent" use cases.
-- **Open items** — the system pushes: a queue of things that *found you* (a field
-  report, a compliance alert, a change-propagation task). Working the queue turns
-  signals into governed change: ECR/ECN, where-used impact, dispositions, compliance
-  mitigation, downstream doc updates.
+1. read the spec and draft the standard data sheet,
+2. flag missing, conflicting, and uncertain values for a human,
+3. delegate specialist checks to subagents,
+4. create **alerts** as each specialist discovers a downstream problem.
 
-Core theme: **nothing publishes without a human**, and every value traces back to a
-source.
+The two alerts are the payoff:
+
+- **Documentation mismatch** — the draft from spec rev C requires 3-wire
+  control; the installation manual and published sheet still show 2-wire.
+- **Compliance alert** — the draft lists R-410A, which is banned from 2027.
+
+From there the demo continues into the existing work flows: edit/publish the
+manual, propagate the change to downstream documents, and mitigate the
+compliance exposure. Nothing publishes without a human.
+
+Core theme: **the agent earns the right-hand panel.** The Alerts rail starts
+empty and fills only after the audit finds something.
 
 ## Screen layout
 
 | Region | What's there |
 | --- | --- |
-| Header | Brand, title "PLM Product Care Copilot", demo switcher, Reset. |
-| Progress strip (under header) | The current flow's step rail (see below); hidden on the launcher. |
-| Left rail — **Ask** | "New conversation" + the five session starters. |
-| Center | The conversation: work streams, cards, drawers. |
-| Right rail | Tabs: **Open items** (the queue) and **Workspace** (documents in context + references). |
+| Header | Brand, title "HVAC Product Data Copilot", demo switcher, Reset. |
+| Progress strip | Hidden at the start; shows **Data Sheet Audit** once the upload begins. |
+| Left rail — **Ask** | Historical conversation starters. Intentionally left as-is: these are old examples and remain clickable. |
+| Center | The chat: upload card, draft sheet, subagent research, alert notifications, and the working flows. |
+| Right rail | Tabs: **Alerts** (the queue) and **Workspace** (documents in context and references). |
 
-### The two "modes"
+### Start state
 
-- **Ask mode** = the left **Ask** rail. Selecting a session resets the chat, greets
-  you, and **auto-types that session's query into the composer** (press Enter to run).
-- **Open-items mode** = clicking a card in the right **Open items** tab. It resets the
-  chat and streams that item's opening turn.
+- A fresh chat is active; the left rail shows the historical conversations.
+- The composer auto-fills **"Draft the MAA-200 data sheet from the new spec."**
+  when clicked.
+- The Alerts tab is empty: *"No alerts yet. I'll add them here when the spec
+  audit finds something."*
+- No field report or compliance item is pre-seeded.
 
-The composer also **auto-types the expected reply** for the current stage when you
-click an empty box (like the HVAC demo). It does *not* auto-fill while an open-items
-item is active or during a queue stage.
+## The seed flow
 
-### Progress-strip flows
+### 1. Ask
 
-Defined in `lib/flow.ts` (`FLOW_STEPS`):
+Click the composer → it types *"Draft the MAA-200 data sheet from the new
+spec."* → **Enter**.
 
-- **Spec → Data Sheet** — Ingest → Extract & Verify → Resolve → Approve → Propagate
-- **Documentation Health** — Health → Draft → Review → Publish
-- **Ingest & Connect** — Connect → Understand → Reconcile → Deliver
-- **Product Care** — Review → Apply → Resolve
+The agent asks for the file and shows a **hollow cloud upload dropzone**. The
+dropzone supports drag-and-drop and opens a **Windows 11-style file explorer**.
+The sample file is `public/manuals/maa-200-spec.pdf`, shown in the explorer as
+`MAA-200_spec_revC.pdf`.
 
----
+The explorer is deliberately a single-file Windows 11 window: tab bar, command
+bar, address bar, Quick access navigation, details columns, and a status bar.
+Only the sample engineering spec is listed. Clicking the file or **Open** runs a
+short upload progress before closing.
 
-# Part A — Ask mode (left rail)
+### 2. Upload + draft
 
-Click a session in the **Ask** rail, then press **Enter** when the composer finishes
-auto-typing. Each entry below lists the steps and what to expect.
+After upload, the agent:
 
-## A1. Create / check a data sheet → *"Turn the DL-2400 spec into a data sheet."*
+- reads the spec (6 pages),
+- runs OCR and drafts 12 fields into the standard HVAC data-sheet template,
+- cross-checks the draft against published rev B,
+- flags four values that need a human: missing weight and warranty, conflicting
+  control wiring, and an uncertain refrigerant-charge read.
 
-This is the flagship flow.
+It then shows the **Draft data sheet · MAA-200** card with provenance for each
+field. The R-410A refrigerant and 3-wire control rows are highlighted, and the
+missing/uncertain rows show their suggested source.
 
-1. **Ingest.** Agent connects to the document vault, fetches the scanned
-   `DL-2400_revC.pdf` (an **upload card** you can click to open the PDF), fetches the
-   published `DL-2400_datasheet_2019.pdf` and the ERP BOM (both **source cards**), and
-   notes the three sources are now in the Workspace.
-2. **Extract.** Send *"Extract attributes"* (auto-filled). Agent runs OCR, fills the
-   12-field template, cross-checks the published sheet, and opens the **data sheet
-   card** + **exceptions card**. Five fields need a decision: **Warranty**
-   (carried-over), **Weight** (missing), **Fire Rating** (missing), **Throw**
-   (conflict: 0.75 in vs 0.625 in), **Cycle Rating** (low-confidence OCR).
-   - Click a row to trace it to the spec line; click a **source chip** to highlight the
-     source in the document viewer.
-3. **Resolve.** Send *"Let's go through the exceptions one by one."* The agent walks
-   each field in order (`RESOLUTION_ORDER`), researches it, proposes a value with a
-   source, and asks to apply it. Confirm with the auto-filled *"Yes, apply that
-   value."* (or type your own value — a short non-"yes" reply is taken as the value).
-   - You can also **open any flagged row → the flag drawer** and use its buttons
-     (preset values, **Enter value**, Defer). Resolved values render back onto the data
-     sheet (e.g. Weight shows "1.2 lbs").
-4. **Approve.** When all five are resolved, the agent shows an **approval card**: the
-   change set (`5 changed`). Send *"Approve & publish"*.
-5. **Propagate.** Agent publishes the sheet as **rev D** and finds **3 documents are
-   now stale**. It offers to bring the installation manual current → send *"Update the
-   installation manual."* This switches to the docs flow (see A2, steps from Draft).
+### 3. Delegate
 
-## A2. Documentation Health → *"What documents are out of date?"*
+The agent launches three specialists side by side in a single light
+**orchestration panel**. The three lanes use the same cube loaders, timed
+research nodes, pulsing agent icons, and inline findings as the main work
+stream. Steps cascade down each lane slowly enough to read:
 
-- Agent indexes the DL Series registry and diffs each doc against spec rev C: **3
-  stale** (installation manual trails **4 revisions**), shown in a **doc-health card**.
-- Reply *"Update this manual"* → **Draft**: agent diffs the rev A installation manual
-  against approved spec rev C and shows a **diff card** + **manual-changes card**
-  (4 changes: Latch Throw, Strike Plate, Throw Adjustment added, legacy Torque step
-  removed).
-- **Review**: open each changed row in the **flag drawer** and accept/keep/edit. When
-  all manual changes are resolved, publishing runs automatically.
-- **Publish**: applies changes, republishes the manual as **rev C**, shows the
-  publish summary, and marks "the loop is closed."
+| Specialist | What it checks | Discovery |
+| --- | --- | --- |
+| Compliance agent | Refrigerant, 2027 rules, ERP BOM, shipped units/open orders | R-410A banned 1 Jan 2027; 8,400 shipped, 1,200 open |
+| Manuals & drawings agent | Installation manual rev A §7.2 and reference drawings | Manual says 2-wire; draft/spec require 3-wire |
+| Published data sheet agent | Published rev B control wiring and revision history | Customers still see rev B; the new draft is rev D |
 
-## A3. Regulation Risk → *"Show regulation risk across the portfolio."*
+### 4. Reactive alerts
 
-- Agent loads RoHS 2027 (Pb · Cd · Cr6) and EU Chrome Restriction 2026 (Cr), matches
-  the BOM, and ranks exposure by **units shipped** → **regulation card** (a sortable
-  product table with **Units shipped** and **Open orders** columns). DL-2400 is the
-  top exposure (lead in C36000 brass, 5,200 units shipped).
-- Each row has **View product** → the agent pulls the product's dossier into the
-  **Workspace** (see B3) and offers mitigation options.
-- Follow-up *"Why is DL-2400 high risk?"* → explains the lead-in-brass reason.
+Alerts are created **as each discovery lands**, not in a batch at the end:
 
-## A4. Legacy Part Search → *"Find a brass latch, 2-3/8 backset, 1980s."*
+- Compliance alert appears first.
+- The documentation alert appears when both the manual and published-sheet
+  agents finish.
 
-- Agent parses the request into attributes (material=brass · backset=2.375 in ·
-  era=1980s), searches archived drawings, and scores matches → **legacy card**.
-  DL-2400 is a 96% match.
-- Follow-up *"Check regulation risk for DL-2400"* jumps to the regulation flow.
+Each alert produces a **New alert created** card in the chat and an animated
+**New** badge in the Alerts rail. The composer is locked during the research and
+while a decision card is waiting.
 
-## A5. Ingest & Connect → *"Connect our supplier catalogs into one master."*
+### 5. Audit summary, review, and publish
 
-- **Connect**: pulls six supplier catalogs into one landing zone (raw rows) →
-  **connections card**. Send *"Survey what you pulled."*
-- **Understand**: detects the six dialects and the traps — German `µF` vs `MFD`,
-  comma decimals, EUR pricing → **ingest-notes card**. Send *"Reconcile the records
-  into one master."*
-- **Reconcile**: matches 3,873 rows down to 1,500 parts, flags one ambiguous fan
-  blade for a human → **master card** ("Master published").
+The seed closes with a short narrative and an **Audit summary** card:
 
----
+- `6` pages read, `12` fields drafted, `4` values need review, `2` alerts.
+- **Data sheet** — the spec left missing and conflicting values; weight and
+  warranty came from other sources, control wiring conflicts with rev B, and the
+  refrigerant charge needs a second read.
+- **Documentation** — manual §7.2 and the published sheet still show 2-wire;
+  the §7.2 change touches 3 related documents.
+- **Compliance** — MAA-200 and NA-1500 use R-410A; 14,400 units shipped and
+  2,100 open orders.
 
-# Part B — Open-items mode (right rail)
+The alert rows are informational; only the data-sheet review is an in-chat
+action.
 
-Click **Open items** in the right rail, then click a card. The queue starts with two
-items and a third is injected by the cascade.
+1. **Review data sheet** opens the review card with the four flagged values.
+   Each row is labelled **Missing**, **Conflict**, **Low confidence**, or
+   **From last sheet**. Confirm or change them, then **Publish rev D**. The
+   sheet is published, the Workspace flips to rev D, and a publish-summary card
+   lists the final values. Typing **"Review the data sheet"** also opens it.
+2. Open the **Documentation** alert from the Alerts rail to jump to the §7.2
+   change proposal and its document updates.
+3. Open the **Compliance** alert from the Alerts rail to jump to the ACS
+   regulation card, the MAA-200 product dossier, and the mitigation prompts.
 
-| Item | Severity | Scope | Summary |
-| --- | --- | --- | --- |
-| Field report | red | MAA-200 | "Wiring diagram on §7.2 doesn't match the unit" |
-| Compliance alert | amber | ACS Group | "2 products exposed to the 2027 refrigerant ban" |
-| Change propagation *(injected)* | amber | MAA-200 | "§7.2 change leaves 3 documents stale" |
+## Working the alerts
 
-Item cards show severity (Action needed / Review) when open, and a status
-(Tracking / Resolved / Declined / Acknowledged) once closed; closed items move under
-**Closed**.
+### Documentation mismatch
 
-## B1. Field report → documentation change
+1. Click the alert (or **Review alert**). The agent compares §7.2 against the
+   draft and spec, shows a finding, and opens a **change-proposal card**
+   with **ECR-2026-0142**.
+2. Choose:
+   - **Send proposal** → sends the §7.2 proposal to the Docs team, moves the
+     alert to **Tracking**, and injects the **Document updates** alert. The
+     manual stays at rev A until the owner accepts.
+   - **Edit** → opens an inline textarea with the full proposed change. Save
+     updates the proposal wording; Cancel restores it.
+   - **Reject** → the alert is **Declined** and §7.2 is left for manual review.
+3. **Document updates** → the affected-documents card groups the three
+   documents. **Send 3 proposals** sends the §7.2 proposal to the Web team for
+   the product page and sell sheet, and to the Docs team for the data sheet.
+   Each owner applies the change in their own system; nothing is edited in-app.
 
-1. Click **Field report**. Agent reports the mismatch (manual §7.2 shows 2 wires, unit
-   has 3), then a **finding** callout: *"**The technician is right** — the manual is
-   two revisions behind the rev C spec."*
-2. A **change-proposal card** appears: proposed change **ECR-2026-0142**, the count of
-   other affected documents, the current manual vs current spec, a **line-level diff**
-   (2-wire → 3-wire), and buttons **Open manual §7.2** / **Open spec §7.2** (open the
-   sample PDFs).
-3. Choose an action:
-   - **Approve and apply** → agent publishes the manual to **rev C** and closes the
-     change request as **ECN-2026-0088**, notifies case **CS-4821**, and **injects the
-     Change propagation item** ("3 documents now stale"). The field-report item moves
-     to **Resolved**.
-   - **Edit** → opens the `wire-manual` **flag drawer** (change §7.2 to the 3-wire
-     diagram).
-   - **Reject** → item becomes **Declined**; §7.2 is flagged for manual review.
+### Compliance alert
 
-## B2. Change propagation → update downstream literature
+1. Click the alert. The agent shows the **regulation card** for MAA-200 and
+   NA-1500, ranked by units shipped.
+2. **View product** pulls the MAA-200 dossier into the **Workspace** tab.
+3. Use the suggested replies: **Set a reminder**, **Close issue**, or **Send to
+   responsible person**. The alert moves to Tracking, except **Close issue**,
+   which resolves it.
 
-1. Click **Change propagation** (appears after B1). Agent finds every document that
-   used §7.2: **3 documents** → **propagation card** grouping them by how they're
-   handled — *AI can update these automatically* (Product Page, Sell Sheet) and
-   *A person needs to edit these* (Data Sheet, with an **Open file** link).
-2. Click **Approve — update 2, task 1** → the 2 reusable docs are updated
-   automatically and **TASK-7781** is raised for the Docs team. Item moves to
-   **Resolved**.
+When every alert is handled, the **Audit complete / Alerts handled** summary
+appears in the chat and the composer locks.
 
-## B3. Compliance alert → mitigation
+## Composer behavior
 
-1. Click **Compliance alert**. Agent checks the ACS catalog against the 2027
-   refrigerant ban → **regulation card** listing MAA-200 and NA-1500 (both high risk,
-   R-410A), ranked by **units shipped**.
-2. **View product** runs a short fetch work-stream and drops everything on file into
-   the right-rail **Workspace** (grouped under the product: item master, BOM, substance
-   declaration, shipped units & open orders, compliance file, spec/data sheet/manual,
-   open cases — openable ones link to the sample PDFs). The rail switches to the
-   **Workspace** tab automatically.
-3. Chat ends with a **finding** callout and four **suggested-reply chips**:
-   - **Open change request** → opens **CR-118**, assigns the owner, sets a review
-     reminder for **1 Sep 2026**; item → **Tracking**.
-   - **Request declaration** → requests a full material declaration (FMD);
-     item → **Tracking**.
-   - **Set a reminder** → reminder for **1 Sep 2026**; item → **Tracking**.
-   - **Acknowledge risk** → records an accepted risk with rationale; item →
-     **Acknowledged**.
-4. The finding states **units**, not dollars: *"ERP shows 8,400 units shipped in the
-   last 12 months with 1,200 on open orders."* The ban takes effect **1 Jan 2027**
-   (`deadline` per row; DL RoHS rows use the same date, EU Chrome rows **1 Jul 2026**).
+- The composer auto-fills the expected prompt for the current stage when you
+  click it and no decision card is waiting. The seed prompt is *"Draft the
+  MAA-200 data sheet from the new spec."* At `done`, the composer locks and does
+  not auto-fill another flow; start another conversation or reset.
+- A **paperclip button** inside the composer opens the same file explorer, so the
+  presenter can attach the engineering spec directly without waiting for the
+  in-chat upload card. It is active in the fresh chat and upload step, and
+  disabled while the agent is researching or another flow is active.
+- The upload card drives the next step; drafting starts automatically after the
+  file lands.
+- The composer is disabled while a decision card is waiting: upload, data-sheet
+  review, queue actions, and manual review. Use the card to continue.
+- At the end of the audit, clicking the composer offers *"Review the
+  documentation mismatch."* Once every alert is cleared, the summary appears and
+  the composer locks.
+- The old left-rail conversations still use their own prompts and flows, but
+  completed ingest runs also end at the locked `done` state.
 
-## Closing the queue
+## Historical conversation starters (left rail)
 
-When every item is closed, a **Queue summary card** appears ("Queue cleared") listing
-the outcomes, with a **Start a new conversation** button.
+These remain available and unchanged; they are useful for showing the broader
+product-data surface, but they are not the default story:
 
----
+- **Create / check a data sheet** — the older DL-2400 spec → data sheet flow.
+- **Documentation Health** — the older DL Series health check.
+- **Regulation Risk** — the older DL Series RoHS/Chrome scan.
+- **Legacy Part Search** — the older archived-drawing search.
+- **Ingest & Connect** — the six-supplier-catalog reconciliation.
 
-# Cards you'll see
+## Cards you'll see
 
-All card renderers live in `components/plm-cards.tsx`, `components/queue-cards.tsx`,
-and the dispatcher `components/plm-message.tsx`.
+- **File upload / explorer** (`file-upload.tsx`): hollow dropzone, one-file
+  Windows 11 explorer, upload progress, and the uploaded-file success state.
+- **Draft data sheet** (`extracted-sheet.tsx`): the drafted standard fields with
+  provenance and missing/conflicting notes.
+- **Subagents** (`subagent-run.tsx`): a light orchestration panel with three
+  side-by-side lanes, cube loaders, pulsing agents, slowly cascading research
+  nodes, and inline findings.
+- **Audit summary / review / published** (`audit-summary.tsx`): the final
+  synthesis, the four-value review with missing/conflict/uncertain labels, and
+  the rev D publish summary.
+- **Alert created** (`alert-created.tsx`): the chat notification linking to the
+  new Alerts item.
+- **Existing cards**: change proposal, doc diff, document updates, regulation,
+  suggested replies, and the queue summary.
 
-- **Work stream** (`agent-stream.tsx`): the timed thought → action → observe beats.
-- **Upload / Source** cards: the ingested files (clickable → PDF viewer).
-- **Data sheet**, **Data-sheet diff**, **Exceptions**: the extracted sheet with
-  provenance; rows open the flag drawer.
-- **Proposal** (`proposalId`), **Approval**: the resolution proposal and the
-  sign-off change set.
-- **Propagation / doc-health / regulation / legacy / connections / ingest-notes /
-  master**: the per-flow result cards.
-- **Finding**: a gold callout that bolds the key phrase.
-- **Change-proposal / queue-propagation / queue-regulation / prompts /
-  queue-summary**: the inbox cards. **Prompts** are the clickable suggested-reply
-  chips that dispatch a mitigation action.
-- **Workspace** (`workspace-panel.tsx`): documents in context plus product-grouped
-  dossier records; records with a linked PDF open the viewer.
-- **Flag drawer** (`flag-drawer.tsx`): right-side sheet to resolve a field/change with
-  preset buttons, **Enter value**, or **Defer**.
-- **Document viewer** (`document-viewer.tsx`): structured spec/manual view with
-  source highlighting. **PDF viewer** (`pdf-modal.tsx`): the sample PDFs.
-
-# Mock data, IDs, and glossary
-
-**Products / brands** (`lib/risk-catalog.ts`): the DL Series (DL-2400 latch + siblings,
-*Above Air*) and MAA-200 / NA-1500 (*Marvair* / *Northern Air*, R-410A). Exposure is
-measured in **units shipped** and **open orders** (no revenue). `queue-data.ts`
-re-exports the ACS subset as `complianceProducts`; `demoData.ts` re-exports the DL
-subset as `regulationRisks`. Brand names are illustrative.
-
-**Recurring IDs**
-
-| ID | Meaning |
-| --- | --- |
-| `ECR-2026-0142` | Engineering change **request** raised from the field report. |
-| `ECN-2026-0088` | Engineering change **notice** that closes it. |
-| `CR-118` | Change request opened for the compliance mitigation. |
-| `TASK-7781` | Authoring task raised by propagation (Docs team). |
-| `CS-4821` | Field technician's case. |
-| `1 Jan 2027` / `1 Sep 2026` | Refrigerant/RoHS deadline / review reminder date. |
-| `1 Jul 2026` | EU Chrome Restriction deadline. |
-
-**Glossary**
-
-- **ECR / ECN**: change request → change notice (approve = implement).
-- **Where-used**: which other documents reference a changed section.
-- **Disposition**: how a downstream doc is handled — auto-update, author, review, none.
-- **Effectivity / rev**: the revision a change takes effect in (e.g. manual rev C,
-  sheet rev D).
-- **FMD / substance declaration**: a supplier's full material declaration for
-  compliance.
-- **Propagation**: pushing an approved upstream change to stale downstream docs.
-
-# Files
+## Files
 
 | File | Role |
 | --- | --- |
-| `page.tsx` | Orchestration: stages, sessions, queue actions, resolution, handlers, layout. |
-| `lib/flow.ts` | `PlmStage`, `PlmMessage` kinds, `sessions`, `EXPECTED_INPUT`, `PLACEHOLDERS`, `FLOW_STEPS`. |
-| `lib/turns.ts` | Ask-mode turn scripts (`specIngestTurn`, `extractTurn`, `resolutionTurn`, `verifyTurn`, `publishTurn`, `healthTurn`, `manualDraftTurn`, `manualPublishTurn`, `regulationTurn`, `legacyTurn`, ingest turns) + `RESOLUTIONS`. |
-| `lib/queue-data.ts` | Queue items, impact rows, IDs/dates; re-exports ACS risk products. |
-| `lib/risk-catalog.ts` | The authoritative risk list (ACS + DL), `riskRecord`, and per-product `productDossiers`. |
-| `lib/queue-turns.ts` | Open-items turn scripts (field report/approve, propagation/apply, view-product, compliance-act). |
-| `lib/demoData.ts` | Spec doc, data-sheet rows, flag details/actions, manual draft, health/regulation/legacy data. |
-| `lib/types.ts` | Queue types, `ComplianceAction`, `ImpactRow`, `FlagAction`, `ResolvedValues`, etc. |
-| `lib/pdf-pages.ts` | The sample PDF files/pages used by the viewer. |
-| `lib/ingest-data.ts` | The six supplier-catalog systems + dialects. |
-| `lib/use-agent-turns.ts` | The beat-streaming engine for the conversation. |
-| `components/plm-message.tsx` | Dispatches each message kind to its card. |
-| `components/plm-cards.tsx`, `queue-cards.tsx` | The card renderers. |
-| `components/suggested-replies.tsx` | The clickable mitigation chips (`kind: "prompts"`). |
-| `components/open-items-panel.tsx` | The right-rail queue. |
-| `components/workspace-panel.tsx` | The right-rail Workspace (grouped product dossiers + references). |
-| `components/session-rail.tsx` | The left "Ask" rail. |
-| `components/progress-strip.tsx` | The flow step rail. |
-| `components/flag-drawer.tsx`, `data-sheet-table.tsx`, `manual-draft-table.tsx`, `template-fields.tsx` | Resolution UI. |
-| `components/document-viewer.tsx`, `pdf-modal.tsx` | Source viewers. |
+| `page.tsx` | Start state, audit orchestration, upload/alert callbacks, existing queue flows, layout. |
+| `lib/flow.ts` | `PlmStage`, message kinds, `SubagentSpec`, audit greeting/prompt, expected inputs, flow steps. |
+| `lib/audit-data.ts` | Sample spec, drafted MAA-200 fields, flagged review values, publish changes, three subagent scripts. |
+| `lib/audit-turns.ts` | Intro/upload, draft/flag, subagent, and publish turns. |
+| `components/file-upload.tsx` | Dropzone + Windows 11 single-file explorer. |
+| `components/subagent-run.tsx` | Light orchestration console with timed agents. |
+| `components/extracted-sheet.tsx` | Draft data-sheet card. |
+| `components/audit-summary.tsx` | Audit summary, flagged-value review, and publish summary. |
+| `components/alert-created.tsx` | New-alert notification card. |
+| `lib/queue-data.ts` | Empty starting queue, generated documentation/compliance alerts, document updates item. |
+| `lib/queue-turns.ts` | Documentation change, compliance, and document update turns. |
+| `components/open-items-panel.tsx` | Right-rail **Alerts** panel, empty state, New badges. |
+| `components/workspace-panel.tsx` | Workspace documents, including the uploaded engineering spec. |
+| `public/manuals/maa-200-spec.pdf` | The sample engineering spec and the only file in the explorer. |
 
-**Reset** from the header returns to the launcher and restores the starting queue.
+**Reset** from the header returns to the fresh chat, clears the alerts, and
+restores the starting state.

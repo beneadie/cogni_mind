@@ -27,7 +27,7 @@ export const demos: Demo[] = [
   {
     slug: "plm",
     name: "Product Data (PLM)",
-    tagline: "A product-care inbox: field reports, legacy parts, compliance, and docs from one queue.",
+    tagline: "Audit a new HVAC data sheet; the agent finds the downstream issues and creates the alerts.",
     href: "/plm",
     status: "live",
   },
