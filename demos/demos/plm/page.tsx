@@ -2,15 +2,23 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AppHeader } from "@/components/app-header";
-import { ArrowRight, PanelLeftOpen, PanelRightOpen, Send } from "lucide-react";
 import {
+  PanelLeftOpen,
+  PanelRightOpen,
+  Paperclip,
+  Send,
+} from "lucide-react";
+import {
+  AUDIT_GREETING,
   EXPECTED_INPUT,
   GREETING_TEXT,
   PLACEHOLDERS,
-  QUEUE_GREETING,
   sessions,
+  type PermissionDecision,
+  type PermissionRequest,
   type PlmSession,
   type PlmStage,
+  type UploadedFile,
 } from "./lib/flow";
 import { useAgentTurns } from "./lib/use-agent-turns";
 import {
@@ -31,6 +39,17 @@ import {
   verifyTurn,
 } from "./lib/turns";
 import {
+  auditIntroTurn,
+  auditPublishTurn,
+  auditScanTurn,
+  auditSkippedTurn,
+  auditSubagentsTurn,
+} from "./lib/audit-turns";
+import {
+  DEFAULT_AUDIT_REVIEW_VALUES,
+  type AuditReviewValues,
+} from "./lib/audit-data";
+import {
   dataSheetRows,
   flagDetails,
   manualCurrentContent,
@@ -40,21 +59,39 @@ import {
 } from "./lib/demoData";
 import type {
   ComplianceAction,
+  ComplianceOutcome,
   FlagActionOutcome,
+  PricingDecision,
   QueueCardAction,
   QueueItem,
 } from "./lib/types";
 import {
+  COMPLIANCE_ALERT_ITEM,
+  DOCUMENTATION_ALERT_ITEM,
   INITIAL_QUEUE,
-  PROPAGATION_ITEM,
   complianceProducts,
+  impactRows,
+  PROPAGATION_ITEM,
 } from "./lib/queue-data";
+import {
+  CHROME_YEAR,
+  REFRIGERANT_YEAR,
+  ROHS_YEAR,
+} from "./lib/dates";
 import { productDossiers, riskRecord } from "./lib/risk-catalog";
 import {
+  PRICING_ALERT_ITEM,
+  PRICING_CASE,
+  PRICING_OPTIONS,
+  pricingOutcomeFor,
+} from "./lib/pricing-data";
+import {
+  complianceOutcomeFor,
   queueComplianceActTurn,
   queueComplianceTurn,
+  queueDocumentationTurn,
   queueFieldApproveTurn,
-  queueFieldReportTurn,
+  queuePricingTurn,
   queuePropagationApplyTurn,
   queuePropagationTurn,
   viewProductTurn,
@@ -63,10 +100,10 @@ import { PlmChatMessage, type MessageHandlers } from "./components/plm-message";
 import { OpenItemsPanel } from "./components/open-items-panel";
 import { QueueSummaryCard } from "./components/queue-cards";
 import { SessionRail } from "./components/session-rail";
-import { ProgressStrip } from "./components/progress-strip";
 import { DocumentViewer, type ViewerState } from "./components/document-viewer";
 import { PdfModal, type PdfView } from "./components/pdf-modal";
 import { FlagDrawer } from "./components/flag-drawer";
+import { FilePickerModal } from "./components/file-upload";
 import {
   WorkspacePanel,
   type WorkspaceDoc,
@@ -80,6 +117,12 @@ const FIELD_KEYWORDS: Record<string, string> = {
   throw: "throw",
   cycle: "cycles",
 };
+
+function queueStage(items: QueueItem[]): PlmStage {
+  return items.length > 0 && items.every((item) => item.status !== "open")
+    ? "done"
+    : "queue-resolve";
+}
 
 function sectionHeading(
   sections: { lines: { id: string }[]; heading: string }[],
@@ -111,12 +154,32 @@ export default function PlmDemo() {
   const [rightTab, setRightTab] = useState<"items" | "workspace">("items");
   const [isAutoFilling, setIsAutoFilling] = useState(false);
   const [queue, setQueue] = useState<QueueItem[]>(INITIAL_QUEUE);
+  const [propagationSentIds, setPropagationSentIds] = useState<string[]>([]);
+  const [specialistPermission, setSpecialistPermission] = useState(false);
+  const [rememberedOwners, setRememberedOwners] = useState<string[]>([]);
+  const [complianceActiveProductId, setComplianceActiveProductId] = useState<
+    string | null
+  >(null);
+  const [complianceOutcomes, setComplianceOutcomes] = useState<
+    Record<string, ComplianceOutcome>
+  >({});
+  const [pricingDecision, setPricingDecision] =
+    useState<PricingDecision | null>(null);
+  const [pendingPropagationIds, setPendingPropagationIds] = useState<
+    string[] | null
+  >(null);
   const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const [riskProductId, setRiskProductId] = useState<string | null>(null);
   const [resolvedValues, setResolvedValues] = useState<Record<string, string>>(
     {},
   );
   const [pdfView, setPdfView] = useState<PdfView | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
+  const [newAlertIds, setNewAlertIds] = useState<string[]>([]);
+  const [auditPublished, setAuditPublished] = useState(false);
+  const [auditReviewValues, setAuditReviewValues] =
+    useState<AuditReviewValues>(() => ({ ...DEFAULT_AUDIT_REVIEW_VALUES }));
+  const [composerPickerOpen, setComposerPickerOpen] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const composerRef = useRef<HTMLTextAreaElement>(null);
@@ -124,12 +187,24 @@ export default function PlmDemo() {
   const autofillRef = useRef<number | null>(null);
   const autofillTargetRef = useRef("");
   const skipFocusAutofillRef = useRef(false);
+  const uploadedUrlRef = useRef<string | null>(null);
+  const completedAgentsRef = useRef<Set<string>>(new Set());
+  const alertsCreatedRef = useRef<Set<string>>(new Set());
+  const auditReviewShownRef = useRef(false);
 
   useEffect(() => {
     if (seededRef.current) return;
     seededRef.current = true;
-    push({ role: "agent", kind: "text", text: QUEUE_GREETING });
+    push({ role: "agent", kind: "text", text: AUDIT_GREETING });
   }, [push]);
+
+  useEffect(() => {
+    return () => {
+      if (uploadedUrlRef.current?.startsWith("blob:")) {
+        URL.revokeObjectURL(uploadedUrlRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const node = scrollRef.current;
@@ -281,7 +356,7 @@ export default function PlmDemo() {
           {
             id: "registry",
             title: "DL Series document registry",
-            meta: "5 documents · 3 stale",
+            meta: "5 documents · 3 need updating",
             status: "Scanned",
             tone: "muted",
           },
@@ -297,14 +372,14 @@ export default function PlmDemo() {
         addWorkspace([
           {
             id: "rohs",
-            title: "RoHS 2027",
+            title: `RoHS ${ROHS_YEAR}`,
             meta: "Restriction text · Pb · Cd · Cr6",
             status: "Loaded",
             tone: "muted",
           },
           {
             id: "chrome",
-            title: "EU Chrome Restriction 2026",
+            title: `EU Chrome Restriction ${CHROME_YEAR}`,
             meta: "Restriction text · Cr",
             status: "Loaded",
             tone: "muted",
@@ -355,7 +430,7 @@ export default function PlmDemo() {
   const runIngestReconcile = useCallback(() => {
     streamTurn(
       ingestReconcileTurn(() => {
-        setStage("ingest-reconcile");
+        setStage("done");
         addWorkspace([
           {
             id: "master",
@@ -368,6 +443,163 @@ export default function PlmDemo() {
       }),
     );
   }, [addWorkspace, streamTurn]);
+
+  /* ---------------------------------------------------------------- */
+  /* Data-sheet audit                                                  */
+  /* ---------------------------------------------------------------- */
+
+  const runAuditIntro = useCallback(() => {
+    if (uploadedUrlRef.current?.startsWith("blob:")) {
+      URL.revokeObjectURL(uploadedUrlRef.current);
+    }
+    uploadedUrlRef.current = null;
+    completedAgentsRef.current.clear();
+    alertsCreatedRef.current.clear();
+    auditReviewShownRef.current = false;
+    setUploadedFile(null);
+    setAuditPublished(false);
+    setAuditReviewValues({ ...DEFAULT_AUDIT_REVIEW_VALUES });
+    setPropagationSentIds([]);
+    setPendingPropagationIds(null);
+    streamTurn(
+      auditIntroTurn(() => {
+        setStage("audit-upload");
+        push({ role: "agent", kind: "upload-request" });
+      }),
+    );
+  }, [push, streamTurn]);
+
+  const addAlert = useCallback(
+    (item: QueueItem) => {
+      if (alertsCreatedRef.current.has(item.id)) return;
+      alertsCreatedRef.current.add(item.id);
+      setQueue((prev) =>
+        prev.some((entry) => entry.id === item.id) ? prev : [...prev, item],
+      );
+      setNewAlertIds((prev) =>
+        prev.includes(item.id) ? prev : [...prev, item.id],
+      );
+      setRightTab("items");
+      setRightOpen(true);
+      push({ role: "agent", kind: "alert-created", queueItem: item });
+    },
+    [push],
+  );
+
+  const handleSubagentComplete = useCallback(
+    (agentId: string) => {
+      if (completedAgentsRef.current.has(agentId)) return;
+      completedAgentsRef.current.add(agentId);
+      if (agentId === "compliance") {
+        addAlert(COMPLIANCE_ALERT_ITEM);
+      }
+      if (
+        (agentId === "manual" || agentId === "datasheet") &&
+        completedAgentsRef.current.has("manual") &&
+        completedAgentsRef.current.has("datasheet")
+      ) {
+        addAlert(DOCUMENTATION_ALERT_ITEM);
+      }
+    },
+    [addAlert],
+  );
+
+  const runSpecialistChecks = useCallback(
+    (remembered: boolean) => {
+      setStage("audit-delegating");
+      streamTurn(
+        auditSubagentsTurn(() => {
+          setStage((current) =>
+            current === "audit-review" ? current : "alerts",
+          );
+        }, remembered),
+      );
+    },
+    [streamTurn],
+  );
+
+  const requestSpecialistChecks = useCallback(() => {
+    if (specialistPermission) {
+      push({
+        role: "agent",
+        kind: "text",
+        text: "Using the permission you saved for specialist checks.",
+      });
+      runSpecialistChecks(true);
+      return;
+    }
+    setStage("audit-permission");
+    const permission: PermissionRequest = {
+      id: "specialist-checks",
+      title: "Run the three specialist checks?",
+      detail:
+        "I'll compare the draft against compliance, the manual, and the published sheet, then create alerts for anything that needs review. These checks only read data.",
+      readOnly: true,
+      items: [
+        `Compliance agent — ${REFRIGERANT_YEAR} refrigerant rules and ERP exposure`,
+        "Manuals & drawings agent — §7.2 against spec rev C",
+        "Published data sheet agent — current customer-facing revision",
+      ],
+    };
+    push({ role: "agent", kind: "permission", permission });
+  }, [push, runSpecialistChecks, specialistPermission]);
+
+  const handleUpload = useCallback(
+    (file: UploadedFile) => {
+      if (isThinking) return;
+      stopAutofill();
+      setInput("");
+      setPendingExpected(null);
+      if (uploadedUrlRef.current?.startsWith("blob:")) {
+        URL.revokeObjectURL(uploadedUrlRef.current);
+      }
+      uploadedUrlRef.current = file.url ?? null;
+      setUploadedFile(file);
+      addWorkspace([
+        {
+          id: "uploaded-data-sheet",
+          title: file.name,
+          meta: "Uploaded engineering spec · rev C",
+          status: "In context",
+          tone: "muted",
+          url: file.url,
+        },
+      ]);
+      push({
+        role: "user",
+        kind: "file",
+        fileName: file.name,
+        fileKind: file.kind,
+        fileUrl: file.url,
+      });
+      setStage("audit-reading");
+      streamTurn(
+        auditScanTurn(file.name, file.kind, () => {
+          requestSpecialistChecks();
+        }),
+      );
+    },
+    [
+      addWorkspace,
+      isThinking,
+      push,
+      requestSpecialistChecks,
+      stopAutofill,
+      streamTurn,
+    ],
+  );
+
+  const openUploadedFile = useCallback(() => {
+    if (!uploadedFile?.url) return;
+    window.open(uploadedFile.url, "_blank", "noopener,noreferrer");
+  }, [uploadedFile]);
+
+  const showAuditReview = useCallback(() => {
+    if (auditReviewShownRef.current) return;
+    auditReviewShownRef.current = true;
+    setStage("audit-review");
+    push({ role: "agent", kind: "audit-review" });
+  }, [push]);
 
   /* ---------------------------------------------------------------- */
   /* Conversational resolution                                         */
@@ -483,6 +715,18 @@ export default function PlmDemo() {
   const routeQuery = useCallback(
     (text: string) => {
       const lower = text.toLowerCase();
+      if (/(dl-2400|dl 2400)/.test(lower)) {
+        runSpecIngest();
+        return;
+      }
+      if (
+        /(new data sheet|new spec|engineering spec|maa-200|draft.*data sheet|check.*data sheet|audit)/.test(
+          lower,
+        )
+      ) {
+        runAuditIntro();
+        return;
+      }
       if (/(regulation|risk|rohs|compliance|chrome)/.test(lower)) {
         runRegulation();
         return;
@@ -506,11 +750,12 @@ export default function PlmDemo() {
       push({
         role: "agent",
         kind: "text",
-        text: "I can turn a spec into a governed data sheet, check documentation health, scan regulation risk, search legacy parts, or integrate supplier catalogs. Which would you like?",
+        text: "I can draft a data sheet from a new spec, audit an existing sheet, keep documentation current, or scan compliance. Which would you like?",
       });
     },
     [
       push,
+      runAuditIntro,
       runHealth,
       runIngestConnect,
       runLegacy,
@@ -526,8 +771,56 @@ export default function PlmDemo() {
 
       switch (current) {
         case "launcher":
-        case "done":
           routeQuery(text);
+          break;
+
+        case "audit-upload":
+          push({
+            role: "agent",
+            kind: "text",
+            text: "Use the upload card to attach the MAA-200 engineering spec — PDF or CSV. I'll start drafting the data sheet as soon as it lands.",
+          });
+          break;
+
+        case "audit-reading":
+        case "audit-delegating":
+          push({
+            role: "agent",
+            kind: "text",
+            text: "I'm still drafting the data sheet and running the specialist checks. Give me a moment.",
+          });
+          break;
+
+        case "audit-review":
+          push({
+            role: "agent",
+            kind: "text",
+            text: "Use the review card to confirm or change the flagged values, then publish rev D.",
+          });
+          break;
+
+        case "alerts":
+          if (/data sheet|draft|review/.test(lower)) {
+            showAuditReview();
+          } else if (/document|manual|wiring|mismatch/.test(lower)) {
+            push({
+              role: "agent",
+              kind: "text",
+              text: "The documentation mismatch is the first alert in the panel — open it there and I'll walk you through the §7.2 change.",
+            });
+          } else if (/compliance|refrigerant|r-410a|risk/.test(lower)) {
+            push({
+              role: "agent",
+              kind: "text",
+              text: "The compliance alert is waiting in the panel. Open it and I'll pull up the affected products and mitigation options.",
+            });
+          } else {
+            push({
+              role: "agent",
+              kind: "text",
+              text: "Both findings are in the Alerts panel. Open one there, or ask me about the draft.",
+            });
+          }
           break;
 
         case "upload":
@@ -639,7 +932,7 @@ export default function PlmDemo() {
             push({
               role: "agent",
               kind: "text",
-              text: "DL-2400 uses C36000 forged brass, which carries lead above the RoHS 2027 threshold. With 5,200 units shipped in the last 12 months, it's the top exposure in the DL Series.",
+              text: `DL-2400 uses C36000 forged brass, which carries lead above the RoHS ${ROHS_YEAR} threshold. With 5,200 units shipped in the last 12 months, it's the top exposure in the DL Series.`,
             });
           } else if (/data sheet|spec|back/.test(lower)) {
             push({
@@ -685,11 +978,18 @@ export default function PlmDemo() {
 
         case "queue-review":
         case "queue-apply":
+          push({
+            role: "agent",
+            kind: "text",
+            text: "Choose an action on the card to continue.",
+          });
+          break;
+
         case "queue-resolve":
           push({
             role: "agent",
             kind: "text",
-            text: "Use the buttons on the card, or pick another item from the Open items queue.",
+            text: "Open another alert from the panel, or ask me a question.",
           });
           break;
 
@@ -710,22 +1010,41 @@ export default function PlmDemo() {
       runManualDraft,
       runPublish,
       runRegulation,
+      showAuditReview,
       startResolution,
     ],
   );
 
+  const composerLocked =
+    stage === "audit-upload" ||
+    stage === "audit-permission" ||
+    stage === "audit-review" ||
+    stage === "queue-review" ||
+    stage === "queue-apply" ||
+    stage === "manual-review" ||
+    stage === "done";
+
   const submit = useCallback(
     (override?: string) => {
-      if (isThinking) return;
+      if (isThinking || composerLocked) return;
       const text = (
         override ?? (isAutoFilling ? autofillTargetRef.current : input)
       ).trim();
       stopAutofill();
       if (!text) return;
       setInput("");
+      setPendingExpected(null);
       processTurn(text, stage);
     },
-    [input, isAutoFilling, isThinking, processTurn, stage, stopAutofill],
+    [
+      composerLocked,
+      input,
+      isAutoFilling,
+      isThinking,
+      processTurn,
+      stage,
+      stopAutofill,
+    ],
   );
 
   const handleInputFocus = useCallback(() => {
@@ -733,12 +1052,13 @@ export default function PlmDemo() {
       skipFocusAutofillRef.current = false;
       return;
     }
-    if (isThinking || isAutoFilling || input) return;
+    if (isThinking || composerLocked || isAutoFilling || input) return;
     if (activeItemId !== null || stage.startsWith("queue")) return;
     const target = pendingExpected ?? EXPECTED_INPUT[stage];
     if (target) startAutofill(target);
   }, [
     activeItemId,
+    composerLocked,
     input,
     isAutoFilling,
     isThinking,
@@ -762,8 +1082,26 @@ export default function PlmDemo() {
   const resetChatState = useCallback(() => {
     resetTurns();
     stopAutofill();
+    if (uploadedUrlRef.current?.startsWith("blob:")) {
+      URL.revokeObjectURL(uploadedUrlRef.current);
+    }
+    uploadedUrlRef.current = null;
+    completedAgentsRef.current.clear();
+    alertsCreatedRef.current.clear();
+    auditReviewShownRef.current = false;
+    setUploadedFile(null);
+    setAuditPublished(false);
+    setAuditReviewValues({ ...DEFAULT_AUDIT_REVIEW_VALUES });
+    setNewAlertIds([]);
     setResolvedFlagIds([]);
     setPublishedDocIds([]);
+    setPropagationSentIds([]);
+    setSpecialistPermission(false);
+    setRememberedOwners([]);
+    setComplianceActiveProductId(null);
+    setComplianceOutcomes({});
+    setPricingDecision(null);
+    setPendingPropagationIds(null);
     setOpenFlagId(null);
     setViewer(null);
     setReferences([]);
@@ -773,6 +1111,7 @@ export default function PlmDemo() {
     setRiskProductId(null);
     setResolvedValues({});
     setPdfView(null);
+    setComposerPickerOpen(false);
     setInput("");
   }, [resetTurns, stopAutofill]);
 
@@ -787,7 +1126,8 @@ export default function PlmDemo() {
     resetAll();
     setActiveSession(null);
     setRightTab("items");
-    push({ role: "agent", kind: "text", text: QUEUE_GREETING });
+    setRightOpen(true);
+    push({ role: "agent", kind: "text", text: AUDIT_GREETING });
   }, [push, resetAll]);
 
   const selectSession = useCallback(
@@ -812,18 +1152,36 @@ export default function PlmDemo() {
 
   const selectQueueItem = useCallback(
     (item: QueueItem) => {
+      if (stage === "audit-delegating") {
+        addAlert(COMPLIANCE_ALERT_ITEM);
+        addAlert(DOCUMENTATION_ALERT_ITEM);
+      }
       resetChatState();
       setActiveSession(null);
       setActiveItemId(item.id);
+      setNewAlertIds((prev) => prev.filter((id) => id !== item.id));
       setRightTab("items");
+      setRightOpen(true);
       setStage("queue-review");
       switch (item.id) {
-        case "field-report":
-          streamTurn(queueFieldReportTurn(() => setStage("queue-review")));
+        case "documentation-mismatch":
+          streamTurn(queueDocumentationTurn(() => setStage("queue-review")));
           break;
-        case "compliance-alert":
+        case "parts-pricing-mismatch":
+          streamTurn(queuePricingTurn(() => setStage("queue-review")));
+          break;
+        case "compliance-alert": {
+          const primary = complianceProducts[0]?.product ?? null;
+          setComplianceActiveProductId(primary);
+          setComplianceOutcomes({});
+          setRiskProductId(primary);
+          if (primary) {
+            addWorkspace(productDossiers[primary] ?? []);
+            setRightTab("workspace");
+          }
           streamTurn(queueComplianceTurn(() => setStage("queue-review")));
           break;
+        }
         case "propagation":
           streamTurn(queuePropagationTurn(() => setStage("queue-review")));
           break;
@@ -831,7 +1189,107 @@ export default function PlmDemo() {
           break;
       }
     },
-    [resetChatState, streamTurn],
+    [addAlert, addWorkspace, resetChatState, stage, streamTurn],
+  );
+
+  const updateAuditReviewValue = useCallback((id: string, value: string) => {
+    setAuditReviewValues((prev) => ({ ...prev, [id]: value }));
+  }, []);
+
+  const publishDataSheet = useCallback(
+    (values: AuditReviewValues) => {
+      if (isThinking || auditPublished) return;
+      setAuditReviewValues(values);
+      setAuditPublished(true);
+      setWorkspace((prev) =>
+        prev.map((doc) =>
+          doc.id === "uploaded-data-sheet"
+            ? {
+                ...doc,
+                meta: "Published · rev D",
+                status: "Published",
+                tone: "online" as const,
+              }
+            : doc,
+        ),
+      );
+      streamTurn(auditPublishTurn(values, () => setStage("alerts")));
+    },
+    [auditPublished, isThinking, streamTurn],
+  );
+
+  const executePropagationSend = useCallback(
+    (selectedIds: string[]) => {
+      if (selectedIds.length === 0) return;
+      const nextSentIds = Array.from(
+        new Set([...propagationSentIds, ...selectedIds]),
+      );
+      const remaining = impactRows.filter(
+        (row) => !nextSentIds.includes(row.document),
+      );
+      const sentRows = impactRows.filter((row) =>
+        selectedIds.includes(row.document),
+      );
+      const allSent = remaining.length === 0;
+      streamTurn(
+        queuePropagationApplyTurn(sentRows, remaining.length, () => {
+          setPropagationSentIds(nextSentIds);
+          const next = queue.map((item) =>
+            item.id === "propagation"
+              ? {
+                  ...item,
+                  status: allSent ? ("tracking" as const) : ("open" as const),
+                  summary: allSent
+                    ? "All §7.2 proposals sent to owners"
+                    : `${remaining.length} document${remaining.length === 1 ? "" : "s"} still need the §7.2 proposal`,
+                }
+              : item,
+          );
+          setQueue(next);
+          if (allSent) setActiveItemId(null);
+          setStage(allSent ? queueStage(next) : "queue-review");
+        }),
+      );
+    },
+    [propagationSentIds, queue, streamTurn],
+  );
+
+  const requestPropagationSend = useCallback(
+    (selectedIds: string[]): boolean => {
+      if (pendingPropagationIds) return false;
+      const rows = impactRows.filter((row) =>
+        selectedIds.includes(row.document),
+      );
+      const owners = Array.from(new Set(rows.map((row) => row.owner)));
+      const newOwners = owners.filter(
+        (owner) => !rememberedOwners.includes(owner),
+      );
+      if (newOwners.length === 0) {
+        const ownerText =
+          owners.length === 1
+            ? owners[0]
+            : `${owners.slice(0, -1).join(", ")} and ${owners[owners.length - 1]}`;
+        push({
+          role: "agent",
+          kind: "text",
+          text: `Using the permission you saved for ${ownerText}.`,
+        });
+        executePropagationSend(selectedIds);
+        return true;
+      }
+
+      setPendingPropagationIds(selectedIds);
+      const permission: PermissionRequest = {
+        id: "document-proposals",
+        title: "Send these proposals to the owners?",
+        detail:
+          "These teams need to approve the §7.2 change. Nothing is edited in their systems until they accept.",
+        items: rows.map((row) => `${row.document} · ${row.owner}`),
+      };
+      push({ role: "agent", kind: "permission", permission });
+      return false;
+    },
+    [executePropagationSend, pendingPropagationIds, push, rememberedOwners],
   );
 
   const handleQueueAction = useCallback(
@@ -842,8 +1300,8 @@ export default function PlmDemo() {
             queueFieldApproveTurn(() => {
               setQueue((prev) => {
                 const resolved = prev.map((item) =>
-                  item.id === "field-report"
-                    ? { ...item, status: "resolved" as const }
+                  item.id === "documentation-mismatch"
+                    ? { ...item, status: "tracking" as const }
                     : item,
                 );
                 return resolved.some(
@@ -853,28 +1311,26 @@ export default function PlmDemo() {
                   : [...resolved, PROPAGATION_ITEM];
               });
               setStage("queue-review");
+              setActiveItemId(PROPAGATION_ITEM.id);
               streamTurn(queuePropagationTurn(() => setStage("queue-review")));
-            }),
+            }, payload),
           );
           break;
-        case "field-edit":
-          setOpenFlagId("wire-manual");
-          break;
-        case "field-reject":
-          setQueue((prev) =>
-            prev.map((item) =>
-              item.id === "field-report"
-                ? { ...item, status: "declined" as const }
-                : item,
-            ),
+        case "field-reject": {
+          const next = queue.map((item) =>
+            item.id === "documentation-mismatch"
+              ? { ...item, status: "declined" as const }
+              : item,
           );
+          setQueue(next);
           push({
             role: "agent",
             kind: "text",
-            text: "Understood — I've left the manual as-is and flagged §7.2 for the product team to review manually.",
+            text: "Understood — I've left the manual as-is, recorded the rejection, and closed the change request.",
           });
-          setStage("queue-resolve");
+          setStage(queueStage(next));
           break;
+        }
         case "compliance-view": {
           if (!payload) break;
           const productId = payload;
@@ -891,48 +1347,238 @@ export default function PlmDemo() {
         case "compliance-act": {
           const decision = payload as ComplianceAction | undefined;
           if (!decision || !riskProductId) break;
-          const nextStatus: QueueItem["status"] =
-            decision === "acknowledge" ? "acknowledged" : "tracking";
+          const outcome = complianceOutcomeFor(riskProductId, decision);
+          const nextStatus: QueueItem["status"] = outcome.status;
           const updatesQueue = riskRecord(riskProductId)?.group === "acs";
           streamTurn(
             queueComplianceActTurn(riskProductId, decision, () => {
+              addWorkspace([
+                {
+                  id: `${riskProductId}-${outcome.referenceId}`,
+                  title: outcome.title,
+                  meta: `${outcome.referenceId} · ${outcome.product}`,
+                  status:
+                    outcome.status === "tracking" ? "Tracking" : "Acknowledged",
+                  tone: outcome.status === "tracking" ? "danger" : "muted",
+                  group: riskProductId,
+                },
+              ]);
               if (updatesQueue) {
-                setQueue((prev) =>
-                  prev.map((item) =>
-                    item.id === "compliance-alert"
-                      ? { ...item, status: nextStatus }
-                      : item,
-                  ),
+                const next = queue.map((item) =>
+                  item.id === "compliance-alert"
+                    ? { ...item, status: nextStatus }
+                    : item,
                 );
+                setQueue(next);
+                setStage(queueStage(next));
+              } else {
+                setStage("queue-resolve");
               }
-              setStage("queue-resolve");
             }),
           );
           break;
         }
-        case "propagation-apply":
-          streamTurn(
-            queuePropagationApplyTurn(() => {
-              setQueue((prev) =>
-                prev.map((item) =>
-                  item.id === "propagation"
-                    ? { ...item, status: "resolved" as const }
-                    : item,
-                ),
-              );
-              setStage("queue-resolve");
-            }),
+        case "compliance-case-select": {
+          if (!payload) break;
+          if (!complianceProducts.some((product) => product.product === payload))
+            break;
+          setComplianceActiveProductId(payload);
+          setRiskProductId(payload);
+          addWorkspace(productDossiers[payload] ?? []);
+          setRightTab("workspace");
+          setStage("queue-review");
+          break;
+        }
+        case "compliance-case-act": {
+          const [productId, rawAction] = (payload ?? "").split("|");
+          const decision = rawAction as ComplianceAction | undefined;
+          if (!productId || !decision || complianceOutcomes[productId]) break;
+          if (!complianceProducts.some((product) => product.product === productId))
+            break;
+
+          const outcome = complianceOutcomeFor(productId, decision);
+          const nextOutcomes = { ...complianceOutcomes, [productId]: outcome };
+          setComplianceOutcomes(nextOutcomes);
+          setComplianceActiveProductId(productId);
+          setRiskProductId(productId);
+          addWorkspace([
+            {
+              id: `${productId}-${outcome.referenceId}`,
+              title: outcome.title,
+              meta: `${outcome.referenceId} · ${outcome.product}`,
+              status:
+                outcome.status === "tracking" ? "Tracking" : "Acknowledged",
+              tone: outcome.status === "tracking" ? "danger" : "muted",
+              group: productId,
+            },
+          ]);
+
+          const decided = complianceProducts.filter(
+            (product) => nextOutcomes[product.product],
+          ).length;
+          const allDecided = decided === complianceProducts.length;
+          const nextStatus: QueueItem["status"] = allDecided
+            ? complianceProducts.every(
+                (product) =>
+                  nextOutcomes[product.product]?.status === "acknowledged",
+              )
+              ? "acknowledged"
+              : "tracking"
+            : "open";
+          const next = queue.map((item) =>
+            item.id === "compliance-alert"
+              ? {
+                  ...item,
+                  status: nextStatus,
+                  summary: `${decided} of ${complianceProducts.length} products decided${
+                    allDecided
+                      ? nextStatus === "acknowledged"
+                        ? " — risks acknowledged"
+                        : " — mitigation tracking"
+                      : ""
+                  }`,
+                }
+              : item,
           );
+          setQueue(next);
+          if (allDecided) {
+            setActiveItemId(null);
+            setStage(queueStage(next));
+          } else {
+            setStage("queue-review");
+          }
+          break;
+        }
+        case "pricing-decide": {
+          const decision = payload as PricingDecision | undefined;
+          if (!decision || pricingDecision) break;
+          if (!PRICING_OPTIONS.some((option) => option.id === decision)) break;
+
+          const outcome = pricingOutcomeFor(decision);
+          setPricingDecision(decision);
+          addWorkspace([
+            {
+              id: `pricing-${outcome.referenceId}`,
+              title: outcome.title,
+              meta: `${outcome.referenceId} · ${PRICING_CASE.partNumber}`,
+              status:
+                outcome.status === "tracking" ? "Tracking" : "Acknowledged",
+              tone: outcome.status === "tracking" ? "danger" : "muted",
+              group: PRICING_CASE.partNumber,
+            },
+          ]);
+          const next = queue.map((item) =>
+            item.id === PRICING_ALERT_ITEM.id
+              ? {
+                  ...item,
+                  status: "resolved" as const,
+                  summary: outcome.queueSummary,
+                }
+              : item,
+          );
+          setQueue(next);
+          setActiveItemId(null);
+          setRightTab("workspace");
+          setRightOpen(true);
+          setStage("queue-resolve");
+          break;
+        }
+        case "propagation-cancel":
+          setPendingPropagationIds(null);
+          push({
+            role: "agent",
+            kind: "text",
+            text:
+              propagationSentIds.length > 0
+                ? "Canceled — no further proposals sent. The Document updates alert stays open for the remaining documents."
+                : "Canceled — no proposals sent. The Document updates alert stays open.",
+          });
           break;
         default:
           break;
       }
     },
-    [addWorkspace, push, riskProductId, streamTurn],
+    [
+      addWorkspace,
+      complianceOutcomes,
+      pricingDecision,
+      propagationSentIds,
+      push,
+      queue,
+      riskProductId,
+      streamTurn,
+    ],
+  );
+
+  const handlePermissionDecision = useCallback(
+    (id: PermissionRequest["id"], decision: PermissionDecision) => {
+      if (id === "specialist-checks") {
+        if (decision === "deny") {
+          streamTurn(auditSkippedTurn(() => setStage("alerts")));
+          return;
+        }
+        const remembered = decision === "always";
+        if (remembered) {
+          setSpecialistPermission(true);
+          push({
+            role: "agent",
+            kind: "text",
+            text: "I'll remember that permission for this session.",
+          });
+        }
+        runSpecialistChecks(remembered);
+        return;
+      }
+
+      const ids = pendingPropagationIds;
+      if (!ids) return;
+      setPendingPropagationIds(null);
+
+      if (decision === "deny") {
+        push({
+          role: "agent",
+          kind: "text",
+          text: "Okay — no proposals were sent. The Document updates alert stays open.",
+        });
+        return;
+      }
+
+      if (decision === "always") {
+        const owners = Array.from(
+          new Set(
+            impactRows
+              .filter((row) => ids.includes(row.document))
+              .map((row) => row.owner),
+          ),
+        );
+        setRememberedOwners((prev) =>
+          Array.from(new Set([...prev, ...owners])),
+        );
+        const ownerText =
+          owners.length === 1
+            ? owners[0]
+            : `${owners.slice(0, -1).join(", ")} and ${owners[owners.length - 1]}`;
+        push({
+          role: "agent",
+          kind: "text",
+          text: `I'll remember ${ownerText} for this session, so future proposals won't ask again.`,
+        });
+      }
+
+      executePropagationSend(ids);
+    },
+    [
+      executePropagationSend,
+      pendingPropagationIds,
+      push,
+      runSpecialistChecks,
+      streamTurn,
+    ],
   );
 
   const openItems = queue.filter((item) => item.status === "open");
   const queueCleared = queue.length > 0 && openItems.length === 0;
+  const showQueueSummary = queueCleared && activeSession === null;
 
   const statusCount = (status: QueueItem["status"]) =>
     queue.filter((item) => item.status === status).length;
@@ -949,15 +1595,13 @@ export default function PlmDemo() {
     );
   if (acknowledgedCount > 0)
     summaryRows.push(
-      `${acknowledgedCount} risk${acknowledgedCount === 1 ? "" : "s"} acknowledged`,
+      `${acknowledgedCount} item${acknowledgedCount === 1 ? "" : "s"} acknowledged`,
     );
   if (declinedCount > 0)
     summaryRows.push(
       `${declinedCount} item${declinedCount === 1 ? "" : "s"} declined`,
     );
-  summaryRows.push(
-    `${complianceProducts.length} products flagged for regulation`,
-  );
+  summaryRows.push("Data-sheet audit findings closed");
 
   /* ---------------------------------------------------------------- */
   /* Drawer                                                           */
@@ -966,6 +1610,14 @@ export default function PlmDemo() {
   const handleFlagAction = useCallback(
     (flagId: string, outcome: FlagActionOutcome, value?: string) => {
       setOpenFlagId(null);
+      if (outcome === "defer") {
+        push({
+          role: "agent",
+          kind: "text",
+          text: "Deferred — I'll leave the alert open so it doesn't get lost.",
+        });
+        return;
+      }
       if (outcome !== "resolve") return;
 
       if (value !== undefined) {
@@ -989,6 +1641,7 @@ export default function PlmDemo() {
     },
     [
       manualFlagIds,
+      push,
       resolvedFlagIds,
       runManualPublish,
       runVerify,
@@ -999,27 +1652,46 @@ export default function PlmDemo() {
 
   const detail = openFlagId ? (flagDetails[openFlagId] ?? null) : null;
 
+  const canAttach =
+    !isThinking &&
+    activeSession === null &&
+    (stage === "launcher" || stage === "audit-upload");
+
   const handlers: MessageHandlers = {
     resolvedFlagIds,
     resolvedValues,
     publishedDocIds,
+    propagationSentIds,
+    rememberedOwners,
+    complianceActiveProductId,
+    complianceOutcomes,
+    pricingDecision,
+    uploadedFile,
+    auditPublished,
+    auditReviewValues,
+    onUpload: handleUpload,
+    onOpenUploaded: openUploadedFile,
+    onSubagentComplete: handleSubagentComplete,
+    onReviewDataSheet: showAuditReview,
+    onAuditReviewValueChange: updateAuditReviewValue,
+    onPublishDataSheet: publishDataSheet,
     onOpenFlag: setOpenFlagId,
     onOpenSource: openSource,
     onHoverSource: hoverSource,
     onOpenPdf: openPdf,
     onQueueAction: handleQueueAction,
+    onPropagate: requestPropagationSend,
+    onPermissionDecision: handlePermissionDecision,
   };
 
   return (
     <div className="flex h-dvh flex-col bg-canvas">
       <AppHeader
         onReset={newConversation}
-        title="PLM Product Care Copilot"
-        subtitle="Cross-Conversation Console"
+        title="HVAC Product Data Copilot"
+        subtitle="Product Data & Compliance"
         hint={null}
       />
-      <ProgressStrip stage={stage} />
-
       <div className="relative flex min-h-0 flex-1">
         {leftOpen ? (
           <div className="hidden w-52 shrink-0 lg:block">
@@ -1047,23 +1719,7 @@ export default function PlmDemo() {
                 />
               ))}
 
-              {!activeItemId &&
-              !activeSession &&
-              openItems.length > 0 &&
-              messages.length === 1 ? (
-                <div className="flex justify-start">
-                  <button
-                    type="button"
-                    onClick={() => selectQueueItem(openItems[0])}
-                    className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface px-4 py-2.5 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                  >
-                    Open {openItems[0].type.toLowerCase()}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              ) : null}
-
-              {queueCleared ? (
+              {showQueueSummary ? (
                 <QueueSummaryCard rows={summaryRows} onNew={newConversation} />
               ) : null}
             </div>
@@ -1090,13 +1746,34 @@ export default function PlmDemo() {
                       submit();
                     }
                   }}
-                  disabled={isThinking}
+                  disabled={isThinking || composerLocked}
                   placeholder={PLACEHOLDERS[stage]}
                   className="scroll-soft min-w-0 flex-1 resize-none bg-transparent py-2 text-[0.88rem] leading-relaxed text-ink placeholder:text-muted focus:outline-none disabled:cursor-not-allowed"
                 />
                 <button
+                  type="button"
+                  onClick={() => {
+                    if (!canAttach) return;
+                    stopAutofill();
+                    setInput("");
+                    setPendingExpected(null);
+                    setComposerPickerOpen(true);
+                  }}
+                  disabled={!canAttach}
+                  aria-label="Attach an engineering spec"
+                  title="Attach an engineering spec"
+                  className="mb-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-line-strong bg-canvas text-muted transition-colors hover:border-line-strong hover:bg-elevated hover:text-ink disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                >
+                  <Paperclip className="h-4 w-4" />
+                </button>
+                <button
                   type="submit"
-                  disabled={isThinking || isAutoFilling || !input.trim()}
+                  disabled={
+                    isThinking ||
+                    composerLocked ||
+                    isAutoFilling ||
+                    !input.trim()
+                  }
                   className="mb-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent text-canvas transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                   aria-label="Send message"
                 >
@@ -1112,7 +1789,7 @@ export default function PlmDemo() {
             <div className="flex items-center gap-1 border-b border-line bg-surface/80 px-2 py-2">
               {(
                 [
-                  { id: "items" as const, label: "Open items" },
+                  { id: "items" as const, label: "Alerts" },
                   { id: "workspace" as const, label: "Workspace" },
                 ]
               ).map((tab) => {
@@ -1144,6 +1821,7 @@ export default function PlmDemo() {
                 <OpenItemsPanel
                   items={queue}
                   activeId={activeItemId}
+                  newIds={newAlertIds}
                   onSelect={selectQueueItem}
                   onCollapse={() => setRightOpen(false)}
                 />
@@ -1188,6 +1866,15 @@ export default function PlmDemo() {
           </button>
         ) : null}
       </div>
+
+      <FilePickerModal
+        open={composerPickerOpen}
+        onClose={() => setComposerPickerOpen(false)}
+        onSelect={(file) => {
+          setComposerPickerOpen(false);
+          handleUpload(file);
+        }}
+      />
 
       <DocumentViewer viewer={viewer} onClose={() => setViewer(null)} />
       <PdfModal

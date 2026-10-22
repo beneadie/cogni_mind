@@ -135,6 +135,23 @@ export function useAgentTurns() {
           return;
         }
 
+        if (beat.kind === "subagents") {
+          finishWork();
+          const launchDelay = beat.launchDelayMs ?? 0;
+          push({
+            role: "agent",
+            kind: "subagents",
+            subagents: beat.agents,
+            subagentDelayMs: launchDelay,
+            subagentPermissionRemembered: beat.permissionRemembered,
+          });
+          after(launchDelay + beat.ms, () => {
+            workId = nextId();
+            runNext();
+          });
+          return;
+        }
+
         if (beat.kind === "text") {
           finishWork();
           push({ role: "agent", kind: "text", text: beat.text });

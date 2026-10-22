@@ -6,7 +6,6 @@ import {
   FileText,
   PanelRightClose,
 } from "lucide-react";
-
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <p className="font-mono text-[0.62rem] font-medium uppercase tracking-[0.16em] text-muted">

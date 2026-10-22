@@ -3,9 +3,10 @@ import { SERVICE_MANUAL } from "@/lib/mock-data";
 import { ActivityBlock } from "./activity-block";
 import { ManualCard } from "./manual-card";
 import { PartCard } from "./part-card";
-import { AvailabilityCard } from "./availability-card";
+import { StockCheckCard } from "./stock-check-card";
 import { RecommendationCard } from "./recommendation-card";
 import { CallbackCard } from "./callback-card";
+import { EmailCard } from "./email-card";
 import { Typewriter } from "./typewriter";
 import { Download, FileText } from "lucide-react";
 
@@ -17,8 +18,10 @@ type ChatMessageProps = {
   onToggleManual?: (id: string) => void;
   onLoadSelected?: () => void;
   onCitation?: (page: number) => void;
-  onCheckAvailability?: () => void;
+  onRequestStockCheck?: () => void;
   onCallbackConfirm?: (choice: "yes" | "no", phone: string) => void;
+  onEmailSend?: () => void;
+  onEmailDiscard?: () => void;
 };
 
 export function ChatMessage({
@@ -29,8 +32,10 @@ export function ChatMessage({
   onToggleManual,
   onLoadSelected,
   onCitation,
-  onCheckAvailability,
+  onRequestStockCheck,
   onCallbackConfirm,
+  onEmailSend,
+  onEmailDiscard,
 }: ChatMessageProps) {
   if (message.kind === "thinking") {
     return (
@@ -119,12 +124,12 @@ export function ChatMessage({
           <PartCard
             partNumber={message.part.partNumber}
             description={message.part.description}
-            onCheckAvailability={onCheckAvailability}
+            onRequestStockCheck={onRequestStockCheck}
           />
         ) : null}
 
-        {message.kind === "availability" && message.availability ? (
-          <AvailabilityCard availability={message.availability} />
+        {message.kind === "stockCheck" && message.stockCheck ? (
+          <StockCheckCard stockCheck={message.stockCheck} />
         ) : null}
 
         {message.kind === "recommendation" && message.recommendation ? (
@@ -135,6 +140,14 @@ export function ChatMessage({
           <CallbackCard
             callback={message.callback}
             onConfirm={onCallbackConfirm}
+          />
+        ) : null}
+
+        {message.kind === "email" && message.email ? (
+          <EmailCard
+            email={message.email}
+            onSend={onEmailSend}
+            onDiscard={onEmailDiscard}
           />
         ) : null}
       </div>

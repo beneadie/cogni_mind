@@ -1,0 +1,19 @@
+field,value,unit,source,confidence
+model,MAA-200,,rev D data sheet,high
+product_type,Split system,,rev D data sheet,high
+nominal_capacity,24000,BTU/h,rev D data sheet,high
+refrigerant,R-410A,,rev D data sheet,high
+control_wiring,"3-wire (R, C, G)",,rev D data sheet,high
+voltage,"208/230",V,rev D data sheet,high
+phase,1,,rev D data sheet,high
+frequency,60,Hz,rev D data sheet,high
+mca,14.5,A,rev D data sheet,high
+mop,20,A,rev D data sheet,high
+airflow,800,CFM,rev D data sheet,high
+weight,184,lb,ERP material master,medium
+warranty,10,years,Published data sheet rev B,medium
+sound_pressure,56,dB(A),rev D data sheet,high
+compressor,Scroll,,rev D data sheet,high
+refrigerant_charge,6.5,lb,rev D data sheet,high
+certifications,"AHRI 210/240; UL 60335-2-40",,rev D data sheet,high
+revision,D - 2026,,rev D data sheet,high

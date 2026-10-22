@@ -1,7 +1,12 @@
 "use client";
 
 import { Typewriter } from "@/components/typewriter";
-import type { PlmMessage } from "../lib/flow";
+import { FileSpreadsheet, FileText } from "lucide-react";
+import type {
+  PermissionDecision,
+  PermissionRequest,
+  PlmMessage,
+} from "../lib/flow";
 import { AgentStream } from "./agent-stream";
 import {
   ApprovalCard,
@@ -26,12 +31,34 @@ import {
 import {
   ChangePropagationCard,
   ChangeProposalCard,
-  QueueRegulationCard,
 } from "./queue-cards";
 import { SuggestedReplies } from "./suggested-replies";
 import { DocDiff } from "./doc-diff";
 import { WarningBlock } from "./warning-block";
-import type { QueueCardAction } from "../lib/types";
+import { FileUploadRequest } from "./file-upload";
+import { SubagentRun } from "./subagent-run";
+import { PermissionCard } from "./permission-card";
+import {
+  ComplianceCaseCard,
+  ComplianceExposureCard,
+  ComplianceOptionsCard,
+  ComplianceOutcomeCard,
+} from "./compliance-card";
+import { PricingCaseCard } from "./pricing-card";
+import { ExtractedSheetCard } from "./extracted-sheet";
+import { AlertCreatedCard } from "./alert-created";
+import {
+  AuditPublishedCard,
+  AuditReviewCard,
+  AuditSummaryCard,
+} from "./audit-summary";
+import { AUDIT_FILE, type AuditReviewValues } from "../lib/audit-data";
+import type {
+  ComplianceOutcome,
+  PricingDecision,
+  QueueCardAction,
+} from "../lib/types";
+import type { UploadedFile } from "../lib/flow";
 
 function FindingBlock({
   text,
@@ -65,11 +92,30 @@ export type MessageHandlers = {
   resolvedFlagIds: string[];
   resolvedValues: Record<string, string>;
   publishedDocIds: string[];
+  propagationSentIds: string[];
+  rememberedOwners: string[];
+  complianceActiveProductId: string | null;
+  complianceOutcomes: Record<string, ComplianceOutcome>;
+  pricingDecision: PricingDecision | null;
+  uploadedFile: UploadedFile | null;
+  auditPublished: boolean;
+  auditReviewValues: AuditReviewValues;
+  onUpload: (file: UploadedFile) => void;
+  onOpenUploaded: () => void;
+  onSubagentComplete: (id: string) => void;
+  onReviewDataSheet: () => void;
+  onAuditReviewValueChange: (id: string, value: string) => void;
+  onPublishDataSheet: (values: AuditReviewValues) => void;
   onOpenFlag: (flagId: string) => void;
   onOpenSource: (doc: "spec" | "manual", lineIds: string[]) => void;
   onHoverSource: (lineIds: string[]) => void;
   onOpenPdf: (docId: string, page: number) => void;
   onQueueAction: (action: QueueCardAction, payload?: string) => void;
+  onPropagate: (ids: string[]) => boolean;
+  onPermissionDecision: (
+    id: PermissionRequest["id"],
+    decision: PermissionDecision,
+  ) => void;
 };
 
 export function PlmChatMessage({
@@ -96,6 +142,27 @@ export function PlmChatMessage({
   }
 
   if (message.role === "user") {
+    if (message.kind === "file") {
+      const FileIcon =
+        message.fileKind === "pdf" ? FileText : FileSpreadsheet;
+      return (
+        <div className="flex justify-end">
+          <div className="inline-flex max-w-[34rem] items-center gap-2.5 rounded-2xl rounded-br-md bg-accent px-3.5 py-2.5 text-canvas">
+            <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-canvas/10">
+              <FileIcon className="h-4 w-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="block truncate text-[0.82rem] font-medium">
+                {message.fileName ?? message.text}
+              </span>
+              <span className="mt-0.5 block font-mono text-[0.56rem] uppercase tracking-[0.08em] text-canvas/60">
+                Uploaded · {message.fileKind?.toUpperCase() ?? "FILE"}
+              </span>
+            </span>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="flex justify-end">
         <div className="max-w-[34rem] whitespace-pre-line rounded-2xl rounded-br-md bg-accent px-4 py-2.5 text-[0.9rem] leading-relaxed text-canvas">
@@ -129,6 +196,68 @@ export function PlmChatMessage({
 
         {message.kind === "upload" ? (
           <UploadCard onOpen={() => handlers.onOpenPdf("dl-2400-spec", 1)} />
+        ) : null}
+
+        {message.kind === "upload-request" ? (
+          <FileUploadRequest
+            fileName={handlers.uploadedFile?.name}
+            fileKind={handlers.uploadedFile?.kind}
+            fileSize={handlers.uploadedFile?.size}
+            onSelect={handlers.onUpload}
+            onOpen={
+              handlers.uploadedFile ? handlers.onOpenUploaded : undefined
+            }
+          />
+        ) : null}
+
+        {message.kind === "extracted-sheet" ? (
+          <ExtractedSheetCard onOpenFile={handlers.onOpenUploaded} />
+        ) : null}
+
+        {message.kind === "subagents" && message.subagents ? (
+          <SubagentRun
+            agents={message.subagents}
+            launchDelayMs={message.subagentDelayMs}
+            permissionRemembered={message.subagentPermissionRemembered}
+            onComplete={handlers.onSubagentComplete}
+          />
+        ) : null}
+
+        {message.kind === "permission" && message.permission ? (
+          <PermissionCard
+            request={message.permission}
+            onDecision={(decision) =>
+              handlers.onPermissionDecision(
+                message.permission!.id,
+                decision,
+              )
+            }
+          />
+        ) : null}
+
+        {message.kind === "alert-created" && message.queueItem ? (
+          <AlertCreatedCard item={message.queueItem} />
+        ) : null}
+
+        {message.kind === "audit-summary" ? (
+          <AuditSummaryCard
+            fileName={handlers.uploadedFile?.name ?? AUDIT_FILE.name}
+            published={handlers.auditPublished}
+            onReview={handlers.onReviewDataSheet}
+          />
+        ) : null}
+
+        {message.kind === "audit-review" ? (
+          <AuditReviewCard
+            published={handlers.auditPublished}
+            values={handlers.auditReviewValues}
+            onValueChange={handlers.onAuditReviewValueChange}
+            onPublish={handlers.onPublishDataSheet}
+          />
+        ) : null}
+
+        {message.kind === "audit-published" ? (
+          <AuditPublishedCard values={handlers.auditReviewValues} />
         ) : null}
 
         {message.kind === "source" && message.sourceId ? (
@@ -206,19 +335,58 @@ export function PlmChatMessage({
 
         {message.kind === "change-proposal" ? (
           <ChangeProposalCard
-            onApprove={() => handlers.onQueueAction("field-approve")}
-            onEdit={() => handlers.onQueueAction("field-edit")}
+            onApprove={(proposal) =>
+              handlers.onQueueAction("field-approve", proposal)
+            }
             onReject={() => handlers.onQueueAction("field-reject")}
             onOpenDoc={handlers.onOpenPdf}
           />
         ) : null}
 
-        {message.kind === "queue-regulation" ? (
-          <QueueRegulationCard
-            onViewProduct={(product) =>
-              handlers.onQueueAction("compliance-view", product)
+        {message.kind === "compliance-case" ? (
+          <ComplianceCaseCard
+            activeProductId={handlers.complianceActiveProductId}
+            outcomes={handlers.complianceOutcomes}
+            onSelectProduct={(product) =>
+              handlers.onQueueAction("compliance-case-select", product)
+            }
+            onAction={(product, action) =>
+              handlers.onQueueAction(
+                "compliance-case-act",
+                `${product}|${action}`,
+              )
             }
           />
+        ) : null}
+
+        {message.kind === "pricing-case" ? (
+          <PricingCaseCard
+            decision={handlers.pricingDecision}
+            onDecide={(decision) =>
+              handlers.onQueueAction("pricing-decide", decision)
+            }
+          />
+        ) : null}
+
+        {message.kind === "compliance-exposure" && message.productId ? (
+          <ComplianceExposureCard productId={message.productId} />
+        ) : null}
+
+        {message.kind === "compliance-options" &&
+        message.productId &&
+        message.complianceOptions ? (
+          <ComplianceOptionsCard
+            productId={message.productId}
+            options={message.complianceOptions}
+            onSelect={(action) =>
+              handlers.onQueueAction("compliance-act", action)
+            }
+          />
+        ) : null}
+
+        {message.kind === "compliance-outcome" &&
+        message.complianceOutcome ? (
+          <ComplianceOutcomeCard outcome={message.complianceOutcome} />
         ) : null}
 
         {message.kind === "prompts" && message.prompts ? (
@@ -231,13 +399,20 @@ export function PlmChatMessage({
         ) : null}
 
         {message.kind === "doc-diff" && message.diff ? (
-          <DocDiff diff={message.diff} applied={message.applied} />
+          <DocDiff
+            diff={message.diff}
+            applied={message.applied}
+            sent={message.sent}
+          />
         ) : null}
 
         {message.kind === "queue-propagation" ? (
           <ChangePropagationCard
-            onPropagate={() => handlers.onQueueAction("propagation-apply")}
+            onPropagate={handlers.onPropagate}
+            onCancel={() => handlers.onQueueAction("propagation-cancel")}
             onOpenDoc={handlers.onOpenPdf}
+            sentIds={handlers.propagationSentIds}
+            rememberedOwners={handlers.rememberedOwners}
           />
         ) : null}
       </div>

@@ -1,4 +1,10 @@
-import type { DocDiff, PromptOption } from "./types";
+import type {
+  ComplianceOption,
+  ComplianceOutcome,
+  DocDiff,
+  PromptOption,
+  QueueItem,
+} from "./types";
 
 export type Tone = "info" | "warn" | "good";
 /** One visible unit of the agent's work in a turn. */
@@ -17,10 +23,47 @@ export type WorkBeat =
       ms2?: number;
     };
 
-export type PlmFlowKind = "spec" | "docs" | "ingest" | "care";
+/** A file the user attached to the audit conversation. */
+export type UploadedFile = {
+  name: string;
+  kind: "csv" | "pdf";
+  size: string;
+  /** Real file served from /public, or a blob URL for a dropped file. */
+  url?: string;
+};
+
+/** One specialist the orchestrator delegates a data-sheet check to. */
+export type SubagentSpec = {
+  id: string;
+  name: string;
+  role: string;
+  icon: "compliance" | "manual" | "sheet";
+  beats: WorkBeat[];
+  finding: string;
+  /** Alert this agent contributes to once its research completes. */
+  alert: "compliance" | "documentation";
+};
+
+export type PermissionRequest = {
+  id: "specialist-checks" | "document-proposals";
+  title: string;
+  detail: string;
+  items: string[];
+  readOnly?: boolean;
+};
+
+export type PermissionDecision = "once" | "always" | "deny";
+
+export type PlmFlowKind = "audit" | "spec" | "docs" | "ingest" | "care";
 
 export type PlmStage =
   | "launcher"
+  | "audit-upload"
+  | "audit-reading"
+  | "audit-permission"
+  | "audit-delegating"
+  | "audit-review"
+  | "alerts"
   | "upload"
   | "extract"
   | "resolve"
@@ -44,6 +87,15 @@ export type PlmStage =
 export type PlmMessageKind =
   | "work"
   | "text"
+  | "file"
+  | "upload-request"
+  | "uploaded"
+  | "subagents"
+  | "alert-created"
+  | "audit-summary"
+  | "audit-review"
+  | "audit-published"
+  | "extracted-sheet"
   | "finding"
   | "warning"
   | "upload"
@@ -63,10 +115,15 @@ export type PlmMessageKind =
   | "regulation"
   | "legacy"
   | "change-proposal"
-  | "queue-regulation"
+  | "compliance-case"
+  | "compliance-exposure"
+  | "compliance-options"
+  | "compliance-outcome"
+  | "pricing-case"
   | "prompts"
   | "doc-diff"
-  | "queue-propagation";
+  | "queue-propagation"
+  | "permission";
 
 export type PlmMessage = {
   id: string;
@@ -91,6 +148,10 @@ export type PlmMessage = {
   productId?: string;
   /** Suggested replies, for `kind: "prompts"`. */
   prompts?: PromptOption[];
+  /** Mitigation choices, for `kind: "compliance-options"`. */
+  complianceOptions?: ComplianceOption[];
+  /** Committed mitigation record, for `kind: "compliance-outcome"`. */
+  complianceOutcome?: ComplianceOutcome;
   /** Heading for a `warning` callout (defaults to "Warning"). */
   title?: string;
   /** Fact chips shown under a `warning` callout. */
@@ -99,12 +160,37 @@ export type PlmMessage = {
   diff?: DocDiff;
   /** Whether the diff has been applied (vs. proposed), for `kind: "doc-diff"`. */
   applied?: boolean;
+  /** Whether the diff was sent to the document owner, for `kind: "doc-diff"`. */
+  sent?: boolean;
+  /** Attached file name, for `kind: "file"` and `kind: "upload-request"`. */
+  fileName?: string;
+  /** Attached file kind, for `kind: "file"`. */
+  fileKind?: "csv" | "pdf";
+  /** Attached file URL, for `kind: "file"`. */
+  fileUrl?: string;
+  /** Specialist agents, for `kind: "subagents"`. */
+  subagents?: SubagentSpec[];
+  /** Delay before the specialist columns launch. */
+  subagentDelayMs?: number;
+  /** Whether specialist checks were allowed by a remembered permission. */
+  subagentPermissionRemembered?: boolean;
+  /** Permission request, for `kind: "permission"`. */
+  permission?: PermissionRequest;
+  /** Alert created by the audit, for `kind: "alert-created"`. */
+  queueItem?: QueueItem;
 };
 
 export type TurnBeat =
   | WorkBeat
   | { kind: "text"; text: string }
-  | { kind: "card"; message: Omit<PlmMessage, "id"> };
+  | { kind: "card"; message: Omit<PlmMessage, "id"> }
+  | {
+      kind: "subagents";
+      agents: SubagentSpec[];
+      ms: number;
+      launchDelayMs?: number;
+      permissionRemembered?: boolean;
+    };
 
 export type TurnPlan = {
   beats: TurnBeat[];
@@ -135,7 +221,7 @@ export const sessions: PlmSession[] = [
   {
     id: "regulation",
     title: "Regulation Risk",
-    subtitle: "RoHS 2027 · EU Chrome 2026",
+    subtitle: "Refrigerant · RoHS · chrome rules",
     query: "Show regulation risk across the portfolio.",
   },
   {
@@ -155,14 +241,18 @@ export const sessions: PlmSession[] = [
 export const GREETING_TEXT =
   "Welcome. I work across product data — I can turn a scanned spec into a governed data sheet, keep documentation current, check regulation exposure, find legacy parts, and integrate messy supplier catalogs. Pick a starting point, or just ask.";
 
-/** Opening line for the Product Care inbox. */
-export const QUEUE_GREETING =
-  "Two items are waiting for you. Start with the field report?";
+/** Opening line for the new data-sheet draft conversation. */
+export const AUDIT_GREETING =
+  "Hi — I'm your product-data copilot. Upload a new engineering spec and I'll draft the standard data sheet, flag missing or conflicting values, then check it against documentation and compliance.";
+
+/** The default prompt auto-filled into the fresh conversation. */
+export const AUDIT_PROMPT = "Draft a data sheet from the new spec.";
 
 /** The prompt auto-filled into the composer when the user clicks the box,
  *  HVAC-style. Stages without an entry are driven by the cards instead. */
 export const EXPECTED_INPUT: Partial<Record<PlmStage, string>> = {
-  launcher: "Turn the DL-2400 spec into a data sheet.",
+  launcher: AUDIT_PROMPT,
+  alerts: "Review the data sheet.",
   upload: "Extract attributes",
   resolve: "Let's go through the exceptions one by one.",
   "resolve-confirm": "Yes, apply that value.",
@@ -173,11 +263,16 @@ export const EXPECTED_INPUT: Partial<Record<PlmStage, string>> = {
   legacy: "Check regulation risk for DL-2400",
   "ingest-connect": "Survey what you pulled.",
   "ingest-understand": "Reconcile the records into one master.",
-  done: "Turn the DL-2400 spec into a data sheet.",
 };
 
 export const PLACEHOLDERS: Record<PlmStage, string> = {
   launcher: "Ask about specs, documents, regulations, or suppliers…",
+  "audit-upload": "Use the upload card to attach the spec…",
+  "audit-reading": "Drafting the data sheet and flagging gaps…",
+  "audit-permission": "Use the permission card to continue…",
+  "audit-delegating": "Checking compliance and documentation…",
+  "audit-review": "Use the review card to continue…",
+  alerts: "Review the data sheet, or ask about the findings…",
   upload: "Select a document to continue…",
   extract: "Review the extracted fields…",
   resolve: "Ask about any flagged field…",
@@ -185,7 +280,7 @@ export const PLACEHOLDERS: Record<PlmStage, string> = {
   approve: "Review the change set…",
   propagate: "Decide what to update next…",
   "manual-draft": "Review the drafted changes…",
-  "manual-review": "Approve the changes to the manual…",
+  "manual-review": "Use the card to review the changes…",
   "manual-publish": "Continue…",
   health: "Ask about documentation health…",
   regulation: "Ask about a product or regulation…",
@@ -193,15 +288,21 @@ export const PLACEHOLDERS: Record<PlmStage, string> = {
   "ingest-connect": "Ask about the systems or the files…",
   "ingest-understand": "Ask about the dialects or the values…",
   "ingest-reconcile": "Ask about the master record…",
-  "queue-review": "Review the item, or pick another…",
-  "queue-apply": "Apply the change, or pick another item…",
-  "queue-resolve": "Pick the next item, or review the change…",
-  done: "Ask a follow-up…",
+  "queue-review": "Choose an action above…",
+  "queue-apply": "Choose an action above…",
+  "queue-resolve": "Open another alert, or type a follow-up…",
+  done: "Flow complete — start another conversation or reset.",
 };
 
 export type FlowStep = { id: string; label: string };
 
 export const FLOW_STEPS: Record<PlmFlowKind, FlowStep[]> = {
+  audit: [
+    { id: "upload", label: "Upload" },
+    { id: "scan", label: "Scan" },
+    { id: "delegate", label: "Delegate" },
+    { id: "triage", label: "Review" },
+  ],
   spec: [
     { id: "ingest", label: "Ingest" },
     { id: "extract", label: "Extract & Verify" },
@@ -229,6 +330,11 @@ export const FLOW_STEPS: Record<PlmFlowKind, FlowStep[]> = {
 };
 
 export const STAGE_FLOW: Partial<Record<PlmStage, PlmFlowKind>> = {
+  "audit-upload": "audit",
+  "audit-reading": "audit",
+  "audit-delegating": "audit",
+  "audit-review": "audit",
+  alerts: "audit",
   upload: "spec",
   extract: "spec",
   resolve: "spec",
@@ -248,6 +354,11 @@ export const STAGE_FLOW: Partial<Record<PlmStage, PlmFlowKind>> = {
 };
 
 export const STAGE_STEP: Partial<Record<PlmStage, string>> = {
+  "audit-upload": "upload",
+  "audit-reading": "scan",
+  "audit-delegating": "delegate",
+  "audit-review": "triage",
+  alerts: "triage",
   upload: "ingest",
   extract: "extract",
   resolve: "resolve",

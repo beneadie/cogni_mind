@@ -1,3 +1,4 @@
+import { CHROME_YEAR, ROHS_YEAR } from "./dates";
 import type { TurnBeat, TurnPlan, WorkBeat } from "./flow";
 import { systems } from "./ingest-data";
 import { dl2400ManualDiff } from "./demoData";
@@ -148,7 +149,7 @@ export const RESOLUTIONS: Record<string, Resolution> = {
     order: 4,
     reason: "the spec and the published sheet disagree",
     guidance:
-      "The spec and the published sheet disagree on Throw. I'll re-read both at the source before recommending which is authoritative.",
+      "The spec and the published sheet disagree on Throw. I'll re-read both at the source before recommending which value is correct.",
     beats: [
       {
         kind: "action",
@@ -405,7 +406,7 @@ export function publishTurn(onDone: () => void): TurnPlan {
       { kind: "card", message: { role: "agent", kind: "propagation" } },
       {
         kind: "text",
-        text: "Three documents are now stale. Want me to bring the installation manual current?",
+        text: "Three documents now need updating. Want me to bring the installation manual current?",
       },
     ],
     onDone,
@@ -490,7 +491,7 @@ export function healthTurn(onDone: () => void): TurnPlan {
         kind: "action",
         label: "Diffing each document against spec rev C",
         command: "diff(doc, spec.revC)",
-        result: "3 stale",
+        result: "3 need updating",
         ms: 1150,
       },
       { kind: "card", message: { role: "agent", kind: "doc-health" } },
@@ -512,15 +513,15 @@ export function regulationTurn(onDone: () => void): TurnPlan {
       },
       {
         kind: "action",
-        label: "Loading RoHS 2027",
-        command: "load(regulation='RoHS_2027')",
+        label: `Loading RoHS ${ROHS_YEAR}`,
+        command: `load(regulation='RoHS_${ROHS_YEAR}')`,
         result: "Pb · Cd · Cr6",
         ms: 950,
       },
       {
         kind: "action",
-        label: "Loading EU Chrome Restriction 2026",
-        command: "load(regulation='EU_Chrome_2026')",
+        label: `Loading EU Chrome Restriction ${CHROME_YEAR}`,
+        command: `load(regulation='EU_Chrome_${CHROME_YEAR}')`,
         result: "Cr",
         ms: 850,
       },

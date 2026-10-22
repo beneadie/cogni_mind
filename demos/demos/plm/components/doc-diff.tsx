@@ -151,9 +151,11 @@ function Hunk({ hunk, mode }: { hunk: DocDiffHunk; mode: Mode }) {
 export function DocDiff({
   diff,
   applied = false,
+  sent = false,
 }: {
   diff: DocDiff;
   applied?: boolean;
+  sent?: boolean;
 }) {
   const [mode, setMode] = useState<Mode>("unified");
 
@@ -172,7 +174,11 @@ export function DocDiff({
           </span>
         </div>
         <div className="flex items-center gap-2">
-          {applied ? (
+          {sent ? (
+            <span className="rounded-full border border-amber/40 bg-amber-soft px-2.5 py-0.5 font-mono text-[0.56rem] uppercase tracking-[0.08em] text-amber">
+              Sent to owner
+            </span>
+          ) : applied ? (
             <span className="rounded-full border border-line-strong bg-canvas px-2.5 py-0.5 font-mono text-[0.56rem] uppercase tracking-[0.08em] text-ink-soft">
               Applied
             </span>

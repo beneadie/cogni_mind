@@ -28,6 +28,19 @@
   --color-danger: #a33b30;
   --color-danger-soft: rgba(163, 59, 48, 0.1);
 
+  /* Scoped Windows 11 surfaces for the mock file picker. */
+  --color-win-bg: #f3f3f3;
+  --color-win-surface: #ffffff;
+  --color-win-elevated: #f9f9f9;
+  --color-win-line: #e5e5e5;
+  --color-win-line-strong: #d6d6d6;
+  --color-win-ink: #1b1b1b;
+  --color-win-ink-soft: #3b3b3b;
+  --color-win-muted: #616161;
+  --color-win-accent: #0067c0;
+  --color-win-accent-hover: #005a9e;
+  --color-win-accent-soft: #e5f1fb;
+
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -67,6 +80,24 @@ body {
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: content-box;
+}
+
+/* Windows-style scrollbar for the mock file picker. */
+.scroll-win {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-win-line-strong) transparent;
+}
+.scroll-win::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.scroll-win::-webkit-scrollbar-track {
+  background: var(--color-win-elevated);
+}
+.scroll-win::-webkit-scrollbar-thumb {
+  background-color: var(--color-win-line-strong);
+  border: 3px solid var(--color-win-elevated);
+  border-radius: 0;
 }
 
 /* ------------------------------------------------------------------ */
@@ -187,6 +218,32 @@ body {
   }
 }
 
+.voice-wave {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.voice-wave__bar {
+  flex: 1;
+  border-radius: 9999px;
+  background-color: currentColor;
+  transform-origin: center;
+  animation: voice-wave 900ms ease-in-out infinite;
+}
+
+@keyframes voice-wave {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scaleY(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -206,5 +263,10 @@ body {
   .hint-pulse {
     box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
     animation: none !important;
+  }
+  .voice-wave__bar {
+    animation: none !important;
+    opacity: 0.8;
+    transform: none;
   }
 }

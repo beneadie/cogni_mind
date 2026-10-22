@@ -1,3 +1,10 @@
+import {
+  CHROME_DEADLINE_LABEL,
+  CHROME_YEAR,
+  REFRIGERANT_DEADLINE_LABEL,
+  REFRIGERANT_YEAR,
+  ROHS_YEAR,
+} from "./dates";
 import type { RegulationRiskRow } from "./types";
 
 export type RiskGroup = "acs" | "dl";
@@ -5,7 +12,7 @@ export type RiskGroup = "acs" | "dl";
 export type RiskProduct = RegulationRiskRow & { group: RiskGroup };
 
 /**
- * One authoritative list of products exposed to an upcoming restriction.
+ * One list of products exposed to an upcoming restriction.
  * `acs` = the cross-company refrigerant group surfaced by the Product Care
  * inbox; `dl` = the DL Series portfolio surfaced by the Ask-side scan.
  * Figures are mocked; no revenue is stated — only units shipped and open
@@ -17,10 +24,10 @@ export const riskProducts: RiskProduct[] = [
     group: "acs",
     company: "Marvair",
     substance: "R-410A",
-    regulation: "2027 Refrigerant Ban",
-    deadline: "1 Jan 2027",
+    regulation: `${REFRIGERANT_YEAR} Refrigerant Ban`,
+    deadline: REFRIGERANT_DEADLINE_LABEL,
     risk: "High",
-    reason: "Uses R-410A, banned from 2027",
+    reason: `Uses R-410A, banned from ${REFRIGERANT_YEAR}`,
     unitsShipped: "8,400",
     unitsShippedValue: 8400,
     openOrders: "1,200",
@@ -32,10 +39,10 @@ export const riskProducts: RiskProduct[] = [
     group: "acs",
     company: "Northern Air",
     substance: "R-410A",
-    regulation: "2027 Refrigerant Ban",
-    deadline: "1 Jan 2027",
+    regulation: `${REFRIGERANT_YEAR} Refrigerant Ban`,
+    deadline: REFRIGERANT_DEADLINE_LABEL,
     risk: "High",
-    reason: "Uses R-410A, banned from 2027",
+    reason: `Uses R-410A, banned from ${REFRIGERANT_YEAR}`,
     unitsShipped: "6,000",
     unitsShippedValue: 6000,
     openOrders: "900",
@@ -47,8 +54,8 @@ export const riskProducts: RiskProduct[] = [
     group: "dl",
     company: "Above Air",
     substance: "Lead (Pb)",
-    regulation: "RoHS 2027",
-    deadline: "1 Jan 2027",
+    regulation: `RoHS ${ROHS_YEAR}`,
+    deadline: REFRIGERANT_DEADLINE_LABEL,
     risk: "High",
     reason: "Lead in C36000 brass body",
     unitsShipped: "5,200",
@@ -62,8 +69,8 @@ export const riskProducts: RiskProduct[] = [
     group: "dl",
     company: "Above Air",
     substance: "Chromium (Cr6)",
-    regulation: "EU Chrome Restriction 2026",
-    deadline: "1 Jul 2026",
+    regulation: `EU Chrome Restriction ${CHROME_YEAR}`,
+    deadline: CHROME_DEADLINE_LABEL,
     risk: "High",
     reason: "Chrome finish detected",
     unitsShipped: "3,900",
@@ -77,8 +84,8 @@ export const riskProducts: RiskProduct[] = [
     group: "dl",
     company: "Above Air",
     substance: "Lead (Pb)",
-    regulation: "RoHS 2027",
-    deadline: "1 Jan 2027",
+    regulation: `RoHS ${ROHS_YEAR}`,
+    deadline: REFRIGERANT_DEADLINE_LABEL,
     risk: "Medium",
     reason: "Lead content above threshold",
     unitsShipped: "2,100",
@@ -92,8 +99,8 @@ export const riskProducts: RiskProduct[] = [
     group: "dl",
     company: "Above Air",
     substance: "Chromium (Cr6)",
-    regulation: "EU Chrome Restriction 2026",
-    deadline: "1 Jul 2026",
+    regulation: `EU Chrome Restriction ${CHROME_YEAR}`,
+    deadline: CHROME_DEADLINE_LABEL,
     risk: "Medium",
     reason: "Chrome in strike plate",
     unitsShipped: "1,400",
@@ -107,8 +114,8 @@ export const riskProducts: RiskProduct[] = [
     group: "dl",
     company: "Above Air",
     substance: "Lead (Pb)",
-    regulation: "RoHS 2027",
-    deadline: "1 Jan 2027",
+    regulation: `RoHS ${ROHS_YEAR}`,
+    deadline: REFRIGERANT_DEADLINE_LABEL,
     risk: "Low",
     reason: "No restricted substances",
     unitsShipped: "600",
@@ -122,8 +129,8 @@ export const riskProducts: RiskProduct[] = [
     group: "dl",
     company: "Above Air",
     substance: "Chromium (Cr6)",
-    regulation: "EU Chrome Restriction 2026",
-    deadline: "1 Jul 2026",
+    regulation: `EU Chrome Restriction ${CHROME_YEAR}`,
+    deadline: CHROME_DEADLINE_LABEL,
     risk: "Low",
     reason: "Discontinued",
     unitsShipped: "0",

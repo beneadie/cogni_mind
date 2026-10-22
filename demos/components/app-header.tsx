@@ -7,8 +7,9 @@ function HumanHint() {
   return (
     <>
       <AtSign className="h-3 w-3 text-gold" />
-      Type <span className="text-ink-soft">@human</span> to send this
-      conversation to a human — we&apos;ll call you
+      Type <strong className="font-semibold text-ink">@human</strong> for a
+      callback or <strong className="font-semibold text-ink">@email</strong> to
+      draft a support email
     </>
   );
 }

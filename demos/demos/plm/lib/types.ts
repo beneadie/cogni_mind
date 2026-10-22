@@ -185,7 +185,7 @@ export type RegulationRiskRow = {
   openOrders: string;
   /** Numeric form of `openOrders`, for sorting. */
   openOrdersValue: number;
-  /** Date the restriction takes effect, e.g. "1 Jan 2027". */
+  /** Date the restriction takes effect. */
   deadline?: string;
   /** Owning company, shown for cross-company (ACS group) views. */
   company?: string;
@@ -210,7 +210,7 @@ export type AffectedDocumentRow = {
   type: string;
   lastUpdated: string;
   status: DocumentStatus;
-  /** Which approved change makes this document stale. */
+  /** Which approved change makes this document need updating. */
   trigger: string;
 };
 
@@ -269,7 +269,7 @@ export type QueueActionVerb = "Review" | "Search" | "Draft";
 export type QueueItem = {
   id: string;
   severity: QueueSeverity;
-  /** Small uppercase label, e.g. "FIELD REPORT". */
+  /** Small uppercase label, e.g. "DOCUMENTATION MISMATCH". */
   type: string;
   /** Product or scope the item applies to. */
   scope: string;
@@ -281,18 +281,65 @@ export type QueueItem = {
 /** Actions emitted from queue cards, handled centrally by the page. */
 export type QueueCardAction =
   | "field-approve"
-  | "field-edit"
   | "field-reject"
   | "compliance-view"
   | "compliance-act"
-  | "propagation-apply";
+  | "compliance-case-select"
+  | "compliance-case-act"
+  | "pricing-decide"
+  | "propagation-cancel";
 
 /** A committed mitigation path for a regulation-exposed product. */
 export type ComplianceAction =
-  | "open-cr"
-  | "declaration"
-  | "reminder"
+  | "change-request"
+  | "request-declaration"
   | "acknowledge";
+
+/** One mitigation option shown on the compliance decision card. */
+export type ComplianceOption = {
+  id: ComplianceAction;
+  label: string;
+  description: string;
+  result: string;
+  primary?: boolean;
+};
+
+/** The structured record produced after a compliance action is chosen. */
+export type ComplianceOutcome = {
+  action: ComplianceAction;
+  product: string;
+  title: string;
+  referenceId: string;
+  status: "tracking" | "acknowledged";
+  summary: string;
+  details: { label: string; value: string }[];
+};
+
+/** A committed sourcing decision for a part with split supplier pricing. */
+export type PricingDecision =
+  | "keep-dual"
+  | "consolidate-delta"
+  | "consolidate-summit";
+
+/** One sourcing option shown on the parts pricing card. */
+export type PricingOption = {
+  id: PricingDecision;
+  label: string;
+  description: string;
+  result: string;
+  primary?: boolean;
+};
+
+/** The structured record produced after a pricing decision is chosen. */
+export type PricingOutcome = {
+  decision: PricingDecision;
+  title: string;
+  referenceId: string;
+  status: "tracking" | "acknowledged";
+  summary: string;
+  details: { label: string; value: string }[];
+  queueSummary: string;
+};
 
 /** A suggested reply chip the user can click to dispatch a queue action. */
 export type PromptOption = {
@@ -357,15 +404,11 @@ export type DocDiff = {
   hunks: DocDiffHunk[];
 };
 
-/** How a downstream document is handled when upstream content changes. */
-export type ImpactDisposition = "auto" | "author" | "review" | "none";
-
 export type ImpactRow = {
   document: string;
   type: string;
   /** The changed section/attribute that affects this document. */
   trigger: string;
-  disposition: ImpactDisposition;
   owner: string;
   status: string;
   /** Sample PDF to open for this document, if one is available. */

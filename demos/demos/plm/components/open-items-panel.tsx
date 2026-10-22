@@ -8,7 +8,9 @@ import {
   Clock,
   PanelRightClose,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import type { QueueItem, QueueSeverity, QueueStatus } from "../lib/types";
 
@@ -53,10 +55,12 @@ const SEVERITY_META: Record<
 function ItemCard({
   item,
   active,
+  isNew,
   onSelect,
 }: {
   item: QueueItem;
   active: boolean;
+  isNew: boolean;
   onSelect: (item: QueueItem) => void;
 }) {
   const meta = SEVERITY_META[item.severity];
@@ -67,15 +71,25 @@ function ItemCard({
   const StatusIcon = status?.icon;
 
   return (
-    <li>
+    <motion.li
+      layout
+      initial={{ opacity: 0, y: -6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+    >
       <button
         type="button"
-        onClick={() => onSelect(item)}
+        onClick={() => {
+          if (!closed) onSelect(item);
+        }}
+        disabled={closed}
         aria-current={active ? "true" : undefined}
-        className={`w-full rounded-xl border px-3 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+        className={`w-full rounded-xl border px-3 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-default ${
           active
             ? "border-accent/50 bg-surface"
-            : "border-line bg-surface/70 hover:border-line-strong hover:bg-surface"
+            : isNew
+              ? "border-amber/50 bg-surface shadow-[0_0_0_1px_rgba(201,162,39,0.18)]"
+              : "border-line bg-surface/70 hover:border-line-strong hover:bg-surface"
         } ${closed ? "opacity-70" : ""}`}
       >
         <div className="flex items-center gap-2">
@@ -97,6 +111,12 @@ function ItemCard({
           >
             {item.type}
           </span>
+          {isNew ? (
+            <span className="inline-flex items-center gap-0.5 rounded-full border border-amber/40 bg-amber-soft px-1.5 py-0.5 font-mono text-[0.48rem] font-semibold uppercase tracking-[0.08em] text-amber">
+              <Sparkles className="h-2.5 w-2.5" />
+              New
+            </span>
+          ) : null}
           <span className="ml-auto font-mono text-[0.56rem] uppercase tracking-[0.1em] text-muted">
             {item.scope}
           </span>
@@ -120,18 +140,20 @@ function ItemCard({
           )}
         </div>
       </button>
-    </li>
+    </motion.li>
   );
 }
 
 export function OpenItemsPanel({
   items,
   activeId,
+  newIds,
   onSelect,
   onCollapse,
 }: {
   items: QueueItem[];
   activeId: string | null;
+  newIds?: string[];
   onSelect: (item: QueueItem) => void;
   onCollapse?: () => void;
 }) {
@@ -143,7 +165,7 @@ export function OpenItemsPanel({
       <div className="flex items-center justify-between border-b border-line px-4 py-3">
         <div className="flex items-center gap-2">
           <p className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-ink">
-            Open items
+            Alerts
           </p>
           <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full border border-line-strong px-1.5 font-mono text-[0.6rem] text-muted">
             {open.length}
@@ -153,7 +175,7 @@ export function OpenItemsPanel({
           <button
             type="button"
             onClick={onCollapse}
-            aria-label="Hide open items"
+            aria-label="Hide alerts"
             className="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors hover:bg-surface hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             <PanelRightClose className="h-4 w-4" />
@@ -169,14 +191,20 @@ export function OpenItemsPanel({
                 key={item.id}
                 item={item}
                 active={item.id === activeId}
+                isNew={Boolean(newIds?.includes(item.id))}
                 onSelect={onSelect}
               />
             ))}
           </ul>
         ) : (
-          <p className="px-1 text-[0.78rem] leading-relaxed text-muted">
-            Nothing open. Nice work.
-          </p>
+          <div className="rounded-xl border border-dashed border-line-strong bg-surface/50 px-3 py-4">
+            <p className="font-mono text-[0.58rem] font-medium uppercase tracking-[0.12em] text-muted">
+              No alerts yet
+            </p>
+            <p className="mt-1.5 text-[0.76rem] leading-relaxed text-muted">
+              I&apos;ll add them here when the spec audit finds something.
+            </p>
+          </div>
         )}
 
         {done.length > 0 ? (
@@ -193,6 +221,7 @@ export function OpenItemsPanel({
                   key={item.id}
                   item={item}
                   active={item.id === activeId}
+                  isNew={false}
                   onSelect={onSelect}
                 />
               ))}
