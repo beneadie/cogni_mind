@@ -94,7 +94,7 @@ email → handoff → callback`.
 - **Left rail** — **Chat History**, empty for a fresh account, with a New case action. Collapsible.
 - **Center** — the conversation, with activity "thinking" blocks, manual cards,
   citations, part/stock-check cards, and the composer.
-- **Right rail** — *Loaded Context*: manuals available/loaded, bookmarked manual pages, and the planned Zoho / monday.com CRM integrations.
+- **Right rail** — *Loaded Context*: manuals available/loaded and bookmarked manual pages.
 - **Header** — brand, demo switcher, Reset.
 
 ## The composer trick (important)
@@ -189,8 +189,6 @@ Start fresh: open `/` and, if needed, click **Reset** in the header.
 - The recommendation is explicitly *not* a confirmed diagnosis ("technician verifies").
 - Stock is never asserted: the agent escalates the check to **John Smith**, a named
   parts specialist, instead of pretending to query live inventory.
-- The planned **Zoho** and **monday.com** marks show intended direct CRM sync; the
-  right rail labels them as illustrative with no live connection.
 - The agent refuses out-of-scope asks (pricing/scheduling) and routes to a **senior
   controls specialist** with a briefing rather than guessing.
 - The email is a **reviewable draft**: the technician sends or discards it, and the
@@ -206,8 +204,7 @@ Start fresh: open `/` and, if needed, click **Reset** in the header.
 | `components/manual-card.tsx` | Selectable manual card + "Load N into context" button. |
 | `components/activity-block.tsx` | The timed "thinking / tool call" steps. |
 | `components/case-history.tsx` | Left rail: empty Chat History and New case action. |
-| `components/context-sidebar.tsx` | Right rail: available/loaded manuals, bookmarks, and planned CRM integrations. |
-| `components/crm-integrations.tsx` | Illustrative Zoho and monday.com marks labelled as planned integration. |
+| `components/context-sidebar.tsx` | Right rail: available/loaded manuals and bookmarks. |
 | `components/part-card.tsx`, `stock-check-card.tsx`, `recommendation-card.tsx`, `callback-card.tsx`, `email-card.tsx` | The structured cards. |
 | `components/pdf-modal.tsx` | PDF page viewer opened by citations/bookmarks. |
 | `components/voice-controls.tsx` | Appearance-only voice-mode toggle and animated recording pill. |

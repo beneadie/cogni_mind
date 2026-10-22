@@ -550,7 +550,7 @@ export function QueueSummaryCard({
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <div>
-          <p className="text-[0.95rem] font-medium text-ink">Audit complete</p>
+          <p className="text-[0.95rem] font-medium text-ink">Queue cleared</p>
           <p className="mt-0.5 font-mono text-[0.64rem] uppercase tracking-[0.1em] text-muted">
             Alerts handled
           </p>

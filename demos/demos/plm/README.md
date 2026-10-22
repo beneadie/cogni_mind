@@ -14,19 +14,26 @@ the agent:
 3. delegate specialist checks to subagents,
 4. create **alerts** as each specialist discovers a downstream problem.
 
-The two alerts are the payoff:
+The audit adds two alerts:
 
 - **Documentation mismatch** — the draft from spec rev C requires 3-wire
   control; the installation manual and published sheet still show 2-wire.
 - **Compliance alert** — the draft lists R-410A, which is subject to an
   upcoming refrigerant ban.
 
+A third escalation is already waiting when the demo opens:
+
+- **Pricing Mismatch Escalation** — the same `CP-31K` compressor is priced at
+  $320 through Delta and $400 through Summit across MAA-200 and NA-1500.
+
 From there the demo continues into the existing work flows: edit/publish the
-manual, propagate the change to downstream documents, and mitigate the
-compliance exposure. Nothing publishes without a human.
+manual, propagate the change to downstream documents, mitigate the compliance
+exposure, and decide the supplier pricing call. Nothing publishes or changes in
+the source systems without a human.
 
 Core theme: **the agent earns the right-hand panel.** The Alerts rail starts
-empty and fills only after the audit finds something.
+with one existing pricing escalation and fills further after the audit finds
+something.
 
 Future compliance deadlines and the review reminder are derived from the current
 date at runtime; historical document dates remain static.
@@ -44,10 +51,10 @@ date at runtime; historical document dates remain static.
 ### Start state
 
 - A fresh chat is active; the left rail shows the historical conversations.
-- The composer auto-fills **"Draft the MAA-200 data sheet from the new spec."**
-  when clicked.
-- The Alerts tab is empty: *"No alerts yet. I'll add them here when the spec
-  audit finds something."*
+- The composer auto-fills **"Draft a data sheet from the new spec."** when
+  clicked.
+- The Alerts tab already shows the **Pricing Mismatch Escalation** for `CP-31K`,
+  without a **New** badge.
 - No field report or compliance item is pre-seeded.
 
 ## The seed flow
@@ -118,7 +125,8 @@ request, the research, and while a decision card is waiting.
 ### 5. Audit summary, review, and publish
 
 The seed closes with a short narrative and an **Audit summary** card focused on
-the data sheet. The two alerts stay above it in their own notification cards.
+the data sheet. The two audit alerts stay above it in their own notification
+cards.
 
 - `6` pages read, `12` fields drafted, `4` values need review.
 - **Data sheet** — the spec left missing and conflicting values; weight and
@@ -139,6 +147,25 @@ action.
    regulation card, the MAA-200 product dossier, and the mitigation prompts.
 
 ## Working the alerts
+
+### Pricing Mismatch Escalation
+
+1. The alert is already open when the demo starts. Click it to see the
+   `CP-31K` compressor used by MAA-200 and NA-1500, with Delta at $320/unit and
+   Summit at $400/unit. Both vendor records are active because each BOM points
+   to a different supplier.
+2. The card shows the 2,400 units affected, the $80/unit gap, the annual impact,
+   and the supply tradeoff: Delta has the lower price but an 8-week lead and
+   covers about 65% of peak; Summit covers 100% with a 4-week lead.
+3. Choose one call:
+   - **Keep both suppliers** — records the supply-cover rationale, leaves the
+     gap in place, and records the outcome as **Acknowledged**.
+   - **Consolidate on Delta** — opens a procurement change request at $320/unit,
+     with capacity confirmation and the effective date tracked.
+   - **Consolidate on Summit** — opens a procurement change request at
+     $400/unit, closing the mismatch while retaining full peak coverage.
+4. The decision record is added to the **Workspace**, and the alert is marked
+   **Resolved**. No price is changed in the source system.
 
 ### Documentation mismatch
 
@@ -189,15 +216,15 @@ action.
 4. The alert stays open until both products have a decision. Then it moves to
    **Tracking** or **Acknowledged**. Reset the demo to choose again.
 
-When every alert is handled, the **Audit complete / Alerts handled** summary
+When every alert is handled, the **Queue cleared / Alerts handled** summary
 appears in the chat and the composer locks.
 
 ## Composer behavior
 
 - The composer auto-fills the expected prompt for the current stage when you
-  click it and no decision card is waiting. The seed prompt is *"Draft the
-  MAA-200 data sheet from the new spec."* At `done`, the composer locks and does
-  not auto-fill another flow; start another conversation or reset.
+  click it and no decision card is waiting. The seed prompt is *"Draft a data
+  sheet from the new spec."* At `done`, the composer locks and does not
+  auto-fill another flow; start another conversation or reset.
 - A **paperclip button** inside the composer opens the same file explorer, so the
   presenter can attach the engineering spec directly without waiting for the
   in-chat upload card. It is active in the fresh chat and upload step, and
@@ -242,6 +269,9 @@ product-data surface, but they are not the default story:
 - **Compliance case** (`compliance-card.tsx`): tabbed product review, exposure
   facts, per-product mitigation choices, and the resulting change request/
   declaration/acknowledgement record.
+- **Pricing case** (`pricing-card.tsx`): side-by-side supplier prices, lead-time
+  and peak-coverage tradeoffs, the three sourcing choices, and the decision
+  record.
 - **Existing cards**: change proposal with the page-14 editor, red/green doc
   diff, suggested-recipient document updates, regulation, suggested replies,
   and the queue summary.
@@ -258,15 +288,17 @@ product-data surface, but they are not the default story:
 | `components/subagent-run.tsx` | Light orchestration console with timed agents. |
 | `components/permission-card.tsx` | Allow once / always / deny permission prompt. |
 | `components/compliance-card.tsx` | Compliance exposure, mitigation choices, and outcome record. |
+| `components/pricing-card.tsx` | Supplier price comparison, sourcing choices, and decision record. |
+| `lib/pricing-data.ts` | Seeded pricing alert, `CP-31K` supplier facts, options, and outcome helper. |
 | `components/extracted-sheet.tsx` | Draft data-sheet card. |
 | `components/audit-summary.tsx` | Audit summary, flagged-value review, and publish summary. |
 | `components/alert-created.tsx` | New-alert notification card. |
-| `lib/queue-data.ts` | Empty starting queue, generated documentation/compliance alerts, page-14 source, document updates item. |
+| `lib/queue-data.ts` | Seeded pricing alert, generated documentation/compliance alerts, page-14 source, document updates item. |
 | `lib/page-diff.ts` | Builds the red/green page diff from the edited page text. |
-| `lib/queue-turns.ts` | Documentation change, recipient sends, compliance, and document update turns. |
+| `lib/queue-turns.ts` | Pricing, documentation change, recipient sends, compliance, and document update turns. |
 | `components/open-items-panel.tsx` | Right-rail **Alerts** panel, empty state, New badges. |
 | `components/workspace-panel.tsx` | Workspace documents, including the uploaded engineering spec. |
 | `public/manuals/maa-200-spec.pdf` | The sample engineering spec and the only file in the explorer. |
 
-**Reset** from the header returns to the fresh chat, clears the alerts, and
-restores the starting state.
+**Reset** from the header returns to the fresh chat, clears transient alerts,
+and restores the existing pricing escalation.

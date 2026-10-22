@@ -119,6 +119,7 @@ export type PlmMessageKind =
   | "compliance-exposure"
   | "compliance-options"
   | "compliance-outcome"
+  | "pricing-case"
   | "prompts"
   | "doc-diff"
   | "queue-propagation"
@@ -242,10 +243,10 @@ export const GREETING_TEXT =
 
 /** Opening line for the new data-sheet draft conversation. */
 export const AUDIT_GREETING =
-  "Hi — I'm your product-data copilot. Upload a new engineering spec and I'll draft the standard data sheet, flag missing or conflicting values, then check it against documentation and compliance. Want me to draft the MAA-200 sheet from the new spec?";
+  "Hi — I'm your product-data copilot. Upload a new engineering spec and I'll draft the standard data sheet, flag missing or conflicting values, then check it against documentation and compliance.";
 
 /** The default prompt auto-filled into the fresh conversation. */
-export const AUDIT_PROMPT = "Draft the MAA-200 data sheet from the new spec.";
+export const AUDIT_PROMPT = "Draft a data sheet from the new spec.";
 
 /** The prompt auto-filled into the composer when the user clicks the box,
  *  HVAC-style. Stages without an entry are driven by the cards instead. */

@@ -12,6 +12,7 @@ import {
   complianceProducts,
   fieldReportChange,
 } from "./queue-data";
+import { PRICING_ALERT_ITEM, PRICING_CASE } from "./pricing-data";
 import { productDossiers, riskRecord } from "./risk-catalog";
 
 /** Documentation mismatch → documentation change. The audit already did the work. */
@@ -166,6 +167,30 @@ export function queueComplianceTurn(onDone: () => void): TurnPlan {
       {
         kind: "text",
         text: `${topProduct?.product ?? "MAA-200"} has the most volume affected. Review each product in the case, then choose one mitigation per product.`,
+      },
+    ],
+    onDone,
+  };
+}
+
+/** Pricing alert → compare the two active supplier prices and decide. */
+export function queuePricingTurn(onDone: () => void): TurnPlan {
+  const delta = PRICING_CASE.suppliers[0];
+  const summit = PRICING_CASE.suppliers[1];
+
+  return {
+    beats: [
+      {
+        kind: "text",
+        text: `I found a split price on the ${PRICING_CASE.partNumber} ${PRICING_CASE.partName.toLowerCase()}. ${PRICING_CASE.products.join(" and ")} both use it, but ${delta?.name} is ${delta?.unitPrice}/unit and ${summit?.name} is ${summit?.unitPrice}/unit. ${PRICING_CASE.volume} carry one of these units, and both vendor records are active.`,
+      },
+      {
+        kind: "card",
+        message: {
+          role: "agent",
+          kind: "pricing-case",
+          queueItemId: PRICING_ALERT_ITEM.id,
+        },
       },
     ],
     onDone,

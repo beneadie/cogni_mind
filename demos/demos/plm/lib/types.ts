@@ -286,6 +286,7 @@ export type QueueCardAction =
   | "compliance-act"
   | "compliance-case-select"
   | "compliance-case-act"
+  | "pricing-decide"
   | "propagation-cancel";
 
 /** A committed mitigation path for a regulation-exposed product. */
@@ -312,6 +313,32 @@ export type ComplianceOutcome = {
   status: "tracking" | "acknowledged";
   summary: string;
   details: { label: string; value: string }[];
+};
+
+/** A committed sourcing decision for a part with split supplier pricing. */
+export type PricingDecision =
+  | "keep-dual"
+  | "consolidate-delta"
+  | "consolidate-summit";
+
+/** One sourcing option shown on the parts pricing card. */
+export type PricingOption = {
+  id: PricingDecision;
+  label: string;
+  description: string;
+  result: string;
+  primary?: boolean;
+};
+
+/** The structured record produced after a pricing decision is chosen. */
+export type PricingOutcome = {
+  decision: PricingDecision;
+  title: string;
+  referenceId: string;
+  status: "tracking" | "acknowledged";
+  summary: string;
+  details: { label: string; value: string }[];
+  queueSummary: string;
 };
 
 /** A suggested reply chip the user can click to dispatch a queue action. */

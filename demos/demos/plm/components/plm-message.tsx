@@ -44,6 +44,7 @@ import {
   ComplianceOptionsCard,
   ComplianceOutcomeCard,
 } from "./compliance-card";
+import { PricingCaseCard } from "./pricing-card";
 import { ExtractedSheetCard } from "./extracted-sheet";
 import { AlertCreatedCard } from "./alert-created";
 import {
@@ -52,7 +53,11 @@ import {
   AuditSummaryCard,
 } from "./audit-summary";
 import { AUDIT_FILE, type AuditReviewValues } from "../lib/audit-data";
-import type { ComplianceOutcome, QueueCardAction } from "../lib/types";
+import type {
+  ComplianceOutcome,
+  PricingDecision,
+  QueueCardAction,
+} from "../lib/types";
 import type { UploadedFile } from "../lib/flow";
 
 function FindingBlock({
@@ -91,6 +96,7 @@ export type MessageHandlers = {
   rememberedOwners: string[];
   complianceActiveProductId: string | null;
   complianceOutcomes: Record<string, ComplianceOutcome>;
+  pricingDecision: PricingDecision | null;
   uploadedFile: UploadedFile | null;
   auditPublished: boolean;
   auditReviewValues: AuditReviewValues;
@@ -349,6 +355,15 @@ export function PlmChatMessage({
                 "compliance-case-act",
                 `${product}|${action}`,
               )
+            }
+          />
+        ) : null}
+
+        {message.kind === "pricing-case" ? (
+          <PricingCaseCard
+            decision={handlers.pricingDecision}
+            onDecide={(decision) =>
+              handlers.onQueueAction("pricing-decide", decision)
             }
           />
         ) : null}

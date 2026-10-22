@@ -5,6 +5,7 @@ import {
   REVIEW_DATE_LABEL,
 } from "./dates";
 import type { DocChange, ImpactRow, QueueItem } from "./types";
+import { PRICING_ALERT_ITEM } from "./pricing-data";
 
 export { acsRiskProducts as complianceProducts } from "./risk-catalog";
 import {
@@ -20,8 +21,8 @@ import {
  */
 export const ACS_GROUP = "ACS Group";
 
-/** The inbox starts empty. Alerts are created by the spec audit. */
-export const INITIAL_QUEUE: QueueItem[] = [];
+/** The inbox starts with the existing pricing escalation. */
+export const INITIAL_QUEUE: QueueItem[] = [PRICING_ALERT_ITEM];
 
 /** Created when the compliance subagent discovers the refrigerant exposure. */
 export const COMPLIANCE_ALERT_ITEM: QueueItem = {

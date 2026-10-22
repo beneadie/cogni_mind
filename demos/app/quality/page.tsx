@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { QualityDemo } from "@/quality/page";
 
 export const metadata: Metadata = {
-  title: "Quality Control | Cognimind",
+  title: "Cogni Demos",
 };
 
 export default function Page() {

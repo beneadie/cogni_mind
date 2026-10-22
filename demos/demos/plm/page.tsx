@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AppHeader } from "@/components/app-header";
 import {
-  ArrowRight,
   PanelLeftOpen,
   PanelRightOpen,
   Paperclip,
@@ -62,6 +61,7 @@ import type {
   ComplianceAction,
   ComplianceOutcome,
   FlagActionOutcome,
+  PricingDecision,
   QueueCardAction,
   QueueItem,
 } from "./lib/types";
@@ -80,11 +80,18 @@ import {
 } from "./lib/dates";
 import { productDossiers, riskRecord } from "./lib/risk-catalog";
 import {
+  PRICING_ALERT_ITEM,
+  PRICING_CASE,
+  PRICING_OPTIONS,
+  pricingOutcomeFor,
+} from "./lib/pricing-data";
+import {
   complianceOutcomeFor,
   queueComplianceActTurn,
   queueComplianceTurn,
   queueDocumentationTurn,
   queueFieldApproveTurn,
+  queuePricingTurn,
   queuePropagationApplyTurn,
   queuePropagationTurn,
   viewProductTurn,
@@ -156,6 +163,8 @@ export default function PlmDemo() {
   const [complianceOutcomes, setComplianceOutcomes] = useState<
     Record<string, ComplianceOutcome>
   >({});
+  const [pricingDecision, setPricingDecision] =
+    useState<PricingDecision | null>(null);
   const [pendingPropagationIds, setPendingPropagationIds] = useState<
     string[] | null
   >(null);
@@ -1091,6 +1100,7 @@ export default function PlmDemo() {
     setRememberedOwners([]);
     setComplianceActiveProductId(null);
     setComplianceOutcomes({});
+    setPricingDecision(null);
     setPendingPropagationIds(null);
     setOpenFlagId(null);
     setViewer(null);
@@ -1108,7 +1118,7 @@ export default function PlmDemo() {
   const resetAll = useCallback(() => {
     resetChatState();
     setStage("launcher");
-    setQueue([]);
+    setQueue(INITIAL_QUEUE);
     setActiveItemId(null);
   }, [resetChatState]);
 
@@ -1156,6 +1166,9 @@ export default function PlmDemo() {
       switch (item.id) {
         case "documentation-mismatch":
           streamTurn(queueDocumentationTurn(() => setStage("queue-review")));
+          break;
+        case "parts-pricing-mismatch":
+          streamTurn(queuePricingTurn(() => setStage("queue-review")));
           break;
         case "compliance-alert": {
           const primary = complianceProducts[0]?.product ?? null;
@@ -1436,6 +1449,40 @@ export default function PlmDemo() {
           }
           break;
         }
+        case "pricing-decide": {
+          const decision = payload as PricingDecision | undefined;
+          if (!decision || pricingDecision) break;
+          if (!PRICING_OPTIONS.some((option) => option.id === decision)) break;
+
+          const outcome = pricingOutcomeFor(decision);
+          setPricingDecision(decision);
+          addWorkspace([
+            {
+              id: `pricing-${outcome.referenceId}`,
+              title: outcome.title,
+              meta: `${outcome.referenceId} · ${PRICING_CASE.partNumber}`,
+              status:
+                outcome.status === "tracking" ? "Tracking" : "Acknowledged",
+              tone: outcome.status === "tracking" ? "danger" : "muted",
+              group: PRICING_CASE.partNumber,
+            },
+          ]);
+          const next = queue.map((item) =>
+            item.id === PRICING_ALERT_ITEM.id
+              ? {
+                  ...item,
+                  status: "resolved" as const,
+                  summary: outcome.queueSummary,
+                }
+              : item,
+          );
+          setQueue(next);
+          setActiveItemId(null);
+          setRightTab("workspace");
+          setRightOpen(true);
+          setStage("queue-resolve");
+          break;
+        }
         case "propagation-cancel":
           setPendingPropagationIds(null);
           push({
@@ -1454,6 +1501,7 @@ export default function PlmDemo() {
     [
       addWorkspace,
       complianceOutcomes,
+      pricingDecision,
       propagationSentIds,
       push,
       queue,
@@ -1617,6 +1665,7 @@ export default function PlmDemo() {
     rememberedOwners,
     complianceActiveProductId,
     complianceOutcomes,
+    pricingDecision,
     uploadedFile,
     auditPublished,
     auditReviewValues,
@@ -1669,22 +1718,6 @@ export default function PlmDemo() {
                   handlers={handlers}
                 />
               ))}
-
-              {!activeItemId &&
-              !activeSession &&
-              openItems.length > 0 &&
-              messages.length === 1 ? (
-                <div className="flex justify-start">
-                  <button
-                    type="button"
-                    onClick={() => selectQueueItem(openItems[0])}
-                    className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface px-4 py-2.5 font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                  >
-                    Open {openItems[0].type.toLowerCase()}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              ) : null}
 
               {showQueueSummary ? (
                 <QueueSummaryCard rows={summaryRows} onNew={newConversation} />
