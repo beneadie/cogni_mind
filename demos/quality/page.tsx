@@ -1,20 +1,21 @@
 "use client";
 
-// PURPOSE: Quality Control demo root: header, two views (New Complaint, Quality Dashboard) and a detail modal.
+// PURPOSE: Quality Control demo root: header, two views (New Ticket, Quality Dashboard) and a detail modal.
 // ROLE: component (demo root). USED BY: app/quality/page.tsx.
 // Client component because it reads the store and owns view-only state (current view, open modal, last created ticket).
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MotionConfig } from "framer-motion";
 import { FilePlus2, LayoutDashboard } from "lucide-react";
-import type { TicketId } from "./lib/contracts";
+import type { ProductId, TicketId } from "./lib/contracts";
+import { productName } from "./lib/data/catalog";
 import { alertTicketIds, selectAlerts } from "./lib/selectors/alerts";
 import { isHistoricalFreeText } from "./lib/selectors/records";
-import type { TrendScope } from "./lib/selectors/trends";
 import type { Correction } from "./lib/state/reducer";
 import { dispatchQuality, useQualityState } from "./lib/state/store";
 import { AlertDetail, alertTitle } from "./components/alerts-panel";
 import { Dashboard, type RecordsFilter } from "./components/dashboard";
+import { DEFAULT_DASHBOARD_FILTERS, type DashboardFilters, filterAlerts, filterTickets } from "./lib/selectors/dashboard";
 import { NewComplaint } from "./components/new-complaint";
 import { Modal } from "./components/modal";
 import { QualityHeader } from "./components/quality-header";
@@ -23,10 +24,10 @@ import { RecordsList } from "./components/records-list";
 type View = "complaint" | "dashboard";
 
 /** What the modal shows: one alert's supporting complaints, or the complaint records (list or one record). */
-type DrawerState = { kind: "alert"; id: string } | { kind: "records"; filter: RecordsFilter; ticketId?: TicketId; scope?: TrendScope } | null;
+type DrawerState = { kind: "alert"; id: string } | { kind: "records"; filter: RecordsFilter; ticketId?: TicketId; productId?: ProductId } | null;
 
 const VIEWS: readonly { id: View; label: string; icon: typeof FilePlus2 }[] = [
-  { id: "complaint", label: "New Complaint", icon: FilePlus2 },
+  { id: "complaint", label: "New Ticket", icon: FilePlus2 },
   { id: "dashboard", label: "Quality Dashboard", icon: LayoutDashboard },
 ];
 
@@ -37,10 +38,15 @@ export function QualityDemo() {
   const [drawer, setDrawer] = useState<DrawerState>(null);
   const [created, setCreated] = useState<TicketId | null>(null);
   const [flaggedAlertIds, setFlaggedAlertIds] = useState<string[]>([]);
+  const [filters, setFilters] = useState<DashboardFilters>(DEFAULT_DASHBOARD_FILTERS);
 
   // Selectors recompute from the records on every store change, so a confirm or correction updates every view.
   const alerts = useMemo(() => selectAlerts(state.tickets), [state.tickets]);
   const alertIds = useMemo(() => alertTicketIds(alerts), [alerts]);
+  // Dashboard filters are view-only: the alert rule still runs over all records, then alerts are narrowed for display.
+  const filteredTickets = useMemo(() => filterTickets(state.tickets, filters), [state.tickets, filters]);
+  const filteredAlerts = useMemo(() => filterAlerts(alerts, state.tickets, filters), [alerts, state.tickets, filters]);
+  const createdAlert = created ? (alerts.find((alert) => alert.ticketIds.includes(created)) ?? null) : null;
   const drawerAlert = drawer?.kind === "alert" ? (alerts.find((alert) => alert.id === drawer.id) ?? null) : null;
   const closeDrawer = useCallback(() => setDrawer(null), []);
 
@@ -57,6 +63,7 @@ export function QualityDemo() {
     setDrawer(null);
     setCreated(null);
     setFlaggedAlertIds([]);
+    setFilters(DEFAULT_DASHBOARD_FILTERS);
   };
 
   // HUMAN-GATE: the reviewed draft becomes a ticket only here, then the dashboard shows where it landed.
@@ -87,9 +94,6 @@ export function QualityDemo() {
               >
                 <Icon className="h-4 w-4" />
                 {label}
-                {id === "dashboard" && alerts.length > 0 ? (
-                  <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#BB7468] px-1.5 font-mono text-[0.6rem] text-canvas">{alerts.length}</span>
-                ) : null}
               </button>
             ))}
           </div>
@@ -111,18 +115,22 @@ export function QualityDemo() {
               </div>
             ) : (
               <Dashboard
-                tickets={state.tickets}
-                alerts={alerts}
+                tickets={filteredTickets}
+                allTickets={state.tickets}
+                alerts={filteredAlerts}
+                filters={filters}
                 created={created}
+                createdAlert={createdAlert}
+                onFilters={setFilters}
                 onOpenAlert={(id) => setDrawer({ kind: "alert", id })}
                 onOpenRecords={(filter, ticketId) => setDrawer({ kind: "records", filter, ticketId })}
-                onOpenScope={(scope) => setDrawer({ kind: "records", filter: "all", scope })}
+                onOpenProduct={(productId) => setDrawer({ kind: "records", filter: "all", productId })}
               />
             )}
           </div>
         </main>
 
-        <Modal open={drawer !== null} title={drawerAlert ? alertTitle(drawerAlert) : "Complaint records"} onClose={closeDrawer}>
+        <Modal open={drawer !== null} title={drawerAlert ? alertTitle(drawerAlert) : "Ticket Records"} onClose={closeDrawer}>
           {drawerAlert ? (
             <AlertDetail
               key={drawerAlert.id}
@@ -135,12 +143,15 @@ export function QualityDemo() {
             />
           ) : drawer?.kind === "records" ? (
             <RecordsList
-              key={`${drawer.filter}:${drawer.ticketId ?? ""}:${drawer.scope ? JSON.stringify(drawer.scope) : ""}`}
+              key={`${drawer.filter}:${drawer.ticketId ?? ""}:${drawer.productId ?? ""}`}
               tickets={state.tickets}
+              // A product card narrows the list to that product, on top of the dashboard's date and company filters.
+              listed={drawer.productId ? filteredTickets.filter((ticket) => ticket.tags.productId === drawer.productId) : filteredTickets}
+              scopeLabel={drawer.productId ? productName(drawer.productId) : undefined}
+              onClearScope={() => setDrawer({ kind: "records", filter: drawer.filter })}
               alertIds={alertIds}
               initialFilter={drawer.filter}
               initialOpenId={drawer.ticketId ?? null}
-              initialScope={drawer.scope ?? null}
               onConfirm={(ticketId) => dispatchQuality({ type: "ticket/confirm", ticketId })}
               onCorrect={(ticketId, correction) => dispatchQuality({ type: "ticket/correct", ticketId, correction })}
             />

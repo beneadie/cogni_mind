@@ -82,14 +82,14 @@ export function AlertDetail({
       <div className={`space-y-1.5 rounded-2xl border px-4 py-3 ${RECURRING.card}`}>
         <p className="text-[0.95rem] font-medium text-ink">{alertTitle(alert)}</p>
         <p className="font-mono text-[0.64rem] uppercase tracking-[0.08em] text-ink-soft">
-          {alert.ticketIds.length} complaints · {alert.companyIds.length} companies · {formatDay(alert.windowStart)} – {formatDay(alert.windowEnd, true)}
+          {alert.ticketIds.length} tickets · {alert.companyIds.length} companies · {formatDay(alert.windowStart)} – {formatDay(alert.windowEnd, true)}
         </p>
         <p className="text-[0.78rem] text-ink-soft">{alert.companyIds.map(companyName).join(", ")}</p>
         <UnconfirmedNote count={alert.unconfirmedCount} />
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <SectionLabel>Supporting complaints · newest first</SectionLabel>
+        <SectionLabel>Supporting tickets · newest first</SectionLabel>
         {evidence.duplicatesMerged > 0 ? (
           <Chip>
             <Merge className="h-3 w-3" />
@@ -136,7 +136,7 @@ export function AlertsPanel({ alerts, highlightedId, onOpen }: { alerts: readonl
         </span>
       </div>
       {alerts.length === 0 ? (
-        <EmptyState>No failure is repeating across companies right now. Watching every new and historical complaint.</EmptyState>
+        <EmptyState>No failure is repeating across companies for these filters.</EmptyState>
       ) : (
         <ul className="space-y-3">
           {alerts.map((alert) => (
@@ -152,12 +152,12 @@ export function AlertsPanel({ alerts, highlightedId, onOpen }: { alerts: readonl
                 <span className="min-w-0 flex-1 space-y-1">
                   <span className="block text-[1rem] font-medium text-ink">{alertTitle(alert)}</span>
                   <span className="block text-[0.8rem] text-ink-soft">
-                    {alert.ticketIds.length} complaints from {alert.companyIds.length} companies in the last {ALERT_WINDOW_DAYS} days · {alert.companyIds.map(companyName).join(", ")}
+                    {alert.ticketIds.length} tickets from {alert.companyIds.length} companies in the last {ALERT_WINDOW_DAYS} days · {alert.companyIds.map(companyName).join(", ")}
                   </span>
                   <UnconfirmedNote count={alert.unconfirmedCount} />
                 </span>
                 <span className="hidden shrink-0 items-center gap-1 self-center font-mono text-[0.62rem] uppercase tracking-[0.1em] text-ink sm:inline-flex">
-                  View complaints
+                  View tickets
                   <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </button>
@@ -165,7 +165,6 @@ export function AlertsPanel({ alerts, highlightedId, onOpen }: { alerts: readonl
           ))}
         </ul>
       )}
-      <RuleDisclosure />
     </section>
   );
 }

@@ -131,9 +131,9 @@ export function NewComplaint({
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-1">
           <h2 id="intake-title" className="font-serif text-xl text-ink">
-            New complaint
+            New ticket
           </h2>
-          <p className="text-[0.8rem] text-muted">Paste a warranty or quality complaint exactly as it arrived, messy wording and all.</p>
+          <p className="text-[0.8rem] text-muted">Paste a warranty or quality ticket exactly as it arrived, messy wording and all.</p>
         </div>
         <button type="button" onClick={() => setText(SAMPLE_COMPLAINT.text)} className={BUTTON.secondary}>
           <Sparkles className="h-3.5 w-3.5 text-gold" />
@@ -151,14 +151,14 @@ export function NewComplaint({
           value={text}
           onChange={(event) => setText(event.target.value)}
           rows={7}
-          aria-label="Complaint text"
+          aria-label="Ticket text"
           placeholder="e.g. tech says freon leaking at the compressor, NF-3000S, 2nd callback this month"
           className={`${FIELD} resize-y text-[0.92rem] leading-relaxed`}
         />
         <div className="flex justify-end">
           <button type="submit" disabled={!text.trim()} className={BUTTON.primary}>
             <Wand2 className="h-3.5 w-3.5" />
-            Analyze complaint
+            Analyze ticket
           </button>
         </div>
       </form>

@@ -6,6 +6,7 @@ import { describe, test } from "node:test";
 import type { CompanyId, Ticket, TicketId } from "../contracts";
 import { SAMPLE_COMPLAINT } from "../data/synthetic";
 import { alertEvidence, selectAlerts } from "../selectors/alerts";
+import { DEFAULT_DASHBOARD_FILTERS, filterAlerts, filterTickets } from "../selectors/dashboard";
 import { backfillProgress, ticketCounters } from "../selectors/records";
 import { trendTickets, trendsByCompany, trendsByProduct } from "../selectors/trends";
 import { type QualityAction, type QualityState, initialState, qualityReducer } from "../state/reducer";
@@ -34,43 +35,47 @@ function leak(id: TicketId, companyId: CompanyId, ageDays: number, text = `leak 
   };
 }
 
-// The simple-version story: nothing on load, one alert after the person confirms the sample complaint.
+// The seed story: two historical recurring failures once history is classified; the sample joins one of them.
 describe("seed story", () => {
-  test("fresh load has no alert", () => {
+  test("before classification only forced-choice tickets count, so no alert yet: the classifier and HUMAN-GATE decide", () => {
     assert.deepEqual(selectAlerts(initialState().tickets), []);
   });
 
-  test("confirming the sample complaint fires exactly one alert", () => {
-    const alerts = selectAlerts(run(SAMPLE, CONFIRM).tickets);
-    assert.equal(alerts.length, 1);
-    const [alert] = alerts;
-    assert.equal(alert.productId, "split-ac-3t");
-    assert.equal(alert.failureType, "compressor_leak");
-    assert.deepEqual(alert.ticketIds, ["Q-026", "Q-002", "Q-001"]);
-    assert.deepEqual([...alert.companyIds].sort(), ["apex-air", "cascade-comfort", "northfield-hvac"]);
-    assert.equal(alert.unconfirmedCount, 0);
+  test("classified history shows two recurring failures across companies", () => {
+    const alerts = selectAlerts(run(BACKFILL).tickets);
+    assert.deepEqual(alerts.map((alert) => `${alert.productId}|${alert.failureType}`).sort(), ["heat-pump-4t|coil_leak", "split-ac-3t|compressor_leak"]);
+    const compressor = alerts.find((alert) => alert.failureType === "compressor_leak");
+    assert.deepEqual(compressor?.ticketIds, ["Q-026", "Q-002", "Q-001"]);
+    assert.equal(compressor?.duplicatesMerged, 1);
+    const coil = alerts.find((alert) => alert.failureType === "coil_leak");
+    assert.deepEqual([...(coil?.companyIds ?? [])].sort(), ["apex-air", "northfield-hvac"]);
+  });
+
+  test("confirming the matching sample grows the existing alert; it adds no new one", () => {
+    const alerts = selectAlerts(run(BACKFILL, SAMPLE, CONFIRM).tickets);
+    assert.equal(alerts.length, 2);
+    const compressor = alerts.find((alert) => alert.failureType === "compressor_leak");
+    assert.deepEqual(compressor?.ticketIds, ["Q-041", "Q-026", "Q-002", "Q-001"]);
+    assert.deepEqual([...(compressor?.companyIds ?? [])].sort(), ["apex-air", "cascade-comfort", "northfield-hvac"]);
   });
 
   test("the classified sample alone (not yet confirmed) changes nothing: HUMAN-GATE", () => {
     assert.deepEqual(selectAlerts(run(SAMPLE).tickets), []);
-  });
-
-  test("backfill adds no unexplained alert, before or after the sample", () => {
-    assert.deepEqual(selectAlerts(run(BACKFILL).tickets), []);
-    const alerts = selectAlerts(run(BACKFILL, SAMPLE, CONFIRM).tickets);
-    assert.equal(alerts.length, 1);
-    assert.equal(alerts[0].ticketIds.length, 3);
-    assert.equal(alerts[0].duplicatesMerged, 1);
+    assert.equal(selectAlerts(run(BACKFILL, SAMPLE).tickets).find((alert) => alert.failureType === "compressor_leak")?.ticketIds.length, 3);
   });
 });
 
 // Non-triggers prove the rule needs every condition, not just volume.
 describe("non-triggers", () => {
-  test("three coil leaks from one company and board faults across three products raise nothing", () => {
-    const tickets = run(BACKFILL).tickets;
-    const coil = tickets.filter((ticket) => ticket.tags.failureType === "coil_leak" && ["Q-008", "Q-010", "Q-011"].includes(ticket.id));
-    assert.equal(coil.length, 3);
-    assert.deepEqual(selectAlerts(tickets), []);
+  test("board faults on different products, and pairs below three tickets, raise nothing", () => {
+    const alerts = selectAlerts(run(BACKFILL).tickets);
+    assert.ok(!alerts.some((alert) => alert.failureType === "control_board_fault"));
+    assert.equal(alerts.length, 2);
+  });
+
+  test("one company alone never alerts: the Northfield coil leaks need Q-027 from Apex", () => {
+    const withoutApex = run(BACKFILL).tickets.filter((ticket) => ticket.id !== "Q-027");
+    assert.ok(!selectAlerts(withoutApex).some((alert) => alert.failureType === "coil_leak"));
   });
 });
 
@@ -109,22 +114,20 @@ describe("evidence", () => {
 describe("counting", () => {
   test("forced-choice tickets count without classification; unclassified tickets do not", () => {
     const counters = ticketCounters(initialState().tickets);
-    assert.equal(counters.counted, 2);
-    assert.equal(counters.unclassified, 21);
-    assert.deepEqual(trendsByProduct(initialState().tickets, { companyId: "all", range: "all" }), [
-      { productId: "split-ac-3t", failureType: "compressor_leak", count: 2, unconfirmed: 0 },
-    ]);
+    assert.equal(counters.counted, 6);
+    assert.equal(counters.unclassified, 32);
+    assert.ok(trendsByProduct(initialState().tickets, { companyId: "all", range: "all" }).every((row) => row.unconfirmed === 0));
   });
 
   test("backfill: suggested tickets count as unconfirmed, needs-review ones are excluded", () => {
     const tickets = run(BACKFILL).tickets;
     const progress = backfillProgress(tickets);
-    assert.deepEqual(progress, { total: 23, classified: 18, needsReview: 5, pending: 0 });
+    assert.deepEqual(progress, { total: 34, classified: 26, needsReview: 8, pending: 0 });
     const counters = ticketCounters(tickets);
-    assert.equal(counters.needsReview, 5);
+    assert.equal(counters.needsReview, 8);
     assert.equal(counters.duplicatesMerged, 2);
-    assert.equal(counters.counted, 2 + 18 - 2);
-    assert.equal(counters.unconfirmed, 16);
+    assert.equal(counters.counted, 6 + 26 - 2);
+    assert.equal(counters.unconfirmed, 24);
     assert.ok(!tickets.some((ticket) => ticket.tags.status === "confirmed" && ticket.classification && ticket.intake === "free_text"));
   });
 
@@ -132,7 +135,7 @@ describe("counting", () => {
     const tickets = run(BACKFILL).tickets;
     const all = { companyId: "all", range: "all" } as const;
     const [top] = trendsByProduct(tickets, all);
-    assert.deepEqual(top, { productId: "split-ac-3t", failureType: "compressor_leak", count: 5, unconfirmed: 3 });
+    assert.deepEqual(top, { productId: "split-ac-3t", failureType: "compressor_leak", count: 6, unconfirmed: 4 });
     const byCompany = trendsByCompany(tickets, all);
     assert.deepEqual(byCompany.map((row) => row.companyId), ["apex-air", "northfield-hvac", "cascade-comfort"]);
     assert.deepEqual(byCompany[1].rows[0], { failureType: "coil_leak", count: 4, unconfirmed: 4 });
@@ -141,10 +144,10 @@ describe("counting", () => {
   test("filters narrow by company and by time range from DEMO_NOW", () => {
     const tickets = run(BACKFILL).tickets;
     const recent = trendsByProduct(tickets, { companyId: "all", range: "30d" });
-    assert.deepEqual(recent.find((row) => row.failureType === "compressor_leak"), { productId: "split-ac-3t", failureType: "compressor_leak", count: 2, unconfirmed: 0 });
+    assert.deepEqual(recent.find((row) => row.failureType === "compressor_leak"), { productId: "split-ac-3t", failureType: "compressor_leak", count: 3, unconfirmed: 1 });
     const cascade = trendsByCompany(tickets, { companyId: "cascade-comfort", range: "90d" });
     assert.equal(cascade.length, 1);
-    assert.equal(cascade[0].total, 4);
+    assert.equal(cascade[0].total, 8);
   });
 });
 
@@ -198,5 +201,36 @@ describe("trend drill-down", () => {
         assert.equal(trendTickets(tickets, { ...scope, status: "suggested" }).length, row.unconfirmed);
       }
     }
+  });
+});
+
+// Dashboard filters narrow what is shown; the alert rule itself still runs over every record.
+describe("dashboard filters", () => {
+  const seeded = qualityReducer(initialState(), { type: "backfill/run" });
+  const withSample = qualityReducer(qualityReducer(seeded, { type: "draft/classify", ...SAMPLE_COMPLAINT }), { type: "draft/confirm" });
+
+  test("date, company and product filters match the records", () => {
+    const tickets = filterTickets(withSample.tickets, { ...DEFAULT_DASHBOARD_FILTERS, companyId: "apex-air", productId: "split-ac-3t" });
+    assert.ok(tickets.length > 0);
+    for (const ticket of tickets) {
+      assert.equal(ticket.companyId, "apex-air");
+      assert.equal(ticket.tags.productId, "split-ac-3t");
+      assert.ok(ticket.date >= isoDaysBefore(ALERT_WINDOW_DAYS - 1));
+    }
+    const custom = filterTickets(withSample.tickets, { ...DEFAULT_DASHBOARD_FILTERS, range: "custom", from: "2000-01-01", to: "2099-12-31" });
+    assert.equal(custom.length, withSample.tickets.length);
+  });
+
+  test("seed volumes: 15 tickets in 7 days, 27 in 30 days", () => {
+    assert.equal(filterTickets(seeded.tickets, { ...DEFAULT_DASHBOARD_FILTERS, range: "7d" }).length, 15);
+    assert.equal(filterTickets(seeded.tickets, DEFAULT_DASHBOARD_FILTERS).length, 27);
+  });
+
+  test("date filters show alerts by real supporting dates: 1 in 7 days, 2 in 30; filters never force one", () => {
+    const alerts = selectAlerts(seeded.tickets);
+    assert.equal(filterAlerts(alerts, seeded.tickets, { ...DEFAULT_DASHBOARD_FILTERS, range: "7d" }).length, 1);
+    assert.equal(filterAlerts(alerts, seeded.tickets, DEFAULT_DASHBOARD_FILTERS).length, 2);
+    assert.equal(filterAlerts(alerts, seeded.tickets, { ...DEFAULT_DASHBOARD_FILTERS, productId: "furnace-80k" }).length, 0);
+    assert.equal(filterAlerts(selectAlerts(withSample.tickets), withSample.tickets, DEFAULT_DASHBOARD_FILTERS).length, 2);
   });
 });

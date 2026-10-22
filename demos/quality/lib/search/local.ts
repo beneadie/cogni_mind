@@ -153,9 +153,9 @@ function unanswerable(answer: string, understood: string[] = []): SearchAnswer {
 
 function answer(question: string, tickets: readonly Ticket[]): SearchAnswer {
   const text = normalizeText(question);
-  if (!text) return unanswerable("Type a question about the complaint records.");
+  if (!text) return unanswerable("Type a question about the ticket records.");
   if (OUT_OF_SCOPE.test(text)) {
-    return unanswerable("The complaint records don't hold causes, costs, inventory or supplier data, so I can't answer that. I can find complaints by product, model, company, failure type, review status or date.");
+    return unanswerable("The ticket records don't hold causes, costs, inventory or supplier data, so I can't answer that. I can find tickets by product, model, company, failure type, review status or date.");
   }
 
   const parsed = parse(question);
@@ -165,7 +165,7 @@ function answer(question: string, tickets: readonly Ticket[]): SearchAnswer {
   if (/\b(recurring|repeat|repeating|repeated|alert|alerts|pattern|patterns)\b|across companies/.test(text)) {
     const alerts = selectAlerts(tickets).filter((alert) => (!parsed.productIds.length || parsed.productIds.includes(alert.productId)) && (!parsed.failureTypes.length || parsed.failureTypes.includes(alert.failureType)));
     const ids = alerts.flatMap((alert) => alert.ticketIds);
-    const list = alerts.map((alert) => `${failureLabel(alert.failureType)} on the ${productName(alert.productId)} (${plural(alert.ticketIds.length, "complaint")}, ${alert.companyIds.length} companies)`);
+    const list = alerts.map((alert) => `${failureLabel(alert.failureType)} on the ${productName(alert.productId)} (${plural(alert.ticketIds.length, "ticket")}, ${alert.companyIds.length} companies)`);
     return {
       kind: "alerts",
       answer: alerts.length
@@ -186,14 +186,14 @@ function answer(question: string, tickets: readonly Ticket[]): SearchAnswer {
       : byProduct
         ? ranking(scoped, (ticket) => productName(ticket.tags.productId as ProductId))
         : ranking(scoped, (ticket) => failureLabel(ticket.tags.failureType as FailureType), (label) => FAILURE_TYPES.findIndex((failure) => failure.label === label));
-    if (rows.length === 0) return unanswerable("No tagged complaints match that yet.", parsed.understood);
+    if (rows.length === 0) return unanswerable("No tagged tickets match that yet.", parsed.understood);
     const top = rows[0];
     const ties = rows.filter((row) => row.count === top.count).map((row) => row.label);
     const subject = byCompany ? "company" : byProduct ? "product" : "failure";
     const lead = ties.length > 1 ? `${ties.join(" and ")} are tied` : `${top.label} leads`;
     return {
       kind: "ranking",
-      answer: `${lead} with ${plural(top.count, "complaint")}. Counted the same way as the dashboard: duplicates merged, untagged complaints left out.`,
+      answer: `${lead} with ${plural(top.count, "ticket")}. Duplicates merged, untagged tickets left out.`,
       understood: [`Most common by ${subject}`, ...parsed.understood],
       ticketIds: [],
       rows,
@@ -213,7 +213,7 @@ function answer(question: string, tickets: readonly Ticket[]): SearchAnswer {
     understood = [`Words: ${parsed.keywords.map((keyword) => `"${keyword}"`).join(", ")}`];
   }
   if (!hasFilters(parsed) && !found.length) {
-    return unanswerable("I couldn't match that to the complaint records. Try a product, model, company, failure type or review status, for example \"Show complaints from Apex Air\".", understood);
+    return unanswerable("I couldn't match that to the ticket records. Try a product, model, company, failure type or review status, for example \"Show tickets from Apex Air\".", understood);
   }
 
   const sorted = [...found].sort(newestFirst);
@@ -223,8 +223,8 @@ function answer(question: string, tickets: readonly Ticket[]): SearchAnswer {
   return {
     kind: "tickets",
     answer: sorted.length
-      ? `${how ? "There are " : "Found "}${plural(sorted.length, "complaint")}: ${statusBreakdown(sorted)}.${duplicates ? ` ${duplicates === 1 ? "1 is a duplicate" : `${duplicates} are duplicates`} of an earlier ticket.` : ""}`
-      : "No complaints match that in the current records.",
+      ? `${how ? "There are " : "Found "}${plural(sorted.length, "ticket")}: ${statusBreakdown(sorted)}.${duplicates ? ` ${duplicates === 1 ? "1 is a duplicate" : `${duplicates} are duplicates`} of an earlier ticket.` : ""}`
+      : "No tickets match that in the current records.",
     understood,
     ticketIds: sorted.map((ticket) => ticket.id),
     rows: [],

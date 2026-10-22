@@ -13,32 +13,32 @@ import { activeSearch, type SearchAnswer } from "../lib/search/index";
 import { formatDay } from "../lib/time";
 import { BUTTON, Chip, DATA_FILL, DATA_TEXT_RANKING, FIELD, StatusTag } from "./ui";
 
-const EXAMPLES = ["Show me compressor leak complaints", "Which product has the most complaints?", "Which complaints need review?"] as const;
+const EXAMPLES = ["Show compressor leak tickets", "Which company has the most tickets?", "What recurring failures need attention?"] as const;
 
-/** Matching tickets shown before "Show all N". */
-const RESULTS_SHOWN = 4;
+/** Matching tickets shown at first, and how many more each "Show more" adds. */
+const RESULTS_STEP = 4;
 
-/** One matching complaint; opens the existing record view in the modal. */
+/** One matching ticket; opens the existing record view in the modal. */
 function ResultTicket({ ticket, onOpen }: { ticket: Ticket; onOpen: () => void }) {
   return (
     <li>
       <button
         type="button"
         onClick={onOpen}
-        className="w-full space-y-1 rounded-xl border border-line bg-canvas px-3 py-2.5 text-left transition-colors hover:border-line-strong hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        className="flex h-full w-full flex-col gap-1.5 rounded-xl border border-line bg-canvas px-3 py-2.5 text-left transition-colors hover:border-line-strong hover:bg-surface hover:shadow-[0_6px_18px_-14px_rgba(26,24,21,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
-        <span className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.62rem] uppercase tracking-[0.08em] text-muted">
-          <span className="font-medium text-ink">{ticket.id}</span>
-          <span>{companyName(ticket.companyId)}</span>
-          <span>{formatDay(ticket.date, true)}</span>
+        <span className="flex items-center gap-2">
+          <span className="font-mono text-[0.68rem] font-medium text-ink">{ticket.id}</span>
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.08em] text-muted">{formatDay(ticket.date, true)}</span>
           <span className="ml-auto">
             <StatusTag status={ticket.tags.status} />
           </span>
         </span>
-        <span className="block text-[0.78rem] font-medium text-ink">
-          {ticket.tags.productId && ticket.tags.failureType ? `${failureLabel(ticket.tags.failureType)} · ${productName(ticket.tags.productId)}` : "Details need review"}
+        <span className="block text-[0.8rem] font-medium text-ink">{ticket.tags.failureType ? failureLabel(ticket.tags.failureType) : "Failure type needs review"}</span>
+        <span className="block truncate text-[0.72rem] text-muted">
+          {companyName(ticket.companyId)} · {ticket.tags.productId ? productName(ticket.tags.productId) : "Product unknown"}
         </span>
-        <span className="line-clamp-2 block text-[0.78rem] leading-relaxed text-ink-soft">{ticket.text || "(empty record)"}</span>
+        <span className="line-clamp-2 block text-[0.76rem] leading-relaxed text-ink-soft">{ticket.text || "(empty record)"}</span>
       </button>
     </li>
   );
@@ -46,10 +46,10 @@ function ResultTicket({ ticket, onOpen }: { ticket: Ticket; onOpen: () => void }
 
 /** One question and its answer, grounded in the records. */
 function Exchange({ question, result, tickets, onOpenTicket }: { question: string; result: SearchAnswer; tickets: readonly Ticket[]; onOpenTicket: (id: TicketId) => void }) {
-  const [showAll, setShowAll] = useState(false);
+  const [visible, setVisible] = useState(RESULTS_STEP);
   const byId = new Map(tickets.map((ticket) => [ticket.id, ticket]));
   const matched = result.ticketIds.flatMap((id) => byId.get(id) ?? []);
-  const shown = showAll ? matched : matched.slice(0, RESULTS_SHOWN);
+  const shown = matched.slice(0, visible);
   const max = Math.max(1, ...result.rows.map((row) => row.count));
 
   return (
@@ -83,16 +83,27 @@ function Exchange({ question, result, tickets, onOpenTicket }: { question: strin
           </ul>
         ) : null}
         {matched.length ? (
-          <ul className="space-y-1.5">
+          <ul className="grid gap-2 sm:grid-cols-2">
             {shown.map((ticket) => (
               <ResultTicket key={ticket.id} ticket={ticket} onOpen={() => onOpenTicket(ticket.id)} />
             ))}
           </ul>
         ) : null}
-        {matched.length > RESULTS_SHOWN ? (
-          <button type="button" onClick={() => setShowAll((value) => !value)} className={BUTTON.secondary}>
-            {showAll ? "Show fewer" : `Show all ${matched.length}`}
-          </button>
+        {matched.length > RESULTS_STEP ? (
+          <div className="flex flex-wrap items-center gap-2">
+            {visible < matched.length ? (
+              <button type="button" onClick={() => setVisible((count) => count + RESULTS_STEP)} className={BUTTON.secondary}>
+                Show more ({matched.length - visible} left)
+              </button>
+            ) : (
+              <button type="button" onClick={() => setVisible(RESULTS_STEP)} className={BUTTON.secondary}>
+                Show fewer
+              </button>
+            )}
+            <span className="font-mono text-[0.6rem] uppercase tracking-[0.1em] text-muted">
+              {Math.min(visible, matched.length)} of {matched.length}
+            </span>
+          </div>
         ) : null}
       </div>
     </li>
@@ -125,13 +136,18 @@ export function AskPanel({ tickets, onOpenTicket }: { tickets: readonly Ticket[]
           <span id="ask-title" className="block font-serif text-lg text-ink">
             Ask the Quality Agent
           </span>
-          <span className="block text-[0.74rem] text-muted">Explore complaints, recurring issues, and product trends.</span>
+          <span className="block text-[0.74rem] text-muted">Explore tickets, recurring issues, and product trends.</span>
         </span>
         <ChevronDown className={`h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open ? (
         <div id="ask-body" className="space-y-4 border-t border-line px-5 py-4">
+          {questions.length === 0 ? (
+            <p className="rounded-xl border border-dashed border-line-strong px-4 py-4 text-center text-[0.8rem] text-muted">
+              Ask about tickets, companies, products or recurring failures, or start with an example below.
+            </p>
+          ) : null}
           {questions.length ? (
             <ol className="scroll-soft max-h-[32rem] space-y-4 overflow-y-auto pr-1" aria-live="polite">
               {questions.map((question, index) => (
@@ -160,7 +176,7 @@ export function AskPanel({ tickets, onOpenTicket }: { tickets: readonly Ticket[]
               ask(draft);
             }}
           >
-            <input value={draft} onChange={(event) => setDraft(event.target.value)} aria-label="Ask a question about the complaints" placeholder="e.g. Show complaints from Apex Air" className={FIELD} />
+            <input value={draft} onChange={(event) => setDraft(event.target.value)} aria-label="Ask a question about the tickets" placeholder="e.g. Show tickets from Apex Air" className={FIELD} />
             <button type="submit" disabled={!draft.trim()} className={BUTTON.primary} aria-label="Ask">
               <CornerDownLeft className="h-3.5 w-3.5" />
               Ask
@@ -174,7 +190,7 @@ export function AskPanel({ tickets, onOpenTicket }: { tickets: readonly Ticket[]
               About this agent
             </summary>
             <p className="mt-1.5">
-              Answers come only from the synthetic demo complaint records, using rule-based matching of products, models, companies, failure types, statuses and dates. No live AI model or external data is
+              Answers come only from the synthetic demo ticket records (all of them, regardless of dashboard filters), using rule-based matching of products, models, companies, failure types, statuses and dates. No live AI model or external data is
               connected.
             </p>
           </details>

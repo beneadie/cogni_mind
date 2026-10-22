@@ -60,7 +60,7 @@ export function TicketReview({
       aria-label={`Ticket ${ticket.id}`}
     >
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="font-serif text-lg text-ink">{pending ? "Incoming complaint" : ticket.id}</h2>
+        <h2 className="font-serif text-lg text-ink">{pending ? "Incoming ticket" : ticket.id}</h2>
         <Chip>{pending ? `${ticket.id} · not yet in records` : formatDay(ticket.date, true)}</Chip>
         <Chip>{companyName(ticket.companyId)}</Chip>
         <Chip>{ticket.kind}</Chip>
@@ -72,7 +72,7 @@ export function TicketReview({
 
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <SectionLabel>Original complaint</SectionLabel>
+          <SectionLabel>Original ticket text</SectionLabel>
           <div className="rounded-xl border border-line bg-canvas px-3 py-3">
             <HighlightedText text={ticket.text} evidence={classification?.evidence ?? []} className="text-[0.84rem] leading-relaxed text-ink-soft" />
             {ticket.modelRaw ? <p className="mt-2 font-mono text-[0.66rem] text-muted">Model field: {ticket.modelRaw}</p> : null}

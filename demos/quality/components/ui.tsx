@@ -23,7 +23,7 @@ export const REVIEW_REASON_TEXT: Record<ReviewReason, string> = {
   negated: "The text rules the failure out (e.g. \"no leak found\"), so nothing was tagged.",
   competing_cues: "Words for more than one failure type appear. Pick the right one.",
   product_unresolved: "The model could not be matched to a known product.",
-  empty_text: "The complaint has no text to read.",
+  empty_text: "The ticket has no text to read.",
 };
 
 /** Mono uppercase label tone shared by section headings. */
